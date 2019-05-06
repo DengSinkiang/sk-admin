@@ -1,11 +1,11 @@
 package com.dxj.rest;
 
+import com.dxj.service.AlipayService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.AlipayConfig;
 import com.dxj.domain.vo.TradeVo;
-import com.dxj.service.AlipayService;
 import com.dxj.util.AliPayStatusEnum;
 import com.dxj.util.AlipayUtils;
 import org.springframework.beans.factory.annotation.Autowired;

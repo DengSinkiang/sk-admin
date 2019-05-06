@@ -34,8 +34,8 @@ class LoggerQueue {
      * @param log
      * @return
      */
-    boolean push(LogMessage log) {
-        return this.blockingQueue.add(log);
+    void push(LogMessage log) {
+        blockingQueue.add(log); //队列满了就抛出异常，不阻塞
     }
 
     /**

@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * 数据权限配置
- * @author jie
+ * @author dxj
  * @date 2019-4-1
  */
 @Component
@@ -77,9 +77,9 @@ public class DataScope {
     public List<Long> getDeptChildren(List<Dept> deptList) {
         List<Long> list = new ArrayList<>();
         deptList.forEach(dept -> {
-                    if (dept!=null && dept.getEnabled()){
+                    if (dept != null && dept.getEnabled()){
                         List<Dept> depts = deptService.findByPid(dept.getId());
-                        if(deptList!=null && deptList.size()!=0){
+                        if(deptList != null && deptList.size() != 0){
                             list.addAll(getDeptChildren(depts));
                         }
                         list.add(dept.getId());

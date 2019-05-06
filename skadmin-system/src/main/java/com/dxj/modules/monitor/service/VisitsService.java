@@ -51,7 +51,7 @@ public class VisitsService {
     public void count(HttpServletRequest request) {
         LocalDate localDate = LocalDate.now();
         Visits visits = visitsRepository.findByDate(localDate.toString());
-        visits.setPvCounts(visits.getPvCounts()+1);
+        visits.setPvCounts(visits.getPvCounts() + 1);
         long ipCounts = logRepository.findIp(localDate.toString(), localDate.plusDays(1).toString());
         visits.setIpCounts(ipCounts);
         visitsRepository.save(visits);
