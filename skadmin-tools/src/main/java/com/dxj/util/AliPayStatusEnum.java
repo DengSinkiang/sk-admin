@@ -36,6 +36,9 @@ public enum  AliPayStatusEnum {
     }
 
     public String getValue() {
-        return value;
+        return this.value;
+    }
+    public String getName() {
+        return this.name;
     }
 }

@@ -65,7 +65,7 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void update(User resources) {
         Optional<User> userOptional = userRepository.findById(resources.getId());
-        ValidationUtil.isNull(userOptional,"User","id",resources.getId());
+        ValidationUtil.isNull(userOptional,"User", "id", resources.getId());
 
         User user = userOptional.orElse(null);
 
@@ -73,12 +73,12 @@ public class UserService {
         User user1 = userRepository.findByUsername(user.getUsername());
         User user2 = userRepository.findByEmail(user.getEmail());
 
-        if(user1 !=null&&!user.getId().equals(user1.getId())){
-            throw new EntityExistException(User.class,"username",resources.getUsername());
+        if(user1 != null&&!user.getId().equals(user1.getId())){
+            throw new EntityExistException(User.class, "username", resources.getUsername());
         }
 
-        if(user2!=null&&!user.getId().equals(user2.getId())){
-            throw new EntityExistException(User.class,"email",resources.getEmail());
+        if(user2 != null&&!user.getId().equals(user2.getId())){
+            throw new EntityExistException(User.class, "email", resources.getEmail());
         }
 
         user.setUsername(resources.getUsername());
@@ -116,18 +116,18 @@ public class UserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updatePass(String username, String pass) {
-        userRepository.updatePass(username,pass,new Date());
+        userRepository.updatePass(username, pass, new Date());
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateAvatar(String username, String url) {
-        userRepository.updateAvatar(username,url);
+        userRepository.updateAvatar(username, url);
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateEmail(String username, String email) {
-        userRepository.updateEmail(username,email);
+        userRepository.updateEmail(username, email);
     }
 }
