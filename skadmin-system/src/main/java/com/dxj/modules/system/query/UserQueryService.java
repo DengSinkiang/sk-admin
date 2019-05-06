@@ -21,6 +21,7 @@ import org.springframework.util.ObjectUtils;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -95,7 +96,7 @@ public class UserQueryService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable){
+    public Map<String, Object> queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable){
         Page<User> page = userRepo.findAll(new Spec(user, deptIds), pageable);
         return PageUtil.toPage(page.map(userMapper::toDto));
     }

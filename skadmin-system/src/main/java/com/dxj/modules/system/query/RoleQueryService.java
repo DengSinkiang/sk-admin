@@ -50,7 +50,7 @@ public class RoleQueryService {
     }
 
     /**
-     * 分页
+     * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(){
