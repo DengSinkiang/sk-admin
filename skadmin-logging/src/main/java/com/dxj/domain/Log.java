@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-11-24
  */
 @Entity

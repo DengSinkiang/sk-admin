@@ -1,10 +1,10 @@
 package com.dxj.rest;
 
+import com.dxj.service.QiNiuService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.QiniuConfig;
 import com.dxj.domain.QiniuContent;
-import com.dxj.service.QiNiuService;
 import com.dxj.service.query.QiNiuQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

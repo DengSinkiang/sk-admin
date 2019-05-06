@@ -1,10 +1,10 @@
 package com.dxj.rest;
 
+import com.dxj.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.EmailConfig;
 import com.dxj.domain.vo.EmailVo;
-import com.dxj.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

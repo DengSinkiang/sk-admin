@@ -52,8 +52,9 @@ public class DictDetailService {
         Optional<DictDetail> optionalDictDetail = dictDetailRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalDictDetail, "DictDetail", "id", resources.getId());
 
-        DictDetail dictDetail = optionalDictDetail.get();
+        DictDetail dictDetail = optionalDictDetail.orElse(null);
         // 此处需自己修改
+        assert dictDetail != null;
         resources.setId(dictDetail.getId());
         dictDetailRepository.save(resources);
     }

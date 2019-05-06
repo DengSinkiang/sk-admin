@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * 获取当前登录的用户名
  *
- * @author jie
+ * @author dxj
  * @date 2019-01-17
  */
 public class SecurityContextHolder {

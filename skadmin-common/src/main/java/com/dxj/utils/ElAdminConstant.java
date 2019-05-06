@@ -2,7 +2,7 @@ package com.dxj.utils;
 
 /**
  * 常用静态常量
- * @author jie
+ * @author dxj
  * @date 2018-12-26
  */
 public class ElAdminConstant {
