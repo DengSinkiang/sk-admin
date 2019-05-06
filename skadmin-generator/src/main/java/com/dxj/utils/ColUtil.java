@@ -5,7 +5,7 @@ import org.apache.commons.configuration.*;
 /**
  * sql字段转java
  *
- * @author jie
+ * @author dxj
  * @date 2019-01-03
  */
 public class ColUtil {
