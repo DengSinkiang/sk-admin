@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -41,7 +42,7 @@ public class MenuQueryService {
      * 不分页
      */
     @Cacheable(key = "'queryAll:'+#p0")
-    public List queryAll(String name){
+    public List queryAll(String name) {
         return menuMapper.toDto(menuRepository.findAll(new Spec(name)));
     }
 
@@ -58,7 +59,7 @@ public class MenuQueryService {
 
             List<Predicate> list = new ArrayList<>();
 
-            if(!ObjectUtils.isEmpty(name)){
+            if (!ObjectUtils.isEmpty(name)) {
                 //模糊
                 list.add(cb.like(root.get("name").as(String.class), "%" + name + "%"));
             }

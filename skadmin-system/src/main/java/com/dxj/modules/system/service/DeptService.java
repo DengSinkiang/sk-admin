@@ -18,9 +18,9 @@ import org.springframework.util.CollectionUtils;
 import java.util.*;
 
 /**
-* @author dxj
-* @date 2019-03-25
-*/
+ * @author dxj
+ * @date 2019-03-25
+ */
 @Service
 @CacheConfig(cacheNames = "dept")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -51,7 +51,7 @@ public class DeptService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Object buildTree(List<DeptDTO> deptDTOS) {
         Set<DeptDTO> trees = new LinkedHashSet<>();
-        Set<DeptDTO> depts= new LinkedHashSet<>();
+        Set<DeptDTO> depts = new LinkedHashSet<>();
         boolean isChild;
         for (DeptDTO deptDTO : deptDTOS) {
             isChild = false;
@@ -67,7 +67,7 @@ public class DeptService {
                     deptDTO.getChildren().add(it);
                 }
             }
-            if(isChild) {
+            if (isChild) {
                 depts.add(deptDTO);
             }
         }
@@ -79,8 +79,8 @@ public class DeptService {
         Integer totalElements = deptDTOS.size();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("totalElements",totalElements);
-        map.put("content",CollectionUtils.isEmpty(trees)?deptDTOS:trees);
+        map.put("totalElements", totalElements);
+        map.put("content", CollectionUtils.isEmpty(trees) ? deptDTOS : trees);
         return map;
     }
 
@@ -93,11 +93,11 @@ public class DeptService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(Dept resources) {
-        if(resources.getId().equals(resources.getPid())) {
+        if (resources.getId().equals(resources.getPid())) {
             throw new BadRequestException("上级不能为自己");
         }
         Optional<Dept> optionalDept = deptRepository.findById(resources.getId());
-        ValidationUtil.isNull( optionalDept,"Dept","id",resources.getId());
+        ValidationUtil.isNull(optionalDept, "Dept", "id", resources.getId());
 
         Dept dept = optionalDept.orElse(null);
         // 此处需自己修改

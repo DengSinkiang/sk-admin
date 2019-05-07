@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class JobQueryService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable){
+    public Object queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
         Page<Job> page = jobRepository.findAll(new Spec(new JobDTO(name, enabled), deptIds, deptId), pageable);
         return PageUtil.toPage(page.map(jobMapper::toDto));
     }
@@ -53,7 +54,7 @@ public class JobQueryService {
         private Long deptId;
         private Set<Long> deptIds;
 
-        Spec(JobDTO job, Set<Long> deptIds, Long deptId){
+        Spec(JobDTO job, Set<Long> deptIds, Long deptId) {
             this.job = job;
             this.deptId = deptId;
             this.deptIds = deptIds;
@@ -70,12 +71,12 @@ public class JobQueryService {
                 list.add(join.get("id").in(deptIds));
             }
 
-            if(!ObjectUtils.isEmpty(job.getEnabled())){
+            if (!ObjectUtils.isEmpty(job.getEnabled())) {
                 //精确
                 list.add(cb.equal(root.get("enabled").as(Boolean.class), job.getEnabled()));
             }
 
-            if(!ObjectUtils.isEmpty(job.getName())){
+            if (!ObjectUtils.isEmpty(job.getName())) {
                 //模糊
                 list.add(cb.like(root.get("name").as(String.class), "%" + job.getName() + "%"));
             }

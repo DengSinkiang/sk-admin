@@ -49,7 +49,7 @@ public class UserQueryService {
 
         private Set<Long> deptIds;
 
-        Spec(UserDTO user, Set<Long> deptIds){
+        Spec(UserDTO user, Set<Long> deptIds) {
             this.deptIds = deptIds;
             this.user = user;
         }
@@ -60,30 +60,30 @@ public class UserQueryService {
             List<Predicate> list = new ArrayList<>();
 
             // 数据权限， 关联查询
-            Join<Dept,User> join = root.join("dept", JoinType.LEFT);
+            Join<Dept, User> join = root.join("dept", JoinType.LEFT);
             if (!CollectionUtils.isEmpty(deptIds)) {
                 list.add(join.get("id").in(deptIds));
             }
 
             if (!ObjectUtils.isEmpty(user.getId())) {
                 //相等
-                list.add(cb.equal(root.get("id").as(Long.class),user.getId()));
+                list.add(cb.equal(root.get("id").as(Long.class), user.getId()));
             }
 
             if (!ObjectUtils.isEmpty(user.getEnabled())) {
                 //相等
-                list.add(cb.equal(root.get("enabled").as(Boolean.class),user.getEnabled()));
+                list.add(cb.equal(root.get("enabled").as(Boolean.class), user.getEnabled()));
             }
 
 
             if (!ObjectUtils.isEmpty(user.getUsername())) {
                 //模糊
-                list.add(cb.like(root.get("username").as(String.class),"%"+user.getUsername()+"%"));
+                list.add(cb.like(root.get("username").as(String.class), "%" + user.getUsername() + "%"));
             }
 
             if (!ObjectUtils.isEmpty(user.getEmail())) {
                 //模糊
-                list.add(cb.like(root.get("email").as(String.class),"%" + user.getEmail() + "%"));
+                list.add(cb.like(root.get("email").as(String.class), "%" + user.getEmail() + "%"));
             }
 
             Predicate[] p = new Predicate[list.size()];
@@ -95,7 +95,7 @@ public class UserQueryService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable){
+    public Object queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable) {
         Page<User> page = userRepo.findAll(new Spec(user, deptIds), pageable);
         return PageUtil.toPage(page.map(userMapper::toDto));
     }

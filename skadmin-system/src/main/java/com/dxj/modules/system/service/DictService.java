@@ -12,12 +12,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 /**
-* @author dxj
-* @date 2019-04-10
-*/
+ * @author dxj
+ * @date 2019-04-10
+ */
 @Service
 @CacheConfig(cacheNames = "dict")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -36,7 +37,7 @@ public class DictService {
     @Cacheable(key = "#p0")
     public DictDTO findById(Long id) {
         Optional<Dict> dict = dictRepository.findById(id);
-        ValidationUtil.isNull(dict,"Dict","id",id);
+        ValidationUtil.isNull(dict, "Dict", "id", id);
         return dictMapper.toDto(dict.orElse(null));
     }
 
@@ -50,7 +51,7 @@ public class DictService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Dict resources) {
         Optional<Dict> optionalDict = dictRepository.findById(resources.getId());
-        ValidationUtil.isNull( optionalDict,"Dict","id",resources.getId());
+        ValidationUtil.isNull(optionalDict, "Dict", "id", resources.getId());
 
         Dict dict = optionalDict.orElse(null);
         // 此处需自己修改

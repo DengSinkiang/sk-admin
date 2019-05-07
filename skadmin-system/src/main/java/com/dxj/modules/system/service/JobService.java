@@ -12,12 +12,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 /**
-* @author dxj
-* @date 2019-03-29
-*/
+ * @author dxj
+ * @date 2019-03-29
+ */
 @Service
 @CacheConfig(cacheNames = "job")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -36,7 +37,7 @@ public class JobService {
     @Cacheable(key = "#p0")
     public JobDTO findById(Long id) {
         Optional<Job> job = jobRepository.findById(id);
-        ValidationUtil.isNull(job,"Job","id",id);
+        ValidationUtil.isNull(job, "Job", "id", id);
         return jobMapper.toDto(job.orElse(null));
     }
 
@@ -50,7 +51,7 @@ public class JobService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Job resources) {
         Optional<Job> optionalJob = jobRepository.findById(resources.getId());
-        ValidationUtil.isNull( optionalJob,"Job","id",resources.getId());
+        ValidationUtil.isNull(optionalJob, "Job", "id", resources.getId());
 
         Job job = optionalJob.orElse(null);
         // 此处需自己修改
