@@ -78,5 +78,6 @@ public class QuartzJob implements Serializable {
     @Column(name = "update_time")
     private Timestamp updateTime;
 
-    public interface Update{}
+    public interface Update {
+    }
 }

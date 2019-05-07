@@ -22,18 +22,18 @@ public class VisitsController {
     private VisitsService visitsService;
 
     @PostMapping(value = "/visits")
-    public ResponseEntity create(){
+    public ResponseEntity create() {
         visitsService.count(RequestHolder.getHttpServletRequest());
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/visits")
-    public ResponseEntity get(){
-        return new ResponseEntity(visitsService.get(),HttpStatus.OK);
+    public ResponseEntity get() {
+        return new ResponseEntity(visitsService.get(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/visits/chartData")
-    public ResponseEntity getChartData(){
-        return new ResponseEntity(visitsService.getChartData(),HttpStatus.OK);
+    public ResponseEntity getChartData() {
+        return new ResponseEntity(visitsService.getChartData(), HttpStatus.OK);
     }
 }

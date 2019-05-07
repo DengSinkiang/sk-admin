@@ -59,7 +59,7 @@ public class QuartzLog implements Serializable {
     /**
      * 异常详细
      */
-    @Column(name = "exception_detail",columnDefinition = "text")
+    @Column(name = "exception_detail", columnDefinition = "text")
     private String exceptionDetail;
 
     /**

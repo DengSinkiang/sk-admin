@@ -14,7 +14,7 @@ public class VisitsTask {
     @Autowired
     private VisitsService visitsService;
 
-    public void run(){
+    public void run() {
         visitsService.save();
     }
 }

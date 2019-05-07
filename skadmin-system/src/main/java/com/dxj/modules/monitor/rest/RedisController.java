@@ -30,14 +30,14 @@ public class RedisController {
     @Log("查询Redis缓存")
     @GetMapping(value = "/redis")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_SELECT')")
-    public ResponseEntity<Page> getRedis(String key, Pageable pageable){
+    public ResponseEntity<Page> getRedis(String key, Pageable pageable) {
         return new ResponseEntity<>(redisService.findByKey(key, pageable), HttpStatus.OK);
     }
 
     @Log("新增Redis缓存")
     @PostMapping(value = "/redis")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_CREATE')")
-    public ResponseEntity<Void> create(@Validated @RequestBody RedisVo resources){
+    public ResponseEntity<Void> create(@Validated @RequestBody RedisVo resources) {
         redisService.save(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -45,7 +45,7 @@ public class RedisController {
     @Log("修改Redis缓存")
     @PutMapping(value = "/redis")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_EDIT')")
-    public ResponseEntity<Void> update(@Validated @RequestBody RedisVo resources){
+    public ResponseEntity<Void> update(@Validated @RequestBody RedisVo resources) {
         redisService.save(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -53,7 +53,7 @@ public class RedisController {
     @Log("删除Redis缓存")
     @DeleteMapping(value = "/redis")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
-    public ResponseEntity<Void> delete(@RequestBody RedisVo resources){
+    public ResponseEntity<Void> delete(@RequestBody RedisVo resources) {
         redisService.delete(resources.getKey());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -61,7 +61,7 @@ public class RedisController {
     @Log("清空Redis缓存")
     @DeleteMapping(value = "/redis/all")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
-    public ResponseEntity<Void> deleteAll(){
+    public ResponseEntity<Void> deleteAll() {
         redisService.flushdb();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
