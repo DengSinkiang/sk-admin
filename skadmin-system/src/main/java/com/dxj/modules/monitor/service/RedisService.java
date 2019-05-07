@@ -38,10 +38,9 @@ public class RedisService {
                 RedisVo redisVo = new RedisVo(s, jedis.get(s));
                 redisVos.add(redisVo);
             }
-            Page<RedisVo> page = new PageImpl<>(
+            return new PageImpl<>(
                     PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),
                     pageable, redisVos.size());
-            return page;
         }
         // 释放资源还给连接池
 
