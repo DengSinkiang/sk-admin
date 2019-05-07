@@ -2,9 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0469a095-e708-4e9f-83ca-e24eabc338f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/FastJsonRedisSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/FastJsonRedisSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/StringRedisSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/StringRedisSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/FastJsonRedisSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/FastJsonRedisSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/StringRedisSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/StringRedisSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/DataScope.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/DataScope.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LogFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LogFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LoggerQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LoggerQueue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/VisitsInitialization.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/VisitsInitialization.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/WebSocketConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/rest/LimitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/rest/LimitController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/RedisService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/RedisService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/VisitsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/VisitsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/JobRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/JobRunner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig$QuartzJobFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig$QuartzJobFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/rest/QuartzJobController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/rest/QuartzJobController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/QuartzJobService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/QuartzJobService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService$Spec.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService$Spec.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService$Spec.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService$Spec.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/task/TestTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/task/TestTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/ExecutionJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/ExecutionJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzManage.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzManage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzRunnable.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzRunnable.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,85 +35,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-627">
-              <caret line="94" column="16" lean-forward="true" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="51" column="10" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/FastJsonRedisSerializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-183">
-              <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/StringRedisSerializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+            <state relative-caret-position="326">
+              <caret line="93" column="51" lean-forward="true" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/MenuService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/query/UserQueryService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/AppRun.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/monitor/rest/RedisController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+            <state relative-caret-position="25">
+              <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -110,6 +65,11 @@
         <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java" />
       </list>
     </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="808" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -358,7 +318,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557229341138" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557239025464" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -384,18 +344,18 @@
       <updated>1557062102058</updated>
       <workItem from="1557062105545" duration="2477000" />
       <workItem from="1557143387257" duration="8327000" />
-      <workItem from="1557228422399" duration="880000" />
+      <workItem from="1557228422399" duration="2685000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8970000" />
+    <option name="totallyTimeSpent" value="10775000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="808" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="808" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22103004" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22103004" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -405,7 +365,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.599162" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.05865922" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -413,7 +373,7 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" visible="true" weight="0.32960895" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32960895" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
@@ -531,13 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/MenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/PermissionService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -556,13 +509,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/query/MenuQueryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -744,35 +690,35 @@
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-627">
-          <caret line="94" column="16" lean-forward="true" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
+          <caret line="94" column="16" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="51" column="10" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
+        <state relative-caret-position="537">
+          <caret line="76" column="10" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/FastJsonRedisSerializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-183">
-          <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
+          <caret line="105" column="55" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/StringRedisSerializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -785,11 +731,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="836">
+          <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/query/MenuQueryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="93" column="51" lean-forward="true" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/MenuService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
         </state>
       </provider>
     </entry>
