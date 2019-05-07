@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -32,15 +33,15 @@ public class QuartzJobQueryService {
     private QuartzJobRepository quartzJobRepository;
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(QuartzJob quartzJob, Pageable pageable){
-        return PageUtil.toPage(quartzJobRepository.findAll(new Spec(quartzJob),pageable));
+    public Object queryAll(QuartzJob quartzJob, Pageable pageable) {
+        return PageUtil.toPage(quartzJobRepository.findAll(new Spec(quartzJob), pageable));
     }
 
     class Spec implements Specification<QuartzJob> {
 
         private QuartzJob quartzJob;
 
-        public Spec(QuartzJob quartzJob){
+        public Spec(QuartzJob quartzJob) {
             this.quartzJob = quartzJob;
         }
 
@@ -49,12 +50,12 @@ public class QuartzJobQueryService {
 
             List<Predicate> list = new ArrayList<Predicate>();
 
-            if(!ObjectUtils.isEmpty(quartzJob.getJobName())){
+            if (!ObjectUtils.isEmpty(quartzJob.getJobName())) {
 
                 /**
                  * 模糊
                  */
-                list.add(cb.like(root.get("jobName").as(String.class),"%"+quartzJob.getJobName()+"%"));
+                list.add(cb.like(root.get("jobName").as(String.class), "%" + quartzJob.getJobName() + "%"));
             }
 
             Predicate[] p = new Predicate[list.size()];

@@ -16,9 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
-* @author dxj
-* @date 2019-04-10
-*/
+ * @author dxj
+ * @date 2019-04-10
+ */
 @RestController
 @RequestMapping("api")
 public class DictController {
@@ -36,16 +36,16 @@ public class DictController {
     @Log("查询字典")
     @GetMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_SELECT')")
-    public ResponseEntity<Object> getDict(DictDTO resources, Pageable pageable){
-        return new ResponseEntity<>(dictQueryService.queryAll(resources,pageable), HttpStatus.OK);
+    public ResponseEntity<Object> getDict(DictDTO resources, Pageable pageable) {
+        return new ResponseEntity<>(dictQueryService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     @Log("新增字典")
     @PostMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_CREATE')")
-    public ResponseEntity<DictDTO> create(@Validated @RequestBody Dict resources){
+    public ResponseEntity<DictDTO> create(@Validated @RequestBody Dict resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ EntityEnums.DICT_ENTITY +" cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnums.DICT_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(dictService.create(resources), HttpStatus.CREATED);
     }
@@ -53,7 +53,7 @@ public class DictController {
     @Log("修改字典")
     @PutMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_EDIT')")
-    public ResponseEntity<Void> update(@Validated(Dict.Update.class) @RequestBody Dict resources){
+    public ResponseEntity<Void> update(@Validated(Dict.Update.class) @RequestBody Dict resources) {
         dictService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -61,7 +61,7 @@ public class DictController {
     @Log("删除字典")
     @DeleteMapping(value = "/dict/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_DELETE')")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         dictService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

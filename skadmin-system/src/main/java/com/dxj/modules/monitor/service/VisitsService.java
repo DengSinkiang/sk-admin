@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class VisitsService {
     public void save() {
         LocalDate localDate = LocalDate.now();
         Visits visits = visitsRepository.findByDate(localDate.toString());
-        if(visits == null){
+        if (visits == null) {
             visits = new Visits();
             visits.setWeekDay(StringUtils.getWeekDay());
             visits.setPvCounts(1L);
@@ -78,7 +79,7 @@ public class VisitsService {
     public Object getChartData() {
         Map<String, Object> map = new HashMap<>();
         LocalDate localDate = LocalDate.now();
-        List<Visits> list = visitsRepository.findAllVisits(localDate.minusDays(6).toString(),localDate.plusDays(1).toString());
+        List<Visits> list = visitsRepository.findAllVisits(localDate.minusDays(6).toString(), localDate.plusDays(1).toString());
         map.put("weekDays", list.stream().map(Visits::getWeekDay).collect(Collectors.toList()));
         map.put("visitsData", list.stream().map(Visits::getPvCounts).collect(Collectors.toList()));
         map.put("ipData", list.stream().map(Visits::getIpCounts).collect(Collectors.toList()));

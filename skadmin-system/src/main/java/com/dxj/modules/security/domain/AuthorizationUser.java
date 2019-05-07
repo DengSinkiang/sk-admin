@@ -1,4 +1,4 @@
-package com.dxj.modules.security.security;
+package com.dxj.modules.security.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,6 @@ public class AuthorizationUser {
 
     @Override
     public String toString() {
-        return "{username=" + username  + ", password= ******}";
+        return "{username=" + username + ", password= ******}";
     }
 }

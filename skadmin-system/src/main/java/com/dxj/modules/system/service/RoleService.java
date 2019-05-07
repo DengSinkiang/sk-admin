@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
 /**
@@ -38,15 +39,15 @@ public class RoleService {
     @Cacheable(key = "#p0")
     public RoleDTO findById(long id) {
         Optional<Role> role = roleRepository.findById(id);
-        ValidationUtil.isNull(role,"Role","id",id);
+        ValidationUtil.isNull(role, "Role", "id", id);
         return roleMapper.toDto(role.orElse(null));
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public RoleDTO create(Role resources) {
-        if(roleRepository.findByName(resources.getName()) != null){
-            throw new EntityExistException(Role.class,"username",resources.getName());
+        if (roleRepository.findByName(resources.getName()) != null) {
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
         return roleMapper.toDto(roleRepository.save(resources));
     }
@@ -56,7 +57,7 @@ public class RoleService {
     public void update(Role resources) {
 
         Optional<Role> optionalRole = roleRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalRole,"Role", "id", resources.getId());
+        ValidationUtil.isNull(optionalRole, "Role", "id", resources.getId());
 
         Role role = optionalRole.orElse(null);
 
@@ -64,7 +65,7 @@ public class RoleService {
 
         assert role != null;
         if (role1 != null && !role1.getId().equals(role.getId())) {
-            throw new EntityExistException(Role.class,"username",resources.getName());
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
 
         role.setName(resources.getName());

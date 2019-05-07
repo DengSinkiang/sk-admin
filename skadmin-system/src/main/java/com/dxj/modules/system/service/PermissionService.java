@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
 /**
@@ -38,15 +39,15 @@ public class PermissionService {
     @Cacheable(key = "#p0")
     public PermissionDTO findById(long id) {
         Optional<Permission> permission = permissionRepository.findById(id);
-        ValidationUtil.isNull(permission,"Permission","id",id);
+        ValidationUtil.isNull(permission, "Permission", "id", id);
         return permissionMapper.toDto(permission.orElse(null));
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public PermissionDTO create(Permission resources) {
-        if(permissionRepository.findByName(resources.getName()) != null){
-            throw new EntityExistException(Permission.class,"name",resources.getName());
+        if (permissionRepository.findByName(resources.getName()) != null) {
+            throw new EntityExistException(Permission.class, "name", resources.getName());
         }
         return permissionMapper.toDto(permissionRepository.save(resources));
     }
@@ -55,18 +56,18 @@ public class PermissionService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Permission resources) {
         Optional<Permission> optionalPermission = permissionRepository.findById(resources.getId());
-        if(resources.getId().equals(resources.getPid())) {
+        if (resources.getId().equals(resources.getPid())) {
             throw new BadRequestException("上级不能为自己");
         }
-        ValidationUtil.isNull(optionalPermission,"Permission","id",resources.getId());
+        ValidationUtil.isNull(optionalPermission, "Permission", "id", resources.getId());
 
         Permission permission = optionalPermission.orElse(null);
 
         Permission permission1 = permissionRepository.findByName(resources.getName());
 
         assert permission != null;
-        if(permission1 != null && !permission1.getId().equals(permission.getId())){
-            throw new EntityExistException(Permission.class,"name",resources.getName());
+        if (permission1 != null && !permission1.getId().equals(permission.getId())) {
+            throw new EntityExistException(Permission.class, "name", resources.getName());
         }
 
         permission.setName(resources.getName());
@@ -87,15 +88,15 @@ public class PermissionService {
 
     @Cacheable(key = "'tree'")
     public Object getPermissionTree(List<Permission> permissions) {
-        List<Map<String,Object>> list = new LinkedList<>();
+        List<Map<String, Object>> list = new LinkedList<>();
         permissions.forEach(permission -> {
-                    if (permission!=null){
+                    if (permission != null) {
                         List<Permission> permissionList = permissionRepository.findByPid(permission.getId());
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("id",permission.getId());
-                        map.put("label",permission.getAlias());
-                        if(permissionList!=null && permissionList.size()!=0){
-                            map.put("children",getPermissionTree(permissionList));
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("id", permission.getId());
+                        map.put("label", permission.getAlias());
+                        if (permissionList != null && permissionList.size() != 0) {
+                            map.put("children", getPermissionTree(permissionList));
                         }
                         list.add(map);
                     }
@@ -133,7 +134,7 @@ public class PermissionService {
         Integer totalElements = permissionDTOs.size();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", trees.size() == 0?permissionDTOs:trees);
+        map.put("content", trees.size() == 0 ? permissionDTOs : trees);
         map.put("totalElements", totalElements);
         return map;
     }

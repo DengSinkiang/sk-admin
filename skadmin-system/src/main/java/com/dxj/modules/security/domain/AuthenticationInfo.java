@@ -1,7 +1,9 @@
-package com.dxj.modules.security.security;
+package com.dxj.modules.security.domain;
 
+import com.dxj.modules.security.domain.JwtUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import java.io.Serializable;
 
 /**

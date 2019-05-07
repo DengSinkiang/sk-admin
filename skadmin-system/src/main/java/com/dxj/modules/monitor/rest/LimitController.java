@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * 接口限流测试类
  */
 @RestController

@@ -36,36 +36,37 @@ public class PermissionController {
 
     /**
      * 返回全部的权限，新增角色时下拉选择
+     *
      * @return
      */
     @GetMapping(value = "/permissions/tree")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_CREATE','PERMISSION_EDIT','ROLES_SELECT','ROLES_ALL')")
-    public ResponseEntity<Object> getTree(){
-        return new ResponseEntity<>(permissionService.getPermissionTree(permissionService.findByPid(0L)),HttpStatus.OK);
+    public ResponseEntity<Object> getTree() {
+        return new ResponseEntity<>(permissionService.getPermissionTree(permissionService.findByPid(0L)), HttpStatus.OK);
     }
 
     @Log("查询权限")
     @GetMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_SELECT')")
-    public ResponseEntity<Object> getPermissions(@RequestParam(required = false) String name){
+    public ResponseEntity<Object> getPermissions(@RequestParam(required = false) String name) {
         List<PermissionDTO> permissionDTOS = permissionQueryService.queryAll(name);
-        return new ResponseEntity<>(permissionService.buildTree(permissionDTOS),HttpStatus.OK);
+        return new ResponseEntity<>(permissionService.buildTree(permissionDTOS), HttpStatus.OK);
     }
 
     @Log("新增权限")
     @PostMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_CREATE')")
-    public ResponseEntity<PermissionDTO> create(@Validated @RequestBody Permission resources){
+    public ResponseEntity<PermissionDTO> create(@Validated @RequestBody Permission resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ EntityEnums.PERMISSION_ENTITY +" cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnums.PERMISSION_ENTITY + " cannot already have an ID");
         }
-        return new ResponseEntity<>(permissionService.create(resources),HttpStatus.CREATED);
+        return new ResponseEntity<>(permissionService.create(resources), HttpStatus.CREATED);
     }
 
     @Log("修改权限")
     @PutMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_EDIT')")
-    public ResponseEntity<Void> update(@Validated(Permission.Update.class) @RequestBody Permission resources){
+    public ResponseEntity<Void> update(@Validated(Permission.Update.class) @RequestBody Permission resources) {
         permissionService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -73,7 +74,7 @@ public class PermissionController {
     @Log("删除权限")
     @DeleteMapping(value = "/permissions/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_DELETE')")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         permissionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

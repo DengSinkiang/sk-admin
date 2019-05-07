@@ -9,6 +9,7 @@ import com.dxj.modules.system.service.UserService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 /**
  * 数据权限配置
+ *
  * @author dxj
  * @date 2019-4-1
  */
@@ -50,7 +52,7 @@ public class DataScope {
         for (Role role : roleSet) {
 
             if (scopeType[0].equals(role.getDataScope())) {
-                return new HashSet<>() ;
+                return new HashSet<>();
             }
 
             // 存储本级的数据权限
@@ -77,9 +79,9 @@ public class DataScope {
     public List<Long> getDeptChildren(List<Dept> deptList) {
         List<Long> list = new ArrayList<>();
         deptList.forEach(dept -> {
-                    if (dept != null && dept.getEnabled()){
+                    if (dept != null && dept.getEnabled()) {
                         List<Dept> depts = deptService.findByPid(dept.getId());
-                        if(deptList != null && deptList.size() != 0){
+                        if (deptList != null && deptList.size() != 0) {
                             list.addAll(getDeptChildren(depts));
                         }
                         list.add(dept.getId());

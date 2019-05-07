@@ -1,4 +1,4 @@
-package com.dxj.modules.security.security;
+package com.dxj.modules.security.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
