@@ -36,9 +36,6 @@ public class StringRedisSerializer implements RedisSerializer<Object> {
     @Override
     public byte[] serialize(Object object) {
         String string = JSON.toJSONString(object);
-        if (string == null) {
-            return null;
-        }
         string = string.replace(target, replacement);
         return string.getBytes(charset);
     }
