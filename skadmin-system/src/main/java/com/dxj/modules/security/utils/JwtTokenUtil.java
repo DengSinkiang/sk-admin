@@ -2,7 +2,7 @@ package com.dxj.modules.security.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.DefaultClock;
-import com.dxj.modules.security.security.JwtUser;
+import com.dxj.modules.security.domain.JwtUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;

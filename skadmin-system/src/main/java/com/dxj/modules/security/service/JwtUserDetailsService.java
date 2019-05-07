@@ -2,7 +2,7 @@ package com.dxj.modules.security.service;
 
 import com.dxj.modules.system.domain.*;
 import com.dxj.exception.EntityNotFoundException;
-import com.dxj.modules.security.security.JwtUser;
+import com.dxj.modules.security.domain.JwtUser;
 import com.dxj.modules.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

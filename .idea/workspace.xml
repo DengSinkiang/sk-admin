@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54eeff16-dead-452c-bb5b-10b52843bdbb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthenticationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthorizationUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/JwtUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtUserDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/rest/AuthenticationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/rest/AuthenticationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/AuthenticationInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/AuthorizationUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/JwtUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtPermissionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtPermissionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/utils/JwtTokenUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/utils/JwtTokenUtil.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,80 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtUserDetailsService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="58" column="10" lean-forward="true" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-552">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="38">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,11 +46,65 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1319">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="-226">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/JwtUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthorizationUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthenticationInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="12" column="76" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1200">
+              <caret line="82" column="47" selection-start-line="82" selection-start-column="47" selection-end-line="82" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,9 +130,9 @@
         <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" />
         <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java" />
         <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java" />
         <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java" />
+        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java" />
       </list>
     </option>
   </component>
@@ -352,6 +341,17 @@
               <item name="security" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dxj" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -364,7 +364,7 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557218677110" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557220948654" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -391,12 +391,12 @@
       <workItem from="1557062105545" duration="2118000" />
       <workItem from="1557103039408" duration="3297000" />
       <workItem from="1557109132338" duration="3377000" />
-      <workItem from="1557137167858" duration="5976000" />
+      <workItem from="1557137167858" duration="7948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3487000" />
+    <option name="totallyTimeSpent" value="5459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1407" y="76" width="1280" height="777" extended-state="0" />
@@ -412,7 +412,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3941606" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3941606" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -438,20 +438,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/LogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/query/LogQueryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/rest/GeneratorController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -729,27 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtUserDetailsService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
@@ -764,41 +729,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthorizationUser.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.1.1.RELEASE/spring-security-core-5.1.1.RELEASE.jar!/org/springframework/security/core/userdetails/UserDetails.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        <state relative-caret-position="114">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/AuthenticationInfo.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="277">
+          <caret line="106" column="54" selection-start-line="106" selection-start-column="54" selection-end-line="106" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.1.1.RELEASE/spring-security-config-5.1.1.RELEASE.jar!/org/springframework/security/config/annotation/web/configurers/ExceptionHandlingConfigurer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+        <state relative-caret-position="220">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/JwtUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthenticationInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/domain/AuthorizationUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/config/SecurityConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-552">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="1200">
+          <caret line="82" column="47" selection-start-line="82" selection-start-column="47" selection-end-line="82" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/utils/JwtTokenUtil.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1319">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="38">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-226">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="12" column="76" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

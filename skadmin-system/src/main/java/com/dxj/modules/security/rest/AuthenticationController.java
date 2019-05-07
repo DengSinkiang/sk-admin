@@ -2,9 +2,9 @@ package com.dxj.modules.security.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
-import com.dxj.modules.security.security.AuthenticationInfo;
-import com.dxj.modules.security.security.AuthorizationUser;
-import com.dxj.modules.security.security.JwtUser;
+import com.dxj.modules.security.domain.AuthenticationInfo;
+import com.dxj.modules.security.domain.AuthorizationUser;
+import com.dxj.modules.security.domain.JwtUser;
 import com.dxj.utils.EncryptUtils;
 import com.dxj.modules.security.utils.JwtTokenUtil;
 import com.dxj.utils.SecurityContextHolder;
@@ -49,7 +49,7 @@ public class AuthenticationController {
      */
     @Log("用户登录")
     @PostMapping(value = "${jwt.auth.path}")
-    public ResponseEntity login(@Validated @RequestBody AuthorizationUser authorizationUser) {
+    public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
 
         final JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
 
@@ -74,7 +74,7 @@ public class AuthenticationController {
      * @return
      */
     @GetMapping(value = "${jwt.auth.account}")
-    public ResponseEntity getUserInfo() {
+    public ResponseEntity<JwtUser> getUserInfo() {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(userDetails.getUsername());
         return ResponseEntity.ok(jwtUser);
