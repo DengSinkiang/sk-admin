@@ -1,5 +1,6 @@
 package com.dxj.modules.security.rest;
 
+import com.dxj.aop.log.LoginLog;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.modules.security.domain.AuthenticationInfo;
@@ -11,6 +12,7 @@ import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,6 +50,7 @@ public class AuthenticationController {
      * @return
      */
     @Log("用户登录")
+    @LoginLog("登录")
     @PostMapping(value = "${jwt.auth.path}")
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
 
@@ -79,4 +82,15 @@ public class AuthenticationController {
         JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(userDetails.getUsername());
         return ResponseEntity.ok(jwtUser);
     }
+
+    /**
+     * 退出登录
+     * @param authorizationUser
+     * @return
+     */
+    @PostMapping(value = "${jwt.auth.logout}")
+    public ResponseEntity<Void> logout(@Validated @RequestBody AuthorizationUser authorizationUser) {
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

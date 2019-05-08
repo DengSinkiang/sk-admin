@@ -1,6 +1,8 @@
 package com.dxj.aspect;
 
+import com.dxj.domain.LoginLog;
 import com.dxj.service.LogService;
+import com.dxj.service.LoginLogService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.domain.Log;
 import com.dxj.exception.BadRequestException;
@@ -25,13 +27,15 @@ public class DataScopeAspect {
 
     @Autowired
     private LogService logService;
+    @Autowired
+    private LoginLogService loginLogService;
 
     private long currentTime = 0L;
 
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.dxj.aop.log.Log)")
+    @Pointcut("@annotation(com.dxj.aop.log.Log) || @annotation(com.dxj.aop.log.LoginLog)")
     public void logPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
@@ -52,6 +56,9 @@ public class DataScopeAspect {
         }
         Log log = new Log("INFO",System.currentTimeMillis() - currentTime);
         logService.save(joinPoint, log);
+
+        LoginLog loginLog = new LoginLog("INFO",System.currentTimeMillis() - currentTime);
+        loginLogService.save(joinPoint, loginLog);
         return result;
     }
 
@@ -66,5 +73,7 @@ public class DataScopeAspect {
         Log log = new Log("ERROR",System.currentTimeMillis() - currentTime);
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
         logService.save((ProceedingJoinPoint)joinPoint, log);
+        LoginLog loginLog = new LoginLog("ERROR",System.currentTimeMillis() - currentTime);
+        loginLogService.save((ProceedingJoinPoint)joinPoint, loginLog);
     }
 }

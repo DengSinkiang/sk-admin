@@ -1,7 +1,9 @@
 package com.dxj.rest;
 
 import com.dxj.domain.Log;
+import com.dxj.domain.LoginLog;
 import com.dxj.service.query.LogQueryService;
+import com.dxj.service.query.LoginLogQueryService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,8 @@ public class LogController {
 
     @Autowired
     private LogQueryService logQueryService;
+    @Autowired
+    private LoginLogQueryService loginLogQueryService;
 
     @GetMapping(value = "/logs")
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -42,5 +46,12 @@ public class LogController {
     public ResponseEntity getErrorLogs(Log log, Pageable pageable){
         log.setLogType("ERROR");
         return new ResponseEntity(logQueryService.queryAll(log,pageable), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/logs/login")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity getLoginLogs(LoginLog loginLog, Pageable pageable){
+        //loginLog.setLogType("INFO");
+        return new ResponseEntity(loginLogQueryService.queryAll(loginLog,pageable), HttpStatus.OK);
     }
 }

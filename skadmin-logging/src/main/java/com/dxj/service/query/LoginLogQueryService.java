@@ -1,8 +1,12 @@
 package com.dxj.service.query;
 
-import com.dxj.domain.Log;
+/**
+ * @Author: dxj
+ * @Date: 2019-05-08 13:08
+ */
+
 import com.dxj.domain.LoginLog;
-import com.dxj.repository.LogRepository;
+import com.dxj.repository.LoginLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,32 +22,28 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author dxj
- * @date 2018-11-24
- */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class LogQueryService {
+public class LoginLogQueryService {
 
     @Autowired
-    private LogRepository logRepository;
+    private LoginLogRepository logRepository;
 
-    public Page queryAll(Log log, Pageable pageable){
+    public Page queryAll(LoginLog log, Pageable pageable){
         return logRepository.findAll(new Spec(log),pageable);
     }
 
 
-    class Spec implements Specification<Log> {
+    class Spec implements Specification<LoginLog> {
 
-        private Log log;
+        private LoginLog log;
 
-        public Spec(Log log){
+        public Spec(LoginLog log){
             this.log = log;
         }
 
         @Override
-        public Predicate toPredicate(Root<Log> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+        public Predicate toPredicate(Root<LoginLog> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
 
             List<Predicate> list = new ArrayList<>();
 
@@ -61,3 +61,4 @@ public class LogQueryService {
         }
     }
 }
+
