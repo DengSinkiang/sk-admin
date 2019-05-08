@@ -26,6 +26,7 @@ public enum EntityEnums {
     public String getEntityName() {
         return this.entityName;
     }
+
     public void setEntityName(String entityName) {
         this.entityName = entityName;
     }

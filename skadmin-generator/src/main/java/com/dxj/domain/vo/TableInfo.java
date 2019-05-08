@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 表的数据信息
+ *
  * @author dxj
  * @date 2019-01-02
  */
@@ -14,9 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TableInfo {
 
-    /** 表名称 **/
+    /**
+     * 表名称
+     **/
     private Object tableName;
 
-    /** 创建日期 **/
+    /**
+     * 创建日期
+     **/
     private Object createTime;
 }

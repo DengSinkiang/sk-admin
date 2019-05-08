@@ -10,8 +10,8 @@ import java.nio.charset.Charset;
 /**
  * Value 序列化
  *
- * @author /
  * @param <T>
+ * @author /
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 

@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
@@ -54,7 +55,7 @@ public class LimitAspect {
             }
         }
 
-        ImmutableList keys = ImmutableList.of(StringUtils.join(limit.prefix(), "_", key, "_", request.getRequestURI().replaceAll("/","_")));
+        ImmutableList keys = ImmutableList.of(StringUtils.join(limit.prefix(), "_", key, "_", request.getRequestURI().replaceAll("/", "_")));
 
         String luaScript = buildLuaScript();
         RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
