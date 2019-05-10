@@ -1,18 +1,17 @@
 package com.dxj.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.dxj.domain.SmsConfig;;
 import com.dxj.domain.vo.SmsVo;
 import com.dxj.exception.BadRequestException;
 import com.dxj.repository.SmsRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
@@ -29,6 +28,7 @@ import java.util.Optional;
  * @Date: 2019-05-10 15:02
  */
 @Service
+@Slf4j
 @CacheConfig(cacheNames = "sms")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class SmsService {
@@ -93,8 +93,9 @@ public class SmsService {
         request.putQueryParameter("TemplateParam", smsVo.getContent());
         try {
             CommonResponse response = client.getCommonResponse(request);
+            log.info("发送短信成功 {}", response.getData());
         } catch (ClientException e) {
-            e.printStackTrace();
+            log.error("发送短信失败原因：{}", e);
         }
 
     }
