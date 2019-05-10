@@ -49,7 +49,7 @@ public class AuthenticationController {
      * @param authorizationUser
      * @return
      */
-    @Log("用户登录")
+
     @LoginLog("登录")
     @PostMapping(value = "${jwt.auth.path}")
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
@@ -81,16 +81,6 @@ public class AuthenticationController {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(userDetails.getUsername());
         return ResponseEntity.ok(jwtUser);
-    }
-
-    /**
-     * 退出登录
-     * @param authorizationUser
-     * @return
-     */
-    @PostMapping(value = "${jwt.auth.logout}")
-    public ResponseEntity<Void> logout(@Validated @RequestBody AuthorizationUser authorizationUser) {
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

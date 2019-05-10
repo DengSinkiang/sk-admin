@@ -33,6 +33,12 @@
             <version>${mail.version}</version>
         </dependency>
 
+        <!-- 阿里短信-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.3.5</version>
+        </dependency>
         <!--七牛云存储-->
         <dependency>
             <groupId>com.qiniu</groupId>

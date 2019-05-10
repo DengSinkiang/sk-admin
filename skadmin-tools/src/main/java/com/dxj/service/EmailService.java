@@ -1,5 +1,6 @@
 package com.dxj.service;
 
+import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
 import com.dxj.domain.EmailConfig;
@@ -72,6 +73,7 @@ public class EmailService {
     @Async
     @Transactional(rollbackFor = Exception.class)
     public void send(EmailVo emailVo, EmailConfig emailConfig){
+
         if(emailConfig == null){
             throw new BadRequestException("请先配置，再操作");
         }
@@ -96,11 +98,13 @@ public class EmailService {
          * 发送
          */
         try {
-            MailUtil.send(account,
-                          emailVo.getTos(),
-                          emailVo.getSubject(),
-                          content,
-                          true);
+            Mail.create(account)
+                    .setTos(emailVo.getTos().toArray(new String[0]))
+                    .setTitle(emailVo.getSubject())
+                    .setContent(content)
+                    .setHtml(true)
+                    .setUseGlobalSession(false)//关闭session
+                    .send();
         }catch (Exception e){
             throw new BadRequestException(e.getMessage());
         }

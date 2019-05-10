@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
@@ -47,12 +46,10 @@ public class LoginLog {
     @Column(name = "create_time")
     private Timestamp createTime;
 
-    @Column(name = "operation")
     private String operation;
 
     @Column(name = "user_agent")
     private String userAgent;
-
 
 
     public LoginLog(String logType, Long time) {

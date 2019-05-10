@@ -47,47 +47,32 @@ public class LoginLogService {
         Method method = signature.getMethod();
         com.dxj.aop.log.LoginLog aopLog = method.getAnnotation(com.dxj.aop.log.LoginLog.class);
 
+        assert log != null;
         // 操作类型
-        if (log != null) {
-            log.setOperation(aopLog.value());
-        }
+        log.setOperation(aopLog.value());
 
         // agent
         String agent = request.getHeader("User-Agent");
-        if (log != null) {
-            log.setUserAgent(agent);
-        }
+        log.setUserAgent(agent);
 
-        StringBuilder params = new StringBuilder("{");
-        //参数值
-        Object[] argValues = joinPoint.getArgs();
-        //参数名称
-        String[] argNames = ((MethodSignature)joinPoint.getSignature()).getParameterNames();
         // 用户名
         String username = "";
 
-        if(argValues != null){
-            for (int i = 0; i < argValues.length; i++) {
-                params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
-            }
-        }
-
         // 获取IP地址
-        assert log != null;
+
         log.setRequestIp(StringUtils.getIP(request));
 
-        String LOGINPATH = "login";
-        if(!LOGINPATH.equals(signature.getName())){
+        if(!"login".equals(signature.getName())){
             UserDetails userDetails = SecurityContextHolder.getUserDetails();
             username = userDetails.getUsername();
         } else {
             try {
-                JSONObject jsonObject = new JSONObject(argValues[0]);
-                username = jsonObject.get("username").toString();
+                username = new JSONObject(joinPoint.getArgs()[0]).get("username").toString();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+        // username
         log.setUsername(username);
         logRepository.save(log);
     }

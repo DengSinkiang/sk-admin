@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 发送邮件
- * @author 郑杰
+ * @author dxj
  * @date 2018/09/28 6:55:53
  */
 @Slf4j
@@ -32,7 +32,7 @@ public class EmailController {
     @Log("配置邮件")
     @PutMapping(value = "/email")
     public ResponseEntity emailConfig(@Validated @RequestBody EmailConfig emailConfig){
-        emailService.update(emailConfig,emailService.find());
+        emailService.update(emailConfig, emailService.find());
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -40,7 +40,7 @@ public class EmailController {
     @PostMapping(value = "/email")
     public ResponseEntity send(@Validated @RequestBody EmailVo emailVo) throws Exception {
         log.warn("REST request to send Email : {}" +emailVo);
-        emailService.send(emailVo,emailService.find());
+        emailService.send(emailVo, emailService.find());
         return new ResponseEntity(HttpStatus.OK);
     }
 }

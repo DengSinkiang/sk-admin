@@ -46,14 +46,15 @@ public class LogService {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         com.dxj.aop.log.Log aopLog = method.getAnnotation(com.dxj.aop.log.Log.class);
-
+        assert log != null;
         // 描述
-        if (log != null) {
+        if (aopLog != null) {
             log.setDescription(aopLog.value());
         }
 
+
         // 方法路径
-        String methodName = joinPoint.getTarget().getClass().getName()+"."+signature.getName()+"()";
+        String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
 
         StringBuilder params = new StringBuilder("{");
         //参数值
@@ -63,24 +64,21 @@ public class LogService {
         // 用户名
         String username = "";
 
-        if(argValues != null){
-            for (int i = 0; i < argValues.length; i++) {
-                params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
-            }
+        assert argValues != null;
+        for (int i = 0; i < argValues.length; i++) {
+            params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
         }
 
         // 获取IP地址
-        assert log != null;
         log.setRequestIp(StringUtils.getIP(request));
 
-        String LOGINPATH = "login";
-        if(!LOGINPATH.equals(signature.getName())){
+        String loginPath = "login";
+        if(!loginPath.equals(signature.getName())){
             UserDetails userDetails = SecurityContextHolder.getUserDetails();
             username = userDetails.getUsername();
         } else {
             try {
-                JSONObject jsonObject = new JSONObject(argValues[0]);
-                username = jsonObject.get("username").toString();
+                username = new JSONObject(argValues[0]).get("username").toString();
             }catch (Exception e){
                 e.printStackTrace();
             }
