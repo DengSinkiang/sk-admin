@@ -25,22 +25,22 @@ public class EmailController {
     private EmailService emailService;
 
     @GetMapping(value = "/email")
-    public ResponseEntity get(){
-        return new ResponseEntity(emailService.find(),HttpStatus.OK);
+    public ResponseEntity<EmailConfig> get(){
+        return new ResponseEntity<>(emailService.find(),HttpStatus.OK);
     }
 
     @Log("配置邮件")
     @PutMapping(value = "/email")
-    public ResponseEntity emailConfig(@Validated @RequestBody EmailConfig emailConfig){
+    public ResponseEntity<EmailConfig> emailConfig(@Validated @RequestBody EmailConfig emailConfig){
         emailService.update(emailConfig, emailService.find());
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Log("发送邮件")
     @PostMapping(value = "/email")
-    public ResponseEntity send(@Validated @RequestBody EmailVo emailVo) throws Exception {
+    public ResponseEntity<Void> send(@Validated @RequestBody EmailVo emailVo) {
         log.warn("REST request to send Email : {}" +emailVo);
         emailService.send(emailVo, emailService.find());
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

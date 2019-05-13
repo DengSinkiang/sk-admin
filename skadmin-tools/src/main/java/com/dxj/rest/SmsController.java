@@ -28,19 +28,19 @@ public class SmsController {
     }
 
     @GetMapping(value = "/sms")
-    public ResponseEntity get() {
+    public ResponseEntity<SmsConfig> get() {
         return new ResponseEntity(smsService.find(), HttpStatus.OK);
     }
     @PutMapping(value = "/sms")
-    public ResponseEntity configSms(@Validated @RequestBody SmsConfig smsConfig) {
+    public ResponseEntity<SmsConfig> configSms(@Validated @RequestBody SmsConfig smsConfig) {
         smsService.update(smsConfig, smsService.find());
         return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping(value = "/sms")
-    public ResponseEntity send(@Validated @RequestBody SmsVo smsVo) {
+    public ResponseEntity<Void> send(@Validated @RequestBody SmsVo smsVo) {
         log.warn("REST request to send Sms : {}" +smsVo);
         smsService.send(smsVo, smsService.find());
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
