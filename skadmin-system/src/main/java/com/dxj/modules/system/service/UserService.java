@@ -1,5 +1,6 @@
 package com.dxj.modules.system.service;
 
+import com.dxj.modules.monitor.service.RedisService;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.EntityExistException;
 import com.dxj.exception.EntityNotFoundException;
@@ -31,10 +32,13 @@ public class UserService {
 
     private final UserMapper userMapper;
 
+    private final RedisService redisService;
+
     @Autowired
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, RedisService redisService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.redisService = redisService;
     }
 
     @Cacheable(key = "#p0")
@@ -80,6 +84,14 @@ public class UserService {
 
         if (user2 != null && !user.getId().equals(user2.getId())) {
             throw new EntityExistException(User.class, "email", resources.getEmail());
+        }
+
+        // 如果用户的角色改变了，需要手动清理下缓存
+        if (!resources.getRoles().equals(user.getRoles())) {
+            String key = "role::loadPermissionByUser:" + user.getUsername();
+            redisService.delete(key);
+            key = "role::findByUsers_Id:" + user.getId();
+            redisService.delete(key);
         }
 
         user.setUsername(resources.getUsername());

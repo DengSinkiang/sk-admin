@@ -105,7 +105,7 @@ public class RoleService {
         roleRepository.deleteById(id);
     }
 
-    @Cacheable(keyGenerator = "keyGenerator")
+    @Cacheable(key = "'findByUsers_Id:' + #p0")
     public List<Role> findByUsers_Id(Long id) {
         return new ArrayList<>(roleRepository.findByUsers_Id(id));
     }

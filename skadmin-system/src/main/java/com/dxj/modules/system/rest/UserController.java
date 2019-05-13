@@ -160,9 +160,8 @@ public class UserController {
      */
     @PostMapping(value = "/users/updateAvatar")
     public ResponseEntity<Void> updateAvatar(@RequestParam MultipartFile file) {
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        Picture picture = pictureService.upload(file, userDetails.getUsername());
-        userService.updateAvatar(userDetails.getUsername(), picture.getUrl());
+        Picture picture = pictureService.upload(file, SecurityContextHolder.getUsername());
+        userService.updateAvatar(SecurityContextHolder.getUsername(), picture.getUrl());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
