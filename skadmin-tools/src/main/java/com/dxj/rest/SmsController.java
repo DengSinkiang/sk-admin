@@ -46,6 +46,12 @@ public class SmsController {
         smsService.update(smsConfig);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    /**
+     * 发送短信
+     * @param smsVo
+     * @return
+     */
     @PostMapping(value = "/sms")
     public ResponseEntity<Void> send(@Validated @RequestBody SmsVo smsVo) {
         log.warn("REST request to send Sms : {}" +smsVo);

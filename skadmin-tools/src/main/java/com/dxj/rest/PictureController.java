@@ -24,17 +24,21 @@ import java.util.Map;
 @RequestMapping("/api")
 public class PictureController {
 
-    @Autowired
-    private PictureService pictureService;
+    private final PictureService pictureService;
+
+    private final PictureQueryService pictureQueryService;
 
     @Autowired
-    private PictureQueryService pictureQueryService;
+    public PictureController(PictureService pictureService, PictureQueryService pictureQueryService) {
+        this.pictureService = pictureService;
+        this.pictureQueryService = pictureQueryService;
+    }
 
     @Log("查询图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_SELECT')")
     @GetMapping(value = "/pictures")
-    public ResponseEntity getRoles(Picture resources, Pageable pageable){
-        return new ResponseEntity(pictureQueryService.queryAll(resources,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> getRoles(Picture resources, Pageable pageable){
+        return new ResponseEntity<>(pictureQueryService.queryAll(resources,pageable),HttpStatus.OK);
     }
 
     /**
@@ -46,15 +50,15 @@ public class PictureController {
     @Log("上传图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_UPLOAD')")
     @PostMapping(value = "/pictures")
-    public ResponseEntity upload(@RequestParam MultipartFile file){
+    public ResponseEntity<Map<String, Object>> upload(@RequestParam MultipartFile file){
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         String userName = userDetails.getUsername();
         Picture picture = pictureService.upload(file,userName);
-        Map map = new HashMap();
-        map.put("errno",0);
-        map.put("id",picture.getId());
-        map.put("data",new String[]{picture.getUrl()});
-        return new ResponseEntity(map,HttpStatus.OK);
+        Map<String, Object> map = new HashMap<>();
+        map.put("errno", 0);
+        map.put("id", picture.getId());
+        map.put("data", new String[]{picture.getUrl()});
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     /**
@@ -65,8 +69,8 @@ public class PictureController {
     @Log("删除图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_DELETE')")
     @DeleteMapping(value = "/pictures/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         pictureService.delete(pictureService.findById(id));
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
