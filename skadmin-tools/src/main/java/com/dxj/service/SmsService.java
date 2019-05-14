@@ -7,7 +7,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.dxj.domain.SmsConfig;;
+import com.dxj.domain.SmsConfig;
 import com.dxj.domain.vo.SmsVo;
 import com.dxj.exception.BadRequestException;
 import com.dxj.repository.SmsRepository;
@@ -53,12 +53,11 @@ public class SmsService {
     /**
      * 更新短信配置
      * @param smsConfig
-     * @param old
      * @return
      */
     @CachePut(key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public SmsConfig update(SmsConfig smsConfig, SmsConfig old) {
+    public SmsConfig update(SmsConfig smsConfig) {
 
         return smsRepository.save(smsConfig);
     }

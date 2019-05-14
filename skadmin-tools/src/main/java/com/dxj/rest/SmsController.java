@@ -27,13 +27,23 @@ public class SmsController {
         this.smsService = smsService;
     }
 
+    /**
+     * 获取短信配置
+     * @return
+     */
     @GetMapping(value = "/sms")
     public ResponseEntity<SmsConfig> get() {
         return new ResponseEntity(smsService.find(), HttpStatus.OK);
     }
+
+    /**
+     * 短信配置
+     * @param smsConfig
+     * @return
+     */
     @PutMapping(value = "/sms")
     public ResponseEntity<SmsConfig> configSms(@Validated @RequestBody SmsConfig smsConfig) {
-        smsService.update(smsConfig, smsService.find());
+        smsService.update(smsConfig);
         return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping(value = "/sms")
