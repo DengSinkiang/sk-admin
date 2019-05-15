@@ -39,29 +39,27 @@ import java.util.Optional;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QiNiuService {
 
-    @Autowired
-    private QiNiuConfigRepository qiNiuConfigRepository;
+    private final QiNiuConfigRepository qiNiuConfigRepository;
 
-    @Autowired
-    private QiniuContentRepository qiniuContentRepository;
+    private final QiniuContentRepository qiniuContentRepository;
 
     @Value("${qiniu.max-size}")
     private Long maxSize;
 
-    private final String TYPE = "公开";
+    @Autowired
+    public QiNiuService(QiNiuConfigRepository qiNiuConfigRepository, QiniuContentRepository qiniuContentRepository) {
+        this.qiNiuConfigRepository = qiNiuConfigRepository;
+        this.qiniuContentRepository = qiniuContentRepository;
+    }
 
     /**
      * 查配置
      * @return
      */
-    @Cacheable(key = "'1'")
+    @Cacheable(cacheNames = "qiNiuConfig", key = "'1'")
     public QiniuConfig find() {
         Optional<QiniuConfig> qiniuConfig = qiNiuConfigRepository.findById(1L);
-        if(qiniuConfig.isPresent()){
-            return qiniuConfig.get();
-        } else {
-            return new QiniuConfig();
-        }
+        return qiniuConfig.orElseGet(QiniuConfig::new);
     }
 
     /**
@@ -69,10 +67,10 @@ public class QiNiuService {
      * @param qiniuConfig
      * @return
      */
-    @CachePut(key = "'1'")
+    @CachePut(cacheNames = "qiNiuConfig", key = "'1'")
     @Transactional(rollbackFor = Exception.class)
     public QiniuConfig update(QiniuConfig qiniuConfig) {
-        if (!(qiniuConfig.getHost().toLowerCase().startsWith("http://")||qiniuConfig.getHost().toLowerCase().startsWith("https://"))) {
+        if (!(qiniuConfig.getHost().toLowerCase().startsWith("http://")|| qiniuConfig.getHost().toLowerCase().startsWith("https://"))) {
             throw new BadRequestException("外链域名必须以http://或者https://开头");
         }
         qiniuConfig.setId(1L);
@@ -88,16 +86,14 @@ public class QiNiuService {
     @Transactional(rollbackFor = Exception.class)
     public QiniuContent upload(MultipartFile file, QiniuConfig qiniuConfig) {
 
-        Long size = maxSize * 1024 * 1024;
+        long size = maxSize * 1024 * 1024;
         if(file.getSize() > size){
             throw new BadRequestException("文件超出规定大小");
         }
         if(qiniuConfig.getId() == null){
             throw new BadRequestException("请先添加相应配置，再操作");
         }
-        /**
-         * 构造一个带指定Zone对象的配置类
-         */
+        //构造一个带指定Zone对象的配置类
         Configuration cfg = QiNiuUtil.getConfiguration(qiniuConfig.getZone());
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
@@ -132,7 +128,7 @@ public class QiNiuService {
     public QiniuContent findByContentId(Long id) {
         Optional<QiniuContent> qiniuContent = qiniuContentRepository.findById(id);
         ValidationUtil.isNull(qiniuContent,"QiniuContent", "id",id);
-        return qiniuContent.get();
+        return qiniuContent.orElse(null);
     }
 
     /**
@@ -142,14 +138,13 @@ public class QiNiuService {
      * @return
      */
     public String download(QiniuContent content,QiniuConfig config){
-        String finalUrl = null;
+        String finalUrl;
+        String TYPE = "公开";
         if(TYPE.equals(content.getType())){
             finalUrl  = content.getUrl();
         } else {
             Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
-            /**
-             * 1小时，可以自定义链接过期时间
-             */
+            //1小时，可以自定义链接过期时间
             long expireInSeconds = 3600;
             finalUrl = auth.privateDownloadUrl(content.getUrl(), expireInSeconds);
         }
@@ -201,7 +196,7 @@ public class QiNiuService {
         BucketManager.FileListIterator fileListIterator = bucketManager.createFileListIterator(config.getBucket(), prefix, limit, delimiter);
         while (fileListIterator.hasNext()) {
             //处理获取的file list结果
-            QiniuContent qiniuContent = null;
+            QiniuContent qiniuContent;
             FileInfo[] items = fileListIterator.next();
             for (FileInfo item : items) {
                 if(qiniuContentRepository.findByKey(item.key) == null){

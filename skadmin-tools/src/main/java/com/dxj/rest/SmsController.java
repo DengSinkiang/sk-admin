@@ -43,8 +43,10 @@ public class SmsController {
      */
     @PutMapping(value = "/sms")
     public ResponseEntity<SmsConfig> configSms(@Validated @RequestBody SmsConfig smsConfig) {
+        System.out.println("真真正正");
+
         smsService.update(smsConfig);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

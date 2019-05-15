@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 发送邮件
- * @author 郑杰
+ * 七牛云上传
+ * @author dxj
  * @date 2018/09/28 6:55:53
  */
 @Slf4j
@@ -63,7 +63,7 @@ public class QiniuController {
     @Log("上传文件")
     @PostMapping(value = "/qiNiuContent")
     public ResponseEntity<Map<String, Object>> upload(@RequestParam MultipartFile file){
-        QiniuContent qiniuContent = qiNiuService.upload(file,qiNiuService.find());
+        QiniuContent qiniuContent = qiNiuService.upload(file, qiNiuService.find());
         Map<String, Object> map = new HashMap<>();
         map.put("id", qiniuContent.getId());
         map.put("errno", 0);
@@ -92,6 +92,7 @@ public class QiniuController {
     @Log("下载文件")
     @GetMapping(value = "/qiNiuContent/download/{id}")
     public ResponseEntity<Map<String, Object>> download(@PathVariable Long id){
+
         Map<String, Object> map = new HashMap<>();
         map.put("url", qiNiuService.download(qiNiuService.findByContentId(id), qiNiuService.find()));
         return new ResponseEntity<>(map,HttpStatus.OK);
