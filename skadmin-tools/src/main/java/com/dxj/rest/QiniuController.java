@@ -52,7 +52,7 @@ public class QiniuController {
     @Log("查询文件")
     @GetMapping(value = "/qiNiuContent")
     public ResponseEntity<Object> getRoles(QiniuContent resources, Pageable pageable){
-        return new ResponseEntity<>(qiNiuQueryService.queryAll(resources,pageable), HttpStatus.OK);
+        return new ResponseEntity<>(qiNiuQueryService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     /**
@@ -66,7 +66,7 @@ public class QiniuController {
         QiniuContent qiniuContent = qiNiuService.upload(file, qiNiuService.find());
         Map<String, Object> map = new HashMap<>();
         map.put("id", qiniuContent.getId());
-        map.put("errno", 0);
+        map.put("code", 0);
         map.put("data", new String[]{qiniuContent.getUrl()});
         return new ResponseEntity<>(map, HttpStatus.OK);
     }

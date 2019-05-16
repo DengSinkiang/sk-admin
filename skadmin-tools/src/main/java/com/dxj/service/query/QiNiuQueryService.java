@@ -43,20 +43,18 @@ public class QiNiuQueryService {
 
         private QiniuContent qiniuContent;
 
-        public Spec(QiniuContent qiniuContent){
+        Spec(QiniuContent qiniuContent){
             this.qiniuContent = qiniuContent;
         }
 
         @Override
         public Predicate toPredicate(Root<QiniuContent> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
 
-            List<Predicate> list = new ArrayList<Predicate>();
+            List<Predicate> list = new ArrayList<>();
 
             if(!ObjectUtils.isEmpty(qiniuContent.getKey())){
-                /**
-                 * 模糊
-                 */
-                list.add(cb.like(root.get("key").as(String.class),"%"+qiniuContent.getKey()+"%"));
+                //模糊
+                list.add(cb.like(root.get("key").as(String.class), "%" + qiniuContent.getKey() + "%"));
             }
 
             Predicate[] p = new Predicate[list.size()];
