@@ -5,6 +5,7 @@ import com.dxj.modules.system.domain.User;
 import com.dxj.modules.system.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +31,7 @@ public class JwtPermissionService {
      * @param user
      * @return
      */
-    @Cacheable(key = "'loadPermissionByUser:' + #p0.username")
+    @CachePut(key = "'loadPermissionByUser:' + #p0.username")
     public Collection<GrantedAuthority> mapToGrantedAuthorities(User user) {
 
         System.out.println("--------------------loadPermissionByUser:" + user.getUsername() + "---------------------");

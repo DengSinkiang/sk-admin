@@ -2,236 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54eeff16-dead-452c-bb5b-10b52843bdbb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/aop/limit/Limit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/aspect/LimitAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/aspect/LimitType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/enums/EntityEnums.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/BadRequestException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/EntityException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/EntityExistException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/EntityNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/handler/ApiError.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/exception/handler/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/mapper/EntityMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/FastJsonRedisSerializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/RedisConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/StringRedisSerializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/swagger2/SwaggerConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/swagger2/SwaggerDataConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/swagger2/SwaggerDataConfig$Page.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/swagger2/SwaggerDataConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/ElAdminConstant$Url.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/ElAdminConstant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/EncryptUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/FileUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/PageUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/RequestHolder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/SecurityContextHolder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/SpringContextHolder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/StringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/ThrowableUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/utils/ValidationUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/domain/GenConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/domain/vo/ColumnInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/domain/vo/TableInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/repository/GenConfigRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/rest/GenConfigController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/rest/GeneratorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/service/GenConfigService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/service/GeneratorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/utils/ColUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/utils/GenUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/aop/log/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/aop/log/LoginLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/aspect/DataScopeAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/domain/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/domain/LoginLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/repository/LogRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/repository/LoginLogRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/rest/LogController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/LogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/LoginLogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/query/LogQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/query/LogQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/query/LoginLogQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/target/classes/com/dxj/service/query/LoginLogQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/AppRun.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/ConfigurerAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/DataScope.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LogFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/LoggerQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/VisitsInitialization.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/config/WebSocketConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/domain/LogMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/domain/Visits.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/domain/vo/RedisVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/repository/VisitsRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/rest/LimitController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/rest/RedisController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/rest/VisitsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/RedisService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/monitor/service/VisitsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/JobRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig$QuartzJobFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/config/QuartzConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/domain/QuartzJob$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/domain/QuartzJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/domain/QuartzLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/repository/QuartzJobRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/repository/QuartzLogRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/rest/QuartzJobController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/QuartzJobService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzJobQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/service/query/QuartzLogQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/task/TestTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/task/VisitsTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/ExecutionJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzManage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/quartz/utils/QuartzRunnable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/config/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/domain/AuthenticationInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/domain/AuthorizationUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/domain/JwtUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/rest/AuthenticationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/JwtAuthenticationEntryPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/security/JwtAuthorizationTokenFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtPermissionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/service/JwtUserDetailsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/security/utils/JwtTokenUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Dept$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Dept.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Dict$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Dict.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/DictDetail$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/DictDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Job$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Job.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Menu$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Permission$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Permission.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Role$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/User$Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/vo/MenuMetaVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/vo/MenuVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/DeptDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/DictDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/DictDetailDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/JobDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/MenuDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/PermissionDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/RoleDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/UserDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DeptMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DeptMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DictDetailMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DictDetailMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DictMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/DictMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/JobMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/JobMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/MenuMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/MenuMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/PermissionMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/PermissionMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/RoleMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/RoleMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/UserMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/UserMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DeptQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DeptQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DictDetailQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DictDetailQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DictQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/DictQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/JobQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/JobQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/MenuQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/MenuQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/PermissionQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/PermissionQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/RoleQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/RoleQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/UserQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/UserQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/DeptRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/DictDetailRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/DictRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/JobRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/MenuRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/PermissionRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/RoleRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/DeptController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/DictController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/DictDetailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/JobController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/MenuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/PermissionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/RoleController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/DeptService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/DictDetailService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/DictService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/JobService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/MenuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/PermissionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/RoleService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DeptMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictDetailMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/JobMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/MenuMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/PermissionMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/RoleMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/UserMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiNiuConfigRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiNiuConfigRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiniuContentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiniuContentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/QiNiuQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/QiNiuQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/config/MultipartConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/AlipayConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/EmailConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/Picture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/QiniuConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/QiniuContent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/SmsConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/VerificationCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/vo/EmailVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/vo/SmsVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/domain/vo/TradeVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/AlipayRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/EmailRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/PictureRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/QiNiuConfigRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/QiniuContentRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/SmsRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/repository/VerificationCodeRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/AliPayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/EmailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/PictureController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/QiniuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/SmsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/VerificationCodeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/AlipayService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/EmailService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/PictureService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/QiNiuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/SmsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/VerificationCodeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/PictureQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/PictureQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/QiNiuQueryService$Spec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/QiNiuQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/util/AliPayStatusEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/util/AlipayUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/util/QiNiuUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DeptMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DeptMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictDetailMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictDetailMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/JobMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/JobMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/MenuMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/MenuMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/PermissionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/PermissionMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/RoleMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/RoleMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/UserMapperImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -246,25 +27,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/EmailService.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1824">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+            <state relative-caret-position="286">
+              <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -273,71 +42,102 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/AppRun.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/RoleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="1452">
+              <caret line="81" column="31" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/QiNiuQueryService.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+            <state relative-caret-position="1452">
+              <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+              <folding>
+                <element signature="e#3644#3645#0" expanded="true" />
+                <element signature="e#3689#3690#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiniuContentRepository.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="1606">
+              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="52" />
+              <folding>
+                <element signature="e#4136#4137#0" expanded="true" />
+                <element signature="e#4181#4182#0" expanded="true" />
+                <element signature="e#4798#4799#0" expanded="true" />
+                <element signature="e#4867#4868#0" expanded="true" />
+                <element signature="e#5013#5014#0" expanded="true" />
+                <element signature="e#5071#5072#0" expanded="true" />
+                <element signature="e#5218#5219#0" expanded="true" />
+                <element signature="e#5277#5278#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiNiuConfigRepository.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
+            <state relative-caret-position="396">
+              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/QiNiuService.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/SmsService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2337">
-              <caret line="151" column="5" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
+            <state relative-caret-position="748">
+              <caret line="57" column="13" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/util/QiNiuUtil.java">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1045">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="1782">
+              <caret line="107" column="96" selection-start-line="107" selection-start-column="87" selection-end-line="107" selection-end-column="96" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/resources/config/application-dev.yml">
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/PermissionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1026">
-              <caret line="54" column="10" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="10" />
+            <state relative-caret-position="220">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/resources/config/application.yml">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/PermissionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+              <folding>
+                <element signature="e#4423#4424#0" expanded="true" />
+                <element signature="e#4481#4482#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -345,74 +145,40 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Arquillian JUnit Test Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>log</find>
+      <find>permission</find>
+      <find>loadPermissionByUser</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/service/GeneratorService.java" />
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/service/GenConfigService.java" />
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/utils/ColUtil.java" />
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/utils/GenUtil.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/sql/eladmin.sql" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/query/LogQueryService.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/repository/LoginLogrepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/query/LoginLogQueryService.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/domain/Log.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aop/log/LoginLog.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/repository/LoginLogRepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/domain/LoginLog.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/LoginLogService.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/rest/LogController.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java" />
-        <option value="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/service/LogService.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/EmailRepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/domain/EmailConfig.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/EmailServiceTest.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/EmailService.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/domain/SmsConfig.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/SmsRepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/domain/vo/SmsVo.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/pom.xml" />
-        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/utils/SecurityContextHolder.java" />
-        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/swagger2/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/resources/config/application-dev.yml" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/UserService.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" />
-        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/monitor/rest/VisitsController.java" />
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/rest/GenConfigController.java" />
-        <option value="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/rest/GeneratorController.java" />
-        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityException.java" />
-        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityExistException.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/EmailController.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/SmsService.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/VerificationCodeController.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/PictureController.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/AliPayController.java" />
-        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityNotFoundException.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/SmsController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/skadmin-system/pom.xml" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/util/QiNiuUtil.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/QiNiuService.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/QiNiuQueryService.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiniuContentRepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiNiuConfigRepository.java" />
-        <option value="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java" />
+        <option value="$PROJECT_DIR$/skadmin-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/skadmin-logging/pom.xml" />
+        <option value="$PROJECT_DIR$/skadmin-generator/pom.xml" />
+        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/config/DataScope.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/BadRequestException.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/handler/ApiError.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/handler/GlobalExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityExistException.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityNotFoundException.java" />
+        <option value="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityException.java" />
+        <option value="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java" />
       </list>
     </option>
   </component>
@@ -440,24 +206,30 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1325" />
-    <option name="y" value="306" />
-    <option name="width" value="1280" />
-    <option name="height" value="709" />
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="808" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -507,6 +279,50 @@
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dxj" type="462c0819:PsiDirectoryNode" />
+              <item name="exception" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dxj" type="462c0819:PsiDirectoryNode" />
+              <item name="redis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-generator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-logging" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-logging" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-logging" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -570,7 +386,7 @@
               <item name="dxj" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -578,71 +394,58 @@
               <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dxj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
               <item name="rest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dxj" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="skadmin-tools" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dxj" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -658,7 +461,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -668,21 +471,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557987326839" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Arquillian JUnit4" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
-    <property name="create.test.in.the.same.root" value="true" />
-    <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.dxj.service" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558016075946" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -727,26 +516,21 @@
       <option name="presentableId" value="Default" />
       <updated>1557062102058</updated>
       <workItem from="1557062105545" duration="2118000" />
-      <workItem from="1557103039408" duration="3297000" />
-      <workItem from="1557109132338" duration="3377000" />
-      <workItem from="1557137167858" duration="40143000" />
-      <workItem from="1557377073139" duration="41661000" />
-      <workItem from="1557735546484" duration="808000" />
-      <workItem from="1557799100956" duration="3027000" />
-      <workItem from="1557804243075" duration="211000" />
-      <workItem from="1557881562886" duration="4850000" />
-      <workItem from="1557893960210" duration="9662000" />
-      <workItem from="1557976108473" duration="1979000" />
+      <workItem from="1557748562572" duration="2059000" />
+      <workItem from="1557750964024" duration="1129000" />
+      <workItem from="1558008284108" duration="3553000" />
+      <workItem from="1558169147772" duration="452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93254000" />
+    <option name="totallyTimeSpent" value="3329000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1325" y="306" width="1280" height="709" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="808" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23424879" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23390558" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -756,24 +540,23 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.54294974" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3987034" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35614526" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.363047" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49919224" weight="0.32901135" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32960895" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.329927" />
-      <window_info anchor="bottom" id="Problems" order="15" />
+      <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.32956383" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.3297568" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -786,375 +569,132 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtUserDetailsService.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityNotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/UserService.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/aspect/LimitAspect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        <state relative-caret-position="-1060">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/handler/ApiError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        <state relative-caret-position="110">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/DeptController.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/handler/GlobalExceptionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/DictController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="39" column="57" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/DictDetailController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/JobController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-551">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1235">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/PermissionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-627">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/RoleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-988">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="167" column="7" selection-start-line="167" selection-start-column="7" selection-end-line="167" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/rest/AuthenticationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1178">
-          <caret line="84" column="1" selection-start-line="84" selection-start-column="1" selection-end-line="84" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/quartz/rest/QuartzJobController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-930">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/rest/LogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/rest/GenConfigController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/rest/GeneratorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/service/GenConfigService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="34" column="20" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/monitor/rest/LimitController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/monitor/rest/RedisController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/monitor/rest/VisitsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/AliPayController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/EmailController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#757#758#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/PictureController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/SmsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/DeptRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/DictDetailRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/DictRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/JobRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/PermissionRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/MenuRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/VerificationCodeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+        <state relative-caret-position="616">
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityExistException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityNotFoundException.java">
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/exception/EntityException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/repository/UserRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-274">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/SmsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+        <state relative-caret-position="286">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#656#657#0" expanded="true" />
-            <element signature="e#700#701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/RoleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="81" column="31" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+          <folding>
+            <element signature="e#3644#3645#0" expanded="true" />
+            <element signature="e#3689#3690#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/qiniu/qiniu-java-sdk/7.2.18/qiniu-java-sdk-7.2.18.jar!/com/qiniu/storage/UploadManager.class">
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.1.2.RELEASE/spring-data-jpa-2.1.2.RELEASE.jar!/org/springframework/data/jpa/repository/JpaSpecificationExecutor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/EmailService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/QiNiuQueryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiniuContentRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/repository/QiNiuConfigRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/QiNiuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2337">
-          <caret line="151" column="5" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/util/QiNiuUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1045">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/resources/config/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="54" column="10" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/resources/config/application.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/AppRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state relative-caret-position="1606">
+          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="52" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4136#4137#0" expanded="true" />
+            <element signature="e#4181#4182#0" expanded="true" />
+            <element signature="e#4798#4799#0" expanded="true" />
+            <element signature="e#4867#4868#0" expanded="true" />
+            <element signature="e#5013#5014#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
+            <element signature="e#5218#5219#0" expanded="true" />
+            <element signature="e#5277#5278#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/SmsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="57" column="13" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="107" column="96" selection-start-line="107" selection-start-column="87" selection-end-line="107" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/PermissionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/PermissionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+          <folding>
+            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#4481#4482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/security/service/JwtPermissionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
     </entry>
