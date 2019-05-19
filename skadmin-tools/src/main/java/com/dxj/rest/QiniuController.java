@@ -110,4 +110,16 @@ public class QiniuController {
         qiNiuService.delete(qiNiuService.findByContentId(id),qiNiuService.find());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * 批量删除文件
+     * @param ids
+     * @return
+     */
+    @Log("批量删除文件")
+    @DeleteMapping(value = "/qiNiuContent")
+    public ResponseEntity<Void> deleteAll(@RequestBody Long[] ids) {
+        qiNiuService.deleteAll(ids, qiNiuService.find());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

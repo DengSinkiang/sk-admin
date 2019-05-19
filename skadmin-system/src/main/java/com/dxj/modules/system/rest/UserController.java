@@ -5,9 +5,11 @@ import com.dxj.config.DataScope;
 import com.dxj.domain.Picture;
 import com.dxj.domain.VerificationCode;
 import com.dxj.enums.EntityEnums;
+import com.dxj.modules.system.domain.Role;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.service.DeptService;
+import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.service.UserService;
 import com.dxj.service.PictureService;
 import com.dxj.service.VerificationCodeService;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -45,6 +48,9 @@ public class UserController {
     private final DataScope dataScope;
 
     private final DeptService deptService;
+
+    @Autowired
+    private RoleService roleService;
 
     private final VerificationCodeService verificationCodeService;
 
@@ -99,6 +105,7 @@ public class UserController {
         if (resources.getId() != null) {
             throw new BadRequestException("A new " + EntityEnums.USER_ENTITY + " cannot already have an ID");
         }
+        checkLevel(resources);
         return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);
     }
 
@@ -106,6 +113,7 @@ public class UserController {
     @PutMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_EDIT')")
     public ResponseEntity<Void> update(@Validated(User.Update.class) @RequestBody User resources) {
+        checkLevel(resources);
         userService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -114,6 +122,13 @@ public class UserController {
     @DeleteMapping(value = "/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer optLevel =  Collections.min(roleService.findByUsers_Id(id).stream().map(Role::getLevel).collect(Collectors.toList()));
+
+        if (currentLevel > optLevel) {
+            throw new BadRequestException("角色权限不足");
+        }
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -183,5 +198,17 @@ public class UserController {
         verificationCodeService.validated(verificationCode);
         userService.updateEmail(userDetails.getUsername(), user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
+     * @param resources
+     */
+    private void checkLevel(User resources) {
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer optLevel = roleService.findByRoles(resources.getRoles());
+        if (currentLevel > optLevel) {
+            throw new BadRequestException("角色权限不足");
+        }
     }
 }

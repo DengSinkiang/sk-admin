@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -72,6 +73,7 @@ public class RoleService {
         role.setRemark(resources.getRemark());
         role.setDataScope(resources.getDataScope());
         role.setDepts(resources.getDepts());
+        role.setLevel(resources.getLevel());
         roleRepository.save(role);
     }
 
@@ -108,5 +110,13 @@ public class RoleService {
     @Cacheable(key = "'findByUsers_Id:' + #p0")
     public List<Role> findByUsers_Id(Long id) {
         return new ArrayList<>(roleRepository.findByUsers_Id(id));
+    }
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Integer findByRoles(Set<Role> roles) {
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        for (Role role : roles) {
+            roleDTOS.add(findById(role.getId()));
+        }
+        return Collections.min(roleDTOS.stream().map(RoleDTO::getLevel).collect(Collectors.toList()));
     }
 }

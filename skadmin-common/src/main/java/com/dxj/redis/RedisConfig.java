@@ -54,6 +54,8 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.password}")
     private String password;
 
+    @Value("${spring.redis.database}")
+    private int database;
     /**
      * 配置 redis 连接池
      *
@@ -64,11 +66,8 @@ public class RedisConfig extends CachingConfigurerSupport {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        if (StringUtils.isNotBlank(password)) {
-            return new JedisPool(jedisPoolConfig, host, port, timeout, password);
-        } else {
-            return new JedisPool(jedisPoolConfig, host, port, timeout);
-        }
+        String pwd = StringUtils.isBlank(password) ? null : password;
+        return new JedisPool(jedisPoolConfig, host, port, timeout, pwd, database);
     }
 
     /**

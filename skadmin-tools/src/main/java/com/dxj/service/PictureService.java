@@ -36,11 +36,11 @@ public class PictureService {
     @Autowired
     private PictureRepository pictureRepository;
 
-    public static final String SUCCESS = "success";
+    private static final String SUCCESS = "success";
 
-    public static final String CODE = "code";
+    private static final String CODE = "code";
 
-    public static final String MSG = "msg";
+    private static final String MSG = "msg";
 
     /**
      * 上传图片
@@ -59,7 +59,7 @@ public class PictureService {
         String result= HttpUtil.post(ElAdminConstant.Url.SM_MS_URL, paramMap);
 
         JSONObject jsonObject = JSONUtil.parseObj(result);
-        Picture picture = null;
+        Picture picture;
         if(!jsonObject.get(CODE).toString().equals(SUCCESS)){
             throw new BadRequestException(jsonObject.get(MSG).toString());
         }
@@ -101,5 +101,11 @@ public class PictureService {
             pictureRepository.delete(picture);
         }
 
+    }
+
+    public void deleteAll(Long[] ids) {
+        for (Long id : ids) {
+            delete(findById(id));
+        }
     }
 }

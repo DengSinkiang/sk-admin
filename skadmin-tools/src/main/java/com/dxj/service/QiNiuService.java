@@ -212,4 +212,16 @@ public class QiNiuService {
         }
 
     }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @param config
+     */
+    @CacheEvict(allEntries = true)
+    public void deleteAll(Long[] ids, QiniuConfig config) {
+        for (Long id : ids) {
+            delete(findByContentId(id), config);
+        }
+    }
 }

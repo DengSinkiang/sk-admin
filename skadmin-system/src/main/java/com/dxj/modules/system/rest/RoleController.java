@@ -1,5 +1,6 @@
 package com.dxj.modules.system.rest;
 
+import cn.hutool.core.lang.Dict;
 import com.dxj.aop.log.Log;
 import com.dxj.enums.EntityEnums;
 import com.dxj.modules.system.domain.Role;
@@ -7,13 +8,20 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.dto.RoleDTO;
 import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.query.RoleQueryService;
+import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -46,8 +54,8 @@ public class RoleController {
      */
     @GetMapping(value = "/roles/all")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','USER_ALL','USER_CREATE','USER_EDIT')")
-    public ResponseEntity<Object> getAll() {
-        return new ResponseEntity<>(roleQueryService.queryAll(), HttpStatus.OK);
+    public ResponseEntity<Object> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return new ResponseEntity<>(roleQueryService.queryAll(pageable), HttpStatus.OK);
     }
 
     @Log("查询角色")
@@ -56,7 +64,11 @@ public class RoleController {
     public ResponseEntity<Object> getRoles(@RequestParam(required = false) String name, Pageable pageable) {
         return new ResponseEntity<>(roleQueryService.queryAll(name, pageable), HttpStatus.OK);
     }
-
+    @GetMapping(value = "/roles/level")
+    public ResponseEntity<Object> getLevel(){
+        List<Integer> levels = roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList());
+        return new ResponseEntity<>(Dict.create().set("level", Collections.min(levels)), HttpStatus.OK);
+    }
     @Log("新增角色")
     @PostMapping(value = "/roles")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_CREATE')")

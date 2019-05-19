@@ -13,11 +13,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 郑杰
+ * @author dxj
  * @date 2018/09/20 14:13:32
  */
 @RestController
@@ -35,14 +36,15 @@ public class PictureController {
     }
 
     @Log("查询图片")
-    @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_SELECT')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_SELECT')")
     @GetMapping(value = "/pictures")
-    public ResponseEntity<Object> getRoles(Picture resources, Pageable pageable){
-        return new ResponseEntity<>(pictureQueryService.queryAll(resources,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> getRoles(Picture resources, Pageable pageable) {
+        return new ResponseEntity<>(pictureQueryService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     /**
      * 上传图片
+     *
      * @param file
      * @return
      * @throws Exception
@@ -50,10 +52,9 @@ public class PictureController {
     @Log("上传图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_UPLOAD')")
     @PostMapping(value = "/pictures")
-    public ResponseEntity<Map<String, Object>> upload(@RequestParam MultipartFile file){
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        String userName = userDetails.getUsername();
-        Picture picture = pictureService.upload(file,userName);
+    public ResponseEntity<Map<String, Object>> upload(@RequestParam MultipartFile file) {
+        String userName = SecurityContextHolder.getUsername();
+        Picture picture = pictureService.upload(file, userName);
         Map<String, Object> map = new HashMap<>();
         map.put("errno", 0);
         map.put("id", picture.getId());
@@ -63,6 +64,7 @@ public class PictureController {
 
     /**
      * 删除图片
+     *
      * @param id
      * @return
      */
@@ -72,5 +74,18 @@ public class PictureController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         pictureService.delete(pictureService.findById(id));
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * 删除多张图片
+     * @param ids
+     * @return
+     */
+    @Log("删除图片")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_DELETE')")
+    @DeleteMapping(value = "/pictures")
+    public ResponseEntity deleteAll(@RequestBody Long[] ids) {
+        pictureService.deleteAll(ids);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

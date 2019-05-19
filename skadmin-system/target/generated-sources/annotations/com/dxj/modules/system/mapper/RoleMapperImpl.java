@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-05-16T20:20:16+0800",
+    date = "2019-05-18T17:45:24+0800",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
 @Component
@@ -42,6 +42,7 @@ public class RoleMapperImpl implements RoleMapper {
         role.setId( dto.getId() );
         role.setName( dto.getName() );
         role.setDataScope( dto.getDataScope() );
+        role.setLevel( dto.getLevel() );
         role.setRemark( dto.getRemark() );
         role.setPermissions( permissionDTOSetToPermissionSet( dto.getPermissions() ) );
         role.setMenus( menuDTOSetToMenuSet( dto.getMenus() ) );
@@ -62,6 +63,7 @@ public class RoleMapperImpl implements RoleMapper {
         roleDTO.setId( entity.getId() );
         roleDTO.setName( entity.getName() );
         roleDTO.setDataScope( entity.getDataScope() );
+        roleDTO.setLevel( entity.getLevel() );
         roleDTO.setRemark( entity.getRemark() );
         roleDTO.setPermissions( permissionSetToPermissionDTOSet( entity.getPermissions() ) );
         roleDTO.setMenus( menuSetToMenuDTOSet( entity.getMenus() ) );
