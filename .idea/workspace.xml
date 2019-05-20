@@ -3,52 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="54eeff16-dead-452c-bb5b-10b52843bdbb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/src/main/java/com/dxj/redis/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/RedisConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-common/target/classes/com/dxj/redis/RedisConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/service/GenConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-generator/src/main/java/com/dxj/service/GenConfigService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/META-INF/skadmin-generator.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/service/GenConfigService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-generator/target/classes/com/dxj/service/GenConfigService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/config/ConfigurerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/config/ConfigurerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/domain/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/domain/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/dto/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/dto/RoleDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/query/RoleQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/query/RoleQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/rest/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/edit.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/edit.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/header.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/header.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/index.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/index.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/META-INF/skadmin-system.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/ConfigurerAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/config/ConfigurerAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/domain/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/RoleDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/dto/RoleDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/RoleMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/mapper/RoleMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/RoleQueryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/query/RoleQueryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/RoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/RoleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/rest/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/com/dxj/modules/system/service/RoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/edit.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/edit.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/header.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/header.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/index.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/classes/template/generator/front/index.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DeptMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DeptMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictDetailMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictDetailMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/DictMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/JobMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/JobMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/MenuMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/MenuMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/PermissionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/PermissionMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/RoleMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/RoleMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/target/generated-sources/annotations/com/dxj/modules/system/mapper/UserMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/PictureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/PictureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/rest/QiniuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/PictureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/PictureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/QiNiuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/QiNiuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/PictureQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/src/main/java/com/dxj/service/query/PictureQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/META-INF/skadmin-tools.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/PictureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/PictureController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/QiniuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/rest/QiniuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/PictureService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/PictureService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/QiNiuService.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/QiNiuService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/PictureQueryService$Spec.class" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-tools/target/classes/com/dxj/service/query/PictureQueryService$Spec.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -95,7 +49,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/config/ConfigurerAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="895">
+            <state relative-caret-position="115">
               <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
             </state>
           </provider>
@@ -214,6 +168,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -341,7 +296,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -352,7 +306,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558267128916" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558356905784" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -402,16 +356,17 @@
       <workItem from="1558008284108" duration="3553000" />
       <workItem from="1558169147772" duration="4736000" />
       <workItem from="1558256263531" duration="1179000" />
+      <workItem from="1558354599920" duration="1007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8792000" />
+    <option name="totallyTimeSpent" value="9799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="808" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18955651" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19170243" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -421,7 +376,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.45251396" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.45251396" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -695,7 +650,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/config/ConfigurerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="895">
+        <state relative-caret-position="115">
           <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
         </state>
       </provider>
