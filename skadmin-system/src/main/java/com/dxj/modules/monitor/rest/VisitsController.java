@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-12-13
  */
 @RestController
@@ -22,18 +22,18 @@ public class VisitsController {
     private VisitsService visitsService;
 
     @PostMapping(value = "/visits")
-    public ResponseEntity create(){
+    public ResponseEntity<Void> create() {
         visitsService.count(RequestHolder.getHttpServletRequest());
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/visits")
-    public ResponseEntity get(){
-        return new ResponseEntity(visitsService.get(),HttpStatus.OK);
+    public ResponseEntity<Object> get() {
+        return new ResponseEntity<>(visitsService.get(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/visits/chartData")
-    public ResponseEntity getChartData(){
-        return new ResponseEntity(visitsService.getChartData(),HttpStatus.OK);
+    public ResponseEntity<Object> getChartData() {
+        return new ResponseEntity<>(visitsService.getChartData(), HttpStatus.OK);
     }
 }

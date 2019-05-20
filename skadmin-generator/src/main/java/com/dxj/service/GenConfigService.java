@@ -1,28 +1,40 @@
 package com.dxj.service;
 
 import com.dxj.domain.GenConfig;
+import com.dxj.repository.GenConfigRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2019-01-14
  */
+@Service
 @CacheConfig(cacheNames = "genConfig")
-public interface GenConfigService {
+public class GenConfigService {
 
-    /**
-     * find
-     * @return
-     */
+    private final GenConfigRepository genConfigRepository;
+
+    @Autowired
+    public GenConfigService(GenConfigRepository genConfigRepository) {
+        this.genConfigRepository = genConfigRepository;
+    }
+
     @Cacheable(key = "'1'")
-    GenConfig find();
+    public GenConfig find() {
+        Optional<GenConfig> genConfig = genConfigRepository.findById(1L);
+        return genConfig.orElseGet(GenConfig::new);
+    }
 
-    /**
-     * update
-     * @param genConfig
-     */
-    @CachePut(key = "'1'")
-    GenConfig update(GenConfig genConfig);
+    @CacheEvict(allEntries = true)
+    public GenConfig update(GenConfig genConfig) {
+        genConfig.setId(1L);
+        return genConfigRepository.save(genConfig);
+    }
 }

@@ -1,16 +1,18 @@
 package com.dxj.modules.security.rest;
 
+import com.dxj.aop.log.LoginLog;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
-import com.dxj.modules.security.security.AuthenticationInfo;
-import com.dxj.modules.security.security.AuthorizationUser;
-import com.dxj.modules.security.security.JwtUser;
+import com.dxj.modules.security.domain.AuthenticationInfo;
+import com.dxj.modules.security.domain.AuthorizationUser;
+import com.dxj.modules.security.domain.JwtUser;
 import com.dxj.utils.EncryptUtils;
 import com.dxj.modules.security.utils.JwtTokenUtil;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-11-23
  * 授权、根据token获取用户详细信息
  */
@@ -43,20 +45,22 @@ public class AuthenticationController {
 
     /**
      * 登录授权
+     *
      * @param authorizationUser
      * @return
      */
-    @Log("用户登录")
+
+    @LoginLog("登录")
     @PostMapping(value = "${jwt.auth.path}")
-    public ResponseEntity login(@Validated @RequestBody AuthorizationUser authorizationUser){
+    public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
 
         final JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
 
-        if(!jwtUser.getPassword().equals(EncryptUtils.encryptPassword(authorizationUser.getPassword()))){
+        if (!jwtUser.getPassword().equals(EncryptUtils.encryptPassword(authorizationUser.getPassword()))) {
             throw new AccountExpiredException("密码错误");
         }
 
-        if(!jwtUser.isEnabled()){
+        if (!jwtUser.isEnabled()) {
             throw new AccountExpiredException("账号已停用，请联系管理员");
         }
 
@@ -64,17 +68,18 @@ public class AuthenticationController {
         final String token = jwtTokenUtil.generateToken(jwtUser);
 
         // 返回 token
-        return ResponseEntity.ok(new AuthenticationInfo(token,jwtUser));
+        return ResponseEntity.ok(new AuthenticationInfo(token, jwtUser));
     }
 
     /**
      * 获取用户信息
+     *
      * @return
      */
     @GetMapping(value = "${jwt.auth.account}")
-    public ResponseEntity getUserInfo(){
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        JwtUser jwtUser = (JwtUser)userDetailsService.loadUserByUsername(userDetails.getUsername());
+    public ResponseEntity<JwtUser> getUserInfo() {
+        JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(SecurityContextHolder.getUsername());
         return ResponseEntity.ok(jwtUser);
     }
+
 }

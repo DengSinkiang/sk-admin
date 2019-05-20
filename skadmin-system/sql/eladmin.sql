@@ -631,3 +631,15 @@ CREATE TABLE `visits` (
 -- ----------------------------
 -- Records of visits
 -- ----------------------------
+CREATE TABLE `login_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime DEFAULT NULL,
+  `log_type` varchar(255) DEFAULT NULL,
+  `operation` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `request_ip` varchar(255) DEFAULT NULL,
+  `time` bigint(20) DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

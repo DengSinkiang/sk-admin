@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2019-01-07
  */
 @Entity
@@ -59,7 +59,7 @@ public class QuartzLog implements Serializable {
     /**
      * 异常详细
      */
-    @Column(name = "exception_detail",columnDefinition = "text")
+    @Column(name = "exception_detail", columnDefinition = "text")
     private String exceptionDetail;
 
     /**

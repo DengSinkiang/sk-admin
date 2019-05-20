@@ -14,7 +14,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -38,15 +40,15 @@ public class RoleService {
     @Cacheable(key = "#p0")
     public RoleDTO findById(long id) {
         Optional<Role> role = roleRepository.findById(id);
-        ValidationUtil.isNull(role,"Role","id",id);
+        ValidationUtil.isNull(role, "Role", "id", id);
         return roleMapper.toDto(role.orElse(null));
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public RoleDTO create(Role resources) {
-        if(roleRepository.findByName(resources.getName()) != null){
-            throw new EntityExistException(Role.class,"username",resources.getName());
+        if (roleRepository.findByName(resources.getName()) != null) {
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
         return roleMapper.toDto(roleRepository.save(resources));
     }
@@ -56,7 +58,7 @@ public class RoleService {
     public void update(Role resources) {
 
         Optional<Role> optionalRole = roleRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalRole,"Role", "id", resources.getId());
+        ValidationUtil.isNull(optionalRole, "Role", "id", resources.getId());
 
         Role role = optionalRole.orElse(null);
 
@@ -64,13 +66,14 @@ public class RoleService {
 
         assert role != null;
         if (role1 != null && !role1.getId().equals(role.getId())) {
-            throw new EntityExistException(Role.class,"username",resources.getName());
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
 
         role.setName(resources.getName());
         role.setRemark(resources.getRemark());
         role.setDataScope(resources.getDataScope());
         role.setDepts(resources.getDepts());
+        role.setLevel(resources.getLevel());
         roleRepository.save(role);
     }
 
@@ -104,8 +107,16 @@ public class RoleService {
         roleRepository.deleteById(id);
     }
 
-    @Cacheable(keyGenerator = "keyGenerator")
+    @Cacheable(key = "'findByUsers_Id:' + #p0")
     public List<Role> findByUsers_Id(Long id) {
         return new ArrayList<>(roleRepository.findByUsers_Id(id));
+    }
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Integer findByRoles(Set<Role> roles) {
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        for (Role role : roles) {
+            roleDTOS.add(findById(role.getId()));
+        }
+        return Collections.min(roleDTOS.stream().map(RoleDTO::getLevel).collect(Collectors.toList()));
     }
 }

@@ -20,38 +20,43 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api")
 public class VerificationCodeController {
 
-    @Autowired
-    private VerificationCodeService verificationCodeService;
+    private final VerificationCodeService verificationCodeService;
+
+    private final UserDetailsService userDetailsService;
+
+    private final EmailService emailService;
 
     @Autowired
-    @Qualifier("jwtUserDetailsService")
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    private EmailService emailService;
+    public VerificationCodeController(VerificationCodeService verificationCodeService, @Qualifier("jwtUserDetailsService") UserDetailsService userDetailsService, EmailService emailService) {
+        this.verificationCodeService = verificationCodeService;
+        this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
+    }
 
     @PostMapping(value = "/code/resetEmail")
-    public ResponseEntity resetEmail(@RequestBody VerificationCode code) throws Exception {
+    public ResponseEntity<Void> resetEmail(@RequestBody VerificationCode code) {
+        sendEmail(code);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private void sendEmail(@RequestBody VerificationCode code) {
         code.setScenes(ElAdminConstant.RESET_MAIL);
         EmailVo emailVo = verificationCodeService.sendEmail(code);
-        emailService.send(emailVo,emailService.find());
-        return new ResponseEntity(HttpStatus.OK);
+        emailService.send(emailVo, emailService.find());
     }
 
     @PostMapping(value = "/code/email/resetPass")
-    public ResponseEntity resetPass(@RequestParam String email) throws Exception {
+    public ResponseEntity<Void> resetPass(@RequestParam String email) {
         VerificationCode code = new VerificationCode();
         code.setType("email");
         code.setValue(email);
-        code.setScenes(ElAdminConstant.RESET_MAIL);
-        EmailVo emailVo = verificationCodeService.sendEmail(code);
-        emailService.send(emailVo,emailService.find());
-        return new ResponseEntity(HttpStatus.OK);
+        sendEmail(code);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/code/validated")
-    public ResponseEntity validated(VerificationCode code){
+    public ResponseEntity<Void> validated(VerificationCode code){
         verificationCodeService.validated(code);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,11 +1,22 @@
 package com.dxj.exception;
 
+<<<<<<< HEAD
 import org.springframework.util.StringUtils;
+=======
+import org.apache.commons.lang3.StringUtils;
+>>>>>>> dev
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+<<<<<<< HEAD
+=======
+/**
+ * @Author: dxj
+ * @Date: 2019-05-14 09:58
+ */
+>>>>>>> dev
 class EntityException {
 
 

@@ -2,7 +2,7 @@ package com.dxj.modules.security.service;
 
 import com.dxj.modules.system.domain.*;
 import com.dxj.exception.EntityNotFoundException;
-import com.dxj.modules.security.security.JwtUser;
+import com.dxj.modules.security.domain.JwtUser;
 import com.dxj.modules.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-11-22
  */
 @Service
@@ -32,7 +32,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
+    public UserDetails loadUserByUsername(String username) {
 
         User user = userService.findByName(username);
         if (user == null) {

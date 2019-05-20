@@ -5,9 +5,11 @@ import com.dxj.config.DataScope;
 import com.dxj.domain.Picture;
 import com.dxj.domain.VerificationCode;
 import com.dxj.enums.EntityEnums;
+import com.dxj.modules.system.domain.Role;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.service.DeptService;
+import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.service.UserService;
 import com.dxj.service.PictureService;
 import com.dxj.service.VerificationCodeService;
@@ -25,7 +27,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -45,6 +49,9 @@ public class UserController {
 
     private final DeptService deptService;
 
+    @Autowired
+    private RoleService roleService;
+
     private final VerificationCodeService verificationCodeService;
 
     @Autowired
@@ -60,7 +67,7 @@ public class UserController {
     @Log("查询用户")
     @GetMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT')")
-    public ResponseEntity<Object> getUsers(UserDTO userDTO, Pageable pageable){
+    public ResponseEntity<Object> getUsers(UserDTO userDTO, Pageable pageable) {
         Set<Long> deptSet = new HashSet<>();
         Set<Long> result = new HashSet<>();
 
@@ -73,38 +80,40 @@ public class UserController {
         Set<Long> deptIds = dataScope.getDeptIds();
 
         // 查询条件不为空并且数据权限不为空则取交集
-        if (!CollectionUtils.isEmpty(deptIds) && !CollectionUtils.isEmpty(deptSet)){
+        if (!CollectionUtils.isEmpty(deptIds) && !CollectionUtils.isEmpty(deptSet)) {
 
             // 取交集
             result.addAll(deptSet);
             result.retainAll(deptIds);
 
             // 若无交集，则代表无数据权限
-            if(result.size() == 0){
-                return new ResponseEntity<>(PageUtil.toPage(null,0),HttpStatus.OK);
-            } else return new ResponseEntity<>(userQueryService.queryAll(userDTO,result,pageable),HttpStatus.OK);
-        // 否则取并集
+            if (result.size() == 0) {
+                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
+            } else return new ResponseEntity<>(userQueryService.queryAll(userDTO, result, pageable), HttpStatus.OK);
+            // 否则取并集
         } else {
             result.addAll(deptSet);
             result.addAll(deptIds);
-            return new ResponseEntity<>(userQueryService.queryAll(userDTO,result,pageable),HttpStatus.OK);
+            return new ResponseEntity<>(userQueryService.queryAll(userDTO, result, pageable), HttpStatus.OK);
         }
     }
 
     @Log("新增用户")
     @PostMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_CREATE')")
-    public ResponseEntity<UserDTO> create(@Validated @RequestBody User resources){
+    public ResponseEntity<UserDTO> create(@Validated @RequestBody User resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ EntityEnums.USER_ENTITY +" cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnums.USER_ENTITY + " cannot already have an ID");
         }
-        return new ResponseEntity<>(userService.create(resources),HttpStatus.CREATED);
+        checkLevel(resources);
+        return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);
     }
 
     @Log("修改用户")
     @PutMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_EDIT')")
-    public ResponseEntity<Void> update(@Validated(User.Update.class) @RequestBody User resources){
+    public ResponseEntity<Void> update(@Validated(User.Update.class) @RequestBody User resources) {
+        checkLevel(resources);
         userService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -112,71 +121,94 @@ public class UserController {
     @Log("删除用户")
     @DeleteMapping(value = "/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_DELETE')")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer optLevel =  Collections.min(roleService.findByUsers_Id(id).stream().map(Role::getLevel).collect(Collectors.toList()));
+
+        if (currentLevel > optLevel) {
+            throw new BadRequestException("角色权限不足");
+        }
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**zx
+    /**
+     * zx
      * 验证密码
+     *
      * @param pass
      * @return
      */
     @GetMapping(value = "/users/validPass/{pass}")
-    public ResponseEntity<Map<String, Integer>> validPass(@PathVariable String pass){
+    public ResponseEntity<Map<String, Integer>> validPass(@PathVariable String pass) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         Map<String, Integer> map = new HashMap<>();
         map.put("status", 200);
         if (!userDetails.getPassword().equals(EncryptUtils.encryptPassword(pass))) {
-           map.put("status", 400);
+            map.put("status", 400);
         }
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     /**
      * 修改密码
+     *
      * @param pass
      * @return
      */
     @GetMapping(value = "/users/updatePass/{pass}")
-    public ResponseEntity<Void> updatePass(@PathVariable String pass){
+    public ResponseEntity<Void> updatePass(@PathVariable String pass) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if(userDetails.getPassword().equals(EncryptUtils.encryptPassword(pass))){
+        if (userDetails.getPassword().equals(EncryptUtils.encryptPassword(pass))) {
             throw new BadRequestException("新密码不能与旧密码相同");
         }
-        userService.updatePass(userDetails.getUsername(),EncryptUtils.encryptPassword(pass));
+        userService.updatePass(userDetails.getUsername(), EncryptUtils.encryptPassword(pass));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
      * 修改头像
+     *
      * @param file
      * @return
      */
     @PostMapping(value = "/users/updateAvatar")
-    public ResponseEntity<Void> updateAvatar(@RequestParam MultipartFile file){
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        Picture picture = pictureService.upload(file,userDetails.getUsername());
-        userService.updateAvatar(userDetails.getUsername(),picture.getUrl());
+    public ResponseEntity<Void> updateAvatar(@RequestParam MultipartFile file) {
+        Picture picture = pictureService.upload(file, SecurityContextHolder.getUsername());
+        userService.updateAvatar(SecurityContextHolder.getUsername(), picture.getUrl());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
      * 修改邮箱
+     *
      * @param user
      * @param user
      * @return
      */
     @Log("修改邮箱")
     @PostMapping(value = "/users/updateEmail/{code}")
-    public ResponseEntity<Void> updateEmail(@PathVariable String code,@RequestBody User user){
+    public ResponseEntity<Void> updateEmail(@PathVariable String code, @RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if(!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))){
+        if (!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
-        VerificationCode verificationCode = new VerificationCode(code, ElAdminConstant.RESET_MAIL,"email",user.getEmail());
+        VerificationCode verificationCode = new VerificationCode(code, ElAdminConstant.RESET_MAIL, "email", user.getEmail());
         verificationCodeService.validated(verificationCode);
-        userService.updateEmail(userDetails.getUsername(),user.getEmail());
+        userService.updateEmail(userDetails.getUsername(), user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
+     * @param resources
+     */
+    private void checkLevel(User resources) {
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer optLevel = roleService.findByRoles(resources.getRoles());
+        if (currentLevel > optLevel) {
+            throw new BadRequestException("角色权限不足");
+        }
     }
 }

@@ -1,11 +1,13 @@
-package com.dxj.modules.security.security;
+package com.dxj.modules.security.domain;
 
+import com.dxj.modules.security.domain.JwtUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-11-23
  * 返回token
  */

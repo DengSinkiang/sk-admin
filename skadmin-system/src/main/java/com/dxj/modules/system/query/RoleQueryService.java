@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -44,17 +45,17 @@ public class RoleQueryService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(String name, Pageable pageable){
-        Page<Role> page = roleRepository.findAll(new Spec(name),pageable);
+    public Object queryAll(String name, Pageable pageable) {
+        Page<Role> page = roleRepository.findAll(new Spec(name), pageable);
         return PageUtil.toPage(page.map(roleMapper::toDto));
     }
 
     /**
-     * 分页
+     * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(){
-        List<Role> roles = roleRepository.findAll(new Spec(null));
+    public Object queryAll(Pageable pageable){
+        List<Role> roles = roleRepository.findAll(new Spec(null), pageable).getContent();
         return roleMapper.toDto(roles);
     }
 
@@ -62,7 +63,7 @@ public class RoleQueryService {
 
         private String name;
 
-        Spec(String name){
+        Spec(String name) {
             this.name = name;
         }
 
@@ -71,7 +72,7 @@ public class RoleQueryService {
 
             List<Predicate> list = new ArrayList<>();
 
-            if(!ObjectUtils.isEmpty(name)){
+            if (!ObjectUtils.isEmpty(name)) {
                 //模糊
                 list.add(cb.like(root.get("name").as(String.class), "%" + name + "%"));
             }

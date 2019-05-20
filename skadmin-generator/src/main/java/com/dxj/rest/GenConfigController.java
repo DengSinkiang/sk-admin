@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2019-01-14
  */
 @RestController
@@ -21,15 +21,16 @@ public class GenConfigController {
 
     /**
      * 查询生成器配置
+     *
      * @return
      */
     @GetMapping(value = "/genConfig")
-    public ResponseEntity get(){
-        return new ResponseEntity(genConfigService.find(), HttpStatus.OK);
+    public ResponseEntity<GenConfig> get() {
+        return new ResponseEntity<>(genConfigService.find(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/genConfig")
-    public ResponseEntity emailConfig(@Validated @RequestBody GenConfig genConfig){
-        return new ResponseEntity(genConfigService.update(genConfig),HttpStatus.OK);
+    public ResponseEntity<GenConfig> emailConfig(@Validated @RequestBody GenConfig genConfig) {
+        return new ResponseEntity<>(genConfigService.update(genConfig), HttpStatus.OK);
     }
 }

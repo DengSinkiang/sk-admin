@@ -12,10 +12,11 @@ import java.util.List;
  * @date 2018-12-13
  */
 @Repository
-public interface VisitsRepository extends JpaRepository<Visits,Long> {
+public interface VisitsRepository extends JpaRepository<Visits, Long> {
 
     /**
      * findByDate
+     *
      * @param date
      * @return
      */
@@ -23,11 +24,12 @@ public interface VisitsRepository extends JpaRepository<Visits,Long> {
 
     /**
      * 获得一个时间段的记录
+     *
      * @param date1
      * @param date2
      * @return
      */
     @Query(value = "select * FROM visits where " +
-            "create_time between ?1 and ?2",nativeQuery = true)
+            "create_time between ?1 and ?2", nativeQuery = true)
     List<Visits> findAllVisits(String date1, String date2);
 }

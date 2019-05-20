@@ -5,17 +5,19 @@ import java.io.StringWriter;
 
 /**
  * 异常工具
- * @author jie
+ *
+ * @author dxj
  * @date 2019-01-06
  */
 public class ThrowableUtil {
 
     /**
      * 获取堆栈信息
+     *
      * @param throwable
      * @return
      */
-    public static String getStackTrace(Throwable throwable){
+    public static String getStackTrace(Throwable throwable) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         try {

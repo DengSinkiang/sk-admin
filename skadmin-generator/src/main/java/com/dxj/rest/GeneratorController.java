@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2019-01-02
  */
 @RestController
@@ -31,40 +32,43 @@ public class GeneratorController {
 
     /**
      * 查询数据库元数据
+     *
      * @param name
      * @param page
      * @param size
      * @return
      */
     @GetMapping(value = "/generator/tables")
-    public ResponseEntity getTables(@RequestParam(defaultValue = "") String name,
-                                   @RequestParam(defaultValue = "0")Integer page,
-                                   @RequestParam(defaultValue = "10")Integer size){
-        int[] startEnd = PageUtil.transToStartEnd(page+1, size);
-        return new ResponseEntity(generatorService.getTables(name,startEnd), HttpStatus.OK);
+    public ResponseEntity<Object> getTables(@RequestParam(defaultValue = "") String name,
+                                    @RequestParam(defaultValue = "0") Integer page,
+                                    @RequestParam(defaultValue = "10") Integer size) {
+        int[] startEnd = PageUtil.transToStartEnd(page + 1, size);
+        return new ResponseEntity<>(generatorService.getTables(name, startEnd), HttpStatus.OK);
     }
 
     /**
      * 查询表内元数据
+     *
      * @param tableName
      * @return
      */
     @GetMapping(value = "/generator/columns")
-    public ResponseEntity getTables(@RequestParam String tableName){
-        return new ResponseEntity(generatorService.getColumns(tableName), HttpStatus.OK);
+    public ResponseEntity<Object> getTables(@RequestParam String tableName) {
+        return new ResponseEntity<>(generatorService.getColumns(tableName), HttpStatus.OK);
     }
 
     /**
      * 生成代码
+     *
      * @param columnInfos
      * @return
      */
     @PostMapping(value = "/generator")
-    public ResponseEntity generator(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName){
-        if(!generatorEnabled){
+    public ResponseEntity<Void> generator(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName) {
+        if (!generatorEnabled) {
             throw new BadRequestException("此环境不允许生成代码！");
         }
-        generatorService.generator(columnInfos,genConfigService.find(),tableName);
+        generatorService.generator(columnInfos, genConfigService.find(), tableName);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

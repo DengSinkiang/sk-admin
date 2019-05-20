@@ -12,44 +12,50 @@ import org.springframework.stereotype.Component;
 
 /**
  * 定时任务配置
+ *
  * @author
  * @date 2019-01-07
  */
 @Configuration
 public class QuartzConfig {
 
-	/**
-	 * 解决Job中注入Spring Bean为null的问题
-	 */
-	@Component("quartzJobFactory")
-	public class QuartzJobFactory extends AdaptableJobFactory {
+    /**
+     * 解决Job中注入Spring Bean为null的问题
+     */
+    @Component("quartzJobFactory")
+    public class QuartzJobFactory extends AdaptableJobFactory {
 
-		@Autowired
-		private AutowireCapableBeanFactory capableBeanFactory;
+        private final AutowireCapableBeanFactory capableBeanFactory;
 
-		@Override
-		protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
+        @Autowired
+        public QuartzJobFactory(AutowireCapableBeanFactory capableBeanFactory) {
+            this.capableBeanFactory = capableBeanFactory;
+        }
 
-			//调用父类的方法
-			Object jobInstance = super.createJobInstance(bundle);
-			capableBeanFactory.autowireBean(jobInstance);
-			return jobInstance;
-		}
-	}
+        @Override
+        protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
 
-	/**
-	 * 注入scheduler到spring
-	 * @param quartzJobFactory
-	 * @return
-	 * @throws Exception
-	 */
-	@Bean(name = "scheduler")
-	public Scheduler scheduler(QuartzJobFactory quartzJobFactory) throws Exception {
-		SchedulerFactoryBean factoryBean=new SchedulerFactoryBean();
-		factoryBean.setJobFactory(quartzJobFactory);
-		factoryBean.afterPropertiesSet();
-		Scheduler scheduler=factoryBean.getScheduler();
-		scheduler.start();
-		return scheduler;
-	}
+            //调用父类的方法
+            Object jobInstance = super.createJobInstance(bundle);
+            capableBeanFactory.autowireBean(jobInstance);
+            return jobInstance;
+        }
+    }
+
+    /**
+     * 注入scheduler到spring
+     *
+     * @param quartzJobFactory
+     * @return
+     * @throws Exception
+     */
+    @Bean(name = "scheduler")
+    public Scheduler scheduler(QuartzJobFactory quartzJobFactory) throws Exception {
+        SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
+        factoryBean.setJobFactory(quartzJobFactory);
+        factoryBean.afterPropertiesSet();
+        Scheduler scheduler = factoryBean.getScheduler();
+        scheduler.start();
+        return scheduler;
+    }
 }

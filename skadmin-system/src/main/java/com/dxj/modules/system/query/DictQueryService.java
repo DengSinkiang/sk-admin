@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -45,16 +46,16 @@ public class DictQueryService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(DictDTO dict, Pageable pageable){
-        Page<Dict> page = dictRepository.findAll(new Spec(dict),pageable);
+    public Object queryAll(DictDTO dict, Pageable pageable) {
+        Page<Dict> page = dictRepository.findAll(new Spec(dict), pageable);
         return PageUtil.toPage(page.map(dictMapper::toDto));
     }
 
     /**
-    * 不分页
-    */
+     * 不分页
+     */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(DictDTO dict){
+    public Object queryAll(DictDTO dict) {
         return dictMapper.toDto(dictRepository.findAll(new Spec(dict)));
     }
 
@@ -62,7 +63,7 @@ public class DictQueryService {
 
         private DictDTO dict;
 
-        Spec(DictDTO dict){
+        Spec(DictDTO dict) {
             this.dict = dict;
         }
 
@@ -71,13 +72,13 @@ public class DictQueryService {
 
             List<Predicate> list = new ArrayList<>();
 
-            if(!ObjectUtils.isEmpty(dict.getName())){
+            if (!ObjectUtils.isEmpty(dict.getName())) {
                 //模糊
                 list.add(cb.like(root.get("name").as(String.class), "%" + dict.getName() + "%"));
             }
-            if(!ObjectUtils.isEmpty(dict.getRemark())){
+            if (!ObjectUtils.isEmpty(dict.getRemark())) {
                 //模糊
-                list.add(cb.like(root.get("remark").as(String.class), "%"+dict.getRemark() + "%"));
+                list.add(cb.like(root.get("remark").as(String.class), "%" + dict.getRemark() + "%"));
             }
             Predicate[] p = new Predicate[list.size()];
             return cb.and(list.toArray(p));

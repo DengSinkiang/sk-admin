@@ -13,12 +13,14 @@ import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * api页面 /swagger-ui.html
- * @author jie
+ *
+ * @author dxj
  * @date 2018-11-23
  */
 
@@ -32,7 +34,7 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         ParameterBuilder ticketPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<Parameter>();
+        List<Parameter> pars = new ArrayList<>();
         ticketPar.name(tokenHeader).description("token")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
@@ -51,7 +53,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("elune 接口文档")
-                .version("1.7")
+                .version("1.8")
                 .build();
     }
 

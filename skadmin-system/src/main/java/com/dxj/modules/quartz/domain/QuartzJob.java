@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2019-01-07
  */
 @Data
@@ -78,5 +78,6 @@ public class QuartzJob implements Serializable {
     @Column(name = "update_time")
     private Timestamp updateTime;
 
-    public interface Update{}
+    public interface Update {
+    }
 }

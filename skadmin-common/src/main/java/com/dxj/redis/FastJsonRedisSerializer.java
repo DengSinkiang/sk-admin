@@ -10,16 +10,16 @@ import java.nio.charset.Charset;
 /**
  * Value 序列化
  *
- * @author /
  * @param <T>
+ * @author /
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     private Class<T> clazz;
 
-    public FastJsonRedisSerializer(Class<T> clazz) {
+    FastJsonRedisSerializer(Class<T> clazz) {
         super();
         this.clazz = clazz;
     }
@@ -38,7 +38,7 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
             return null;
         }
         String str = new String(bytes, DEFAULT_CHARSET);
-        return (T) JSON.parseObject(str, clazz);
+        return JSON.parseObject(str, clazz);
     }
 
 }

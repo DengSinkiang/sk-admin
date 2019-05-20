@@ -1,11 +1,11 @@
 package com.dxj.rest;
 
+import com.dxj.service.AlipayService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.AlipayConfig;
 import com.dxj.domain.vo.TradeVo;
-import com.dxj.service.AlipayService;
 import com.dxj.util.AliPayStatusEnum;
 import com.dxj.util.AlipayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +27,28 @@ import java.util.Map;
 @RequestMapping("/api")
 public class AliPayController {
 
-    @Autowired
+    final
     AlipayUtils alipayUtils;
 
+    private final AlipayService alipayService;
+
     @Autowired
-    private AlipayService alipayService;
+    public AliPayController(AlipayUtils alipayUtils, AlipayService alipayService) {
+        this.alipayUtils = alipayUtils;
+        this.alipayService = alipayService;
+    }
 
     @GetMapping(value = "/aliPay")
-    public ResponseEntity get(){
-        return new ResponseEntity(alipayService.find(),HttpStatus.OK);
+    public ResponseEntity<AlipayConfig> get(){
+        return new ResponseEntity<>(alipayService.find(), HttpStatus.OK);
     }
 
     @Log("配置支付宝")
     @PutMapping(value = "/aliPay")
-    public ResponseEntity payConfig(@Validated @RequestBody AlipayConfig alipayConfig){
+    public ResponseEntity<AlipayConfig> payConfig(@Validated @RequestBody AlipayConfig alipayConfig){
         alipayConfig.setId(1L);
         alipayService.update(alipayConfig);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Log("支付宝PC网页支付")

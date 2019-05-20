@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-12-03
  */
 @Service
@@ -43,20 +43,22 @@ public class PictureQueryService {
 
         private Picture picture;
 
-        public Spec(Picture picture){
+        Spec(Picture picture){
             this.picture = picture;
         }
 
         @Override
         public Predicate toPredicate(Root<Picture> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
 
-            List<Predicate> list = new ArrayList<Predicate>();
+            List<Predicate> list = new ArrayList<>();
 
             if(!ObjectUtils.isEmpty(picture.getFilename())){
-                /**
-                 * 模糊
-                 */
+                //模糊
                 list.add(cb.like(root.get("filename").as(String.class),"%"+picture.getFilename()+"%"));
+            }
+            if(!ObjectUtils.isEmpty(picture.getUsername())){
+                //模糊
+                list.add(cb.like(root.get("username").as(String.class),"%"+picture.getUsername()+"%"));
             }
 
             Predicate[] p = new Predicate[list.size()];

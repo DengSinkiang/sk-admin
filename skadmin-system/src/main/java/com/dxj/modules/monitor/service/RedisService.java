@@ -9,11 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 可自行扩展
+ *
  * @author dxj
  * @date 2018-12-10
  */
@@ -27,7 +29,7 @@ public class RedisService {
         this.pool = pool;
     }
 
-    public Page findByKey(String key, Pageable pageable){
+    public Page findByKey(String key, Pageable pageable) {
         try (Jedis jedis = pool.getResource()) {
             List<RedisVo> redisVos = new ArrayList<>();
 
@@ -38,10 +40,9 @@ public class RedisService {
                 RedisVo redisVo = new RedisVo(s, jedis.get(s));
                 redisVos.add(redisVo);
             }
-            Page<RedisVo> page = new PageImpl<>(
+            return new PageImpl<>(
                     PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),
                     pageable, redisVos.size());
-            return page;
         }
         // 释放资源还给连接池
 

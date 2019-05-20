@@ -1,6 +1,7 @@
 package com.dxj.service.query;
 
 import com.dxj.domain.Log;
+import com.dxj.domain.LoginLog;
 import com.dxj.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jie
+ * @author dxj
  * @date 2018-11-24
  */
 @Service
@@ -32,6 +33,7 @@ public class LogQueryService {
         return logRepository.findAll(new Spec(log),pageable);
     }
 
+
     class Spec implements Specification<Log> {
 
         private Log log;
@@ -43,7 +45,7 @@ public class LogQueryService {
         @Override
         public Predicate toPredicate(Root<Log> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
 
-            List<Predicate> list = new ArrayList<Predicate>();
+            List<Predicate> list = new ArrayList<>();
 
 
             if(!ObjectUtils.isEmpty(log.getUsername())){

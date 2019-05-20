@@ -1,6 +1,7 @@
 package com.dxj.utils;
 
 import org.springframework.util.DigestUtils;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -9,7 +10,8 @@ import javax.crypto.spec.IvParameterSpec;
 
 /**
  * 加密
- * @author jie
+ *
+ * @author dxj
  * @date 2018-11-23
  */
 public class EncryptUtils {
@@ -18,12 +20,13 @@ public class EncryptUtils {
 
     /**
      * 对称加密
+     *
      * @param source
      * @return
      * @throws Exception
      */
     public static String desEncrypt(String source) throws Exception {
-        if (source == null || source.length() == 0){
+        if (source == null || source.length() == 0) {
             return null;
         }
         Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
@@ -53,7 +56,7 @@ public class EncryptUtils {
 
 
     public static byte[] hex2byte(byte[] b) {
-        if ((b.length % 2) != 0){
+        if ((b.length % 2) != 0) {
             throw new IllegalArgumentException("长度不是偶数");
         }
         byte[] b2 = new byte[b.length / 2];
@@ -66,12 +69,13 @@ public class EncryptUtils {
 
     /**
      * 对称解密
+     *
      * @param source
      * @return
      * @throws Exception
      */
     public static String desDecrypt(String source) throws Exception {
-        if (source == null || source.length() == 0){
+        if (source == null || source.length() == 0) {
             return null;
         }
         byte[] src = hex2byte(source.getBytes());
@@ -87,11 +91,12 @@ public class EncryptUtils {
 
     /**
      * 密码加密
+     *
      * @param password
      * @return
      */
-    public static String encryptPassword(String password){
-        return  DigestUtils.md5DigestAsHex(password.getBytes());
+    public static String encryptPassword(String password) {
+        return DigestUtils.md5DigestAsHex(password.getBytes());
     }
 
     public static void main(String[] args) {

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,8 @@ public class DictDetailQueryService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(DictDetailDTO dictDetail, Pageable pageable){
-        Page<DictDetail> page = dictDetailRepository.findAll(new Spec(dictDetail),pageable);
+    public Object queryAll(DictDetailDTO dictDetail, Pageable pageable) {
+        Page<DictDetail> page = dictDetailRepository.findAll(new Spec(dictDetail), pageable);
         return PageUtil.toPage(page.map(dictDetailMapper::toDto));
     }
 
@@ -52,7 +53,7 @@ public class DictDetailQueryService {
 
         private DictDetailDTO dictDetail;
 
-        Spec(DictDetailDTO dictDetail){
+        Spec(DictDetailDTO dictDetail) {
             this.dictDetail = dictDetail;
         }
 
@@ -61,14 +62,14 @@ public class DictDetailQueryService {
 
             List<Predicate> list = new ArrayList<>();
 
-            Join<Dict,DictDetail> join = root.join("dict", JoinType.LEFT);
+            Join<Dict, DictDetail> join = root.join("dict", JoinType.LEFT);
 
-            if(!ObjectUtils.isEmpty(dictDetail.getLabel())){
+            if (!ObjectUtils.isEmpty(dictDetail.getLabel())) {
                 //模糊
                 list.add(cb.like(root.get("label").as(String.class), "%" + dictDetail.getLabel() + "%"));
             }
 
-            if(!ObjectUtils.isEmpty(dictDetail.getDictName())){
+            if (!ObjectUtils.isEmpty(dictDetail.getDictName())) {
                 list.add(cb.equal(join.get("name").as(String.class), dictDetail.getDictName()));
             }
             Predicate[] p = new Predicate[list.size()];

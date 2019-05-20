@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 /**
@@ -37,14 +38,14 @@ public class QuartzJobService {
     @Cacheable(key = "#p0")
     public QuartzJob findById(Long id) {
         Optional<QuartzJob> quartzJob = quartzJobRepository.findById(id);
-        ValidationUtil.isNull(quartzJob,"QuartzJob","id",id);
+        ValidationUtil.isNull(quartzJob, "QuartzJob", "id", id);
         return quartzJob.orElse(null);
     }
 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public QuartzJob create(QuartzJob resources) {
-        if (!CronExpression.isValidExpression(resources.getCronExpression())){
+        if (!CronExpression.isValidExpression(resources.getCronExpression())) {
             throw new BadRequestException("cron表达式格式错误");
         }
         resources = quartzJobRepository.save(resources);
@@ -55,10 +56,10 @@ public class QuartzJobService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(QuartzJob resources) {
-        if(resources.getId().equals(1L)){
+        if (resources.getId().equals(1L)) {
             throw new BadRequestException("该任务不可操作");
         }
-        if (!CronExpression.isValidExpression(resources.getCronExpression())){
+        if (!CronExpression.isValidExpression(resources.getCronExpression())) {
             throw new BadRequestException("cron表达式格式错误");
         }
         resources = quartzJobRepository.save(resources);
@@ -67,7 +68,7 @@ public class QuartzJobService {
 
     @CacheEvict(allEntries = true)
     public void updateIsPause(QuartzJob quartzJob) {
-        if(quartzJob.getId().equals(1L)){
+        if (quartzJob.getId().equals(1L)) {
             throw new BadRequestException("该任务不可操作");
         }
         if (quartzJob.getIsPause()) {
@@ -81,7 +82,7 @@ public class QuartzJobService {
     }
 
     public void execution(QuartzJob quartzJob) {
-        if(quartzJob.getId().equals(1L)){
+        if (quartzJob.getId().equals(1L)) {
             throw new BadRequestException("该任务不可操作");
         }
         quartzManage.runAJobNow(quartzJob);
@@ -90,7 +91,7 @@ public class QuartzJobService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void delete(QuartzJob quartzJob) {
-        if(quartzJob.getId().equals(1L)){
+        if (quartzJob.getId().equals(1L)) {
             throw new BadRequestException("该任务不可操作");
         }
         quartzManage.deleteJob(quartzJob);
