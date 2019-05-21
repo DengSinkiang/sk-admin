@@ -1,6 +1,6 @@
 package com.dxj.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import cdcom.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.context.annotation.Configuration;
