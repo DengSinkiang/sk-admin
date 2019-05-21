@@ -20,5 +20,4 @@ public interface DeptRepository extends JpaRepository<Dept, Long>, JpaSpecificat
      */
     List<Dept> findByPid(Long id);
 
-    Set<Dept> findByRoles_Id(Long id);
 }

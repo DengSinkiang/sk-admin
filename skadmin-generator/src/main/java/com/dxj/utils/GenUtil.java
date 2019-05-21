@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * 代码生成
  *
- * @author dxj
+ * @author jie
  * @date 2019-01-02
  */
 @Slf4j
@@ -31,12 +31,14 @@ public class GenUtil {
 
     private static final String PK = "PRI";
 
+    private static final String EXTRA = "auto_increment";
+
     /**
      * 获取后端代码模板名称
      *
      * @return
      */
-    public static List<String> getAdminTemplateNames() {
+    private static List<String> getAdminTemplateNames() {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("Entity");
         templateNames.add("Dto");
@@ -54,7 +56,7 @@ public class GenUtil {
      *
      * @return
      */
-    public static List<String> getFrontTemplateNames() {
+    private static List<String> getFrontTemplateNames() {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("api");
         templateNames.add("index");
@@ -79,10 +81,12 @@ public class GenUtil {
         map.put("tableName", tableName);
         String className = StringUtils.toCapitalizeCamelCase(tableName);
         map.put("className", className);
+        map.put("upperCaseClassName", className.toUpperCase());
         map.put("changeClassName", StringUtils.toCamelCase(tableName));
         map.put("hasTimestamp", false);
         map.put("hasBigDecimal", false);
         map.put("hasQuery", false);
+        map.put("auto", false);
 
         List<Map<String, Object>> columns = new ArrayList<>();
         List<Map<String, Object>> queryColumns = new ArrayList<>();
@@ -92,8 +96,12 @@ public class GenUtil {
             listMap.put("columnKey", column.getColumnKey());
 
             String colType = ColUtil.cloToJava(column.getColumnType().toString());
+            String changeColumnName = StringUtils.toCamelCase(column.getColumnName().toString());
+            String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName().toString());
             if (PK.equals(column.getColumnKey())) {
                 map.put("pkColumnType", colType);
+                map.put("pkChangeColName", changeColumnName);
+                map.put("pkCapitalColName", capitalColumnName);
             }
             if (TIMESTAMP.equals(colType)) {
                 map.put("hasTimestamp", true);
@@ -101,12 +109,15 @@ public class GenUtil {
             if (BIGDECIMAL.equals(colType)) {
                 map.put("hasBigDecimal", true);
             }
+            if (EXTRA.equals(column.getExtra())) {
+                map.put("auto", true);
+            }
             listMap.put("columnType", colType);
             listMap.put("columnName", column.getColumnName());
             listMap.put("isNullable", column.getIsNullable());
             listMap.put("columnShow", column.getColumnShow());
-            listMap.put("changeColumnName", StringUtils.toCamelCase(column.getColumnName().toString()));
-            listMap.put("capitalColumnName", StringUtils.toCapitalizeCamelCase(column.getColumnName().toString()));
+            listMap.put("changeColumnName", changeColumnName);
+            listMap.put("capitalColumnName", capitalColumnName);
 
             if (!StringUtils.isBlank(column.getColumnQuery())) {
                 listMap.put("columnQuery", column.getColumnQuery());
@@ -204,7 +215,7 @@ public class GenUtil {
     /**
      * 定义前端文件路径以及名称
      */
-    public static String getFrontFilePath(String templateName, GenConfig genConfig, String apiName) {
+    private static String getFrontFilePath(String templateName, GenConfig genConfig, String apiName) {
         String path = genConfig.getPath();
 
         if ("api".equals(templateName)) {
@@ -229,23 +240,17 @@ public class GenUtil {
         return null;
     }
 
-    public static void genFile(File file, Template template, Map<String, Object> map) throws IOException {
+    private static void genFile(File file, Template template, Map<String, Object> map) throws IOException {
         // 生成目标文件
         Writer writer = null;
         try {
             FileUtil.touch(file);
             writer = new FileWriter(file);
             template.render(map, writer);
-        } catch (TemplateException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (TemplateException | IOException e) {
             throw new RuntimeException(e);
         } finally {
             writer.close();
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(FileUtil.exist("E:\\1.5.txt"));
     }
 }
