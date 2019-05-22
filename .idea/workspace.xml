@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54eeff16-dead-452c-bb5b-10b52843bdbb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/eForm.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/skadmin-system/src/main/resources/template/generator/front/eForm.ftl" afterDir="false" />
-    </list>
+    <list default="true" id="54eeff16-dead-452c-bb5b-10b52843bdbb" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/skadmin-common/target/" />
@@ -42,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-608">
-              <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            <state relative-caret-position="285">
+              <caret line="114" column="46" lean-forward="true" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -176,6 +172,11 @@
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -358,7 +359,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558507139116" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558511925351" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -413,16 +414,15 @@
       <workItem from="1558399254500" duration="862000" />
       <workItem from="1558406317379" duration="566000" />
       <workItem from="1558422543948" duration="3224000" />
-      <workItem from="1558494773003" duration="1120000" />
+      <workItem from="1558494773003" duration="1313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17496000" />
+    <option name="totallyTimeSpent" value="17689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1427" y="141" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17770597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -860,8 +860,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-logging/src/main/java/com/dxj/aspect/DataScopeAspect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-608">
-          <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        <state relative-caret-position="285">
+          <caret line="114" column="46" lean-forward="true" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
         </state>
       </provider>
     </entry>
