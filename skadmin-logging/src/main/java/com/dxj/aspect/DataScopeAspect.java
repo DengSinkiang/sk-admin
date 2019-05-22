@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * @date 2018-11-24
  */
 @Component
-@Aspect
+@Aspect //把当前类声明为切面类
 @Slf4j
 public class DataScopeAspect {
 
@@ -45,7 +45,7 @@ public class DataScopeAspect {
     }
 
     //登录日志
-    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)")
+    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)") //指定切入点表达式
     public void loginLogPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
@@ -55,7 +55,7 @@ public class DataScopeAspect {
      *
      * @param joinPoint join point for advice
      */
-    @Around("logPointcut()")
+    @Around("logPointcut()") //把当前方法看成是环绕通知。
     public Object logAround(ProceedingJoinPoint joinPoint){
         Object result = getObject(joinPoint);
         //操作日志
@@ -92,7 +92,7 @@ public class DataScopeAspect {
      * @param joinPoint join point for advice
      * @param e exception
      */
-    @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
+    @AfterThrowing(pointcut = "logPointcut()", throwing = "e") // 把当前方法看成是异常通知。
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
 
         //异常日志

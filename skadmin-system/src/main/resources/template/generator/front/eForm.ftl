@@ -35,12 +35,15 @@
       return {
         loading: false, dialog: false,
         form: {
-      <#if columns??>
+     <#if columns??>
       <#list columns as column>
       ${column.changeColumnName}: ''<#if column_has_next>,</#if>
       </#list>
-      </#if>
-    }
+       </#if>
+      },
+      rules: {
+
+      }
     }
     },
     methods: {
