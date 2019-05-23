@@ -56,7 +56,6 @@ jwt:
     path: /login
     # 获取用户信息
     account: /info
-    logout: /logout
 
 #是否允许生成代码，生产环境设置为false
 generator:

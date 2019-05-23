@@ -21,14 +21,18 @@ import java.util.List;
 @RequestMapping("api")
 public class GeneratorController {
 
-    @Autowired
-    private GeneratorService generatorService;
+    private final GeneratorService generatorService;
 
-    @Autowired
-    private GenConfigService genConfigService;
+    private final GenConfigService genConfigService;
 
     @Value("${generator.enabled}")
     private Boolean generatorEnabled;
+
+    @Autowired
+    public GeneratorController(GeneratorService generatorService, GenConfigService genConfigService) {
+        this.generatorService = generatorService;
+        this.genConfigService = genConfigService;
+    }
 
     /**
      * 查询数据库元数据
