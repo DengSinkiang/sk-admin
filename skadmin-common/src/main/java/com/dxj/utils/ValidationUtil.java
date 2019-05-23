@@ -8,7 +8,7 @@ import java.util.Optional;
  * 验证工具
  *
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 public class ValidationUtil {
 
@@ -36,7 +36,7 @@ public class ValidationUtil {
         if (string == null) {
             return false;
         }
-        String regEx1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-        return string.matches(regEx1);
+        String regEx = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        return string.matches(regEx);
     }
 }

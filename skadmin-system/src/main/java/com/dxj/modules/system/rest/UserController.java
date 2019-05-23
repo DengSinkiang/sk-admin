@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 @RestController
 @RequestMapping("api")
@@ -49,19 +49,19 @@ public class UserController {
 
     private final DeptService deptService;
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
 
     private final VerificationCodeService verificationCodeService;
 
     @Autowired
-    public UserController(UserService userService, UserQueryService userQueryService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService) {
+    public UserController(UserService userService, UserQueryService userQueryService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService, RoleService roleService) {
         this.userService = userService;
         this.userQueryService = userQueryService;
         this.pictureService = pictureService;
         this.dataScope = dataScope;
         this.deptService = deptService;
         this.verificationCodeService = verificationCodeService;
+        this.roleService = roleService;
     }
 
     @Log("查询用户")
