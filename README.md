@@ -16,9 +16,9 @@
 #### 开发环境
 
 - JDK：8
-- IDE：IntelliJ IDEA （后端）
+- IDE：IntelliJ IDEA
 - 依赖管理：Maven
-- 数据库：MySQL 5.5.59
+- 数据库：MySQL 5.7
 
 #### 功能模块
 ```
