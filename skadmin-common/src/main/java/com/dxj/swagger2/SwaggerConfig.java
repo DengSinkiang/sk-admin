@@ -31,10 +31,13 @@ public class SwaggerConfig {
     @Value("${jwt.header}")
     private String tokenHeader;
 
+    @Value("${swagger.enabled}")
+    private Boolean enabled;
+
     @Bean
     public Docket createRestApi() {
         ParameterBuilder ticketPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<>();
+        List<Parameter> pars = new ArrayList<Parameter>();
         ticketPar.name(tokenHeader).description("token")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
@@ -43,6 +46,7 @@ public class SwaggerConfig {
                 .build();
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2)
+                .enable(enabled)
                 .apiInfo(apiInfo())
                 .select()
                 .paths(Predicates.not(PathSelectors.regex("/error.*")))
@@ -52,8 +56,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("elune 接口文档")
-                .version("1.8")
+                .title("skadmin 接口文档")
+                .version("2.0")
                 .build();
     }
 

@@ -6,6 +6,7 @@ import com.dxj.enums.EntityEnums;
 import com.dxj.modules.system.domain.Role;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.dto.RoleDTO;
+import com.dxj.modules.system.dto.RoleSmallDTO;
 import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.query.RoleQueryService;
 import com.dxj.utils.SecurityContextHolder;
@@ -66,7 +67,7 @@ public class RoleController {
     }
     @GetMapping(value = "/roles/level")
     public ResponseEntity<Object> getLevel(){
-        List<Integer> levels = roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList());
+        List<Integer> levels = roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList());
         return new ResponseEntity<>(Dict.create().set("level", Collections.min(levels)), HttpStatus.OK);
     }
     @Log("新增角色")

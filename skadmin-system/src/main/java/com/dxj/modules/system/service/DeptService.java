@@ -48,6 +48,9 @@ public class DeptService {
         return deptRepository.findByPid(pid);
     }
 
+    public Set<Dept> findByRoleIds(Long id) {
+        return deptRepository.findByRoles_Id(id);
+    }
     @Cacheable(keyGenerator = "keyGenerator")
     public Object buildTree(List<DeptDTO> deptDTOS) {
         Set<DeptDTO> trees = new LinkedHashSet<>();

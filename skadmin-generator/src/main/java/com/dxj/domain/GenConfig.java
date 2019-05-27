@@ -46,6 +46,9 @@ public class GenConfig {
      **/
     private String author;
 
+    /** 表前缀 **/
+    private String prefix;
+
     /**
      * 是否覆盖
      **/

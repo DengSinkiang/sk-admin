@@ -111,18 +111,17 @@ public class UserService {
     }
 
     @Cacheable(key = "'loadUserByUsername:'+#p0")
-    public User findByName(String userName) {
+    public UserDTO findByName(String userName) {
         User user;
-        if (ValidationUtil.isEmail(userName)) {
+        if(ValidationUtil.isEmail(userName)){
             user = userRepository.findByEmail(userName);
         } else {
             user = userRepository.findByUsername(userName);
         }
-
         if (user == null) {
             throw new EntityNotFoundException(User.class, "name", userName);
         } else {
-            return user;
+            return userMapper.toDto(user);
         }
     }
 

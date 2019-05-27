@@ -1,23 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50562
-Source Host           : localhost:3306
-Source Database       : eladmin
-
-Target Server Type    : MYSQL
-Target Server Version : 50562
-File Encoding         : 65001
-
-Date: 2019-04-11 11:11:09
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for alipay_config
--- ----------------------------
 DROP TABLE IF EXISTS `alipay_config`;
 CREATE TABLE `alipay_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -33,11 +13,6 @@ CREATE TABLE `alipay_config` (
   `sys_service_provider_id` varchar(255) DEFAULT NULL COMMENT '商户号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of alipay_config
--- ----------------------------
-INSERT INTO `alipay_config` VALUES ('1', '2016091700532697', 'utf-8', 'JSON', 'https://openapi.alipaydev.com/gateway.do', 'http://api.auauz.net/api/aliPay/notify', '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', 'http://api.auauz.net/api/aliPay/return', 'RSA2', '2088102176044281');
 
 -- ----------------------------
 -- Table structure for dept
@@ -135,13 +110,9 @@ CREATE TABLE `gen_config` (
   `pack` varchar(255) DEFAULT NULL COMMENT '至于哪个包下',
   `path` varchar(255) DEFAULT NULL COMMENT '前端代码生成的路径',
   `api_path` varchar(255) DEFAULT NULL,
+  `prefix` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of gen_config
--- ----------------------------
-INSERT INTO `gen_config` VALUES ('1', 'jie', '\0', 'eladmin-system', 'com.dxjles.system', 'E:\\workspace\\com\\eladmin-qt\\src\\views\\system\\dictDetail', 'E:\\workspace\\com\\eladmin-qt\\src\\api');
 
 -- ----------------------------
 -- Table structure for job
@@ -185,11 +156,7 @@ CREATE TABLE `log` (
   `time` bigint(20) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4954 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of log
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=9465 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for menu
@@ -327,7 +294,11 @@ CREATE TABLE `picture` (
   `username` varchar(255) DEFAULT NULL COMMENT '用户名称',
   `width` varchar(255) DEFAULT NULL COMMENT '图片宽度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of picture
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for qiniu_config
@@ -357,7 +328,11 @@ CREATE TABLE `qiniu_content` (
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
   `url` varchar(255) DEFAULT NULL COMMENT '文件url',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qiniu_content
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for quartz_job
@@ -399,7 +374,7 @@ CREATE TABLE `quartz_log` (
   `params` varchar(255) DEFAULT NULL,
   `time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quartz_log
@@ -415,14 +390,16 @@ CREATE TABLE `role` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `data_scope` varchar(255) DEFAULT NULL,
+  `level` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '2018-11-23 11:04:37', '管理员', '系统所有权', '全部');
-INSERT INTO `role` VALUES ('2', '2018-11-23 13:09:06', '普通用户', '用于测试菜单与权限', '自定义');
+INSERT INTO `role` VALUES ('1', '2018-11-23 11:04:37', '超级管理员', '系统所有权', '全部', '1');
+INSERT INTO `role` VALUES ('2', '2018-11-23 13:09:06', '普通用户', '用于测试菜单与权限', '自定义', '3');
+INSERT INTO `role` VALUES ('4', '2019-05-13 14:16:15', '普通管理员', '普通管理员级别为2，使用该角色新增用户时只能赋予比普通管理员级别低的角色', '全部', '2');
 
 -- ----------------------------
 -- Table structure for roles_depts
@@ -440,7 +417,8 @@ CREATE TABLE `roles_depts` (
 -- ----------------------------
 -- Records of roles_depts
 -- ----------------------------
-INSERT INTO `roles_depts` VALUES ('2', '7');
+INSERT INTO `roles_depts` VALUES ('2', '5');
+INSERT INTO `roles_depts` VALUES ('2', '8');
 
 -- ----------------------------
 -- Table structure for roles_menus
@@ -497,9 +475,12 @@ INSERT INTO `roles_menus` VALUES ('3', '2');
 INSERT INTO `roles_menus` VALUES ('4', '2');
 INSERT INTO `roles_menus` VALUES ('5', '2');
 INSERT INTO `roles_menus` VALUES ('6', '2');
+INSERT INTO `roles_menus` VALUES ('8', '2');
+INSERT INTO `roles_menus` VALUES ('9', '2');
 INSERT INTO `roles_menus` VALUES ('10', '2');
 INSERT INTO `roles_menus` VALUES ('11', '2');
 INSERT INTO `roles_menus` VALUES ('12', '2');
+INSERT INTO `roles_menus` VALUES ('14', '2');
 INSERT INTO `roles_menus` VALUES ('15', '2');
 INSERT INTO `roles_menus` VALUES ('16', '2');
 INSERT INTO `roles_menus` VALUES ('17', '2');
@@ -510,12 +491,17 @@ INSERT INTO `roles_menus` VALUES ('22', '2');
 INSERT INTO `roles_menus` VALUES ('23', '2');
 INSERT INTO `roles_menus` VALUES ('24', '2');
 INSERT INTO `roles_menus` VALUES ('27', '2');
+INSERT INTO `roles_menus` VALUES ('28', '2');
+INSERT INTO `roles_menus` VALUES ('30', '2');
 INSERT INTO `roles_menus` VALUES ('33', '2');
 INSERT INTO `roles_menus` VALUES ('34', '2');
 INSERT INTO `roles_menus` VALUES ('35', '2');
 INSERT INTO `roles_menus` VALUES ('36', '2');
 INSERT INTO `roles_menus` VALUES ('37', '2');
 INSERT INTO `roles_menus` VALUES ('38', '2');
+INSERT INTO `roles_menus` VALUES ('39', '2');
+INSERT INTO `roles_menus` VALUES ('1', '4');
+INSERT INTO `roles_menus` VALUES ('2', '4');
 
 -- ----------------------------
 -- Table structure for roles_permissions
@@ -534,17 +520,24 @@ CREATE TABLE `roles_permissions` (
 -- Records of roles_permissions
 -- ----------------------------
 INSERT INTO `roles_permissions` VALUES ('1', '1');
+INSERT INTO `roles_permissions` VALUES ('4', '2');
 INSERT INTO `roles_permissions` VALUES ('2', '3');
-INSERT INTO `roles_permissions` VALUES ('2', '4');
+INSERT INTO `roles_permissions` VALUES ('4', '3');
+INSERT INTO `roles_permissions` VALUES ('4', '4');
+INSERT INTO `roles_permissions` VALUES ('4', '5');
+INSERT INTO `roles_permissions` VALUES ('4', '6');
 INSERT INTO `roles_permissions` VALUES ('2', '8');
 INSERT INTO `roles_permissions` VALUES ('2', '14');
+INSERT INTO `roles_permissions` VALUES ('2', '20');
 INSERT INTO `roles_permissions` VALUES ('2', '23');
 INSERT INTO `roles_permissions` VALUES ('2', '24');
 INSERT INTO `roles_permissions` VALUES ('2', '25');
 INSERT INTO `roles_permissions` VALUES ('2', '26');
 INSERT INTO `roles_permissions` VALUES ('2', '30');
+INSERT INTO `roles_permissions` VALUES ('2', '36');
 INSERT INTO `roles_permissions` VALUES ('2', '41');
 INSERT INTO `roles_permissions` VALUES ('2', '46');
+INSERT INTO `roles_permissions` VALUES ('2', '51');
 
 -- ----------------------------
 -- Table structure for user
@@ -574,7 +567,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '2019-04-04 16:00:46', '2', '18888888888', '11');
+INSERT INTO `user` VALUES ('1', 'https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '2019-05-18 17:34:21', '2', '18888888888', '11');
 INSERT INTO `user` VALUES ('3', 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2018-12-27 20:05:26', 'test@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'test', '2019-04-01 09:15:24', '2', '17777777777', '12');
 INSERT INTO `user` VALUES ('5', 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2019-04-02 10:07:12', 'hr@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'hr', null, '11', '15555555555', '8');
 
@@ -596,7 +589,7 @@ CREATE TABLE `users_roles` (
 -- ----------------------------
 INSERT INTO `users_roles` VALUES ('1', '1');
 INSERT INTO `users_roles` VALUES ('3', '2');
-INSERT INTO `users_roles` VALUES ('5', '2');
+INSERT INTO `users_roles` VALUES ('5', '4');
 
 -- ----------------------------
 -- Table structure for verification_code
@@ -611,7 +604,11 @@ CREATE TABLE `verification_code` (
   `value` varchar(255) DEFAULT NULL COMMENT '接收邮箱或者手机号码',
   `scenes` varchar(255) DEFAULT NULL COMMENT '业务名称：如重置邮箱、重置密码等',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of verification_code
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for visits
@@ -626,20 +623,4 @@ CREATE TABLE `visits` (
   `week_day` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_11aksgq87euk9bcyeesfs4vtp` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of visits
--- ----------------------------
-CREATE TABLE `login_log` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `create_time` datetime DEFAULT NULL,
-  `log_type` varchar(255) DEFAULT NULL,
-  `operation` varchar(255) DEFAULT NULL,
-  `user_agent` varchar(255) DEFAULT NULL,
-  `request_ip` varchar(255) DEFAULT NULL,
-  `time` bigint(20) DEFAULT NULL,
-  `status` bit(1) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;

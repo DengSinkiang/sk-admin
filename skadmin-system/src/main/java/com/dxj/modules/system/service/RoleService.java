@@ -3,6 +3,8 @@ package com.dxj.modules.system.service;
 import com.dxj.modules.system.domain.Menu;
 import com.dxj.modules.system.domain.Role;
 import com.dxj.exception.EntityExistException;
+import com.dxj.modules.system.dto.RoleSmallDTO;
+import com.dxj.modules.system.mapper.RoleSmallMapper;
 import com.dxj.modules.system.repository.RoleRepository;
 import com.dxj.modules.system.dto.RoleDTO;
 import com.dxj.modules.system.mapper.RoleMapper;
@@ -31,10 +33,13 @@ public class RoleService {
 
     private final RoleMapper roleMapper;
 
+    private final RoleSmallMapper roleSmallMapper;
+
     @Autowired
-    public RoleService(RoleRepository roleRepository, RoleMapper roleMapper) {
+    public RoleService(RoleRepository roleRepository, RoleMapper roleMapper, RoleSmallMapper roleSmallMapper) {
         this.roleRepository = roleRepository;
         this.roleMapper = roleMapper;
+        this.roleSmallMapper = roleSmallMapper;
     }
 
     @Cacheable(key = "#p0")
@@ -108,8 +113,8 @@ public class RoleService {
     }
 
     @Cacheable(key = "'findByUsers_Id:' + #p0")
-    public List<Role> findByUsers_Id(Long id) {
-        return new ArrayList<>(roleRepository.findByUsers_Id(id));
+    public List<RoleSmallDTO> findByUsers_Id(Long id) {
+        return roleSmallMapper.toDto(roleRepository.findByUsers_Id(id).stream().collect(Collectors.toList()));
     }
     @Cacheable(keyGenerator = "keyGenerator")
     public Integer findByRoles(Set<Role> roles) {

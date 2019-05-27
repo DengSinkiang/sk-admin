@@ -1,5 +1,6 @@
 package com.dxj.service;
 
+import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
 import com.dxj.domain.Log;
 import com.dxj.repository.LogRepository;
@@ -87,5 +88,8 @@ public class LogService {
         log.setUsername(username);
         log.setParams(params + " }");
         logRepository.save(log);
+    }
+    public Object findByErrDetail(Long id) {
+        return Dict.create().set("exception", logRepository.findExceptionById(id));
     }
 }

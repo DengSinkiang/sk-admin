@@ -8,6 +8,7 @@ import com.dxj.enums.EntityEnums;
 import com.dxj.modules.system.domain.Role;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.BadRequestException;
+import com.dxj.modules.system.dto.RoleSmallDTO;
 import com.dxj.modules.system.service.DeptService;
 import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.service.UserService;
@@ -123,8 +124,8 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
-        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
-        Integer optLevel =  Collections.min(roleService.findByUsers_Id(id).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+        Integer optLevel =  Collections.min(roleService.findByUsers_Id(id).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
 
         if (currentLevel > optLevel) {
             throw new BadRequestException("角色权限不足");
@@ -205,7 +206,7 @@ public class UserController {
      * @param resources
      */
     private void checkLevel(User resources) {
-        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(Role::getLevel).collect(Collectors.toList()));
+        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
         Integer optLevel = roleService.findByRoles(resources.getRoles());
         if (currentLevel > optLevel) {
             throw new BadRequestException("角色权限不足");
