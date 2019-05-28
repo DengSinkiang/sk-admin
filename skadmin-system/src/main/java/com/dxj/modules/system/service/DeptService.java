@@ -2,6 +2,7 @@ package com.dxj.modules.system.service;
 
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.domain.Dept;
+import com.dxj.modules.system.query.DeptSpec;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.modules.system.repository.DeptRepository;
 import com.dxj.modules.system.dto.DeptDTO;
@@ -110,5 +111,13 @@ public class DeptService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         deptRepository.deleteById(id);
+    }
+
+    /**
+     * 不分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public List queryAll(DeptDTO dept, Set<Long> deptIds) {
+        return deptMapper.toDto(deptRepository.findAll(DeptSpec.getSpec(dept, deptIds)));
     }
 }

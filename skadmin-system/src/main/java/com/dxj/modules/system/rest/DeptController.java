@@ -7,7 +7,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.domain.Dept;
 import com.dxj.modules.system.service.DeptService;
 import com.dxj.modules.system.dto.DeptDTO;
-import com.dxj.modules.system.query.DeptQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +27,11 @@ public class DeptController {
 
     private final DeptService deptService;
 
-    private final DeptQueryService deptQueryService;
-
     private final DataScope dataScope;
 
     @Autowired
-    public DeptController(DeptService deptService, DeptQueryService deptQueryService, DataScope dataScope) {
+    public DeptController(DeptService deptService, DataScope dataScope) {
         this.deptService = deptService;
-        this.deptQueryService = deptQueryService;
         this.dataScope = dataScope;
     }
 
@@ -45,7 +41,7 @@ public class DeptController {
     public ResponseEntity<Object> getDept(DeptDTO resources) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
-        List<DeptDTO> deptDTOS = deptQueryService.queryAll(resources, deptIds);
+        List<DeptDTO> deptDTOS = deptService.queryAll(resources, deptIds);
         return new ResponseEntity<>(deptService.buildTree(deptDTOS), HttpStatus.OK);
     }
 
