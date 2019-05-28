@@ -6,6 +6,7 @@ import com.dxj.modules.system.domain.Menu;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.domain.vo.MenuVo;
+import com.dxj.modules.system.dto.UserDTO;
 import com.dxj.modules.system.service.MenuService;
 import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.service.UserService;
@@ -58,8 +59,7 @@ public class MenuController {
      */
     @GetMapping(value = "/menus/build")
     public ResponseEntity<List<MenuVo>> buildMenus() {
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        User user = userService.findByName(userDetails.getUsername());
+        UserDTO user = userService.findByName(SecurityContextHolder.getUsername());
         List<MenuDTO> menuDTOList = menuService.findByRoles(roleService.findByUsers_Id(user.getId()));
         List<MenuDTO> menuDTOTree = (List<MenuDTO>) menuService.buildTree(menuDTOList).get("content");
         return new ResponseEntity<>(menuService.buildMenus(menuDTOTree), HttpStatus.OK);

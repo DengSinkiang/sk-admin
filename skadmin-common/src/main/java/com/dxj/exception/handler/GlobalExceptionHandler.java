@@ -11,6 +11,9 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Objects;
+
 import static org.springframework.http.HttpStatus.*;
 
 /**
@@ -26,8 +29,8 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity handleException(Exception e){
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity handleException(Throwable e){
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
         ApiError apiError = new ApiError(BAD_REQUEST.value(),e.getMessage());
@@ -52,13 +55,13 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-	@ExceptionHandler(value = BadRequestException.class)
-	public ResponseEntity<ApiError> badRequestException(BadRequestException e) {
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<ApiError> badRequestException(BadRequestException e) {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
         ApiError apiError = new ApiError(e.getStatus(),e.getMessage());
         return buildResponseEntity(apiError);
-	}
+    }
 
     /**
      * 处理 EntityExist
@@ -95,10 +98,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
-        String[] str = e.getBindingResult().getAllErrors().get(0).getCodes()[1].split("\\.");
-        StringBuffer msg = new StringBuffer(str[1]+":");
-        msg.append(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
-        ApiError apiError = new ApiError(BAD_REQUEST.value(),msg.toString());
+        String[] str = Objects.requireNonNull(e.getBindingResult().getAllErrors().get(0).getCodes())[1].split("\\.");
+        ApiError apiError = new ApiError(BAD_REQUEST.value(), str[1] + ":" + e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return buildResponseEntity(apiError);
     }
 

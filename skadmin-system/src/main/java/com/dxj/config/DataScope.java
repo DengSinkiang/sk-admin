@@ -3,6 +3,8 @@ package com.dxj.config;
 import com.dxj.modules.system.domain.Dept;
 import com.dxj.modules.system.domain.Role;
 import com.dxj.modules.system.domain.User;
+import com.dxj.modules.system.dto.RoleSmallDTO;
+import com.dxj.modules.system.dto.UserDTO;
 import com.dxj.modules.system.service.DeptService;
 import com.dxj.modules.system.service.RoleService;
 import com.dxj.modules.system.service.UserService;
@@ -24,35 +26,31 @@ import java.util.Set;
 @Component
 public class DataScope {
 
-    private final String[] scopeType = {"全部", "本级", "自定义"};
-
-    private final UserService userService;
-
-    private final RoleService roleService;
-
-    private final DeptService deptService;
+    private final String[] scopeType = {"全部","本级","自定义"};
 
     @Autowired
-    public DataScope(UserService userService, RoleService roleService, DeptService deptService) {
-        this.userService = userService;
-        this.roleService = roleService;
-        this.deptService = deptService;
-    }
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private DeptService deptService;
 
     public Set<Long> getDeptIds() {
 
-        User user = userService.findByName(SecurityContextHolder.getUserDetails().getUsername());
+        UserDTO user = userService.findByName(SecurityContextHolder.getUsername());
 
         // 用于存储部门id
         Set<Long> deptIds = new HashSet<>();
 
         // 查询用户角色
-        List<Role> roleSet = roleService.findByUsers_Id(user.getId());
+        List<RoleSmallDTO> roleSet = roleService.findByUsers_Id(user.getId());
 
-        for (Role role : roleSet) {
+        for (RoleSmallDTO role : roleSet) {
 
             if (scopeType[0].equals(role.getDataScope())) {
-                return new HashSet<>();
+                return new HashSet<>() ;
             }
 
             // 存储本级的数据权限
@@ -62,8 +60,8 @@ public class DataScope {
 
             // 存储自定义的数据权限
             if (scopeType[2].equals(role.getDataScope())) {
-                Set<Dept> deptList = role.getDepts();
-                for (Dept dept : deptList) {
+                Set<Dept> depts = deptService.findByRoleIds(role.getId());
+                for (Dept dept : depts) {
                     deptIds.add(dept.getId());
                     List<Dept> deptChildren = deptService.findByPid(dept.getId());
                     if (deptChildren != null && deptChildren.size() != 0) {
@@ -79,9 +77,9 @@ public class DataScope {
     public List<Long> getDeptChildren(List<Dept> deptList) {
         List<Long> list = new ArrayList<>();
         deptList.forEach(dept -> {
-                    if (dept != null && dept.getEnabled()) {
+                    if (dept!=null && dept.getEnabled()){
                         List<Dept> depts = deptService.findByPid(dept.getId());
-                        if (deptList != null && deptList.size() != 0) {
+                        if(deptList!=null && deptList.size()!=0){
                             list.addAll(getDeptChildren(depts));
                         }
                         list.add(dept.getId());

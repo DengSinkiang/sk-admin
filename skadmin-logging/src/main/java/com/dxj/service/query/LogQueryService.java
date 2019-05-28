@@ -3,10 +3,14 @@ package com.dxj.service.query;
 import com.dxj.domain.Log;
 import com.dxj.domain.LoginLog;
 import com.dxj.repository.LogRepository;
+import com.dxj.service.mapper.LogErrorMapper;
+import com.dxj.service.mapper.LogSmallMapper;
+import com.dxj.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,26 +30,42 @@ import java.util.List;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogQueryService {
 
-    @Autowired
-    private LogRepository logRepository;
+    private final LogRepository logRepository;
 
-    public Page queryAll(Log log, Pageable pageable){
-        return logRepository.findAll(new Spec(log),pageable);
+    private final LogErrorMapper logErrorMapper;
+
+    private final LogSmallMapper logSmallMapper;
+
+    @Autowired
+    public LogQueryService(LogRepository logRepository, LogErrorMapper logErrorMapper, LogSmallMapper logSmallMapper) {
+        this.logRepository = logRepository;
+        this.logErrorMapper = logErrorMapper;
+        this.logSmallMapper = logSmallMapper;
     }
 
+    public Object queryAll(Log log, Pageable pageable){
+        Page<Log> page = logRepository.findAll(new Spec(log),pageable);
+        if (!ObjectUtils.isEmpty(log.getUsername())) {
+            return PageUtil.toPage(page.map(logSmallMapper::toDto));
+        }
+        if (log.getLogType().equals("ERROR")) {
+            return PageUtil.toPage(page.map(logErrorMapper::toDto));
+        }
+        return logRepository.findAll(new Spec(log),pageable);
+    }
 
     class Spec implements Specification<Log> {
 
         private Log log;
 
-        public Spec(Log log){
+        Spec(Log log){
             this.log = log;
         }
 
         @Override
         public Predicate toPredicate(Root<Log> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
 
-            List<Predicate> list = new ArrayList<>();
+            List<Predicate> list = new ArrayList<Predicate>();
 
 
             if(!ObjectUtils.isEmpty(log.getUsername())){

@@ -7,6 +7,7 @@ import com.dxj.modules.system.domain.vo.MenuMetaVo;
 import com.dxj.modules.system.domain.vo.MenuVo;
 import com.dxj.exception.BadRequestException;
 import com.dxj.exception.EntityExistException;
+import com.dxj.modules.system.dto.RoleSmallDTO;
 import com.dxj.modules.system.repository.MenuRepository;
 import com.dxj.modules.system.dto.MenuDTO;
 import com.dxj.modules.system.mapper.MenuMapper;
@@ -44,10 +45,10 @@ public class MenuService {
         return menuMapper.toDto(menu.orElse(null));
     }
 
-    public List<MenuDTO> findByRoles(List<Role> roles) {
+    public List<MenuDTO> findByRoles(List<RoleSmallDTO> roles) {
         Set<Menu> menus = new LinkedHashSet<>();
-        for (Role role : roles) {
-            List<Menu> menus1 = new ArrayList<>(menuRepository.findByRoles_IdOrderBySortAsc(role.getId()));
+        for (RoleSmallDTO role : roles) {
+            List<Menu> menus1 = menuRepository.findByRoles_IdOrderBySortAsc(role.getId()).stream().collect(Collectors.toList());
             menus.addAll(menus1);
         }
         return menus.stream().map(menuMapper::toDto).collect(Collectors.toList());
