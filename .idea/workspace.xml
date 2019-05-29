@@ -39,14 +39,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/spec/UserSpec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="236">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8227">
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -55,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/spec/DeptSpec.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="122">
-              <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -187,84 +196,6 @@
               <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="skadmin-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dxj" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="spec" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -274,7 +205,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559095499981" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559095691428" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -313,15 +244,16 @@
       <workItem from="1558582598287" duration="4549000" />
       <workItem from="1558658955339" duration="2628000" />
       <workItem from="1558919911129" duration="5564000" />
-      <workItem from="1559090111201" duration="5260000" />
+      <workItem from="1559090111201" duration="5523000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="444000" />
+    <option name="totallyTimeSpent" value="707000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1426" y="220" width="1280" height="709" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.41195476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -342,7 +274,7 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" visible="true" weight="0.048622366" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.048622366" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.16045381" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
@@ -360,17 +292,10 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/spec/DeptSpec.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -379,11 +304,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/skadmin-system/src/main/java/com/dxj/modules/system/spec/UserSpec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="236">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8227">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
     </entry>
