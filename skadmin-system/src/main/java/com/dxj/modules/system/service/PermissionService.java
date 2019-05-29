@@ -6,6 +6,7 @@ import com.dxj.exception.EntityExistException;
 import com.dxj.modules.system.repository.PermissionRepository;
 import com.dxj.modules.system.dto.PermissionDTO;
 import com.dxj.modules.system.mapper.PermissionMapper;
+import com.dxj.modules.system.spec.PermissionSpec;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -137,5 +138,13 @@ public class PermissionService {
         map.put("content", trees.size() == 0 ? permissionDTOs : trees);
         map.put("totalElements", totalElements);
         return map;
+    }
+
+    /**
+     * 不分页
+     */
+    @Cacheable(key = "'queryAll:'+#p0")
+    public List queryAll(String name) {
+        return permissionMapper.toDto(permissionRepository.findAll(PermissionSpec.getSpec(name)));
     }
 }

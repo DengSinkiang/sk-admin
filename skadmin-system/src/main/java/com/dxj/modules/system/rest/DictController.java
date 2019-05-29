@@ -6,7 +6,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.domain.Dict;
 import com.dxj.modules.system.service.DictService;
 import com.dxj.modules.system.dto.DictDTO;
-import com.dxj.modules.system.query.DictQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -25,19 +24,17 @@ public class DictController {
 
     private final DictService dictService;
 
-    private final DictQueryService dictQueryService;
 
     @Autowired
-    public DictController(DictService dictService, DictQueryService dictQueryService) {
+    public DictController(DictService dictService) {
         this.dictService = dictService;
-        this.dictQueryService = dictQueryService;
     }
 
     @Log("查询字典")
     @GetMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_SELECT')")
     public ResponseEntity<Object> getDict(DictDTO resources, Pageable pageable) {
-        return new ResponseEntity<>(dictQueryService.queryAll(resources, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(dictService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     @Log("新增字典")

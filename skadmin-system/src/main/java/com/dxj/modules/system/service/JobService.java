@@ -1,6 +1,8 @@
 package com.dxj.modules.system.service;
 
 import com.dxj.modules.system.domain.Job;
+import com.dxj.modules.system.spec.JobSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.modules.system.repository.JobRepository;
 import com.dxj.modules.system.dto.JobDTO;
@@ -9,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author dxj
@@ -64,5 +69,11 @@ public class JobService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         jobRepository.deleteById(id);
+    }
+
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
+        Page<Job> page = jobRepository.findAll(JobSpec.getSpec(new JobDTO(name, enabled), deptIds, deptId), pageable);
+        return PageUtil.toPage(page.map(jobMapper::toDto));
     }
 }

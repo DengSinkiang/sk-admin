@@ -8,11 +8,15 @@ import com.dxj.modules.system.mapper.RoleSmallMapper;
 import com.dxj.modules.system.repository.RoleRepository;
 import com.dxj.modules.system.dto.RoleDTO;
 import com.dxj.modules.system.mapper.RoleMapper;
+import com.dxj.modules.system.spec.RoleSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -123,5 +127,23 @@ public class RoleService {
             roleDTOS.add(findById(role.getId()));
         }
         return Collections.min(roleDTOS.stream().map(RoleDTO::getLevel).collect(Collectors.toList()));
+    }
+
+    /**
+     * 分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(String name, Pageable pageable) {
+        Page<Role> page = roleRepository.findAll(RoleSpec.getSpec(name), pageable);
+        return PageUtil.toPage(page.map(roleMapper::toDto));
+    }
+
+    /**
+     * 不分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(Pageable pageable){
+        List<Role> roles = roleRepository.findAll(RoleSpec.getSpec(null), pageable).getContent();
+        return roleMapper.toDto(roles);
     }
 }
