@@ -8,7 +8,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.dto.RoleDTO;
 import com.dxj.modules.system.dto.RoleSmallDTO;
 import com.dxj.modules.system.service.RoleService;
-import com.dxj.modules.system.query.RoleQueryService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -34,12 +33,9 @@ public class RoleController {
 
     private final RoleService roleService;
 
-    private final RoleQueryService roleQueryService;
-
     @Autowired
-    public RoleController(RoleService roleService, RoleQueryService roleQueryService) {
+    public RoleController(RoleService roleService) {
         this.roleService = roleService;
-        this.roleQueryService = roleQueryService;
     }
 
     @GetMapping(value = "/roles/{id}")
@@ -56,14 +52,14 @@ public class RoleController {
     @GetMapping(value = "/roles/all")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','USER_ALL','USER_CREATE','USER_EDIT')")
     public ResponseEntity<Object> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return new ResponseEntity<>(roleQueryService.queryAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(roleService.queryAll(pageable), HttpStatus.OK);
     }
 
     @Log("查询角色")
     @GetMapping(value = "/roles")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_SELECT')")
     public ResponseEntity<Object> getRoles(@RequestParam(required = false) String name, Pageable pageable) {
-        return new ResponseEntity<>(roleQueryService.queryAll(name, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(roleService.queryAll(name, pageable), HttpStatus.OK);
     }
     @GetMapping(value = "/roles/level")
     public ResponseEntity<Object> getLevel(){

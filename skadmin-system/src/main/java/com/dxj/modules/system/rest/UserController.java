@@ -5,7 +5,6 @@ import com.dxj.config.DataScope;
 import com.dxj.domain.Picture;
 import com.dxj.domain.VerificationCode;
 import com.dxj.enums.EntityEnums;
-import com.dxj.modules.system.domain.Role;
 import com.dxj.modules.system.domain.User;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.dto.RoleSmallDTO;
@@ -16,7 +15,6 @@ import com.dxj.service.PictureService;
 import com.dxj.service.VerificationCodeService;
 import com.dxj.utils.*;
 import com.dxj.modules.system.dto.UserDTO;
-import com.dxj.modules.system.query.UserQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -42,8 +40,6 @@ public class UserController {
 
     private final UserService userService;
 
-    private final UserQueryService userQueryService;
-
     private final PictureService pictureService;
 
     private final DataScope dataScope;
@@ -55,9 +51,8 @@ public class UserController {
     private final VerificationCodeService verificationCodeService;
 
     @Autowired
-    public UserController(UserService userService, UserQueryService userQueryService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService, RoleService roleService) {
+    public UserController(UserService userService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService, RoleService roleService) {
         this.userService = userService;
-        this.userQueryService = userQueryService;
         this.pictureService = pictureService;
         this.dataScope = dataScope;
         this.deptService = deptService;
@@ -90,12 +85,12 @@ public class UserController {
             // 若无交集，则代表无数据权限
             if (result.size() == 0) {
                 return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
-            } else return new ResponseEntity<>(userQueryService.queryAll(userDTO, result, pageable), HttpStatus.OK);
+            } else return new ResponseEntity<>(userService.queryAll(userDTO, result, pageable), HttpStatus.OK);
             // 否则取并集
         } else {
             result.addAll(deptSet);
             result.addAll(deptIds);
-            return new ResponseEntity<>(userQueryService.queryAll(userDTO, result, pageable), HttpStatus.OK);
+            return new ResponseEntity<>(userService.queryAll(userDTO, result, pageable), HttpStatus.OK);
         }
     }
 

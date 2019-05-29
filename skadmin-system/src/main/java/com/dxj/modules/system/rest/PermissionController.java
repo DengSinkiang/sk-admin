@@ -6,7 +6,6 @@ import com.dxj.modules.system.domain.Permission;
 import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.service.PermissionService;
 import com.dxj.modules.system.dto.PermissionDTO;
-import com.dxj.modules.system.query.PermissionQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +25,9 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-    private final PermissionQueryService permissionQueryService;
-
     @Autowired
-    public PermissionController(PermissionService permissionService, PermissionQueryService permissionQueryService) {
+    public PermissionController(PermissionService permissionService) {
         this.permissionService = permissionService;
-        this.permissionQueryService = permissionQueryService;
     }
 
     /**
@@ -49,7 +45,7 @@ public class PermissionController {
     @GetMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_SELECT')")
     public ResponseEntity<Object> getPermissions(@RequestParam(required = false) String name) {
-        List<PermissionDTO> permissionDTOS = permissionQueryService.queryAll(name);
+        List<PermissionDTO> permissionDTOS = permissionService.queryAll(name);
         return new ResponseEntity<>(permissionService.buildTree(permissionDTOS), HttpStatus.OK);
     }
 

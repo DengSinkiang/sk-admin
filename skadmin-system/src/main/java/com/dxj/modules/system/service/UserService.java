@@ -7,17 +7,23 @@ import com.dxj.exception.EntityNotFoundException;
 import com.dxj.modules.system.repository.UserRepository;
 import com.dxj.modules.system.dto.UserDTO;
 import com.dxj.modules.system.mapper.UserMapper;
+import com.dxj.modules.system.spec.UserSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author dxj
@@ -141,5 +147,14 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void updateEmail(String username, String email) {
         userRepository.updateEmail(username, email);
+    }
+
+    /**
+     * 分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Map<String, Object> queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable) {
+        Page<User> page = userRepository.findAll(UserSpec.getSpec(user, deptIds), pageable);
+        return PageUtil.toPage(page.map(userMapper::toDto));
     }
 }

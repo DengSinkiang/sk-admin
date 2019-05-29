@@ -7,7 +7,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.modules.system.domain.Job;
 import com.dxj.modules.system.dto.JobDTO;
 import com.dxj.modules.system.service.JobService;
-import com.dxj.modules.system.query.JobQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -28,14 +27,11 @@ public class JobController {
 
     private final JobService jobService;
 
-    private final JobQueryService jobQueryService;
-
     private final DataScope dataScope;
 
     @Autowired
-    public JobController(JobService jobService, JobQueryService jobQueryService, DataScope dataScope) {
+    public JobController(JobService jobService, DataScope dataScope) {
         this.jobService = jobService;
-        this.jobQueryService = jobQueryService;
         this.dataScope = dataScope;
     }
 
@@ -48,7 +44,7 @@ public class JobController {
                                           Pageable pageable) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
-        return new ResponseEntity<>(jobQueryService.queryAll(name, enabled, deptIds, deptId, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(jobService.queryAll(name, enabled, deptIds, deptId, pageable), HttpStatus.OK);
     }
 
     @Log("新增岗位")
