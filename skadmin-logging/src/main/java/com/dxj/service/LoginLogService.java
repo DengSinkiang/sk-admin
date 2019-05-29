@@ -3,12 +3,15 @@ package com.dxj.service;
 import cn.hutool.json.JSONObject;
 import com.dxj.domain.LoginLog;
 import com.dxj.repository.LoginLogRepository;
+import com.dxj.service.spec.LoginLogSpec;
 import com.dxj.utils.RequestHolder;
 import com.dxj.utils.SecurityContextHolder;
 import com.dxj.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -75,5 +78,9 @@ public class LoginLogService {
         // username
         log.setUsername(username);
         logRepository.save(log);
+    }
+
+    public Page queryAll(LoginLog log, Pageable pageable){
+        return logRepository.findAll(LoginLogSpec.getSpec(log), pageable);
     }
 }

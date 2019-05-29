@@ -3,8 +3,7 @@ package com.dxj.rest;
 import com.dxj.domain.Log;
 import com.dxj.domain.LoginLog;
 import com.dxj.service.LogService;
-import com.dxj.service.query.LogQueryService;
-import com.dxj.service.query.LoginLogQueryService;
+import com.dxj.service.LoginLogService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,16 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class LogController {
 
-    private final LogQueryService logQueryService;
-
     private final LogService logService;
 
-    private final LoginLogQueryService loginLogQueryService;
+    private final LoginLogService loginLogService;
 
     @Autowired
-    public LogController(LogQueryService logQueryService, LoginLogQueryService loginLogQueryService, LogService logService) {
-        this.logQueryService = logQueryService;
-        this.loginLogQueryService = loginLogQueryService;
+    public LogController(LoginLogService loginLogService, LogService logService) {
+        this.loginLogService = loginLogService;
         this.logService = logService;
     }
 
@@ -42,21 +38,21 @@ public class LogController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Object> getLogs(Log log, Pageable pageable){
         log.setLogType("INFO");
-        return new ResponseEntity<>(logQueryService.queryAll(log, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/user")
     public ResponseEntity<Object> getUserLogs(Log log, Pageable pageable){
         log.setLogType("INFO");
         log.setUsername(SecurityContextHolder.getUsername());
-        return new ResponseEntity<>(logQueryService.queryAll(log, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/error")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Object> getErrorLogs(Log log, Pageable pageable){
         log.setLogType("ERROR");
-        return new ResponseEntity<>(logQueryService.queryAll(log, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/error/{id}")
@@ -68,6 +64,6 @@ public class LogController {
     @GetMapping(value = "/logs/login")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Page> getLoginLogs(LoginLog loginLog, Pageable pageable){
-        return new ResponseEntity<>(loginLogQueryService.queryAll(loginLog, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(loginLogService.queryAll(loginLog, pageable), HttpStatus.OK);
     }
 }
