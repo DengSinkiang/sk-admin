@@ -27,13 +27,14 @@
     - 角色管理 对权限与菜单进行分配
     - 权限管理 权限细化到接口
     - 菜单管理 已实现菜单动态路由，后端可配置化，支持多级菜单
-    - 部门管理与岗位管理
+    - 部门管理
+    - 岗位管理
     - 字典管理 
 - 系统监控
     - 操作日志 使用apo记录用户操作日志
     - 异常日志 记录操作过程中的异常，并且提供查看异常的堆栈信息
-    - 系统缓存 使用jedis将缓存操作可视化，并提供对redis的基本操作，可根据需求自行扩展
-    - 实时控制台 实时打印logback日志，来自微强迫症患者的精心配色，更好的监控系统的运行状态
+    - 系统缓存 使用jedis将缓存操作可视化，并提供对redis的基本操作
+    - 实时控制台 实时打印logback日志，更好的监控系统的运行状态
     - SQL监控 采用druid 监控数据库访问性能，默认用户名admin，密码123456
 - 系统工具
  - 定时任务 整合Quartz做定时任务，加入任务日志，任务运行情况一目了然
@@ -68,14 +69,15 @@
 		    - rest 控制器
 		    - service 业务实现
 		    - query 业务查询
-        - quartz 定时任务
-        - security 系统安全
-	        - config  JWT的安全过滤器配置
-		    - rest 用户登录授权的接口
-		    - security 配置spring security
-		    - service 用户登录与权限的处理
-		    - utils JWT工具
-    	- system 系统管理
+                - quartz 定时任务
+                - security 系统安全
+	            - config  JWT的安全过滤器配置
+		        - rest 用户登录授权的接口
+		        - security 配置spring security
+		        - service 用户登录与权限的处理
+		        - utils JWT工具
+    	        - system 系统管理
+		    
 - skadmin-logging 系统日志模块
 - skadmin-tools 系统第三方工具模块
 - skadmin-generator 系统代码生成模块
