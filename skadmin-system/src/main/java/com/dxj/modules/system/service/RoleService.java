@@ -3,14 +3,20 @@ package com.dxj.modules.system.service;
 import com.dxj.modules.system.domain.Menu;
 import com.dxj.modules.system.domain.Role;
 import com.dxj.exception.EntityExistException;
+import com.dxj.modules.system.dto.RoleSmallDTO;
+import com.dxj.modules.system.mapper.RoleSmallMapper;
 import com.dxj.modules.system.repository.RoleRepository;
 import com.dxj.modules.system.dto.RoleDTO;
 import com.dxj.modules.system.mapper.RoleMapper;
+import com.dxj.modules.system.spec.RoleSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +26,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author dxj
- * @date 2018-12-03
+ * @date 2019-04-03
  */
 @Service
 @CacheConfig(cacheNames = "role")
@@ -31,10 +37,13 @@ public class RoleService {
 
     private final RoleMapper roleMapper;
 
+    private final RoleSmallMapper roleSmallMapper;
+
     @Autowired
-    public RoleService(RoleRepository roleRepository, RoleMapper roleMapper) {
+    public RoleService(RoleRepository roleRepository, RoleMapper roleMapper, RoleSmallMapper roleSmallMapper) {
         this.roleRepository = roleRepository;
         this.roleMapper = roleMapper;
+        this.roleSmallMapper = roleSmallMapper;
     }
 
     @Cacheable(key = "#p0")
@@ -108,8 +117,8 @@ public class RoleService {
     }
 
     @Cacheable(key = "'findByUsers_Id:' + #p0")
-    public List<Role> findByUsers_Id(Long id) {
-        return new ArrayList<>(roleRepository.findByUsers_Id(id));
+    public List<RoleSmallDTO> findByUsers_Id(Long id) {
+        return roleSmallMapper.toDto(roleRepository.findByUsers_Id(id).stream().collect(Collectors.toList()));
     }
     @Cacheable(keyGenerator = "keyGenerator")
     public Integer findByRoles(Set<Role> roles) {
@@ -118,5 +127,23 @@ public class RoleService {
             roleDTOS.add(findById(role.getId()));
         }
         return Collections.min(roleDTOS.stream().map(RoleDTO::getLevel).collect(Collectors.toList()));
+    }
+
+    /**
+     * 分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(String name, Pageable pageable) {
+        Page<Role> page = roleRepository.findAll(RoleSpec.getSpec(name), pageable);
+        return PageUtil.toPage(page.map(roleMapper::toDto));
+    }
+
+    /**
+     * 不分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(Pageable pageable){
+        List<Role> roles = roleRepository.findAll(RoleSpec.getSpec(null), pageable).getContent();
+        return roleMapper.toDto(roles);
     }
 }

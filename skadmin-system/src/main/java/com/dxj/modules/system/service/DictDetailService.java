@@ -1,6 +1,8 @@
 package com.dxj.modules.system.service;
 
 import com.dxj.modules.system.domain.DictDetail;
+import com.dxj.modules.system.spec.DictDetailSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.modules.system.repository.DictDetailRepository;
 import com.dxj.modules.system.dto.DictDetailDTO;
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +68,14 @@ public class DictDetailService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         dictDetailRepository.deleteById(id);
+    }
+
+    /**
+     * 分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(DictDetailDTO dictDetail, Pageable pageable) {
+        Page<DictDetail> page = dictDetailRepository.findAll(DictDetailSpec.getSpec(dictDetail), pageable);
+        return PageUtil.toPage(page.map(dictDetailMapper::toDto));
     }
 }

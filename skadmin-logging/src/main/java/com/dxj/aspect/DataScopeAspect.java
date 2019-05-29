@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * @date 2018-11-24
  */
 @Component
-@Aspect
+@Aspect //把当前类声明为切面类
 @Slf4j
 public class DataScopeAspect {
 
@@ -45,7 +45,7 @@ public class DataScopeAspect {
     }
 
     //登录日志
-    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)")
+    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)") //指定切入点表达式
     public void loginLogPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
@@ -55,10 +55,11 @@ public class DataScopeAspect {
      *
      * @param joinPoint join point for advice
      */
-    @Around("logPointcut()")
-    public Object logAround(ProceedingJoinPoint joinPoint){
-        Object result = getObject(joinPoint);
-        //操作日志
+    @Around("logPointcut()") //把当前方法看成是环绕通知。
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object result;
+        currentTime = System.currentTimeMillis();
+        result = joinPoint.proceed();
         Log log = new Log("INFO",System.currentTimeMillis() - currentTime);
         logService.save(joinPoint, log);
         return result;
@@ -66,25 +67,14 @@ public class DataScopeAspect {
 
     //登录日志
     @Around("loginLogPointcut()")
-    public Object loginLogAround(ProceedingJoinPoint joinPoint){
-        Object result = getObject(joinPoint);
+    public Object loginLogAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object result;
+        result = joinPoint.proceed();
         //操作日志
         LoginLog loginLog = new LoginLog("INFO",System.currentTimeMillis() - currentTime);
         loginLogService.save(joinPoint, loginLog);
         return result;
     }
-
-    private Object getObject(ProceedingJoinPoint joinPoint) {
-        Object result;
-        currentTime = System.currentTimeMillis();
-        try {
-            result = joinPoint.proceed();
-        } catch (Throwable e) {
-            throw new BadRequestException(e.getMessage());
-        }
-        return result;
-    }
-
 
     /**
      * 配置异常通知
@@ -92,7 +82,7 @@ public class DataScopeAspect {
      * @param joinPoint join point for advice
      * @param e exception
      */
-    @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
+    @AfterThrowing(pointcut = "logPointcut()", throwing = "e") // 把当前方法看成是异常通知。
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
 
         //异常日志
