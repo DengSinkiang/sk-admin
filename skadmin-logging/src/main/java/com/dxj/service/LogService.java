@@ -4,17 +4,25 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
 import com.dxj.domain.Log;
 import com.dxj.repository.LogRepository;
+import com.dxj.service.mapper.LogErrorMapper;
+import com.dxj.service.mapper.LogSmallMapper;
+import com.dxj.service.spec.LogSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.RequestHolder;
 import com.dxj.utils.SecurityContextHolder;
 import com.dxj.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
@@ -28,9 +36,15 @@ public class LogService {
 
     private final LogRepository logRepository;
 
+    private final LogSmallMapper logSmallMapper;
+
+    private final LogErrorMapper logErrorMapper;
+
     @Autowired
-    public LogService(LogRepository logRepository) {
+    public LogService(LogRepository logRepository, LogSmallMapper logSmallMapper, LogErrorMapper logErrorMapper) {
         this.logRepository = logRepository;
+        this.logSmallMapper = logSmallMapper;
+        this.logErrorMapper = logErrorMapper;
     }
 
     /**
@@ -91,5 +105,15 @@ public class LogService {
     }
     public Object findByErrDetail(Long id) {
         return Dict.create().set("exception", logRepository.findExceptionById(id));
+    }
+    public Object queryAll(Log log, Pageable pageable){
+        Page<Log> page = logRepository.findAll(LogSpec.getSpec(log), pageable);
+        if (!ObjectUtils.isEmpty(log.getUsername())) {
+            return PageUtil.toPage(page.map(logSmallMapper::toDto));
+        }
+        if (log.getLogType().equals("ERROR")) {
+            return PageUtil.toPage(page.map(logErrorMapper::toDto));
+        }
+        return logRepository.findAll(LogSpec.getSpec(log), pageable);
     }
 }

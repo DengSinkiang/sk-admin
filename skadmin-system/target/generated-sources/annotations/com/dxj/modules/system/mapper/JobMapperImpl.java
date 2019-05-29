@@ -11,9 +11,13 @@ import org.springframework.stereotype.Component;
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
 <<<<<<< HEAD
+<<<<<<< HEAD
     date = "2019-05-13T19:57:20+0800",
 =======
     date = "2019-05-18T17:45:24+0800",
+>>>>>>> dev
+=======
+    date = "2019-05-28T22:10:47+0800",
 >>>>>>> dev
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
@@ -86,4 +90,30 @@ public class JobMapperImpl implements JobMapper {
 
         return list;
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public JobDTO toDto(Job job, String deptSuperiorName) {
+        if ( job == null && deptSuperiorName == null ) {
+            return null;
+        }
+
+        JobDTO jobDTO = new JobDTO();
+
+        if ( job != null ) {
+            jobDTO.setId( job.getId() );
+            jobDTO.setSort( job.getSort() );
+            jobDTO.setName( job.getName() );
+            jobDTO.setEnabled( job.getEnabled() );
+            jobDTO.setDept( deptMapper.toDto( job.getDept() ) );
+            jobDTO.setCreateTime( job.getCreateTime() );
+        }
+        if ( deptSuperiorName != null ) {
+            jobDTO.setDeptSuperiorName( deptSuperiorName );
+        }
+
+        return jobDTO;
+    }
+>>>>>>> dev
 }
