@@ -61,31 +61,30 @@
     - utils 通用工具
 - skadmin-system 系统核心模块
 	- config 配置跨域与静态资源
-	- modules 系统相关模块
-		- monitor 系统监控
-		    - config 配置日志拦截器与WebSocket等
+        - security 系统安全
+	            - config  JWT的安全过滤器配置
+		    - rest 用户登录授权的接口
+		    - security 配置spring security
+		    - service 用户登录与权限的处理
+		    - utils JWT工具
+    	- system 系统管理
 		    - domain 实体类
 		    - repository 数据库操作
 		    - rest 控制器
 		    - service 业务实现
-		    - query 业务查询
-                - quartz 定时任务
-                - security 系统安全
-	            - config  JWT的安全过滤器配置
-		        - rest 用户登录授权的接口
-		        - security 配置spring security
-		        - service 用户登录与权限的处理
-		        - utils JWT工具
-    	        - system 系统管理
-			- domain 实体类
-			- repository 数据库操作
-			- rest 控制器
-			- service 业务实现
-			- spec 查询条件
+	            - spec 查询条件
 		    
 - skadmin-logging 系统日志模块
 - skadmin-tools 系统第三方工具模块
 - skadmin-generator 系统代码生成模块
+- skadmin-quartz 定时任务模块
+	- config 配置日志拦截器与WebSocket等
+	- domain 实体类
+	- repository 数据库操作
+	- rest 控制器
+	- service 业务实现
+	- query 业务查询
+- skadmin-monitor 系统监控模块
 ```
 #### 后端技术栈
 
