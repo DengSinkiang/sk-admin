@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author dxj
  * @reference https://cloud.tencent.com/developer/article/1096792
- * @date 2018-12-24
+ * @date 2019-04-24
  */
 public class LogFilter extends Filter<ILoggingEvent> {
 

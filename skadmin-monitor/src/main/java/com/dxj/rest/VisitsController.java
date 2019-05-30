@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class VisitsController {
 
+    private final VisitsService visitsService;
+
     @Autowired
-    private VisitsService visitsService;
+    public VisitsController(VisitsService visitsService) {
+        this.visitsService = visitsService;
+    }
 
     @PostMapping(value = "/visits")
     public ResponseEntity<Void> create() {
