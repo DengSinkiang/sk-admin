@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author dxj
- * @date 2018-11-24
+ * @date 2019-04-24
  */
 @Component
 @Aspect //把当前类声明为切面类
@@ -38,14 +38,14 @@ public class DataScopeAspect {
 
     /**
      * 配置切入点
+     * 该方法无方法体,主要为了让同类中其他方法使用此切入点
      */
     @Pointcut("@annotation(com.dxj.aop.log.Log)")
-    public void logPointcut() {
-        // 该方法无方法体,主要为了让同类中其他方法使用此切入点
-    }
+    public void logPointcut() {}
 
     //登录日志
-    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)") //指定切入点表达式
+    //指定切入点表达式
+    @Pointcut("@annotation(com.dxj.aop.log.LoginLog)")
     public void loginLogPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
@@ -53,7 +53,7 @@ public class DataScopeAspect {
     /**
      * 配置环绕通知,使用在方法logPointcut()上注册的切入点
      *
-     * @param joinPoint join point for advice
+     * @param joinPoint
      */
     @Around("logPointcut()") //把当前方法看成是环绕通知。
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -79,8 +79,8 @@ public class DataScopeAspect {
     /**
      * 配置异常通知
      *
-     * @param joinPoint join point for advice
-     * @param e exception
+     * @param joinPoint
+     * @param e
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e") // 把当前方法看成是异常通知。
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
@@ -94,15 +94,17 @@ public class DataScopeAspect {
     /**
      * 配置登录异常通知
      *
-     * @param joinPoint join point for advice
+     * @param joinPoint
      */
     @AfterThrowing(pointcut = "loginLogPointcut()", throwing = "e")
     public void loginLogAfterThrowing(JoinPoint joinPoint, Throwable e) {
 
         long time = System.currentTimeMillis() - currentTime;
+
         //登录异常日志
         LoginLog loginLog = new LoginLog("ERROR", time);
         loginLogService.save((ProceedingJoinPoint)joinPoint, loginLog);
+
         //同时记录在异常日志中
         Log log = new Log("ERROR", time);
         log.setDescription("登录");

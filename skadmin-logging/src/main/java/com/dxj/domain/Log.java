@@ -3,13 +3,14 @@ package com.dxj.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * @author dxj
- * @date 2018-11-24
+ * @date 2019-04-24
  */
 @Entity
 @Data
