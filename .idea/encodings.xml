@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/skadmin-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/skadmin-generator" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/skadmin-logging" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/skadmin-monitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/skadmin-quartz" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/skadmin-system" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/skadmin-tools" charset="UTF-8" />
   </component>

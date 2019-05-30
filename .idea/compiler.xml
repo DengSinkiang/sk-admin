@@ -10,6 +10,8 @@
         <module name="skadmin-common" />
         <module name="skadmin-generator" />
         <module name="skadmin-logging" />
+        <module name="skadmin-monitor" />
+        <module name="skadmin-quartz" />
         <module name="skadmin-system" />
         <module name="skadmin-tools" />
       </profile>
@@ -20,6 +22,8 @@
       <module name="skadmin-common" options="-parameters" />
       <module name="skadmin-generator" options="-parameters" />
       <module name="skadmin-logging" options="-parameters" />
+      <module name="skadmin-monitor" options="-parameters" />
+      <module name="skadmin-quartz" options="-parameters" />
       <module name="skadmin-system" options="-parameters" />
       <module name="skadmin-tools" options="-parameters" />
     </option>
