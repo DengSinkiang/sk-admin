@@ -5,7 +5,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.domain.QuartzJob;
 import com.dxj.repository.QuartzJobRepository;
 import com.dxj.repository.QuartzLogRepository;
-import com.dxj.service.query.QuartzLogQueryService;
 import com.dxj.spec.QuartzJobSpec;
 import com.dxj.spec.QuartzLogSpec;
 import com.dxj.utils.PageUtil;
