@@ -98,11 +98,11 @@ public class RedisConfig extends CachingConfigurerSupport {
         // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         // 建议使用这种方式，小范围指定白名单
         ParserConfig.getGlobalInstance().addAccept("com.dxj.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.modules.system.dto");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.modules.system.domain");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.system.dto");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.system.domain");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.modules.quartz.domain");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.modules.monitor.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.modules.security.security");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.security.security");
         // key的序列化采用StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());

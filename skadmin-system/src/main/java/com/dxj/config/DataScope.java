@@ -1,13 +1,11 @@
 package com.dxj.config;
 
-import com.dxj.modules.system.domain.Dept;
-import com.dxj.modules.system.domain.Role;
-import com.dxj.modules.system.domain.User;
-import com.dxj.modules.system.dto.RoleSmallDTO;
-import com.dxj.modules.system.dto.UserDTO;
-import com.dxj.modules.system.service.DeptService;
-import com.dxj.modules.system.service.RoleService;
-import com.dxj.modules.system.service.UserService;
+import com.dxj.system.domain.Dept;
+import com.dxj.system.dto.RoleSmallDTO;
+import com.dxj.system.dto.UserDTO;
+import com.dxj.system.service.DeptService;
+import com.dxj.system.service.RoleService;
+import com.dxj.system.service.UserService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
