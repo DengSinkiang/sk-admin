@@ -108,7 +108,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      * @return
      */
     public static String getSize(int size) {
-        String resultSize = "";
+        String resultSize;
         if (size / GB >= 1) {
             //如果当前Byte的值大于等于1GB
             resultSize = DF.format(size / (float) GB) + "GB   ";

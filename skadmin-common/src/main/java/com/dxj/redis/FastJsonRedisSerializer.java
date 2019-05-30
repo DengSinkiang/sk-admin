@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
  * Value 序列化
  *
  * @param <T>
- * @author /
+ * @author dxj
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 

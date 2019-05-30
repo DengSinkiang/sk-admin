@@ -12,7 +12,7 @@ import javax.crypto.spec.IvParameterSpec;
  * 加密
  *
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 public class EncryptUtils {
 
