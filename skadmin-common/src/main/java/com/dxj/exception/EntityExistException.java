@@ -2,7 +2,7 @@ package com.dxj.exception;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 public class EntityExistException extends RuntimeException {
 

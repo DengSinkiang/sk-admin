@@ -1,6 +1,5 @@
 package com.dxj.utils;
 
-import com.dxj.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ReflectionUtils;

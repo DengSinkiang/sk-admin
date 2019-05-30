@@ -6,8 +6,6 @@ import com.dxj.exception.BadRequestException;
 import com.dxj.domain.QuartzJob;
 import com.dxj.domain.QuartzLog;
 import com.dxj.service.QuartzJobService;
-import com.dxj.service.query.QuartzJobQueryService;
-import com.dxj.service.query.QuartzLogQueryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -28,22 +26,16 @@ public class QuartzJobController {
 
     private final QuartzJobService quartzJobService;
 
-    private final QuartzJobQueryService quartzJobQueryService;
-
-    private final QuartzLogQueryService quartzLogQueryService;
-
     @Autowired
-    public QuartzJobController(QuartzJobService quartzJobService, QuartzJobQueryService quartzJobQueryService, QuartzLogQueryService quartzLogQueryService) {
+    public QuartzJobController(QuartzJobService quartzJobService) {
         this.quartzJobService = quartzJobService;
-        this.quartzJobQueryService = quartzJobQueryService;
-        this.quartzLogQueryService = quartzLogQueryService;
     }
 
     @Log("查询定时任务")
     @GetMapping(value = "/jobs")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
     public ResponseEntity<Object> getJobs(QuartzJob resources, Pageable pageable) {
-        return new ResponseEntity<>(quartzJobQueryService.queryAll(resources, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(quartzJobService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     /**
@@ -56,7 +48,7 @@ public class QuartzJobController {
     @GetMapping(value = "/jobLogs")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
     public ResponseEntity<Object> getJobLogs(QuartzLog resources, Pageable pageable) {
-        return new ResponseEntity<>(quartzLogQueryService.queryAll(resources, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(quartzJobService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     @Log("新增定时任务")

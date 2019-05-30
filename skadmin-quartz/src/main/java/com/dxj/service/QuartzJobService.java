@@ -1,8 +1,13 @@
 package com.dxj.service;
 
+import com.dxj.domain.QuartzLog;
 import com.dxj.exception.BadRequestException;
 import com.dxj.domain.QuartzJob;
 import com.dxj.repository.QuartzJobRepository;
+import com.dxj.repository.QuartzLogRepository;
+import com.dxj.spec.QuartzJobSpec;
+import com.dxj.spec.QuartzLogSpec;
+import com.dxj.utils.PageUtil;
 import com.dxj.utils.QuartzManage;
 import com.dxj.utils.ValidationUtil;
 import org.quartz.CronExpression;
@@ -10,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +35,11 @@ public class QuartzJobService {
 
     private final QuartzManage quartzManage;
 
+    private final QuartzLogRepository quartzLogRepository;
     @Autowired
-    public QuartzJobService(QuartzJobRepository quartzJobRepository, QuartzManage quartzManage) {
+    public QuartzJobService(QuartzJobRepository quartzJobRepository, QuartzLogRepository quartzLogRepository, QuartzManage quartzManage) {
         this.quartzJobRepository = quartzJobRepository;
+        this.quartzLogRepository = quartzLogRepository;
         this.quartzManage = quartzManage;
     }
 
@@ -96,5 +104,14 @@ public class QuartzJobService {
         }
         quartzManage.deleteJob(quartzJob);
         quartzJobRepository.delete(quartzJob);
+    }
+
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Object queryAll(QuartzJob quartzJob, Pageable pageable) {
+        return PageUtil.toPage(quartzJobRepository.findAll(QuartzJobSpec.getSpec(quartzJob), pageable));
+    }
+
+    public Object queryAll(QuartzLog quartzLog, Pageable pageable) {
+        return PageUtil.toPage(quartzLogRepository.findAll(QuartzLogSpec.getSpec(quartzLog), pageable));
     }
 }

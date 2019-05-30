@@ -9,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 创建一个阻塞队列，作为日志系统输出的日志的一个临时载体
  *
  * @author https://cloud.tencent.com/developer/article/1096792
- * @date 2018-12-24
+ * @date 2019-04-24
  */
 class LoggerQueue {
 

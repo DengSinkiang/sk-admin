@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 public interface EntityMapper<D, E> {
 

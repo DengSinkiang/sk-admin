@@ -6,13 +6,17 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author dxj
- * @date 2018-12-25
+ * @date 2019-01-25
  */
 @Component
 public class VisitsTask {
 
+    private final VisitsService visitsService;
+
     @Autowired
-    private VisitsService visitsService;
+    public VisitsTask(VisitsService visitsService) {
+        this.visitsService = visitsService;
+    }
 
     public void run() {
         visitsService.save();

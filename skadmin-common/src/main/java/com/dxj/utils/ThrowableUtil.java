@@ -7,7 +7,7 @@ import java.io.StringWriter;
  * 异常工具
  *
  * @author dxj
- * @date 2019-01-06
+ * @date 2019-04-06
  */
 public class ThrowableUtil {
 

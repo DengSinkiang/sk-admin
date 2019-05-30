@@ -4,7 +4,7 @@ package com.dxj.utils;
  * 常用静态常量
  *
  * @author dxj
- * @date 2018-12-26
+ * @date 2019-04-26
  */
 public class ElAdminConstant {
 
