@@ -4,8 +4,6 @@ import com.dxj.domain.QuartzJob;
 import com.dxj.domain.QuartzLog;
 import com.dxj.repository.QuartzLogRepository;
 import com.dxj.service.QuartzJobService;
-import com.dxj.utils.SpringContextHolder;
-import com.dxj.utils.ThrowableUtil;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +17,7 @@ import java.util.concurrent.Future;
 /**
  * 参考人人开源，https://gitee.com/renrenio/renren-security
  *
- * @author
+ * @author dxj
  * @date 2019-01-07
  */
 @Async
