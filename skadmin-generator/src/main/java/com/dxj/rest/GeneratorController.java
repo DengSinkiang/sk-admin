@@ -73,6 +73,6 @@ public class GeneratorController {
             throw new BadRequestException("此环境不允许生成代码！");
         }
         generatorService.generator(columnInfos, genConfigService.find(), tableName);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
