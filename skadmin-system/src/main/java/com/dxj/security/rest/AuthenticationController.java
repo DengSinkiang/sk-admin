@@ -73,7 +73,7 @@ public class AuthenticationController {
      *
      * @return
      */
-    @GetMapping(value = "${jwt.auth.account}")
+    @GetMapping(value = "${jwt.auth.info}")
     public ResponseEntity<JwtUser> getUserInfo() {
         JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(SecurityContextHolder.getUsername());
         return ResponseEntity.ok(jwtUser);

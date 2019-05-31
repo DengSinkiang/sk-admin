@@ -32,6 +32,8 @@ spring:
       stat-view-servlet:
         url-pattern: /druid/*
         reset-enable: false
+        login-username: admin
+        login-password: 123456
 
       web-stat-filter:
         url-pattern: /*
@@ -41,7 +43,7 @@ spring:
   jpa:
     hibernate:
       # 生产环境设置成 none，避免程序运行时自动更新数据库结构
-      ddl-auto: update
+      ddl-auto: none
 
 #jwt
 jwt:
@@ -53,12 +55,15 @@ jwt:
     # 授权路径
     path: /login
     # 获取用户信息
-    info: /info
+    account: /info
 
 #是否允许生成代码，生产环境设置为false
 generator:
-  enabled: true
+  enabled: false
 
-#是否开启 swagger-ui
-swagger:
-  enabled: true
+#如果生产环境要开启swagger，需要配置请求地址
+#springfox:
+#  documentation:
+#    swagger:
+#      v2:
+#        host: # 接口域名或外网ip
