@@ -11,7 +11,7 @@
     <modules>
         <module>skadmin-common</module>
         <module>skadmin-generator</module>
-        <module>skadmin-logging</module>
+        <module>skadmin-log</module>
         <module>skadmin-admin</module>
         <module>skadmin-tools</module>
         <module>skadmin-monitor</module>

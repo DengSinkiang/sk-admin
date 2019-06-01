@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.dxj.service</groupId>
-            <artifactId>skadmin-logging</artifactId>
+            <artifactId>skadmin-log</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
