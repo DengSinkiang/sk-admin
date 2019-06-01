@@ -1,16 +1,16 @@
 package com.dxj.admin.rest;
 
-import com.dxj.aop.log.Log;
-import com.dxj.enums.EntityEnums;
+import com.dxj.log.annotation.Log;
+import com.dxj.common.enums.EntityEnums;
 import com.dxj.admin.domain.Menu;
-import com.dxj.exception.BadRequestException;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.domain.vo.MenuVo;
 import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.service.MenuService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
 import com.dxj.admin.dto.MenuDTO;
-import com.dxj.utils.SecurityContextHolder;
+import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

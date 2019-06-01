@@ -1,9 +1,9 @@
 package com.dxj.admin.rest;
 
-import com.dxj.aop.log.Log;
-import com.dxj.enums.EntityEnums;
+import com.dxj.log.annotation.Log;
+import com.dxj.common.enums.EntityEnums;
 import com.dxj.admin.domain.Permission;
-import com.dxj.exception.BadRequestException;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.service.PermissionService;
 import com.dxj.admin.dto.PermissionDTO;
 import org.springframework.beans.factory.annotation.Autowired;

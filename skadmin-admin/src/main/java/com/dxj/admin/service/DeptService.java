@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.exception.BadRequestException;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.service.spec.DeptSpec;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.dto.DeptDTO;
 import com.dxj.admin.mapper.DeptMapper;

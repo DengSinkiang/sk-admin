@@ -5,12 +5,12 @@ import ${package}.domain.${className};
     <#list columns as column>
         <#if column.columnKey = 'UNI'>
             <#if column_index = 1>
-import com.dxj.exception.EntityExistException;
+import EntityExistException;
             </#if>
         </#if>
     </#list>
 </#if>
-import com.dxj.utils.ValidationUtil;
+import ValidationUtil;
 import ${package}.repository.${className}Repository;
 import ${package}.service.${className}Service;
 import ${package}.service.dto.${className}DTO;

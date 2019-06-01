@@ -1,6 +1,6 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.mapper.EntityMapper;
+import com.dxj.common.mapper.EntityMapper;
 import com.dxj.admin.domain.Role;
 
 import com.dxj.admin.dto.RoleDTO;

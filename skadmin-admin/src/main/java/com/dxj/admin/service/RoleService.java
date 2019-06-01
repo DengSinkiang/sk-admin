@@ -2,15 +2,15 @@ package com.dxj.admin.service;
 
 import com.dxj.admin.domain.Menu;
 import com.dxj.admin.domain.Role;
-import com.dxj.exception.EntityExistException;
+import com.dxj.common.exception.EntityExistException;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.RoleSmallMapper;
 import com.dxj.admin.repository.RoleRepository;
 import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.service.spec.RoleSpec;
-import com.dxj.utils.PageUtil;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;

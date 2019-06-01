@@ -1,7 +1,7 @@
 package ${package}.rest;
 
-import com.dxj.aop.log.Log;
-import com.dxj.exception.BadRequestException;
+import Log;
+import BadRequestException;
 import ${package}.domain.${className};
 import ${package}.service.${className}Service;
 import ${package}.service.dto.${className}DTO;

@@ -1,6 +1,6 @@
 package com.dxj;
 
-import com.dxj.utils.SpringContextHolder;
+import com.dxj.common.util.SpringContextHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.mapper.EntityMapper;
+import com.dxj.common.mapper.EntityMapper;
 import com.dxj.admin.domain.DictDetail;
 import com.dxj.admin.dto.DictDetailDTO;
 import org.mapstruct.Mapper;

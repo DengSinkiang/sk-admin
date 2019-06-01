@@ -1,9 +1,9 @@
 package com.dxj.admin.rest;
 
-import com.dxj.aop.log.Log;
-import com.dxj.config.DataScope;
-import com.dxj.enums.EntityEnums;
-import com.dxj.exception.BadRequestException;
+import com.dxj.log.annotation.Log;
+import com.dxj.admin.config.DataScope;
+import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.dto.DeptDTO;

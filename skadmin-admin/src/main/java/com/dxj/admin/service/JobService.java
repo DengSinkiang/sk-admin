@@ -2,8 +2,8 @@ package com.dxj.admin.service;
 
 import com.dxj.admin.domain.Job;
 import com.dxj.admin.service.spec.JobSpec;
-import com.dxj.utils.PageUtil;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.admin.repository.JobRepository;
 import com.dxj.admin.dto.JobDTO;
 import com.dxj.admin.mapper.JobMapper;

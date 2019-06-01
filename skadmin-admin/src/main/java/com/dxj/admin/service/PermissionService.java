@@ -1,13 +1,13 @@
 package com.dxj.admin.service;
 
 import com.dxj.admin.domain.Permission;
-import com.dxj.exception.BadRequestException;
-import com.dxj.exception.EntityExistException;
+import com.dxj.common.exception.BadRequestException;
+import com.dxj.common.exception.EntityExistException;
 import com.dxj.admin.repository.PermissionRepository;
 import com.dxj.admin.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
 import com.dxj.admin.service.spec.PermissionSpec;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
