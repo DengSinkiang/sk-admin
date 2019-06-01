@@ -1,4 +1,4 @@
-package com.dxj.admin.security.rest;
+package com.dxj.admin.security.controller;
 
 import com.dxj.log.annotation.LoginLog;
 import lombok.extern.slf4j.Slf4j;
