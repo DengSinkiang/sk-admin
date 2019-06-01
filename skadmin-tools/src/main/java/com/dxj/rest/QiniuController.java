@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.QiniuConfig;
 import com.dxj.domain.QiniuContent;
-import com.dxj.service.query.QiNiuQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -29,12 +28,10 @@ public class QiniuController {
 
     private final QiNiuService qiNiuService;
 
-    private final QiNiuQueryService qiNiuQueryService;
 
     @Autowired
-    public QiniuController(QiNiuService qiNiuService, QiNiuQueryService qiNiuQueryService) {
+    public QiniuController(QiNiuService qiNiuService) {
         this.qiNiuService = qiNiuService;
-        this.qiNiuQueryService = qiNiuQueryService;
     }
 
     @GetMapping(value = "/qiNiuConfig")
@@ -52,7 +49,7 @@ public class QiniuController {
     @Log("查询文件")
     @GetMapping(value = "/qiNiuContent")
     public ResponseEntity<Object> getRoles(QiniuContent resources, Pageable pageable){
-        return new ResponseEntity<>(qiNiuQueryService.queryAll(resources, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(qiNiuService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     /**

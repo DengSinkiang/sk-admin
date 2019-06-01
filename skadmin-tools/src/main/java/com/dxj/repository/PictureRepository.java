@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @author jie
- * @date 2018-12-27
+ * @author dxj
+ * @date 2019-04-27
  */
-public interface PictureRepository extends JpaRepository<Picture,Long>, JpaSpecificationExecutor {
+public interface PictureRepository extends JpaRepository<Picture, Long>, JpaSpecificationExecutor<Picture> {
 }

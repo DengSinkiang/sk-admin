@@ -37,7 +37,7 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         ParameterBuilder ticketPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<Parameter>();
+        List<Parameter> pars = new ArrayList<>();
         ticketPar.name(tokenHeader).description("token")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
@@ -57,7 +57,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("skadmin 接口文档")
-                .version("2.0")
+                .version("1.0")
                 .build();
     }
 

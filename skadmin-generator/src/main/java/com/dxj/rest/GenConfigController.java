@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api")
 public class GenConfigController {
 
+    private final GenConfigService genConfigService;
+
     @Autowired
-    private GenConfigService genConfigService;
+    public GenConfigController(GenConfigService genConfigService) {
+        this.genConfigService = genConfigService;
+    }
 
     /**
      * 查询生成器配置
@@ -30,7 +34,7 @@ public class GenConfigController {
     }
 
     @PutMapping(value = "/genConfig")
-    public ResponseEntity<GenConfig> emailConfig(@Validated @RequestBody GenConfig genConfig) {
+    public ResponseEntity<GenConfig> genConfig(@Validated @RequestBody GenConfig genConfig) {
         return new ResponseEntity<>(genConfigService.update(genConfig), HttpStatus.OK);
     }
 }

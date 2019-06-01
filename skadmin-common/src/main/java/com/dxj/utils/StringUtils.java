@@ -10,7 +10,6 @@ import java.util.Date;
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     private static final char SEPARATOR = '_';
-    private static final String CHARSET_NAME = "UTF-8";
 
     /**
      * 是否包含字符串
@@ -37,7 +36,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * toCapitalizeCamelCase("hello_world") == "HelloWorld"
      * toUnderScoreCase("helloWorld") = "hello_world"
      */
-    public static String toCamelCase(String s) {
+    static String toCamelCase(String s) {
         if (s == null) {
             return null;
         }
@@ -69,7 +68,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * toCapitalizeCamelCase("hello_world") == "HelloWorld"
      * toUnderScoreCase("helloWorld") = "hello_world"
      */
-    public static String toCapitalizeCamelCase(String s) {
+    static String toCapitalizeCamelCase(String s) {
         if (s == null) {
             return null;
         }

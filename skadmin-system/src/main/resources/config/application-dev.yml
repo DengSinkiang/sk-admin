@@ -53,7 +53,7 @@ jwt:
     # 授权路径
     path: /login
     # 获取用户信息
-    account: /info
+    info: /info
 
 #是否允许生成代码，生产环境设置为false
 generator:
