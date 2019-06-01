@@ -10,7 +10,7 @@
         </encoder>
 
         <!--添加我们自定义的filter-->
-        <filter class="com.dxj.config.LogFilter" />
+        <filter class="com.dxj.monitor.config.LogFilter" />
     </appender>
 
     <!--普通日志输出到控制台-->

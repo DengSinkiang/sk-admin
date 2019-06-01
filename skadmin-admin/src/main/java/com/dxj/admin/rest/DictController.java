@@ -1,8 +1,8 @@
 package com.dxj.admin.rest;
 
-import com.dxj.aop.log.Log;
-import com.dxj.enums.EntityEnums;
-import com.dxj.exception.BadRequestException;
+import com.dxj.log.annotation.Log;
+import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.domain.Dict;
 import com.dxj.admin.service.DictService;
 import com.dxj.admin.dto.DictDTO;

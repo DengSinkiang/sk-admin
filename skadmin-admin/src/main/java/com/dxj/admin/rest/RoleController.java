@@ -1,14 +1,14 @@
 package com.dxj.admin.rest;
 
 import cn.hutool.core.lang.Dict;
-import com.dxj.aop.log.Log;
-import com.dxj.enums.EntityEnums;
+import com.dxj.log.annotation.Log;
+import com.dxj.common.enums.EntityEnums;
 import com.dxj.admin.domain.Role;
-import com.dxj.exception.BadRequestException;
+import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.service.RoleService;
-import com.dxj.utils.SecurityContextHolder;
+import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

@@ -48,11 +48,11 @@
 </template>
 
 <script>
-  import checkPermission from '@/utils/permission'
+  import checkPermission from '@/util/permission'
   import initData from '@/mixins/initData'
   import { del } from '@/api/${changeClassName}'
   <#if hasTimestamp>
-  import { parseTime } from '@/utils/index'
+  import { parseTime } from '@/util/index'
   </#if>
   import eHeader from './module/header'
   import edit from './module/edit'

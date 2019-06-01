@@ -1,6 +1,6 @@
 package ${package}.service.query;
 
-import com.dxj.utils.PageUtil;
+import PageUtil;
 import ${package}.domain.${className};
 import ${package}.service.dto.${className}DTO;
 import ${package}.repository.${className}Repository;

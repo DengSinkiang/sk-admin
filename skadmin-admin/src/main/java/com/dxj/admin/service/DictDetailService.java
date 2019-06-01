@@ -2,8 +2,8 @@ package com.dxj.admin.service;
 
 import com.dxj.admin.domain.DictDetail;
 import com.dxj.admin.service.spec.DictDetailSpec;
-import com.dxj.utils.PageUtil;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.admin.repository.DictDetailRepository;
 import com.dxj.admin.dto.DictDetailDTO;
 import com.dxj.admin.mapper.DictDetailMapper;

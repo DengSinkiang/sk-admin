@@ -1,15 +1,15 @@
 package com.dxj.admin.service;
 
-import com.dxj.service.RedisService;
+import com.dxj.monitor.service.RedisService;
 import com.dxj.admin.domain.User;
-import com.dxj.exception.EntityExistException;
-import com.dxj.exception.EntityNotFoundException;
+import com.dxj.common.exception.EntityExistException;
+import com.dxj.common.exception.EntityNotFoundException;
 import com.dxj.admin.repository.UserRepository;
 import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
 import com.dxj.admin.service.spec.UserSpec;
-import com.dxj.utils.PageUtil;
-import com.dxj.utils.ValidationUtil;
+import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
