@@ -1,4 +1,4 @@
-package com.dxj.admin.rest;
+package com.dxj.admin.controller;
 
 import cn.hutool.core.lang.Dict;
 import com.dxj.log.annotation.Log;

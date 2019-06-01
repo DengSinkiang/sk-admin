@@ -1,4 +1,4 @@
-package com.dxj.generator.rest;
+package com.dxj.generator.controller;
 
 import cn.hutool.core.util.PageUtil;
 import com.dxj.generator.domain.vo.ColumnInfo;

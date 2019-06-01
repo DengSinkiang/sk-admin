@@ -1,4 +1,4 @@
-package com.dxj.tools.rest;
+package com.dxj.tools.controller;
 
 import com.dxj.tools.service.AlipayService;
 import io.swagger.annotations.ApiOperation;

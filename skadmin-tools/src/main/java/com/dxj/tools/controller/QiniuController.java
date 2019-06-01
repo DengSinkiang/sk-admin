@@ -1,4 +1,4 @@
-package com.dxj.tools.rest;
+package com.dxj.tools.controller;
 
 import com.dxj.tools.service.QiNiuService;
 import lombok.extern.slf4j.Slf4j;

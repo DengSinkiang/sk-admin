@@ -6,7 +6,7 @@ import com.dxj.admin.security.domain.AuthenticationInfo;
 import com.dxj.admin.security.domain.AuthorizationUser;
 import com.dxj.admin.security.domain.JwtUser;
 import com.dxj.common.util.EncryptUtils;
-import com.dxj.admin.security.utils.JwtTokenUtil;
+import com.dxj.admin.security.util.JwtTokenUtil;
 import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

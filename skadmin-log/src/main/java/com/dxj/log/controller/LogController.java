@@ -1,4 +1,4 @@
-package com.dxj.log.rest;
+package com.dxj.log.controller;
 
 import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;

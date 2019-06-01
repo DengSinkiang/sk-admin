@@ -60,25 +60,25 @@
 ```
 # 项目模块如下
 - skadmin-common 公共模块
-    - aop.limit 接口限流自定义注解
+    - annotation 接口限流自定义注解
     - exception 项目统一异常的处理
     - mapper mapstruct的通用mapper
+    - enums 常量枚举
     - redis redis缓存相关配置
-    - swagger2 接口文档配置
-    - utils 通用工具
+    - swagger 接口文档配置
+    - util 通用工具
 - skadmin-admin 系统核心模块
     - config 配置跨域与静态资源
     - security 系统安全
         - config  JWT的安全过滤器配置
-        - rest 用户登录授权的接口
+        - controller 用户登录授权的接口
 	    - security 配置spring security
 	    - service 用户登录与权限的处理
-	    - utils JWT工具
-    - admin 系统管理
-	    - domain 实体类
-	    - rest 控制器
-	    - service 业务实现
-	        - spec 业务查询条件
+	    - util JWT工具
+	- domain 实体类
+	- controller 控制器
+	- service 业务实现
+	    - spec 业务查询条件
 		    
 - skadmin-log 系统日志模块
 - skadmin-tools 系统第三方工具模块
@@ -87,7 +87,7 @@
     - config 配置日志拦截器与WebSocket等
     - domain 实体类
     - repository 数据库操作
-    - rest 控制器
+    - controller 控制器
     - service 业务实现
         - spec 业务查询条件
 - skadmin-monitor 系统监控模块

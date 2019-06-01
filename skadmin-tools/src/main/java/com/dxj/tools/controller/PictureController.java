@@ -1,4 +1,4 @@
-package com.dxj.tools.rest;
+package com.dxj.tools.controller;
 
 import com.dxj.log.annotation.Log;
 import com.dxj.tools.domain.Picture;

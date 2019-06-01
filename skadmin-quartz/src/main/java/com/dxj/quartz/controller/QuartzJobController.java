@@ -1,4 +1,4 @@
-package com.dxj.quartz.rest;
+package com.dxj.quartz.controller;
 
 import com.dxj.log.annotation.Log;
 import com.dxj.common.enums.EntityEnums;

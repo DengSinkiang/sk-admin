@@ -1,4 +1,4 @@
-package com.dxj.common.swagger2;
+package com.dxj.common.swagger;
 
 import com.google.common.base.Predicates;
 import org.springframework.beans.factory.annotation.Value;

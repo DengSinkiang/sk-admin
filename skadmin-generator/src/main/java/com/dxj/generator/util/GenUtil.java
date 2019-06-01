@@ -192,7 +192,7 @@ public class GenUtil {
         }
 
         if ("Controller".equals(templateName)) {
-            return packagePath + "rest" + File.separator + className + "Controller.java";
+            return packagePath + "controller" + File.separator + className + "Controller.java";
         }
 
         if ("Service".equals(templateName)) {

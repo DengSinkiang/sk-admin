@@ -1,4 +1,4 @@
-package com.dxj.admin.security.utils;
+package com.dxj.admin.security.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.DefaultClock;

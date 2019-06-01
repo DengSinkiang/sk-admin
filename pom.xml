@@ -112,7 +112,7 @@
             <version>${log4jdbc.version}</version>
         </dependency>
 
-        <!-- RESTful APIs swagger2 -->
+        <!-- RESTful APIs swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>

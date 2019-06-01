@@ -1,4 +1,4 @@
-package com.dxj.admin.rest;
+package com.dxj.admin.controller;
 
 import com.dxj.common.util.ElAdminConstant;
 import com.dxj.common.util.EncryptUtils;

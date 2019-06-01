@@ -1,4 +1,4 @@
-package com.dxj.generator.rest;
+package com.dxj.generator.controller;
 
 import com.dxj.generator.domain.GenConfig;
 import com.dxj.generator.service.GenConfigService;

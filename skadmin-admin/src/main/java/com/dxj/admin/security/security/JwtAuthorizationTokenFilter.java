@@ -3,7 +3,7 @@ package com.dxj.admin.security.security;
 import com.dxj.admin.security.domain.JwtUser;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
-import com.dxj.admin.security.utils.JwtTokenUtil;
+import com.dxj.admin.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
