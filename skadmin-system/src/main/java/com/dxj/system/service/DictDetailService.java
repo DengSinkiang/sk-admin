@@ -1,7 +1,7 @@
 package com.dxj.system.service;
 
 import com.dxj.system.domain.DictDetail;
-import com.dxj.system.spec.DictDetailSpec;
+import com.dxj.system.service.spec.DictDetailSpec;
 import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.system.repository.DictDetailRepository;

@@ -7,7 +7,7 @@ import com.dxj.exception.EntityNotFoundException;
 import com.dxj.system.repository.UserRepository;
 import com.dxj.system.dto.UserDTO;
 import com.dxj.system.mapper.UserMapper;
-import com.dxj.system.spec.UserSpec;
+import com.dxj.system.service.spec.UserSpec;
 import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;

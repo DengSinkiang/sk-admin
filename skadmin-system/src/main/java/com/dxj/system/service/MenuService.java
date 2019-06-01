@@ -10,7 +10,7 @@ import com.dxj.system.dto.RoleSmallDTO;
 import com.dxj.system.repository.MenuRepository;
 import com.dxj.system.dto.MenuDTO;
 import com.dxj.system.mapper.MenuMapper;
-import com.dxj.system.spec.MenuSpec;
+import com.dxj.system.service.spec.MenuSpec;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

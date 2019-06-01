@@ -6,7 +6,7 @@ import com.dxj.exception.EntityExistException;
 import com.dxj.system.repository.PermissionRepository;
 import com.dxj.system.dto.PermissionDTO;
 import com.dxj.system.mapper.PermissionMapper;
-import com.dxj.system.spec.PermissionSpec;
+import com.dxj.system.service.spec.PermissionSpec;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

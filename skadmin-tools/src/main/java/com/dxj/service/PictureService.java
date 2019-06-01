@@ -4,7 +4,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.dxj.spec.PictureSpec;
+import com.dxj.service.spec.PictureSpec;
 import com.dxj.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.domain.Picture;

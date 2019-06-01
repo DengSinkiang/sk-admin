@@ -1,6 +1,6 @@
 package com.dxj.service;
 
-import com.dxj.spec.QiNiuSpec;
+import com.dxj.service.spec.QiNiuSpec;
 import com.dxj.utils.PageUtil;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;

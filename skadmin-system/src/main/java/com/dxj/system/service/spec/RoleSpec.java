@@ -1,6 +1,6 @@
-package com.dxj.spec;
+package com.dxj.system.service.spec;
 
-import com.dxj.domain.QiniuContent;
+import com.dxj.system.domain.Role;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ObjectUtils;
 
@@ -8,14 +8,18 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QiNiuSpec {
-    public static Specification<QiniuContent> getSpec(QiniuContent qiniuContent) {
-        return (Specification<QiniuContent>) (root, query, cb) -> {
+/**
+ * @Author: dxj
+ * @Date: 2019-05-29 09:41
+ */
+public class RoleSpec {
+    public static Specification<Role> getSpec(String name) {
+        return (Specification<Role>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
 
-            if(!ObjectUtils.isEmpty(qiniuContent.getKey())){
+            if (!ObjectUtils.isEmpty(name)) {
                 //模糊
-                list.add(cb.like(root.get("key").as(String.class), "%" + qiniuContent.getKey() + "%"));
+                list.add(cb.like(root.get("name").as(String.class), "%" + name + "%"));
             }
 
             Predicate[] p = new Predicate[list.size()];

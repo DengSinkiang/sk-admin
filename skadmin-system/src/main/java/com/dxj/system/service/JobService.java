@@ -1,7 +1,7 @@
 package com.dxj.system.service;
 
 import com.dxj.system.domain.Job;
-import com.dxj.system.spec.JobSpec;
+import com.dxj.system.service.spec.JobSpec;
 import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.system.repository.JobRepository;
