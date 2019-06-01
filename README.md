@@ -80,7 +80,7 @@
 	    - service 业务实现
 	        - spec 业务查询条件
 		    
-- skadmin-logging 系统日志模块
+- skadmin-log 系统日志模块
 - skadmin-tools 系统第三方工具模块
 - skadmin-generator 系统代码生成模块
 - skadmin-quartz 定时任务模块
