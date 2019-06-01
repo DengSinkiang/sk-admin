@@ -95,12 +95,12 @@
 #### 后端技术栈
 
 - 基础框架：Spring Boot 2.1.0.RELEASE
-- 持久层框架：Spring boot Jpa
+- 持久层框架：Spring Boot Jpa
 - 安全框架：Spring Security
 - 缓存框架：Redis
 - 日志打印：logback+log4jdbc
 - 接口文档 swagger2
-- 其他：fastjson、aop、MapStruct等
+- 其他：FastJson、AOP、MapStruct等
 
 #### 前端技术栈
 - node
