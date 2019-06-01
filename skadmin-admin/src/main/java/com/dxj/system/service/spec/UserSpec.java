@@ -1,4 +1,4 @@
-package com.dxj.system.spec;
+package com.dxj.system.service.spec;
 
 import com.dxj.system.domain.Dept;
 import com.dxj.system.domain.User;

@@ -1,4 +1,4 @@
-package com.dxj.system.spec;
+package com.dxj.system.service.spec;
 
 import com.dxj.system.domain.Permission;
 import org.springframework.data.jpa.domain.Specification;

@@ -79,7 +79,7 @@
 	- repository 数据库操作
 	- rest 控制器
 	- service 业务实现
-	- spec 查询条件
+	    - spec 业务查询条件
 		    
 - skadmin-logging 系统日志模块
 - skadmin-tools 系统第三方工具模块
@@ -90,7 +90,7 @@
     - repository 数据库操作
     - rest 控制器
     - service 业务实现
-    - query 业务查询
+        - spec 业务查询条件
 - skadmin-monitor 系统监控模块
 ```
 #### 后端技术栈

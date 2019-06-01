@@ -12,7 +12,7 @@
         <module>skadmin-common</module>
         <module>skadmin-generator</module>
         <module>skadmin-logging</module>
-        <module>skadmin-system</module>
+        <module>skadmin-admin</module>
         <module>skadmin-tools</module>
         <module>skadmin-monitor</module>
         <module>skadmin-quartz</module>

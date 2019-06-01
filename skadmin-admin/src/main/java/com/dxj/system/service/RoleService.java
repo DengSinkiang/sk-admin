@@ -8,7 +8,7 @@ import com.dxj.system.mapper.RoleSmallMapper;
 import com.dxj.system.repository.RoleRepository;
 import com.dxj.system.dto.RoleDTO;
 import com.dxj.system.mapper.RoleMapper;
-import com.dxj.system.spec.RoleSpec;
+import com.dxj.system.service.spec.RoleSpec;
 import com.dxj.utils.PageUtil;
 import com.dxj.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;

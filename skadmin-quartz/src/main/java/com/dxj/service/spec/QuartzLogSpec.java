@@ -1,4 +1,4 @@
-package com.dxj.spec;
+package com.dxj.service.spec;
 
 import com.dxj.domain.QuartzLog;
 import org.springframework.data.jpa.domain.Specification;

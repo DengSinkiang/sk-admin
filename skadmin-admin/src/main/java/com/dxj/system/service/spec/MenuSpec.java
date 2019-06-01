@@ -1,6 +1,6 @@
-package com.dxj.system.spec;
+package com.dxj.system.service.spec;
 
-import com.dxj.system.domain.Role;
+import com.dxj.system.domain.Menu;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ObjectUtils;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 /**
  * @Author: dxj
- * @Date: 2019-05-29 09:41
+ * @Date: 2019-05-29 09:26
  */
-public class RoleSpec {
-    public static Specification<Role> getSpec(String name) {
-        return (Specification<Role>) (root, query, cb) -> {
+public class MenuSpec {
+    public static Specification<Menu> getSpec(String name) {
+        return (Specification<Menu>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
 
             if (!ObjectUtils.isEmpty(name)) {

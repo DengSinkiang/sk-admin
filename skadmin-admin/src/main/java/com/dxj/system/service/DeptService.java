@@ -2,7 +2,7 @@ package com.dxj.system.service;
 
 import com.dxj.exception.BadRequestException;
 import com.dxj.system.domain.Dept;
-import com.dxj.system.spec.DeptSpec;
+import com.dxj.system.service.spec.DeptSpec;
 import com.dxj.utils.ValidationUtil;
 import com.dxj.system.repository.DeptRepository;
 import com.dxj.system.dto.DeptDTO;
