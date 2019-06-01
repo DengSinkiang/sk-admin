@@ -3,14 +3,12 @@ package com.dxj.rest;
 import com.dxj.aop.log.Log;
 import com.dxj.domain.Picture;
 import com.dxj.service.PictureService;
-import com.dxj.service.query.PictureQueryService;
 import com.dxj.utils.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,19 +25,16 @@ public class PictureController {
 
     private final PictureService pictureService;
 
-    private final PictureQueryService pictureQueryService;
-
     @Autowired
-    public PictureController(PictureService pictureService, PictureQueryService pictureQueryService) {
+    public PictureController(PictureService pictureService) {
         this.pictureService = pictureService;
-        this.pictureQueryService = pictureQueryService;
     }
 
     @Log("查询图片")
     @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_SELECT')")
     @GetMapping(value = "/pictures")
-    public ResponseEntity<Object> getRoles(Picture resources, Pageable pageable) {
-        return new ResponseEntity<>(pictureQueryService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getRoles(Picture resources, Pageable pageable) {
+        return new ResponseEntity<>(pictureService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
     /**

@@ -4,6 +4,8 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.dxj.spec.PictureSpec;
+import com.dxj.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.domain.Picture;
 import com.dxj.exception.BadRequestException;
@@ -15,12 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -107,5 +111,13 @@ public class PictureService {
         for (Long id : ids) {
             delete(findById(id));
         }
+    }
+
+    /**
+     * 分页
+     */
+    @Cacheable(keyGenerator = "keyGenerator")
+    public Map<String, Object> queryAll(Picture picture, Pageable pageable){
+        return PageUtil.toPage(pictureRepository.findAll(PictureSpec.getSpec(picture), pageable));
     }
 }
