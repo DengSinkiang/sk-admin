@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -74,7 +75,7 @@ public class DictDetailService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(DictDetailDTO dictDetail, Pageable pageable) {
+    public Map<String, Object> queryAll(DictDetailDTO dictDetail, Pageable pageable) {
         Page<DictDetail> page = dictDetailRepository.findAll(DictDetailSpec.getSpec(dictDetail), pageable);
         return PageUtil.toPage(page.map(dictDetailMapper::toDto));
     }

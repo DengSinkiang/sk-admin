@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,10 +39,10 @@ public class JobController {
     @Log("查询岗位")
     @GetMapping(value = "/job")
     @PreAuthorize("hasAnyRole('ADMIN', 'USERJOB_ALL', 'USERJOB_SELECT', 'USER_ALL', 'USER_SELECT')")
-    public ResponseEntity<Object> getJobs(@RequestParam(required = false) String name,
-                                          @RequestParam(required = false) Long deptId,
-                                          @RequestParam(required = false) Boolean enabled,
-                                          Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getJobs(@RequestParam(required = false) String name,
+                                                       @RequestParam(required = false) Long deptId,
+                                                       @RequestParam(required = false) Boolean enabled,
+                                                       Pageable pageable) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
         return new ResponseEntity<>(jobService.queryAll(name, enabled, deptIds, deptId, pageable), HttpStatus.OK);

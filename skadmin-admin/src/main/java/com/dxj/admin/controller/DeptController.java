@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,7 +39,7 @@ public class DeptController {
     @Log("查询部门")
     @GetMapping(value = "/dept")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT','DEPT_ALL','DEPT_SELECT')")
-    public ResponseEntity<Object> getDept(DeptDTO resources) {
+    public ResponseEntity<Map<String, Object>> getDept(DeptDTO resources) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
         List<DeptDTO> deptDTOS = deptService.queryAll(resources, deptIds);

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -72,7 +73,7 @@ public class JobService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
+    public Map<String, Object> queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
         Page<Job> page = jobRepository.findAll(JobSpec.getSpec(new JobDTO(name, enabled), deptIds, deptId), pageable);
         return PageUtil.toPage(page.map(jobMapper::toDto));
     }

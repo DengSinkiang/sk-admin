@@ -48,7 +48,7 @@ public class MenuService {
     public List<MenuDTO> findByRoles(List<RoleSmallDTO> roles) {
         Set<Menu> menus = new LinkedHashSet<>();
         for (RoleSmallDTO role : roles) {
-            List<Menu> menus1 = menuRepository.findByRoles_IdOrderBySortAsc(role.getId()).stream().collect(Collectors.toList());
+            List<Menu> menus1 = new ArrayList<>(menuRepository.findByRoles_IdOrderBySortAsc(role.getId()));
             menus.addAll(menus1);
         }
         return menus.stream().map(menuMapper::toDto).collect(Collectors.toList());
@@ -103,7 +103,7 @@ public class MenuService {
     }
 
     @Cacheable(key = "'tree'")
-    public Object getMenuTree(List<Menu> menus) {
+    public List<Map<String, Object>> getMenuTree(List<Menu> menus) {
         List<Map<String, Object>> list = new LinkedList<>();
         menus.forEach(menu -> {
                     if (menu != null) {
@@ -126,7 +126,7 @@ public class MenuService {
         return menuRepository.findByPid(pid);
     }
 
-    public Map buildTree(List<MenuDTO> menuDTOS) {
+    public Map<String, Object> buildTree(List<MenuDTO> menuDTOS) {
         List<MenuDTO> trees = new ArrayList<>();
 
         for (MenuDTO menuDTO : menuDTOS) {
@@ -210,7 +210,7 @@ public class MenuService {
      * 不分页
      */
     @Cacheable(key = "'queryAll:'+#p0")
-    public List queryAll(String name) {
+    public List<MenuDTO> queryAll(String name) {
         return menuMapper.toDto(menuRepository.findAll(MenuSpec.getSpec(name)));
     }
 }

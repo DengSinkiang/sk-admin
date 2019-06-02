@@ -16,6 +16,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @author dxj
  * @date 2019-04-10
@@ -34,8 +36,8 @@ public class DictDetailController {
 
     @Log("查询字典详情")
     @GetMapping(value = "/dictDetail")
-    public ResponseEntity<Object> getDictDetails(DictDetailDTO resources,
-                                                 @PageableDefault(value = 10, sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getDictDetails(DictDetailDTO resources,
+                                              @PageableDefault(value = 10, sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return new ResponseEntity<>(dictDetailService.queryAll(resources, pageable), HttpStatus.OK);
     }
 

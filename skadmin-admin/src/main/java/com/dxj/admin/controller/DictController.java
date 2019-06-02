@@ -14,6 +14,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @author dxj
  * @date 2019-04-10
@@ -33,7 +35,7 @@ public class DictController {
     @Log("查询字典")
     @GetMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_SELECT')")
-    public ResponseEntity<Object> getDict(DictDTO resources, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getDict(DictDTO resources, Pageable pageable) {
         return new ResponseEntity<>(dictService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
