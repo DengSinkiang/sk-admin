@@ -53,7 +53,7 @@ public class DeptService {
         return deptRepository.findByRoles_Id(id);
     }
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object buildTree(List<DeptDTO> deptDTOS) {
+    public Map<String, Object> buildTree(List<DeptDTO> deptDTOS) {
         Set<DeptDTO> trees = new LinkedHashSet<>();
         Set<DeptDTO> depts = new LinkedHashSet<>();
         boolean isChild;
@@ -120,7 +120,7 @@ public class DeptService {
      * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public List queryAll(DeptDTO dept, Set<Long> deptIds) {
+    public List<DeptDTO> queryAll(DeptDTO dept, Set<Long> deptIds) {
         return deptMapper.toDto(deptRepository.findAll(DeptSpec.getSpec(dept, deptIds)));
     }
 }

@@ -12,7 +12,7 @@ import java.util.Set;
  * @author dxj
  * @date 2018-12-03
  */
-public interface PermissionRepository extends JpaRepository<Permission, Long>, JpaSpecificationExecutor {
+public interface PermissionRepository extends JpaRepository<Permission, Long>, JpaSpecificationExecutor<Permission> {
 
     /**
      * findByName

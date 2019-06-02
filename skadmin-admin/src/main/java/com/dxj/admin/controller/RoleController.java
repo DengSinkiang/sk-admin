@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -51,14 +52,14 @@ public class RoleController {
      */
     @GetMapping(value = "/roles/all")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','USER_ALL','USER_CREATE','USER_EDIT')")
-    public ResponseEntity<Object> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<List<RoleDTO>> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return new ResponseEntity<>(roleService.queryAll(pageable), HttpStatus.OK);
     }
 
     @Log("查询角色")
     @GetMapping(value = "/roles")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_SELECT')")
-    public ResponseEntity<Object> getRoles(@RequestParam(required = false) String name, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getRoles(@RequestParam(required = false) String name, Pageable pageable) {
         return new ResponseEntity<>(roleService.queryAll(name, pageable), HttpStatus.OK);
     }
     @GetMapping(value = "/roles/level")

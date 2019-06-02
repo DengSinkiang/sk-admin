@@ -118,7 +118,7 @@ public class RoleService {
 
     @Cacheable(key = "'findByUsers_Id:' + #p0")
     public List<RoleSmallDTO> findByUsers_Id(Long id) {
-        return roleSmallMapper.toDto(roleRepository.findByUsers_Id(id).stream().collect(Collectors.toList()));
+        return roleSmallMapper.toDto(new ArrayList<>(roleRepository.findByUsers_Id(id)));
     }
     @Cacheable(keyGenerator = "keyGenerator")
     public Integer findByRoles(Set<Role> roles) {
@@ -133,7 +133,7 @@ public class RoleService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(String name, Pageable pageable) {
+    public Map<String, Object> queryAll(String name, Pageable pageable) {
         Page<Role> page = roleRepository.findAll(RoleSpec.getSpec(name), pageable);
         return PageUtil.toPage(page.map(roleMapper::toDto));
     }
@@ -142,7 +142,7 @@ public class RoleService {
      * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(Pageable pageable){
+    public List<RoleDTO> queryAll(Pageable pageable){
         List<Role> roles = roleRepository.findAll(RoleSpec.getSpec(null), pageable).getContent();
         return roleMapper.toDto(roles);
     }

@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author dxj
@@ -70,7 +71,7 @@ public class MenuController {
     @Log("查询菜单")
     @GetMapping(value = "/menus")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_SELECT')")
-    public ResponseEntity<Object> getMenus(@RequestParam(required = false) String name) {
+    public ResponseEntity<Map<String, Object>> getMenus(@RequestParam(required = false) String name) {
         List<MenuDTO> menuDTOList = menuService.queryAll(name);
         return new ResponseEntity<>(menuService.buildTree(menuDTOList), HttpStatus.OK);
     }

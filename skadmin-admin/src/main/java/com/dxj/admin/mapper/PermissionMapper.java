@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @date 2018-11-23
  */
 @Service
-@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PermissionMapper extends EntityMapper<PermissionDTO, Permission> {
 
 }

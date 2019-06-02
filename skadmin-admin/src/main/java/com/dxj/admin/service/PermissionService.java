@@ -112,7 +112,7 @@ public class PermissionService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object buildTree(List<PermissionDTO> permissionDTOs) {
+    public Map<String, Object> buildTree(List<PermissionDTO> permissionDTOs) {
 
         List<PermissionDTO> trees = new ArrayList<>();
 
@@ -144,7 +144,7 @@ public class PermissionService {
      * 不分页
      */
     @Cacheable(key = "'queryAll:'+#p0")
-    public List queryAll(String name) {
+    public List<PermissionDTO> queryAll(String name) {
         return permissionMapper.toDto(permissionRepository.findAll(PermissionSpec.getSpec(name)));
     }
 }

@@ -66,7 +66,7 @@ public class UserController {
     @Log("查询用户")
     @GetMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT')")
-    public ResponseEntity<Object> getUsers(UserDTO userDTO, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getUsers(UserDTO userDTO, Pageable pageable) {
         Set<Long> deptSet = new HashSet<>();
         Set<Long> result = new HashSet<>();
 

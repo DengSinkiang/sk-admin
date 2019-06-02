@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author dxj
@@ -44,7 +45,7 @@ public class PermissionController {
     @Log("查询权限")
     @GetMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_SELECT')")
-    public ResponseEntity<Object> getPermissions(@RequestParam(required = false) String name) {
+    public ResponseEntity<Map<String, Object>> getPermissions(@RequestParam(required = false) String name) {
         List<PermissionDTO> permissionDTOS = permissionService.queryAll(name);
         return new ResponseEntity<>(permissionService.buildTree(permissionDTOS), HttpStatus.OK);
     }

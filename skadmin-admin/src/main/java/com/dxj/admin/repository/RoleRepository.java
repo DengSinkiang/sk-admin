@@ -10,7 +10,7 @@ import java.util.Set;
  * @author dxj
  * @date 2018-12-03
  */
-public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor {
+public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role> {
 
     /**
      * findByName
