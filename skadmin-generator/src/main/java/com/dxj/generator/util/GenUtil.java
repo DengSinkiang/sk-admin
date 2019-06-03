@@ -76,7 +76,7 @@ public class GenUtil {
      * @param genConfig   生成代码的参数配置，如包路径，作者
      */
     public static void generatorCode(List<ColumnInfo> columnInfos, GenConfig genConfig, String tableName) throws IOException {
-        Map<String,Object> map = new HashMap();
+        Map<String,Object> map = new HashMap<>();
         map.put("package",genConfig.getPack());
         map.put("moduleName",genConfig.getModuleName());
         map.put("author",genConfig.getAuthor());
@@ -101,7 +101,7 @@ public class GenUtil {
         List<Map<String,Object>> columns = new ArrayList<>();
         List<Map<String,Object>> queryColumns = new ArrayList<>();
         for (ColumnInfo column : columnInfos) {
-            Map<String,Object> listMap = new HashMap();
+            Map<String,Object> listMap = new HashMap<>();
             listMap.put("columnComment",column.getColumnComment());
             listMap.put("columnKey",column.getColumnKey());
 
@@ -146,16 +146,7 @@ public class GenUtil {
             Template template = engine.getTemplate("generator/admin/"+templateName+".ftl");
             String filePath = getAdminFilePath(templateName,genConfig,className);
 
-            File file = new File(filePath);
-
-            // 如果非覆盖生成
-            if(!genConfig.getCover()){
-                if(FileUtil.exist(file)){
-                    continue;
-                }
-            }
-            // 生成代码
-            genFile(file, template, map);
+            getFileCode(genConfig, map, template, filePath);
         }
 
         // 生成前端代码
@@ -164,23 +155,28 @@ public class GenUtil {
             Template template = engine.getTemplate("generator/front/"+templateName+".ftl");
             String filePath = getFrontFilePath(templateName,genConfig,map.get("changeClassName").toString());
 
-            File file = new File(filePath);
-
-            // 如果非覆盖生成
-            if(!genConfig.getCover()){
-                if(FileUtil.exist(file)){
-                    continue;
-                }
-            }
-            // 生成代码
-            genFile(file, template, map);
+            getFileCode(genConfig, map, template, filePath);
         }
+    }
+
+    private static void getFileCode(GenConfig genConfig, Map<String, Object> map, Template template, String filePath) throws IOException {
+        assert filePath != null;
+        File file = new File(filePath);
+
+        // 如果非覆盖生成
+        if (!genConfig.getCover()) {
+            if (FileUtil.exist(file)) {
+                return;
+            }
+        }
+        // 生成代码
+        genFile(file, template, map);
     }
 
     /**
      * 定义后端文件路径以及名称
      */
-    public static String getAdminFilePath(String templateName, GenConfig genConfig, String className) {
+    private static String getAdminFilePath(String templateName, GenConfig genConfig, String className) {
         String ProjectPath = System.getProperty("user.dir") + File.separator + genConfig.getModuleName();
         String packagePath = ProjectPath + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator;
         if (!ObjectUtils.isEmpty(genConfig.getPack())) {
@@ -199,9 +195,6 @@ public class GenUtil {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if ("ServiceImpl".equals(templateName)) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
-        }
 
         if ("Dto".equals(templateName)) {
             return packagePath + "service" + File.separator + "dto" + File.separator + className + "DTO.java";
@@ -211,8 +204,8 @@ public class GenUtil {
             return packagePath + "service" + File.separator + "mapper" + File.separator + className + "Mapper.java";
         }
 
-        if ("QueryService".equals(templateName)) {
-            return packagePath + "service" + File.separator + "query" + File.separator + className + "QueryService.java";
+        if ("Spec".equals(templateName)) {
+            return packagePath + "service" + File.separator + "spec" + File.separator + className + "Spec.java";
         }
 
         if ("Repository".equals(templateName)) {
@@ -260,6 +253,7 @@ public class GenUtil {
         } catch (TemplateException | IOException e) {
             throw new RuntimeException(e);
         } finally {
+            assert writer != null;
             writer.close();
         }
     }
