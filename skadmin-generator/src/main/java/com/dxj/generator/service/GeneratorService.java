@@ -35,23 +35,23 @@ public class GeneratorService {
      */
     public Object getTables(String name, int[] startEnd) {
         StringBuilder sql = new StringBuilder("select table_name tableName,create_time createTime from information_schema.tables where table_schema = (select database()) ");
-        if(!ObjectUtils.isEmpty(name)){
+        if (!ObjectUtils.isEmpty(name)) {
             sql.append("and table_name like '%").append(name).append("%' ");
         }
         sql.append("order by table_name");
         Query query = em.createNativeQuery(sql.toString());
         query.setFirstResult(startEnd[0]);
-        query.setMaxResults(startEnd[1]-startEnd[0]);
+        query.setMaxResults(startEnd[1] - startEnd[0]);
 
         System.out.println(sql.toString());
         List<Object[]> result = query.getResultList();
         List<TableInfo> tableInfos = new ArrayList<>();
         for (Object[] obj : result) {
-            tableInfos.add(new TableInfo(obj[0],obj[1]));
+            tableInfos.add(new TableInfo(obj[0], obj[1]));
         }
         Query query1 = em.createNativeQuery("SELECT COUNT(*) from information_schema.tables where table_schema = (select database())");
         Object totalElements = query1.getSingleResult();
-        return PageUtil.toPage(tableInfos,totalElements);
+        return PageUtil.toPage(tableInfos, totalElements);
     }
 
     /**
@@ -62,7 +62,7 @@ public class GeneratorService {
      */
     public Object getColumns(String name) {
         StringBuilder sql = new StringBuilder("select column_name, is_nullable, data_type, column_comment, column_key, extra from information_schema.columns where ");
-        if(!ObjectUtils.isEmpty(name)){
+        if (!ObjectUtils.isEmpty(name)) {
             sql.append("table_name = '").append(name).append("' ");
         }
         sql.append("and table_schema = (select database()) order by ordinal_position");
@@ -70,9 +70,9 @@ public class GeneratorService {
         List<Object[]> result = query.getResultList();
         List<ColumnInfo> columnInfos = new ArrayList<>();
         for (Object[] obj : result) {
-            columnInfos.add(new ColumnInfo(obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],null,"true"));
+            columnInfos.add(new ColumnInfo(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], null, "true"));
         }
-        return PageUtil.toPage(columnInfos,columnInfos.size());
+        return PageUtil.toPage(columnInfos, columnInfos.size());
     }
 
     /**
