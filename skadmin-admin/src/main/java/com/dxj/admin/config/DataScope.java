@@ -24,16 +24,20 @@ import java.util.Set;
 @Component
 public class DataScope {
 
-    private final String[] scopeType = {"全部","本级","自定义"};
+    private final String[] scopeType = {"全部", "本级", "自定义"};
+
+    private final UserService userService;
+
+    private final RoleService roleService;
+
+    private final DeptService deptService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private DeptService deptService;
+    public DataScope(UserService userService, RoleService roleService, DeptService deptService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.deptService = deptService;
+    }
 
     public Set<Long> getDeptIds() {
 
@@ -48,7 +52,7 @@ public class DataScope {
         for (RoleSmallDTO role : roleSet) {
 
             if (scopeType[0].equals(role.getDataScope())) {
-                return new HashSet<>() ;
+                return new HashSet<>();
             }
 
             // 存储本级的数据权限
@@ -75,9 +79,9 @@ public class DataScope {
     public List<Long> getDeptChildren(List<Dept> deptList) {
         List<Long> list = new ArrayList<>();
         deptList.forEach(dept -> {
-                    if (dept!=null && dept.getEnabled()){
+                    if (dept != null && dept.getEnabled()) {
                         List<Dept> depts = deptService.findByPid(dept.getId());
-                        if(deptList!=null && deptList.size()!=0){
+                        if (deptList != null && deptList.size() != 0) {
                             list.addAll(getDeptChildren(depts));
                         }
                         list.add(dept.getId());
