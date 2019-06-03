@@ -44,7 +44,7 @@ public class DictController {
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_CREATE')")
     public ResponseEntity<DictDTO> create(@Validated @RequestBody Dict resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnums.DICT_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnums.DICT_ENTITY + " cannot to create already have an ID");
         }
         return new ResponseEntity<>(dictService.create(resources), HttpStatus.CREATED);
     }
