@@ -48,8 +48,7 @@ public class GenUtil {
         templateNames.add("Mapper");
         templateNames.add("Repository");
         templateNames.add("Service");
-        templateNames.add("ServiceImpl");
-        templateNames.add("QueryService");
+        templateNames.add("Spec");
         templateNames.add("Controller");
         return templateNames;
     }
@@ -76,93 +75,97 @@ public class GenUtil {
      * @param genConfig   生成代码的参数配置，如包路径，作者
      */
     public static void generatorCode(List<ColumnInfo> columnInfos, GenConfig genConfig, String tableName) throws IOException {
-        Map<String,Object> map = new HashMap<>();
-        map.put("package",genConfig.getPack());
-        map.put("moduleName",genConfig.getModuleName());
-        map.put("author",genConfig.getAuthor());
+        Map<String, Object> map = new HashMap<>();
+        map.put("package", genConfig.getPack());
+        map.put("moduleName", genConfig.getModuleName());
+        map.put("author", genConfig.getAuthor());
         map.put("date", LocalDate.now().toString());
-        map.put("tableName",tableName);
+        map.put("tableName", tableName);
         String className = StringUtils.toCapitalizeCamelCase(tableName);
         String changeClassName = StringUtils.toCamelCase(tableName);
 
         // 判断是否去除表前缀
         if (StringUtils.isNotEmpty(genConfig.getPrefix())) {
-            className = StringUtils.toCapitalizeCamelCase(StrUtil.removePrefix(tableName,genConfig.getPrefix()));
-            changeClassName = StringUtils.toCamelCase(StrUtil.removePrefix(tableName,genConfig.getPrefix()));
+            className = StringUtils.toCapitalizeCamelCase(StrUtil.removePrefix(tableName, genConfig.getPrefix()));
+            changeClassName = StringUtils.toCamelCase(StrUtil.removePrefix(tableName, genConfig.getPrefix()));
         }
         map.put("className", className);
         map.put("upperCaseClassName", className.toUpperCase());
         map.put("changeClassName", changeClassName);
-        map.put("hasTimestamp",false);
-        map.put("hasBigDecimal",false);
-        map.put("hasQuery",false);
-        map.put("auto",false);
+        map.put("hasTimestamp", false);
+        map.put("hasBigDecimal", false);
+        map.put("hasQuery", false);
+        map.put("auto", false);
 
-        List<Map<String,Object>> columns = new ArrayList<>();
-        List<Map<String,Object>> queryColumns = new ArrayList<>();
+        List<Map<String, Object>> columns = new ArrayList<>();
+        List<Map<String, Object>> queryColumns = new ArrayList<>();
         for (ColumnInfo column : columnInfos) {
-            Map<String,Object> listMap = new HashMap<>();
-            listMap.put("columnComment",column.getColumnComment());
-            listMap.put("columnKey",column.getColumnKey());
+            Map<String, Object> listMap = new HashMap<>();
+            listMap.put("columnComment", column.getColumnComment());
+            listMap.put("columnKey", column.getColumnKey());
 
             String colType = ColUtil.cloToJava(column.getColumnType().toString());
             String changeColumnName = StringUtils.toCamelCase(column.getColumnName().toString());
             String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName().toString());
-            if(PK.equals(column.getColumnKey())){
-                map.put("pkColumnType",colType);
-                map.put("pkChangeColName",changeColumnName);
-                map.put("pkCapitalColName",capitalColumnName);
+            if (PK.equals(column.getColumnKey())) {
+                map.put("pkColumnType", colType);
+                map.put("pkChangeColName", changeColumnName);
+                map.put("pkCapitalColName", capitalColumnName);
             }
-            if(TIMESTAMP.equals(colType)){
-                map.put("hasTimestamp",true);
+            if (TIMESTAMP.equals(colType)) {
+                map.put("hasTimestamp", true);
             }
-            if(BIGDECIMAL.equals(colType)){
-                map.put("hasBigDecimal",true);
+            if (BIGDECIMAL.equals(colType)) {
+                map.put("hasBigDecimal", true);
             }
-            if(EXTRA.equals(column.getExtra())){
-                map.put("auto",true);
+            if (EXTRA.equals(column.getExtra())) {
+                map.put("auto", true);
             }
-            listMap.put("columnType",colType);
-            listMap.put("columnName",column.getColumnName());
-            listMap.put("isNullable",column.getIsNullable());
-            listMap.put("columnShow",column.getColumnShow());
-            listMap.put("changeColumnName",changeColumnName);
-            listMap.put("capitalColumnName",capitalColumnName);
+            listMap.put("columnType", colType);
+            listMap.put("columnName", column.getColumnName());
+            listMap.put("isNullable", column.getIsNullable());
+            listMap.put("columnShow", column.getColumnShow());
+            listMap.put("changeColumnName", changeColumnName);
+            listMap.put("capitalColumnName", capitalColumnName);
 
-            if(!StringUtils.isBlank(column.getColumnQuery())){
-                listMap.put("columnQuery",column.getColumnQuery());
-                map.put("hasQuery",true);
+            if (!StringUtils.isBlank(column.getColumnQuery())) {
+                listMap.put("columnQuery", column.getColumnQuery());
+                map.put("hasQuery", true);
                 queryColumns.add(listMap);
             }
             columns.add(listMap);
         }
-        map.put("columns",columns);
-        map.put("queryColumns",queryColumns);
+        map.put("columns", columns);
+        map.put("queryColumns", queryColumns);
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
 
         // 生成后端代码
         List<String> templates = getAdminTemplateNames();
         for (String templateName : templates) {
-            Template template = engine.getTemplate("generator/admin/"+templateName+".ftl");
-            String filePath = getAdminFilePath(templateName,genConfig,className);
+            Template template = engine.getTemplate("generator/admin/" + templateName + ".ftl");
+            String filePath = getAdminFilePath(templateName, genConfig, className);
 
-            getFileCode(genConfig, map, template, filePath);
+            assert filePath != null;
+            File file = new File(filePath);
+            getCodeTemplate(genConfig, map, template, file);
+
         }
 
         // 生成前端代码
         templates = getFrontTemplateNames();
         for (String templateName : templates) {
-            Template template = engine.getTemplate("generator/front/"+templateName+".ftl");
-            String filePath = getFrontFilePath(templateName,genConfig,map.get("changeClassName").toString());
+            Template template = engine.getTemplate("generator/front/" + templateName + ".ftl");
+            String filePath = getFrontFilePath(templateName, genConfig, map.get("changeClassName").toString());
 
-            getFileCode(genConfig, map, template, filePath);
+            assert filePath != null;
+            File file = new File(filePath);
+
+            // 如果非覆盖生成
+            getCodeTemplate(genConfig, map, template, file);
         }
     }
 
-    private static void getFileCode(GenConfig genConfig, Map<String, Object> map, Template template, String filePath) throws IOException {
-        assert filePath != null;
-        File file = new File(filePath);
-
+    private static void getCodeTemplate(GenConfig genConfig, Map<String, Object> map, Template template, File file) throws IOException {
         // 如果非覆盖生成
         if (!genConfig.getCover()) {
             if (FileUtil.exist(file)) {
@@ -195,7 +198,6 @@ public class GenUtil {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-
         if ("Dto".equals(templateName)) {
             return packagePath + "service" + File.separator + "dto" + File.separator + className + "DTO.java";
         }
@@ -204,7 +206,7 @@ public class GenUtil {
             return packagePath + "service" + File.separator + "mapper" + File.separator + className + "Mapper.java";
         }
 
-        if ("Spec".equals(templateName)) {
+        if ("QueryService".equals(templateName)) {
             return packagePath + "service" + File.separator + "spec" + File.separator + className + "Spec.java";
         }
 
