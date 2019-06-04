@@ -5,7 +5,7 @@ import BadRequestException;
 import ${package}.domain.${className};
 import ${package}.service.${className}Service;
 import ${package}.service.dto.${className}DTO;
-import ${package}.service.query.${className}QueryService;
+import ${package}.service.spec.${className}Spec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
