@@ -8,7 +8,7 @@ import org.apache.commons.configuration.*;
  * @author dxj
  * @date 2019-01-03
  */
-public class ColUtil {
+class ColUtil {
 
     /**
      * 转换mysql数据类型为java数据类型
@@ -16,7 +16,7 @@ public class ColUtil {
      * @param type
      * @return
      */
-    public static String cloToJava(String type) {
+    static String cloToJava(String type) {
         Configuration config = getConfig();
         assert config != null;
         return config.getString(type, "unknowType");
@@ -25,7 +25,7 @@ public class ColUtil {
     /**
      * 获取配置信息
      */
-    public static PropertiesConfiguration getConfig() {
+    private static PropertiesConfiguration getConfig() {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (ConfigurationException e) {
