@@ -39,11 +39,11 @@
     - 操作日志 使用aop记录用户操作日志
     - 异常日志 记录操作过程中的异常，并且提供查看异常的堆栈信息
 - 云存储管理
-    - 七牛云
-    - 腾讯云
-    - 阿里云
+    - 七牛云存储
+    - 腾讯云存储
+    - 阿里云存储
 - 消息管理
-    - 短信服务
+    - 短信服务 阿里大于
     - 邮件服务 配合富文本，发送html格式的邮件
 - 系统工具
     - 定时任务 整合Quartz做定时任务，加入任务日志，任务运行情况一目了然
@@ -82,7 +82,7 @@
 		    
 - skadmin-log 系统日志模块
 - skadmin-tools 系统第三方工具模块
-- skadmin-generator 系统代码生成模块
+- skadmin-generator 系统代码生成模块(还在修改中...)
 - skadmin-quartz 定时任务模块
     - config 配置日志拦截器与WebSocket等
     - domain 实体类
@@ -99,7 +99,7 @@
 - 安全框架：Spring Security
 - 缓存框架：Redis
 - 日志打印：logback+log4jdbc
-- 接口文档 swagger2
+- 接口文档 Swagger2
 - 其他：FastJson、AOP、MapStruct等
 
 #### 前端技术栈
