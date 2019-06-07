@@ -7,7 +7,7 @@ import com.dxj.log.repository.LogRepository;
 import com.dxj.log.service.mapper.LogErrorMapper;
 import com.dxj.log.service.mapper.LogSmallMapper;
 import com.dxj.log.service.spec.LogSpec;
-import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.common.util.StringUtils;
@@ -109,10 +109,10 @@ public class LogService {
     public Object queryAll(Log log, Pageable pageable){
         Page<Log> page = logRepository.findAll(LogSpec.getSpec(log), pageable);
         if (!ObjectUtils.isEmpty(log.getUsername())) {
-            return PageUtil.toPage(page.map(logSmallMapper::toDto));
+            return PageUtils.toPage(page.map(logSmallMapper::toDto));
         }
         if (log.getLogType().equals("ERROR")) {
-            return PageUtil.toPage(page.map(logErrorMapper::toDto));
+            return PageUtils.toPage(page.map(logErrorMapper::toDto));
         }
         return logRepository.findAll(LogSpec.getSpec(log), pageable);
     }

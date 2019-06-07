@@ -1,4 +1,4 @@
-package com.dxj.monitor.rest;
+package com.dxj.monitor.controller;
 
 import com.dxj.log.annotation.Log;
 import com.dxj.monitor.domain.vo.RedisVo;

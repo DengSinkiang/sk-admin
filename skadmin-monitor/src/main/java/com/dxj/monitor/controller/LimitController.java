@@ -1,4 +1,4 @@
-package com.dxj.monitor.rest;
+package com.dxj.monitor.controller;
 
 import com.dxj.common.annotation.Limit;
 import org.springframework.web.bind.annotation.GetMapping;

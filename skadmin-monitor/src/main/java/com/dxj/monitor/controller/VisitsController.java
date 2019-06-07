@@ -1,4 +1,4 @@
-package com.dxj.monitor.rest;
+package com.dxj.monitor.controller;
 
 import com.dxj.monitor.service.VisitsService;
 import com.dxj.common.util.RequestHolder;

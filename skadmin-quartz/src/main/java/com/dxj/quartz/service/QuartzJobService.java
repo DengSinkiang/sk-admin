@@ -8,8 +8,8 @@ import com.dxj.quartz.repository.QuartzJobRepository;
 import com.dxj.quartz.repository.QuartzLogRepository;
 import com.dxj.quartz.service.spec.QuartzJobSpec;
 import com.dxj.quartz.service.spec.QuartzLogSpec;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.ValidationUtils;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -46,7 +46,7 @@ public class QuartzJobService {
     @Cacheable(key = "#p0")
     public QuartzJob findById(Long id) {
         Optional<QuartzJob> quartzJob = quartzJobRepository.findById(id);
-        ValidationUtil.isNull(quartzJob, "QuartzJob", "id", id);
+        ValidationUtils.isNull(quartzJob, "QuartzJob", "id", id);
         return quartzJob.orElse(null);
     }
 
@@ -108,10 +108,10 @@ public class QuartzJobService {
 
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(QuartzJob quartzJob, Pageable pageable) {
-        return PageUtil.toPage(quartzJobRepository.findAll(QuartzJobSpec.getSpec(quartzJob), pageable));
+        return PageUtils.toPage(quartzJobRepository.findAll(QuartzJobSpec.getSpec(quartzJob), pageable));
     }
 
     public Object queryAll(QuartzLog quartzLog, Pageable pageable) {
-        return PageUtil.toPage(quartzLogRepository.findAll(QuartzLogSpec.getSpec(quartzLog), pageable));
+        return PageUtils.toPage(quartzLogRepository.findAll(QuartzLogSpec.getSpec(quartzLog), pageable));
     }
 }

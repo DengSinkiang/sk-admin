@@ -3,7 +3,7 @@ package com.dxj.admin.service;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.service.spec.DeptSpec;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.ValidationUtils;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.dto.DeptDTO;
 import com.dxj.admin.mapper.DeptMapper;
@@ -40,7 +40,7 @@ public class DeptService {
     @Cacheable(key = "#p0")
     public DeptDTO findById(Long id) {
         Optional<Dept> dept = deptRepository.findById(id);
-        ValidationUtil.isNull(dept, "Dept", "id", id);
+        ValidationUtils.isNull(dept, "Dept", "id", id);
         return deptMapper.toDto(dept.orElse(null));
     }
 
@@ -101,7 +101,7 @@ public class DeptService {
             throw new BadRequestException("上级不能为自己");
         }
         Optional<Dept> optionalDept = deptRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalDept, "Dept", "id", resources.getId());
+        ValidationUtils.isNull(optionalDept, "Dept", "id", resources.getId());
 
         Dept dept = optionalDept.orElse(null);
         // 此处需自己修改

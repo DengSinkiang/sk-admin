@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
  * @author dxj
  * @date 2018-12-27
  */
-public class FileUtil extends cn.hutool.core.io.FileUtil {
+public class FileUtils extends cn.hutool.core.io.FileUtil {
 
     /**
      * 定义GB的计算常量

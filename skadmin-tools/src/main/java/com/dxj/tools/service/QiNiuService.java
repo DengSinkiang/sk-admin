@@ -1,10 +1,10 @@
 package com.dxj.tools.service;
 
 import com.dxj.tools.service.spec.QiNiuSpec;
-import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.PageUtils;
 import com.dxj.tools.domain.QiniuConfig;
 import com.dxj.tools.domain.QiniuContent;
-import com.dxj.tools.util.QiNiuUtil;
+import com.dxj.tools.util.QiNiuUtils;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -17,8 +17,8 @@ import com.qiniu.util.Auth;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tools.repository.QiNiuConfigRepository;
 import com.dxj.tools.repository.QiniuContentRepository;
-import com.dxj.common.util.FileUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.FileUtils;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
@@ -100,14 +100,14 @@ public class QiNiuService {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtil.getConfiguration(qiniuConfig.getZone());
+        Configuration cfg = QiNiuUtils.getConfiguration(qiniuConfig.getZone());
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
         String upToken = auth.uploadToken(qiniuConfig.getBucket());
         try {
             String key = file.getOriginalFilename();
             if (qiniuContentRepository.findByKey(key) != null) {
-                key = QiNiuUtil.getKey(key);
+                key = QiNiuUtils.getKey(key);
             }
             Response response = uploadManager.put(file.getBytes(), key, upToken);
             //解析上传成功的结果
@@ -118,7 +118,7 @@ public class QiNiuService {
             qiniuContent.setType(qiniuConfig.getType());
             qiniuContent.setKey(putRet.key);
             qiniuContent.setUrl(qiniuConfig.getHost() + "/" + putRet.key);
-            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
+            qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(file.getSize() + "")));
             return qiniuContentRepository.save(qiniuContent);
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
@@ -134,7 +134,7 @@ public class QiNiuService {
     @Cacheable(key = "'content:'+#p0")
     public QiniuContent findByContentId(Long id) {
         Optional<QiniuContent> qiniuContent = qiniuContentRepository.findById(id);
-        ValidationUtil.isNull(qiniuContent, "QiniuContent", "id", id);
+        ValidationUtils.isNull(qiniuContent, "QiniuContent", "id", id);
         return qiniuContent.orElse(null);
     }
 
@@ -170,7 +170,7 @@ public class QiNiuService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(QiniuContent content, QiniuConfig config) {
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtil.getConfiguration(config.getZone());
+        Configuration cfg = QiNiuUtils.getConfiguration(config.getZone());
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
         BucketManager bucketManager = new BucketManager(auth, cfg);
         try {
@@ -193,7 +193,7 @@ public class QiNiuService {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtil.getConfiguration(config.getZone());
+        Configuration cfg = QiNiuUtils.getConfiguration(config.getZone());
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
         BucketManager bucketManager = new BucketManager(auth, cfg);
         //文件名前缀
@@ -211,7 +211,7 @@ public class QiNiuService {
             for (FileInfo item : items) {
                 if (qiniuContentRepository.findByKey(item.key) == null) {
                     qiniuContent = new QiniuContent();
-                    qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(item.fsize + "")));
+                    qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(item.fsize + "")));
                     qiniuContent.setKey(item.key);
                     qiniuContent.setType(config.getType());
                     qiniuContent.setBucket(config.getBucket());
@@ -241,6 +241,6 @@ public class QiNiuService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(QiniuContent qiniuContent, Pageable pageable) {
-        return PageUtil.toPage(qiniuContentRepository.findAll(QiNiuSpec.getSpec(qiniuContent), pageable));
+        return PageUtils.toPage(qiniuContentRepository.findAll(QiNiuSpec.getSpec(qiniuContent), pageable));
     }
 }

@@ -2,7 +2,7 @@ package com.dxj.tools.util;
 
 import com.qiniu.common.Zone;
 import com.qiniu.storage.Configuration;
-import com.dxj.common.util.FileUtil;
+import com.dxj.common.util.FileUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  * @author dxj
  * @date 2018-12-31
  */
-public class QiNiuUtil {
+public class QiNiuUtils {
 
     private static final String HUAD = "华东";
 
@@ -51,9 +51,9 @@ public class QiNiuUtil {
     public static String getKey(String file){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
-        return FileUtil.getFileNameNoEx(file) + "-" +
+        return FileUtils.getFileNameNoEx(file) + "-" +
                 sdf.format(date) +
                 "." +
-                FileUtil.getExtensionName(file);
+                FileUtils.getExtensionName(file);
     }
 }
