@@ -8,8 +8,8 @@ import com.dxj.admin.repository.UserRepository;
 import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
 import com.dxj.admin.service.spec.UserSpec;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -50,7 +50,7 @@ public class UserService {
     @Cacheable(key = "#p0")
     public UserDTO findById(long id) {
         Optional<User> user = userRepository.findById(id);
-        ValidationUtil.isNull(user, "User", "id", id);
+        ValidationUtils.isNull(user, "User", "id", id);
         return userMapper.toDto(user.orElse(null));
     }
 
@@ -76,7 +76,7 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void update(User resources) {
         Optional<User> userOptional = userRepository.findById(resources.getId());
-        ValidationUtil.isNull(userOptional, "User", "id", resources.getId());
+        ValidationUtils.isNull(userOptional, "User", "id", resources.getId());
 
         User user = userOptional.orElse(null);
 
@@ -119,7 +119,7 @@ public class UserService {
     @Cacheable(key = "'loadUserByUsername:'+#p0")
     public UserDTO findByName(String userName) {
         User user;
-        if(ValidationUtil.isEmail(userName)){
+        if(ValidationUtils.isEmail(userName)){
             user = userRepository.findByEmail(userName);
         } else {
             user = userRepository.findByUsername(userName);
@@ -155,6 +155,6 @@ public class UserService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable) {
         Page<User> page = userRepository.findAll(UserSpec.getSpec(user, deptIds), pageable);
-        return PageUtil.toPage(page.map(userMapper::toDto));
+        return PageUtils.toPage(page.map(userMapper::toDto));
     }
 }

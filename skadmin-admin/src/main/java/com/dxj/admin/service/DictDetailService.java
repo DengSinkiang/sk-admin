@@ -2,8 +2,8 @@ package com.dxj.admin.service;
 
 import com.dxj.admin.domain.DictDetail;
 import com.dxj.admin.service.spec.DictDetailSpec;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.ValidationUtils;
 import com.dxj.admin.repository.DictDetailRepository;
 import com.dxj.admin.dto.DictDetailDTO;
 import com.dxj.admin.mapper.DictDetailMapper;
@@ -42,7 +42,7 @@ public class DictDetailService {
     @Cacheable(key = "#p0")
     public DictDetailDTO findById(Long id) {
         Optional<DictDetail> dictDetail = dictDetailRepository.findById(id);
-        ValidationUtil.isNull(dictDetail, "DictDetail", "id", id);
+        ValidationUtils.isNull(dictDetail, "DictDetail", "id", id);
         return dictDetailMapper.toDto(dictDetail.orElse(null));
     }
 
@@ -56,7 +56,7 @@ public class DictDetailService {
     @Transactional(rollbackFor = Exception.class)
     public void update(DictDetail resources) {
         Optional<DictDetail> optionalDictDetail = dictDetailRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalDictDetail, "DictDetail", "id", resources.getId());
+        ValidationUtils.isNull(optionalDictDetail, "DictDetail", "id", resources.getId());
 
         DictDetail dictDetail = optionalDictDetail.orElse(null);
         // 此处需自己修改
@@ -77,6 +77,6 @@ public class DictDetailService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(DictDetailDTO dictDetail, Pageable pageable) {
         Page<DictDetail> page = dictDetailRepository.findAll(DictDetailSpec.getSpec(dictDetail), pageable);
-        return PageUtil.toPage(page.map(dictDetailMapper::toDto));
+        return PageUtils.toPage(page.map(dictDetailMapper::toDto));
     }
 }

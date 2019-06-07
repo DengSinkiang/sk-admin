@@ -13,7 +13,7 @@ import java.util.Map;
  * @author dxj
  * @date 2019-04-10
  */
-public class PageUtil extends cn.hutool.core.util.PageUtil {
+public class PageUtils extends cn.hutool.core.util.PageUtil {
 
     /**
      * List 分页

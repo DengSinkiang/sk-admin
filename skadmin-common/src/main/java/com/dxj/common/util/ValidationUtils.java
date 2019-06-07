@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author dxj
  * @date 2019-04-23
  */
-public class ValidationUtil {
+public class ValidationUtils {
 
     /**
      * 验证空

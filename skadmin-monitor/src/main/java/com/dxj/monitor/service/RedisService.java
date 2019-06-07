@@ -1,7 +1,7 @@
 package com.dxj.monitor.service;
 
 import com.dxj.monitor.domain.vo.RedisVo;
-import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -41,7 +41,7 @@ public class RedisService {
                 redisVos.add(redisVo);
             }
             return new PageImpl<>(
-                    PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),
+                    PageUtils.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),
                     pageable, redisVos.size());
         }
         // 释放资源还给连接池

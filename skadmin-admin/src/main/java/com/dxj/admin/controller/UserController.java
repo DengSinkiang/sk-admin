@@ -2,7 +2,7 @@ package com.dxj.admin.controller;
 
 import com.dxj.common.util.ElAdminConstant;
 import com.dxj.common.util.EncryptUtils;
-import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.Log;
 import com.dxj.admin.config.DataScope;
@@ -87,7 +87,7 @@ public class UserController {
 
             // 若无交集，则代表无数据权限
             if (result.size() == 0) {
-                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
+                return new ResponseEntity<>(PageUtils.toPage(null, 0), HttpStatus.OK);
             } else return new ResponseEntity<>(userService.queryAll(userDTO, result, pageable), HttpStatus.OK);
             // 否则取并集
         } else {

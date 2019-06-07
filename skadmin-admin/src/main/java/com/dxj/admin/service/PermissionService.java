@@ -7,7 +7,7 @@ import com.dxj.admin.repository.PermissionRepository;
 import com.dxj.admin.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
 import com.dxj.admin.service.spec.PermissionSpec;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -40,7 +40,7 @@ public class PermissionService {
     @Cacheable(key = "#p0")
     public PermissionDTO findById(long id) {
         Optional<Permission> permission = permissionRepository.findById(id);
-        ValidationUtil.isNull(permission, "Permission", "id", id);
+        ValidationUtils.isNull(permission, "Permission", "id", id);
         return permissionMapper.toDto(permission.orElse(null));
     }
 
@@ -60,7 +60,7 @@ public class PermissionService {
         if (resources.getId().equals(resources.getPid())) {
             throw new BadRequestException("上级不能为自己");
         }
-        ValidationUtil.isNull(optionalPermission, "Permission", "id", resources.getId());
+        ValidationUtils.isNull(optionalPermission, "Permission", "id", resources.getId());
 
         Permission permission = optionalPermission.orElse(null);
 

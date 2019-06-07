@@ -1,7 +1,7 @@
 package com.dxj.quartz.util;
 
 import com.dxj.common.util.SpringContextHolder;
-import com.dxj.common.util.ThrowableUtil;
+import com.dxj.common.util.ThrowableUtils;
 import com.dxj.quartz.domain.QuartzJob;
 import com.dxj.quartz.domain.QuartzLog;
 import com.dxj.quartz.repository.QuartzLogRepository;
@@ -62,7 +62,7 @@ public class ExecutionJob extends QuartzJobBean {
             log.setTime(times);
             // 任务状态 0：成功 1：失败
             log.setIsSuccess(false);
-            log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
+            log.setExceptionDetail(ThrowableUtils.getStackTrace(e));
             //出错就暂停任务
             quartzManage.pauseJob(quartzJob);
             //更新状态

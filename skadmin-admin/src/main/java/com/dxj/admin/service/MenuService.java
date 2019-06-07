@@ -11,7 +11,7 @@ import com.dxj.admin.repository.MenuRepository;
 import com.dxj.admin.dto.MenuDTO;
 import com.dxj.admin.mapper.MenuMapper;
 import com.dxj.admin.service.spec.MenuSpec;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -41,7 +41,7 @@ public class MenuService {
     @Cacheable(key = "#p0")
     public MenuDTO findById(long id) {
         Optional<Menu> menu = menuRepository.findById(id);
-        ValidationUtil.isNull(menu, "Menu", "id", id);
+        ValidationUtils.isNull(menu, "Menu", "id", id);
         return menuMapper.toDto(menu.orElse(null));
     }
 
@@ -73,7 +73,7 @@ public class MenuService {
             throw new BadRequestException("上级不能为自己");
         }
         Optional<Menu> optionalPermission = menuRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalPermission, "Permission", "id", resources.getId());
+        ValidationUtils.isNull(optionalPermission, "Permission", "id", resources.getId());
 
         if (resources.getIFrame()) {
             if (!(resources.getPath().toLowerCase().startsWith("http://") || resources.getPath().toLowerCase().startsWith("https://"))) {
@@ -202,7 +202,7 @@ public class MenuService {
 
     public Menu findOne(Long id) {
         Optional<Menu> menu = menuRepository.findById(id);
-        ValidationUtil.isNull(menu, "Menu", "id", id);
+        ValidationUtils.isNull(menu, "Menu", "id", id);
         return menu.orElse(null);
     }
 

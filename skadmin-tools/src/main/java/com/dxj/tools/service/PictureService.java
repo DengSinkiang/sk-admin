@@ -5,14 +5,14 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.dxj.tools.service.spec.PictureSpec;
-import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.PageUtils;
 import com.dxj.tools.domain.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tools.repository.PictureRepository;
 import com.dxj.common.util.ElAdminConstant;
-import com.dxj.common.util.FileUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.FileUtils;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -55,7 +55,7 @@ public class PictureService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public Picture upload(MultipartFile multipartFile, String username) {
-        File file = FileUtil.toFile(multipartFile);
+        File file = FileUtils.toFile(multipartFile);
 
         HashMap<String, Object> paramMap = new HashMap<>();
 
@@ -69,12 +69,12 @@ public class PictureService {
         }
         //转成实体类
         picture = JSON.parseObject(jsonObject.get("data").toString(), Picture.class);
-        picture.setSize(FileUtil.getSize(Integer.valueOf(picture.getSize())));
+        picture.setSize(FileUtils.getSize(Integer.valueOf(picture.getSize())));
         picture.setUsername(username);
-        picture.setFilename(FileUtil.getFileNameNoEx(multipartFile.getOriginalFilename())+"."+FileUtil.getExtensionName(multipartFile.getOriginalFilename()));
+        picture.setFilename(FileUtils.getFileNameNoEx(multipartFile.getOriginalFilename())+"."+ FileUtils.getExtensionName(multipartFile.getOriginalFilename()));
         pictureRepository.save(picture);
         //删除临时文件
-        FileUtil.deleteFile(file);
+        FileUtils.deleteFile(file);
         return picture;
 
     }
@@ -87,7 +87,7 @@ public class PictureService {
     @Cacheable(key = "#p0")
     public Picture findById(Long id) {
         Optional<Picture> picture = pictureRepository.findById(id);
-        ValidationUtil.isNull(picture,"Picture","id",id);
+        ValidationUtils.isNull(picture,"Picture","id",id);
         return picture.get();
     }
 
@@ -118,6 +118,6 @@ public class PictureService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(Picture picture, Pageable pageable){
-        return PageUtil.toPage(pictureRepository.findAll(PictureSpec.getSpec(picture), pageable));
+        return PageUtils.toPage(pictureRepository.findAll(PictureSpec.getSpec(picture), pageable));
     }
 }

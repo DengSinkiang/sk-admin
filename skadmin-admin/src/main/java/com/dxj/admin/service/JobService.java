@@ -2,8 +2,8 @@ package com.dxj.admin.service;
 
 import com.dxj.admin.domain.Job;
 import com.dxj.admin.service.spec.JobSpec;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.ValidationUtils;
 import com.dxj.admin.repository.JobRepository;
 import com.dxj.admin.dto.JobDTO;
 import com.dxj.admin.mapper.JobMapper;
@@ -43,7 +43,7 @@ public class JobService {
     @Cacheable(key = "#p0")
     public JobDTO findById(Long id) {
         Optional<Job> job = jobRepository.findById(id);
-        ValidationUtil.isNull(job, "Job", "id", id);
+        ValidationUtils.isNull(job, "Job", "id", id);
         return jobMapper.toDto(job.orElse(null));
     }
 
@@ -57,7 +57,7 @@ public class JobService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Job resources) {
         Optional<Job> optionalJob = jobRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalJob, "Job", "id", resources.getId());
+        ValidationUtils.isNull(optionalJob, "Job", "id", resources.getId());
 
         Job job = optionalJob.orElse(null);
         // 此处需自己修改
@@ -75,6 +75,6 @@ public class JobService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
         Page<Job> page = jobRepository.findAll(JobSpec.getSpec(new JobDTO(name, enabled), deptIds, deptId), pageable);
-        return PageUtil.toPage(page.map(jobMapper::toDto));
+        return PageUtils.toPage(page.map(jobMapper::toDto));
     }
 }

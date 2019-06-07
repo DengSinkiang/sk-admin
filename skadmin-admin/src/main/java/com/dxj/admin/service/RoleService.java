@@ -9,8 +9,8 @@ import com.dxj.admin.repository.RoleRepository;
 import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.service.spec.RoleSpec;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ValidationUtil;
+import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -49,7 +49,7 @@ public class RoleService {
     @Cacheable(key = "#p0")
     public RoleDTO findById(long id) {
         Optional<Role> role = roleRepository.findById(id);
-        ValidationUtil.isNull(role, "Role", "id", id);
+        ValidationUtils.isNull(role, "Role", "id", id);
         return roleMapper.toDto(role.orElse(null));
     }
 
@@ -67,7 +67,7 @@ public class RoleService {
     public void update(Role resources) {
 
         Optional<Role> optionalRole = roleRepository.findById(resources.getId());
-        ValidationUtil.isNull(optionalRole, "Role", "id", resources.getId());
+        ValidationUtils.isNull(optionalRole, "Role", "id", resources.getId());
 
         Role role = optionalRole.orElse(null);
 
@@ -135,7 +135,7 @@ public class RoleService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(String name, Pageable pageable) {
         Page<Role> page = roleRepository.findAll(RoleSpec.getSpec(name), pageable);
-        return PageUtil.toPage(page.map(roleMapper::toDto));
+        return PageUtils.toPage(page.map(roleMapper::toDto));
     }
 
     /**
