@@ -1,4 +1,4 @@
-package com.dxj.admin.security.service;
+package com.dxj.admin.service;
 
 import com.dxj.admin.domain.Role;
 import com.dxj.admin.dto.UserDTO;

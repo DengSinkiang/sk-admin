@@ -1,4 +1,4 @@
-package com.dxj.admin.security.domain;
+package com.dxj.admin.domain;
 
 import lombok.Getter;
 import lombok.Setter;

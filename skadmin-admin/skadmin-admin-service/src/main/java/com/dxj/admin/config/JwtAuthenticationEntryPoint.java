@@ -1,4 +1,4 @@
-package com.dxj.admin.security.config;
+package com.dxj.admin.config;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
