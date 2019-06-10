@@ -1,5 +1,14 @@
 # skadmin权限管理系统
 
+
+<div style="text-align: center">
+
+[![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/DengSinkiang/skadmin/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/DengSinkiang/skadmin.svg?style=social&label=Stars)](https://github.com/DengSinkiang/skadmin)
+[![GitHub forks](https://img.shields.io/github/forks/DengSinkiang/skadmin.svg?style=social&label=Fork)](https://github.com/DengSinkiang/skadmin)
+
+</div>
+
 #### 项目简介
 
 项目基于 Spring Boot 2.1.0 、 Spring boot Jpa、 Spring Security、Redis、Vue的前后端分离的权限管理系统，项目采用分模块开发方式， 权限控制采用 RBAC（Role-Based Access Control，基于角色的访问控制），支持数据字典、数据权限管理、前端菜单支持动态路由
@@ -110,3 +119,11 @@
 - vue-router
 - axios
 - element ui
+#### 系统预览
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
