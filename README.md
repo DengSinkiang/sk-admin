@@ -79,18 +79,15 @@
     - swagger 接口文档配置
     - util 通用工具
 - skadmin-admin 系统核心模块
-    - config 配置跨域与静态资源
-    - security 系统安全
-        - config  JWT的安全过滤器配置
-        - controller 用户登录授权的接口
-	- security 配置spring security
-	- service 用户登录与权限的处理
-	- util JWT工具
-    - domain 实体类
-    - controller 控制器
-    - service 业务实现
-	- spec 业务查询条件
-		    
+    - skadmin-admin-interface
+        - domain
+	- dto
+	- mapper
+    - skadmin-admin-service
+        - config 配置跨域与静态资源及JWT的安全过滤器配置
+        - controller 控制器
+	- service 业务实现
+	    - spec 业务查询条件	    
 - skadmin-log 系统日志模块
 - skadmin-tools 系统第三方工具模块
 - skadmin-generator 系统代码生成模块(还在修改中...)
