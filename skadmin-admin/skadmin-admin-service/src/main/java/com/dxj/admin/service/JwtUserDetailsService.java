@@ -1,8 +1,6 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.dto.DeptDTO;
-import com.dxj.admin.dto.JobDTO;
-import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.dto.*;
 import com.dxj.admin.domain.JwtUser;
 import com.dxj.common.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +49,8 @@ public class JwtUserDetailsService implements UserDetailsService {
                 user.getAvatar(),
                 user.getEmail(),
                 user.getPhone(),
-                Optional.ofNullable(user.getDept()).map(DeptDTO::getName).orElse(null),
-                Optional.ofNullable(user.getJob()).map(JobDTO::getName).orElse(null),
+                Optional.ofNullable(user.getDept()).map(DeptSmallDTO::getName).orElse(null),
+                Optional.ofNullable(user.getJob()).map(JobSmallDTO::getName).orElse(null),
                 permissionService.mapToGrantedAuthorities(user),
                 user.getEnabled(),
                 user.getCreateTime(),

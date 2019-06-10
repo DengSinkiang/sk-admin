@@ -122,8 +122,8 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
-        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
-        Integer optLevel =  Collections.min(roleService.findByUsers_Id(id).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+        Integer currentLevel = Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+        Integer optLevel = Collections.min(roleService.findByUsers_Id(id).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
 
         if (currentLevel > optLevel) {
             throw new BadRequestException("角色权限不足");
@@ -136,7 +136,7 @@ public class UserController {
      * zx
      * 验证密码
      *
-     * @param
+     * @param user
      * @return
      */
     @PostMapping(value = "/users/validPass")
@@ -144,25 +144,25 @@ public class UserController {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         Map<String, Object> map = new HashMap<>();
         map.put("status", 200);
-        if(!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))){
+        if (!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
             map.put("status", 400);
         }
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     /**
-     * 修改密码
+     *  修改密码
      *
-     * @param
+     * @param user
      * @return
      */
     @PostMapping(value = "/users/updatePass")
     public ResponseEntity<Void> updatePass(@RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if(userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))){
+        if (userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("新密码不能与旧密码相同");
         }
-        userService.updatePass(userDetails.getUsername(),EncryptUtils.encryptPassword(user.getPassword()));
+        userService.updatePass(userDetails.getUsername(), EncryptUtils.encryptPassword(user.getPassword()));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -201,10 +201,11 @@ public class UserController {
 
     /**
      * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
+     *
      * @param resources
      */
     private void checkLevel(User resources) {
-        Integer currentLevel =  Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+        Integer currentLevel = Collections.min(roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
         Integer optLevel = roleService.findByRoles(resources.getRoles());
         if (currentLevel > optLevel) {
             throw new BadRequestException("角色权限不足");
