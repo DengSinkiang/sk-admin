@@ -86,6 +86,7 @@
     - skadmin-admin-service
         - config 配置跨域与静态资源及JWT的安全过滤器配置
         - controller 控制器
+	- repository 数据库操作
 	- service 业务实现
 	    - spec 业务查询条件	    
 - skadmin-log 系统日志模块
