@@ -1,10 +1,9 @@
-package com.dxj.admin.security.service;
+package com.dxj.admin.service;
 
 import com.dxj.admin.dto.DeptDTO;
 import com.dxj.admin.dto.JobDTO;
 import com.dxj.admin.dto.UserDTO;
-import com.dxj.admin.security.domain.JwtUser;
-import com.dxj.admin.service.UserService;
+import com.dxj.admin.domain.JwtUser;
 import com.dxj.common.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

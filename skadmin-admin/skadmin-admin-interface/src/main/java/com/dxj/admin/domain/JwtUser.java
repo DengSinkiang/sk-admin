@@ -1,4 +1,4 @@
-package com.dxj.admin.security.domain;
+package com.dxj.admin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-04-23
  */
 @Getter
 @AllArgsConstructor

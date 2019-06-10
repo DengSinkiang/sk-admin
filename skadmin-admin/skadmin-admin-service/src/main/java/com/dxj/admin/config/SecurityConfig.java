@@ -1,6 +1,6 @@
-package com.dxj.admin.security.config;
+package com.dxj.admin.config;
 
-import com.dxj.admin.security.service.JwtUserDetailsService;
+import com.dxj.admin.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

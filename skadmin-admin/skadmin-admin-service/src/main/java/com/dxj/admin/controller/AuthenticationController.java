@@ -1,9 +1,9 @@
-package com.dxj.admin.security.controller;
+package com.dxj.admin.controller;
 
-import com.dxj.admin.security.config.JwtTokenUtils;
-import com.dxj.admin.security.domain.AuthenticationInfo;
-import com.dxj.admin.security.domain.AuthorizationUser;
-import com.dxj.admin.security.domain.JwtUser;
+import com.dxj.admin.config.JwtTokenUtils;
+import com.dxj.admin.domain.AuthenticationInfo;
+import com.dxj.admin.domain.AuthorizationUser;
+import com.dxj.admin.domain.JwtUser;
 import com.dxj.common.util.EncryptUtils;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.LoginLog;
