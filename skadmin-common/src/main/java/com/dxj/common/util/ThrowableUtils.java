@@ -19,12 +19,9 @@ public class ThrowableUtils {
      */
     public static String getStackTrace(Throwable throwable) {
         StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        try {
+        try (PrintWriter pw = new PrintWriter(sw)) {
             throwable.printStackTrace(pw);
             return sw.toString();
-        } finally {
-            pw.close();
         }
     }
 }

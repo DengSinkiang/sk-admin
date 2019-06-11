@@ -29,8 +29,7 @@ public class SecurityContextHolder {
      */
     public static String getUsername(){
         Object obj = getUserDetails();
-        JSONObject json = new JSONObject(obj);
-        return json.get("username", String.class);
+        return new JSONObject(obj).get("username", String.class);
     }
 
     /**
@@ -39,7 +38,6 @@ public class SecurityContextHolder {
      */
     public static Long getUserId(){
         Object obj = getUserDetails();
-        JSONObject json = new JSONObject(obj);
-        return json.get("id", Long.class);
+        return new JSONObject(obj).get("id", Long.class);
     }
 }

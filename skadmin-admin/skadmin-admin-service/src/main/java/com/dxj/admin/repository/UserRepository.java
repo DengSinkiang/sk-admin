@@ -12,7 +12,7 @@ import java.util.Date;
  * @author dxj
  * @date 2018-11-22
  */
-public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     /**
      * findByUsername
