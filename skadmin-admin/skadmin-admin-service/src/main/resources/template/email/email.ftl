@@ -46,7 +46,7 @@
 			font-size: 12px;
 			padding: 20px 0px;
 			font-family: Microsoft YaHei;">
-                Copyright &copy;${.now?string("yyyy")} SK-ADMIN 后台管理系统 All Rights Reserved.
+                Copyright &copy;${.now?string("yyyy")} SKADMIN 后台管理系统 All Rights Reserved.
         </div>
 
     </div>
