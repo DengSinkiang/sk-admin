@@ -3,7 +3,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+    url: jdbc:log4jdbc:mysql://localhost:3306/skadmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
 
