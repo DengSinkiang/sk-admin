@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>com.dxj.service</groupId>
-            <artifactId>skadmin-tools</artifactId>
+            <artifactId>skadmin-tool</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

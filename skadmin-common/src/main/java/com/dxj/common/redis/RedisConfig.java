@@ -104,7 +104,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         ParserConfig.getGlobalInstance().addAccept("com.dxj.monitor.domain");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.log.domain");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.generator.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.tools.domain");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.tool.domain");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.security");
         // key的序列化采用StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());

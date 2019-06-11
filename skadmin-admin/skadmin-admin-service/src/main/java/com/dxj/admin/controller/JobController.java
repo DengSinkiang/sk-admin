@@ -4,7 +4,7 @@ import com.dxj.admin.config.DataScope;
 import com.dxj.admin.domain.Job;
 import com.dxj.admin.dto.JobDTO;
 import com.dxj.admin.service.JobService;
-import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.enums.EntityEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.log.annotation.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class JobController {
     @PreAuthorize("hasAnyRole('ADMIN','USERJOB_ALL','USERJOB_CREATE')")
     public ResponseEntity<JobDTO> create(@Validated @RequestBody Job resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnums.JOB_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnum.JOB_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(jobService.create(resources), HttpStatus.CREATED);
     }

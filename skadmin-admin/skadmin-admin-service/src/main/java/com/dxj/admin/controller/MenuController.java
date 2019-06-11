@@ -7,7 +7,7 @@ import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.service.MenuService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
-import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.enums.EntityEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.Log;
@@ -81,7 +81,7 @@ public class MenuController {
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_CREATE')")
     public ResponseEntity<MenuDTO> create(@Validated @RequestBody Menu resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnums.MENU_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnum.MENU_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(menuService.create(resources), HttpStatus.CREATED);
     }

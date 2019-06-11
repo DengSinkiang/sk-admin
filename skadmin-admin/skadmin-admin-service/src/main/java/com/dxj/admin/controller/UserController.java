@@ -7,17 +7,17 @@ import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
-import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.enums.EntityEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.ElAdminConstant;
 import com.dxj.common.util.EncryptUtils;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.Log;
-import com.dxj.tools.domain.Picture;
-import com.dxj.tools.domain.VerificationCode;
-import com.dxj.tools.service.PictureService;
-import com.dxj.tools.service.VerificationCodeService;
+import com.dxj.tool.domain.Picture;
+import com.dxj.tool.domain.VerificationCode;
+import com.dxj.tool.service.PictureService;
+import com.dxj.tool.service.VerificationCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -102,7 +102,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_CREATE')")
     public ResponseEntity<UserDTO> create(@Validated @RequestBody User resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnums.USER_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnum.USER_ENTITY + " cannot already have an ID");
         }
         checkLevel(resources);
         return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);

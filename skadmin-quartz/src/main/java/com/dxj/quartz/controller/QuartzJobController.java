@@ -1,7 +1,7 @@
 package com.dxj.quartz.controller;
 
 import com.dxj.log.annotation.Log;
-import com.dxj.common.enums.EntityEnums;
+import com.dxj.common.enums.EntityEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.quartz.domain.QuartzJob;
 import com.dxj.quartz.domain.QuartzLog;
@@ -56,7 +56,7 @@ public class QuartzJobController {
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_CREATE')")
     public ResponseEntity<QuartzJob> create(@Validated @RequestBody QuartzJob resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnums.QUARTZ_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + EntityEnum.QUARTZ_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(quartzJobService.create(resources), HttpStatus.CREATED);
     }
