@@ -3,7 +3,7 @@ package ${package}.controller;
 import com.dxj.log.annotation.Log;
 import ${package}.domain.${className};
 import ${package}.service.${className}Service;
-import ${package}.service.dto.${className}QueryCriteria;
+import ${package}.dto.${className}QueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

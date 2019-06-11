@@ -1,8 +1,8 @@
-package ${package}.service.mapper;
+package ${package}.mapper;
 
 import com.dxj.common.mapper.EntityMapper;
 import ${package}.domain.${className};
-import ${package}.service.dto.${className}DTO;
+import ${package}.dto.${className}DTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -198,20 +198,17 @@ public class GenUtils {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if ("ServiceImpl".equals(templateName)) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
-        }
 
         if ("Dto".equals(templateName)) {
-            return packagePath + "service" + File.separator + "dto" + File.separator + className + "DTO.java";
+            return packagePath + "dto" + File.separator + className + "DTO.java";
         }
 
         if ("QueryCriteria".equals(templateName)) {
-            return packagePath + "service" + File.separator + "dto" + File.separator + className + "QueryCriteria.java";
+            return packagePath + "dto" + File.separator + className + "QueryCriteria.java";
         }
 
         if ("Mapper".equals(templateName)) {
-            return packagePath + "service" + File.separator + "mapper" + File.separator + className + "Mapper.java";
+            return packagePath + "mapper" + File.separator + className + "Mapper.java";
         }
 
         if ("Repository".equals(templateName)) {
