@@ -22,8 +22,8 @@ import java.util.Map;
 /**
  * 代码生成
  *
- * @author jie
- * @date 2019-01-02
+ * @author dxj
+ * @date 2019-04-02
  */
 @Slf4j
 public class GenUtils {
@@ -48,7 +48,7 @@ public class GenUtils {
         templateNames.add("Mapper");
         templateNames.add("Repository");
         templateNames.add("Service");
-        templateNames.add("Spec");
+        templateNames.add("QueryCriteria");
         templateNames.add("Controller");
         return templateNames;
     }
@@ -198,16 +198,20 @@ public class GenUtils {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
+        if ("ServiceImpl".equals(templateName)) {
+            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+        }
+
         if ("Dto".equals(templateName)) {
             return packagePath + "service" + File.separator + "dto" + File.separator + className + "DTO.java";
         }
 
-        if ("Mapper".equals(templateName)) {
-            return packagePath + "service" + File.separator + "mapper" + File.separator + className + "Mapper.java";
+        if ("QueryCriteria".equals(templateName)) {
+            return packagePath + "service" + File.separator + "dto" + File.separator + className + "QueryCriteria.java";
         }
 
-        if ("QueryService".equals(templateName)) {
-            return packagePath + "service" + File.separator + "spec" + File.separator + className + "Spec.java";
+        if ("Mapper".equals(templateName)) {
+            return packagePath + "service" + File.separator + "mapper" + File.separator + className + "Mapper.java";
         }
 
         if ("Repository".equals(templateName)) {

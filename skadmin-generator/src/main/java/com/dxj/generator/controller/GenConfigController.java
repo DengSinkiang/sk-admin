@@ -29,7 +29,7 @@ public class GenConfigController {
      * @return
      */
     @GetMapping(value = "/genConfig")
-    public ResponseEntity<GenConfig> get() {
+    public ResponseEntity<GenConfig> getConfig() {
         return new ResponseEntity<>(genConfigService.find(), HttpStatus.OK);
     }
 
