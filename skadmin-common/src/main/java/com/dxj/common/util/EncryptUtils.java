@@ -21,34 +21,36 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class EncryptUtils {
 
-    private static String strKey = "Passw0rd", strParam = "Passw0rd";
+    private static String strKey = "sinkiang", strParam = "sinkiang";
 
     /**
      * 对称加密
-     *
      * @param source
      * @return
      * @throws Exception
      */
     public static String desEncrypt(String source) throws Exception {
-        Comm comm = new Comm(source).invoke();
-        if (comm.is()) return null;
-        Cipher cipher = comm.getCipher();
-        SecretKey secretKey = comm.getSecretKey();
-        IvParameterSpec iv = comm.getIv();
+        if (source == null || source.length() == 0){
+            return null;
+        }
+        Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+        DESKeySpec desKeySpec = new DESKeySpec(strKey.getBytes("UTF-8"));
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
+        IvParameterSpec iv = new IvParameterSpec(strParam.getBytes("UTF-8"));
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
         return byte2hex(
-                cipher.doFinal(source.getBytes(StandardCharsets.UTF_8))).toUpperCase();
+                cipher.doFinal(source.getBytes("UTF-8"))).toUpperCase();
     }
 
-    private static String byte2hex(byte[] inStr) {
+    public static String byte2hex(byte[] inStr) {
         String stmp;
-        StringBuilder out = new StringBuilder(inStr.length * 2);
-        for (byte b : inStr) {
-            stmp = Integer.toHexString(b & 0xFF);
+        StringBuffer out = new StringBuffer(inStr.length * 2);
+        for (int n = 0; n < inStr.length; n++) {
+            stmp = Integer.toHexString(inStr[n] & 0xFF);
             if (stmp.length() == 1) {
                 // 如果是0至F的单位字符串，则添加0
-                out.append("0").append(stmp);
+                out.append("0" + stmp);
             } else {
                 out.append(stmp);
             }
@@ -58,7 +60,7 @@ public class EncryptUtils {
 
 
     private static byte[] hex2byte(byte[] b) {
-        if ((b.length % 2) != 0) {
+        if ((b.length % 2) != 0){
             throw new IllegalArgumentException("长度不是偶数");
         }
         byte[] b2 = new byte[b.length / 2];
@@ -71,21 +73,20 @@ public class EncryptUtils {
 
     /**
      * 对称解密
-     *
      * @param source
      * @return
      * @throws Exception
      */
     public static String desDecrypt(String source) throws Exception {
-        if (source == null || source.length() == 0) {
+        if (source == null || source.length() == 0){
             return null;
         }
         byte[] src = hex2byte(source.getBytes());
         Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-        DESKeySpec desKeySpec = new DESKeySpec(strKey.getBytes(StandardCharsets.UTF_8));
+        DESKeySpec desKeySpec = new DESKeySpec(strKey.getBytes("UTF-8"));
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
         SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
-        IvParameterSpec iv = new IvParameterSpec(strParam.getBytes(StandardCharsets.UTF_8));
+        IvParameterSpec iv = new IvParameterSpec(strParam.getBytes("UTF-8"));
         cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
         byte[] retByte = cipher.doFinal(src);
         return new String(retByte);
@@ -93,57 +94,10 @@ public class EncryptUtils {
 
     /**
      * 密码加密
-     *
      * @param password
      * @return
      */
-    public static String encryptPassword(String password) {
-        return DigestUtils.md5DigestAsHex(password.getBytes());
-    }
-
-    public static void main(String[] args) {
-        System.out.println(encryptPassword("123456"));
-    }
-
-    private static class Comm {
-        private boolean myResult;
-        private String source;
-        private Cipher cipher;
-        private SecretKey secretKey;
-        private IvParameterSpec iv;
-
-        Comm(String source) {
-            this.source = source;
-        }
-
-        boolean is() {
-            return myResult;
-        }
-
-        Cipher getCipher() {
-            return cipher;
-        }
-
-        SecretKey getSecretKey() {
-            return secretKey;
-        }
-
-        IvParameterSpec getIv() {
-            return iv;
-        }
-
-        Comm invoke() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidKeySpecException {
-            if (source == null || source.length() == 0) {
-                myResult = true;
-                return this;
-            }
-            cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-            DESKeySpec desKeySpec = new DESKeySpec(strKey.getBytes(StandardCharsets.UTF_8));
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            secretKey = keyFactory.generateSecret(desKeySpec);
-            iv = new IvParameterSpec(strParam.getBytes(StandardCharsets.UTF_8));
-            myResult = false;
-            return this;
-        }
+    public static String encryptPassword(String password){
+        return  DigestUtils.md5DigestAsHex(password.getBytes());
     }
 }
