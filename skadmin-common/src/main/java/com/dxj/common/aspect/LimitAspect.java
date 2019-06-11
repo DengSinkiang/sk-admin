@@ -21,6 +21,10 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
+/**
+ * @author dxj
+ * @date 2019-4-1
+ */
 @Aspect
 @Component
 public class LimitAspect {

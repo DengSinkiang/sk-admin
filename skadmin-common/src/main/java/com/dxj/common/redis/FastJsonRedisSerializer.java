@@ -7,11 +7,12 @@ import org.springframework.data.redis.serializer.SerializationException;
 
 import java.nio.charset.Charset;
 
+
 /**
  * Value 序列化
  *
- * @param <T>
  * @author dxj
+ * @date 2019-4-1
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 

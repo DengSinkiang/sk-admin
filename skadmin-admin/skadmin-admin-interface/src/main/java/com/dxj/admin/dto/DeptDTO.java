@@ -38,7 +38,4 @@ public class DeptDTO implements Serializable {
 
     private Timestamp createTime;
 
-    public String getLabel() {
-        return name;
-    }
 }

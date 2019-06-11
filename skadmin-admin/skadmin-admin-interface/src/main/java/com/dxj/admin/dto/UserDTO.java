@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-03-23
  */
 @Data
 public class UserDTO implements Serializable {

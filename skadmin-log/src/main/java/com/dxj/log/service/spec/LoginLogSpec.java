@@ -8,6 +8,10 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author dxj
+ * @date 2019-04-24
+ */
 public class LoginLogSpec {
     public static Specification<LoginLog> getSpec(LoginLog log) {
         return (Specification<LoginLog>) (root, query, cb) -> {

@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author dxj
+ * @date 2019-4-1
+ */
 public class DeptSpec {
     public static Specification<Dept> getSpec(DeptDTO dept, Set<Long> deptIds) {
         return (Specification<Dept>) (root, query, cb) -> {

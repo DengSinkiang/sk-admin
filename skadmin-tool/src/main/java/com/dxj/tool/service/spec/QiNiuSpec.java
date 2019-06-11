@@ -8,6 +8,10 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author dxj
+ * @date 2019-05-31
+ */
 public class QiNiuSpec {
     public static Specification<QiniuContent> getSpec(QiniuContent qiniuContent) {
         return (Specification<QiniuContent>) (root, query, cb) -> {

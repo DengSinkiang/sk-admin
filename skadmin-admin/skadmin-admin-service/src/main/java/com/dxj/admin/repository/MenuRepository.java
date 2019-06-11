@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author dxj
- * @date 2018-12-17
+ * @date 2019-04-17
  */
 public interface MenuRepository extends JpaRepository<Menu, Long>, JpaSpecificationExecutor<Menu> {
 

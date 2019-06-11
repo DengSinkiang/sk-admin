@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * @author dxj
- * @date 2018-12-03
+ * @date 2019-04-03
  */
 public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role> {
 

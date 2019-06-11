@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author jie
- * @date 2018-12-26
+ * @author dxj
+ * @date 2019-04-26
  */
 @RestController
 @RequestMapping("api")

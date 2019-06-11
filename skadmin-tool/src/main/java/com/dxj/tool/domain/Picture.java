@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 /**
  * sm.ms图床
  *
- * @author jie
- * @date 2018-12-27
+ * @author dxj
+ * @date 2019-05-27
  */
 @Data
 @Entity

@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 七牛云存储工具类
  * @author dxj
- * @date 2018-12-31
+ * @date 2019-05-31
  */
 public class QiNiuUtils {
 

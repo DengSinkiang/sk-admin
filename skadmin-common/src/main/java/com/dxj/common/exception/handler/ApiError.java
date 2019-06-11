@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-03-23
  */
 @Data
 class ApiError {

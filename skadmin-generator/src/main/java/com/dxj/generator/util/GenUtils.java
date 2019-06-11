@@ -26,7 +26,7 @@ import java.util.Map;
  * @date 2019-01-02
  */
 @Slf4j
-public class GenUtil {
+public class GenUtils {
 
     private static final String TIMESTAMP = "Timestamp";
 
@@ -104,7 +104,7 @@ public class GenUtil {
             listMap.put("columnComment", column.getColumnComment());
             listMap.put("columnKey", column.getColumnKey());
 
-            String colType = ColUtil.cloToJava(column.getColumnType().toString());
+            String colType = ColUtils.cloToJava(column.getColumnType().toString());
             String changeColumnName = StringUtils.toCamelCase(column.getColumnName().toString());
             String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName().toString());
             if (PK.equals(column.getColumnKey())) {

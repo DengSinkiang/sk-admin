@@ -6,10 +6,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+
 /**
  * 初始化站点统计
  *
- * @author jie
+ * @author dxj
+ * @date 2019-04-24
  */
 @Component
 public class VisitsInitialization implements ApplicationRunner {

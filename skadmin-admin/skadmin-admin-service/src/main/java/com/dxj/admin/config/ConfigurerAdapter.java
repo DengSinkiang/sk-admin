@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * WebMvcConfigurer
  *
  * @author dxj
- * @date 2018-11-30
+ * @date 2019-03-30
  */
 @Configuration
 @EnableWebMvc

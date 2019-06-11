@@ -3,7 +3,7 @@ package com.dxj.tool.util;
 /**
  * 支付状态
  * @author dxj
- * @date 2018/08/01 16:45:43
+ * @date 2019/05/01 16:45:43
  */
 public enum  AliPayStatusEnum {
 

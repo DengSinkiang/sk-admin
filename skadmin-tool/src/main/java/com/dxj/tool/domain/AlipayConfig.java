@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 /**
  * 支付宝配置类
- * @author jie
- * @date 2018-12-31
+ * @author dxj
+ * @date 2019-05-31
  */
 @Data
 @Entity

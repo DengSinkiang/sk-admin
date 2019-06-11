@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author dxj
- * @date 2018-11-23
+ * @date 2019-03-23
  * 授权、根据token获取用户详细信息
  */
 @Slf4j

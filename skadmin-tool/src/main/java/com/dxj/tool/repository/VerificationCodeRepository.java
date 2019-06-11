@@ -4,8 +4,8 @@ import com.dxj.tool.domain.VerificationCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author jie
- * @date 2018-12-26
+ * @author dxj
+ * @date 2019-05-26
  */
 public interface VerificationCodeRepository extends JpaRepository<VerificationCode, Long> {
 

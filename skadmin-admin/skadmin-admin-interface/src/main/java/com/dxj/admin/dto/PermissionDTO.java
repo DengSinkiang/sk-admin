@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author dxj
- * @date 2018-12-03
+ * @date 2019-04-03
  */
 @Data
 public class PermissionDTO implements Serializable{

@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * @author dxj
+ * @date 2019-4-1
+ */
 @Component
 public class JwtTokenUtils implements Serializable {
 

@@ -8,7 +8,7 @@ import org.apache.commons.configuration.*;
  * @author dxj
  * @date 2019-01-03
  */
-class ColUtil {
+class ColUtils {
 
     /**
      * 转换mysql数据类型为java数据类型

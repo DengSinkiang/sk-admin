@@ -6,7 +6,11 @@ import java.util.Date;
 
 /**
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
+ *
+ * @author dxj
+ * @date 2019-04-17
  */
+
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     private static final char SEPARATOR = '_';

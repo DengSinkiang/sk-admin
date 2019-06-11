@@ -9,6 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 接口限流测试类
+ *
+ * @author dxj
+ * @date 2019-04-24
  */
 @RestController
 @RequestMapping("api")

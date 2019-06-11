@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author dxj
- * @date 2018-12-26
+ * @date 2019-05-26
  */
 public interface EmailRepository extends JpaRepository<EmailConfig, Long> {
 }

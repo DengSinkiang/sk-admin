@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * 发送邮件时，接收参数的类
- * @author 郑杰
- * @date 2018/09/28 12:02:14
+ * @author dxj
+ * @date 2019/05/28 12:02:14
  */
 @Data
 @AllArgsConstructor

@@ -9,7 +9,8 @@ import java.nio.charset.Charset;
 /**
  * 重写序列化器
  *
- * @author /
+ * @Author: dxj
+ * @Date: 2019-05-14 09:58
  */
 public class StringRedisSerializer implements RedisSerializer<Object> {
 

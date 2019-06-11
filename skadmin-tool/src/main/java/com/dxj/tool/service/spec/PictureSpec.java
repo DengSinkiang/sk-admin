@@ -8,6 +8,10 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author dxj
+ * @date 2019-05-31
+ */
 public class PictureSpec {
     public static Specification<Picture> getSpec(Picture picture) {
         return (Specification<Picture>) (root, query, cb) -> {
