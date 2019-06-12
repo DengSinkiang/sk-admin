@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author dxj
@@ -56,6 +57,7 @@ public class DeptService {
     public Map<String, Object> buildTree(List<DeptDTO> deptDTOS) {
         Set<DeptDTO> trees = new LinkedHashSet<>();
         Set<DeptDTO> depts = new LinkedHashSet<>();
+        List<String> deptNames = deptDTOS.stream().map(DeptDTO::getName).collect(Collectors.toList());
         boolean isChild;
         for (DeptDTO deptDTO : deptDTOS) {
             isChild = false;
@@ -72,6 +74,8 @@ public class DeptService {
                 }
             }
             if (isChild) {
+                depts.add(deptDTO);
+            } else if (!deptNames.contains(deptRepository.findNameById(deptDTO.getPid()))) {
                 depts.add(deptDTO);
             }
         }

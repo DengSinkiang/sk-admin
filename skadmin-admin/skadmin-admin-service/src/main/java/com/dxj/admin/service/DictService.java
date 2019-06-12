@@ -80,12 +80,5 @@ public class DictService {
         return PageUtils.toPage(page.map(dictMapper::toDto));
     }
 
-    /**
-     * 不分页
-     */
-    @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(DictDTO dict) {
-        return dictMapper.toDto(dictRepository.findAll(DictSpec.getSpec(dict)));
-    }
 
 }
