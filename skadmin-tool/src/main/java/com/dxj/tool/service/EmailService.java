@@ -2,11 +2,11 @@ package com.dxj.tool.service;
 
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
+import com.dxj.common.util.AesEncryptUtils;
 import com.dxj.tool.domain.EmailConfig;
 import com.dxj.tool.domain.vo.EmailVo;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.EmailRepository;
-import com.dxj.common.util.EncryptUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
@@ -44,8 +44,8 @@ public class EmailService {
     public EmailConfig update(EmailConfig emailConfig, EmailConfig old) {
         try {
             if(!emailConfig.getPass().equals(old.getPass())){
-                // 对称加密
-                emailConfig.setPass(EncryptUtils.desEncrypt(emailConfig.getPass()));
+                // 加密
+                emailConfig.setPass(AesEncryptUtils.encrypt(emailConfig.getPass()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,8 +82,8 @@ public class EmailService {
         account.setPort(Integer.parseInt(emailConfig.getPort()));
         account.setAuth(true);
         try {
-            // 对称解密
-            account.setPass(EncryptUtils.desDecrypt(emailConfig.getPass()));
+            // 解密
+            account.setPass(AesEncryptUtils.decrypt(emailConfig.getPass()));
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }

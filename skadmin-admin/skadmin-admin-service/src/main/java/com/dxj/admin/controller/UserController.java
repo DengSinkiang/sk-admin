@@ -9,10 +9,7 @@ import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
 import com.dxj.common.enums.EntityEnum;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.common.util.ElAdminConstant;
-import com.dxj.common.util.EncryptUtils;
-import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.SecurityContextHolder;
+import com.dxj.common.util.*;
 import com.dxj.log.annotation.Log;
 import com.dxj.tool.domain.Picture;
 import com.dxj.tool.domain.VerificationCode;
@@ -144,7 +141,7 @@ public class UserController {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         Map<String, Object> map = new HashMap<>();
         map.put("status", 200);
-        if (!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
+        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
             map.put("status", 400);
         }
         return new ResponseEntity<>(map, HttpStatus.OK);
@@ -159,10 +156,10 @@ public class UserController {
     @PostMapping(value = "/users/updatePass")
     public ResponseEntity<Void> updatePass(@RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
+        if (userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("新密码不能与旧密码相同");
         }
-        userService.updatePass(userDetails.getUsername(), EncryptUtils.encryptPassword(user.getPassword()));
+        userService.updatePass(userDetails.getUsername(), AesEncryptUtils.encryptPassword(user.getPassword()));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -190,7 +187,7 @@ public class UserController {
     @PostMapping(value = "/users/updateEmail/{code}")
     public ResponseEntity<Void> updateEmail(@PathVariable String code, @RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))) {
+        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
         VerificationCode verificationCode = new VerificationCode(code, ElAdminConstant.RESET_MAIL, "email", user.getEmail());
