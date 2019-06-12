@@ -1,8 +1,9 @@
-package com.dxj.log.service.dto;
+package com.dxj.log.dto;
 
 import lombok.Data;
-import java.sql.Timestamp;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * @Author: dxj

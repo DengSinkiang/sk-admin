@@ -1,10 +1,10 @@
 package com.dxj.log.controller;
 
+import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
-import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

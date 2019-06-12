@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
  * @date 2019-04-24
  */
 @Component
-public class VisitsInitialization implements ApplicationRunner {
+public class VisitInitialization implements ApplicationRunner {
 
     private final VisitsService visitsService;
 
     @Autowired
-    public VisitsInitialization(VisitsService visitsService) {
+    public VisitInitialization(VisitsService visitsService) {
         this.visitsService = visitsService;
     }
 

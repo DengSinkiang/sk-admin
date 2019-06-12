@@ -11,12 +11,11 @@
 
     <groupId>com.dxj.service</groupId>
     <artifactId>skadmin-log</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.dxj.common</groupId>
-            <artifactId>skadmin-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
+    <modules>
+        <module>skadmin-log-interface</module>
+        <module>skadmin-log-service</module>
+    </modules>
+
 
 </project>

@@ -1,4 +1,4 @@
-package com.dxj.log.service.dto;
+package com.dxj.log.dto;
 
 import lombok.Data;
 

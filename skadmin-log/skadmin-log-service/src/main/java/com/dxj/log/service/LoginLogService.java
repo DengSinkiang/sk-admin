@@ -1,12 +1,12 @@
 package com.dxj.log.service;
 
 import cn.hutool.json.JSONObject;
-import com.dxj.log.domain.LoginLog;
-import com.dxj.log.repository.LoginLogRepository;
-import com.dxj.log.service.spec.LoginLogSpec;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.common.util.StringUtils;
+import com.dxj.log.domain.LoginLog;
+import com.dxj.log.repository.LoginLogRepository;
+import com.dxj.log.service.spec.LoginLogSpec;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 

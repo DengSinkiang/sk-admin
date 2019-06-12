@@ -1,11 +1,11 @@
 package com.dxj.log.aspect;
 
+import com.dxj.common.util.ThrowableUtils;
+import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import lombok.extern.slf4j.Slf4j;
-import com.dxj.log.domain.Log;
-import com.dxj.common.util.ThrowableUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
