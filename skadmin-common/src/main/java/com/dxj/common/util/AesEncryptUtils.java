@@ -23,15 +23,14 @@ public class AesEncryptUtils {
      * 加密
      *
      * @param content    加密的字符串
-     * @param encryptKey key值
      * @return
      * @throws Exception
      */
-    public static String encrypt(String content, String encryptKey) throws Exception {
+    public static String encrypt(String content) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES"));
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(KEY.getBytes(), "AES"));
         byte[] b = cipher.doFinal(content.getBytes(StandardCharsets.UTF_8));
         // 采用base64算法进行转码,避免出现中文乱码
         return Base64.encodeBase64String(b);
@@ -42,27 +41,18 @@ public class AesEncryptUtils {
      * 解密
      *
      * @param encryptStr 解密的字符串
-     * @param decryptKey 解密的key值
      * @return
      * @throws Exception
      */
-    public static String decrypt(String encryptStr, String decryptKey) throws Exception {
+    public static String decrypt(String encryptStr) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decryptKey.getBytes(), "AES"));
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(KEY.getBytes(), "AES"));
         // 采用base64算法进行转码,避免出现中文乱码
         byte[] encryptBytes = Base64.decodeBase64(encryptStr);
         byte[] decryptBytes = cipher.doFinal(encryptBytes);
         return new String(decryptBytes);
-    }
-
-    public static String encrypt(String content) throws Exception {
-        return encrypt(content, KEY);
-    }
-
-    public static String decrypt(String encryptStr) throws Exception {
-        return decrypt(encryptStr, KEY);
     }
     /**
      * 密码 md5加密
@@ -75,9 +65,9 @@ public class AesEncryptUtils {
 
     public static void main(String[] args) throws Exception {
         String str = "15235215Xin";
-        String encrypt = encrypt(str, KEY);
+        String encrypt = encrypt(str);
         System.out.println("加密后：" + encrypt);
-        String decrypt = decrypt(encrypt, KEY);
+        String decrypt = decrypt(encrypt);
         System.out.println("解密后：" + decrypt);
 
 
