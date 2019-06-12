@@ -1,5 +1,8 @@
 package com.dxj.common.util;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.DigestUtils;
 
 import javax.crypto.Cipher;
@@ -87,10 +90,13 @@ public class EncryptUtils {
         byte[] retByte = cipher.doFinal(src);
         return new String(retByte);
     }
-
+    @Bean
+    public static PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
     public static void main(String[] args) {
         String str = "123456";
-        System.out.println(encryptPassword(str));
+        System.out.println(passwordEncoder().encode(str));
 
     }
     /**

@@ -68,7 +68,7 @@ public class UserService {
 
         // 默认密码 123456，此密码是加密后的字符
         resources.setPassword("e10adc3949ba59abbe56e057f20f883e");
-        resources.setAvatar("https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg");
+        resources.setAvatar("https://mmmlf.tmuyun.com/8918a306ea314404835a9196585c4b75.jpeg");
         return userMapper.toDto(userRepository.save(resources));
     }
 

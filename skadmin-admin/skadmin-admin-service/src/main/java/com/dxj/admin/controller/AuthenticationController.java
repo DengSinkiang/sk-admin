@@ -4,7 +4,6 @@ import com.dxj.admin.config.JwtTokenUtils;
 import com.dxj.admin.domain.AuthenticationInfo;
 import com.dxj.admin.domain.AuthorizationUser;
 import com.dxj.admin.domain.JwtUser;
-import com.dxj.common.util.EncryptUtils;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.LoginLog;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +52,9 @@ public class AuthenticationController {
 
         final JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
 
+        System.out.println(jwtUser.getPassword());
+        System.out.println("-------------------");
+        System.out.println(authorizationUser.getPassword());
         if (!jwtUser.getPassword().equals(authorizationUser.getPassword())) {
             throw new AccountExpiredException("密码错误");
         }
