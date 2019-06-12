@@ -36,15 +36,10 @@ public class LogService {
 
     private final LogRepository logRepository;
 
-    private final LogSmallMapper logSmallMapper;
-
-    private final LogErrorMapper logErrorMapper;
 
     @Autowired
-    public LogService(LogRepository logRepository, LogSmallMapper logSmallMapper, LogErrorMapper logErrorMapper) {
+    public LogService(LogRepository logRepository) {
         this.logRepository = logRepository;
-        this.logSmallMapper = logSmallMapper;
-        this.logErrorMapper = logErrorMapper;
     }
 
     /**
@@ -107,13 +102,7 @@ public class LogService {
         return Dict.create().set("exception", logRepository.findExceptionById(id));
     }
     public Object queryAll(Log log, Pageable pageable){
-        Page<Log> page = logRepository.findAll(LogSpec.getSpec(log), pageable);
-        if (!ObjectUtils.isEmpty(log.getUsername())) {
-            return PageUtils.toPage(page.map(logSmallMapper::toDto));
-        }
-        if (log.getLogType().equals("ERROR")) {
-            return PageUtils.toPage(page.map(logErrorMapper::toDto));
-        }
+
         return logRepository.findAll(LogSpec.getSpec(log), pageable);
     }
 }

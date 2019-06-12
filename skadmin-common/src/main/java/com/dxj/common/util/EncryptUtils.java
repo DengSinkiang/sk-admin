@@ -88,6 +88,11 @@ public class EncryptUtils {
         return new String(retByte);
     }
 
+    public static void main(String[] args) {
+        String str = "123456";
+        System.out.println(encryptPassword(str));
+
+    }
     /**
      * 密码加密
      * @param password
