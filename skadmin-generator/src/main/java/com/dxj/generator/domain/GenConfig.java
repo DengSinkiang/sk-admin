@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 代码生成配置
  *
  * @author dxj
- * @date 2019-01-03
+ * @date 2019-02-03
  */
 @Data
 @Entity

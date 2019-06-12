@@ -26,8 +26,12 @@ import java.util.Optional;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class EmailService {
 
+    private final EmailRepository emailRepository;
+
     @Autowired
-    private EmailRepository emailRepository;
+    public EmailService(EmailRepository emailRepository) {
+        this.emailRepository = emailRepository;
+    }
 
     /**
      * 更新邮件配置
@@ -56,11 +60,7 @@ public class EmailService {
     @Cacheable(key = "'1'")
     public EmailConfig find() {
         Optional<EmailConfig> emailConfig = emailRepository.findById(1L);
-        if(emailConfig.isPresent()){
-            return emailConfig.get();
-        } else {
-            return new EmailConfig();
-        }
+        return emailConfig.orElseGet(EmailConfig::new);
     }
 
     /**
@@ -76,9 +76,7 @@ public class EmailService {
         if(emailConfig == null){
             throw new BadRequestException("请先配置，再操作");
         }
-        /**
-         * 封装
-         */
+        // 封装
         MailAccount account = new MailAccount();
         account.setHost(emailConfig.getHost());
         account.setPort(Integer.parseInt(emailConfig.getPort()));
@@ -90,12 +88,10 @@ public class EmailService {
             throw new BadRequestException(e.getMessage());
         }
         account.setFrom(emailConfig.getUser()+"<"+emailConfig.getFromUser()+">");
-        //ssl方式发送
+        // ssl方式发送
         account.setStartttlsEnable(true);
         String content = emailVo.getContent();
-        /**
-         * 发送
-         */
+        // 发送
         try {
             Mail.create(account)
                     .setTos(emailVo.getTos().toArray(new String[0]))

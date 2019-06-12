@@ -29,21 +29,22 @@ public class SmsController {
 
     /**
      * 获取短信配置
+     *
      * @return
      */
     @GetMapping(value = "/sms")
     public ResponseEntity<SmsConfig> get() {
-        return new ResponseEntity(smsService.find(), HttpStatus.OK);
+        return new ResponseEntity<>(smsService.find(), HttpStatus.OK);
     }
 
     /**
      * 短信配置
+     *
      * @param smsConfig
      * @return
      */
     @PutMapping(value = "/sms")
     public ResponseEntity<SmsConfig> configSms(@Validated @RequestBody SmsConfig smsConfig) {
-        System.out.println("真真正正");
 
         smsService.update(smsConfig);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -51,12 +52,13 @@ public class SmsController {
 
     /**
      * 发送短信
+     *
      * @param smsVo
      * @return
      */
     @PostMapping(value = "/sms")
     public ResponseEntity<Void> send(@Validated @RequestBody SmsVo smsVo) {
-        log.warn("REST request to send Sms : {}" +smsVo);
+        log.warn("REST request to send Sms : {}" + smsVo);
         smsService.send(smsVo, smsService.find());
         return new ResponseEntity<>(HttpStatus.OK);
     }

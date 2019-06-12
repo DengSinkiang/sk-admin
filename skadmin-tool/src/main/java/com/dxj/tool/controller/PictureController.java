@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2019/04/20 14:13:32
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api")
 public class PictureController {
 
     private final PictureService pictureService;

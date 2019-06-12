@@ -19,7 +19,7 @@ import java.util.Set;
  * 数据权限配置
  *
  * @author dxj
- * @date 2019-4-1
+ * @date 2019-04-01
  */
 @Component
 public class DataScope {

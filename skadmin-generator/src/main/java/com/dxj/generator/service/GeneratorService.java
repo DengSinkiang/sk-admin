@@ -33,7 +33,7 @@ public class GeneratorService {
      * @param startEnd
      * @return
      */
-    public Object getTables(String name, int[] startEnd) {
+    public Object getTableList(String name, int[] startEnd) {
         StringBuilder sql = new StringBuilder("select table_name tableName,create_time createTime from information_schema.tables where table_schema = (select database()) ");
         if (!ObjectUtils.isEmpty(name)) {
             sql.append("and table_name like '%").append(name).append("%' ");
@@ -60,7 +60,7 @@ public class GeneratorService {
      * @param name
      * @return
      */
-    public Object getColumns(String name) {
+    public Object getColumnList(String name) {
         StringBuilder sql = new StringBuilder("select column_name, is_nullable, data_type, column_comment, column_key, extra from information_schema.columns where ");
         if (!ObjectUtils.isEmpty(name)) {
             sql.append("table_name = '").append(name).append("' ");
@@ -68,26 +68,26 @@ public class GeneratorService {
         sql.append("and table_schema = (select database()) order by ordinal_position");
         Query query = em.createNativeQuery(sql.toString());
         List<Object[]> result = query.getResultList();
-        List<ColumnInfo> columnInfos = new ArrayList<>();
+        List<ColumnInfo> columnInfoList = new ArrayList<>();
         for (Object[] obj : result) {
-            columnInfos.add(new ColumnInfo(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], null, "true"));
+            columnInfoList.add(new ColumnInfo(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], null, "true"));
         }
-        return PageUtils.toPage(columnInfos, columnInfos.size());
+        return PageUtils.toPage(columnInfoList, columnInfoList.size());
     }
 
     /**
      * 生成代码
      *
-     * @param columnInfos
+     * @param columnInfoList
      * @param genConfig
      * @param tableName
      */
-    public void generator(List<ColumnInfo> columnInfos, GenConfig genConfig, String tableName) {
+    public void generator(List<ColumnInfo> columnInfoList, GenConfig genConfig, String tableName) {
         if (genConfig.getId() == null) {
             throw new BadRequestException("请先配置生成器");
         }
         try {
-            GenUtils.generatorCode(columnInfos, genConfig, tableName);
+            GenUtils.generatorCode(columnInfoList, genConfig, tableName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

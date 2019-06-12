@@ -24,13 +24,13 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("api")
-public class QiniuController {
+public class QiNiuController {
 
     private final QiNiuService qiNiuService;
 
 
     @Autowired
-    public QiniuController(QiNiuService qiNiuService) {
+    public QiNiuController(QiNiuService qiNiuService) {
         this.qiNiuService = qiNiuService;
     }
 

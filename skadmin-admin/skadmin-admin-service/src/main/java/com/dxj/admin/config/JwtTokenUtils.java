@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 /**
  * @author dxj
- * @date 2019-4-1
+ * @date 2019-04-01
  */
 @Component
 public class JwtTokenUtils implements Serializable {

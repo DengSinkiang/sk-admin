@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * @author dxj
- * @date 2019-4-1
+ * @date 2019-04-01
  */
 @Configuration
 @EnableWebSecurity

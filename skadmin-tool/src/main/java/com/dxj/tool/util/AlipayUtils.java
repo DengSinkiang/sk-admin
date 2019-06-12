@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -35,8 +34,7 @@ public class AlipayUtils {
         String[] split1 = s.split(" ");
         String s1 = split1[0] + split1[1];
         String[] split2 = s1.split(":");
-        String s2 = split2[0] + split2[1] + split2[2] + a;
-        return s2;
+        return split2[0] + split2[1] + split2[2] + a;
     }
 
     /**
@@ -46,13 +44,11 @@ public class AlipayUtils {
      */
     public boolean rsaCheck(HttpServletRequest request, AlipayConfig alipay){
 
-        /**
-         *  获取支付宝POST过来反馈信息
-         */
+        //获取支付宝POST过来反馈信息
         Map<String,String> params = new HashMap<>(1);
         Map requestParams = request.getParameterMap();
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
-            String name = (String) iter.next();
+        for (Object o : requestParams.keySet()) {
+            String name = (String) o;
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
             for (int i = 0; i < values.length; i++) {
@@ -63,11 +59,10 @@ public class AlipayUtils {
         }
 
         try {
-            boolean verifyResult = AlipaySignature.rsaCheckV1(params,
+            return AlipaySignature.rsaCheckV1(params,
                     alipay.getPublicKey(),
                     alipay.getCharset(),
                     alipay.getSignType());
-            return verifyResult;
         } catch (AlipayApiException e) {
             return false;
         }

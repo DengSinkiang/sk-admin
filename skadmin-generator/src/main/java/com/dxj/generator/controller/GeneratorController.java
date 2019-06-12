@@ -47,7 +47,7 @@ public class GeneratorController {
                                     @RequestParam(defaultValue = "0") Integer page,
                                     @RequestParam(defaultValue = "10") Integer size) {
         int[] startEnd = PageUtil.transToStartEnd(page + 1, size);
-        return new ResponseEntity<>(generatorService.getTables(name, startEnd), HttpStatus.OK);
+        return new ResponseEntity<>(generatorService.getTableList(name, startEnd), HttpStatus.OK);
     }
 
     /**
@@ -58,7 +58,7 @@ public class GeneratorController {
      */
     @GetMapping(value = "/generator/columns")
     public ResponseEntity<Object> getTableList(@RequestParam String tableName) {
-        return new ResponseEntity<>(generatorService.getColumns(tableName), HttpStatus.OK);
+        return new ResponseEntity<>(generatorService.getColumnList(tableName), HttpStatus.OK);
     }
 
     /**

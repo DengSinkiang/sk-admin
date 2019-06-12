@@ -6,10 +6,8 @@ import com.dxj.tool.service.EmailService;
 import com.dxj.tool.service.VerificationCodeService;
 import com.dxj.common.util.ElAdminConstant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,14 +20,11 @@ public class VerificationCodeController {
 
     private final VerificationCodeService verificationCodeService;
 
-    private final UserDetailsService userDetailsService;
-
     private final EmailService emailService;
 
     @Autowired
-    public VerificationCodeController(VerificationCodeService verificationCodeService, @Qualifier("jwtUserDetailsService") UserDetailsService userDetailsService, EmailService emailService) {
+    public VerificationCodeController(VerificationCodeService verificationCodeService, EmailService emailService) {
         this.verificationCodeService = verificationCodeService;
-        this.userDetailsService = userDetailsService;
         this.emailService = emailService;
     }
 
