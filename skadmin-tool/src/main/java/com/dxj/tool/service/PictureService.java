@@ -10,7 +10,7 @@ import com.dxj.tool.domain.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.PictureRepository;
-import com.dxj.common.util.ElAdminConstant;
+import com.dxj.common.util.SkAdminConstant;
 import com.dxj.common.util.FileUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,7 @@ import java.util.Optional;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class PictureService {
 
-    @Autowired
-    private PictureRepository pictureRepository;
+    private final PictureRepository pictureRepository;
 
     private static final String SUCCESS = "success";
 
@@ -46,8 +46,14 @@ public class PictureService {
 
     private static final String MSG = "msg";
 
+    @Autowired
+    public PictureService(PictureRepository pictureRepository) {
+        this.pictureRepository = pictureRepository;
+    }
+
     /**
      * 上传图片
+     *
      * @param multipartFile
      * @param username
      * @return
@@ -60,18 +66,18 @@ public class PictureService {
         HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("smfile", file);
-        String result= HttpUtil.post(ElAdminConstant.Url.SM_MS_URL, paramMap);
+        String result = HttpUtil.post(SkAdminConstant.Url.SM_MS_URL, paramMap);
 
         JSONObject jsonObject = JSONUtil.parseObj(result);
         Picture picture;
-        if(!jsonObject.get(CODE).toString().equals(SUCCESS)){
+        if (!jsonObject.get(CODE).toString().equals(SUCCESS)) {
             throw new BadRequestException(jsonObject.get(MSG).toString());
         }
         //转成实体类
         picture = JSON.parseObject(jsonObject.get("data").toString(), Picture.class);
         picture.setSize(FileUtils.getSize(Integer.valueOf(picture.getSize())));
         picture.setUsername(username);
-        picture.setFilename(FileUtils.getFileNameNoEx(multipartFile.getOriginalFilename())+"."+ FileUtils.getExtensionName(multipartFile.getOriginalFilename()));
+        picture.setFilename(FileUtils.getFileNameNoEx(multipartFile.getOriginalFilename()) + "." + FileUtils.getExtensionName(multipartFile.getOriginalFilename()));
         pictureRepository.save(picture);
         //删除临时文件
         FileUtils.deleteFile(file);
@@ -81,28 +87,30 @@ public class PictureService {
 
     /**
      * 根据ID查询
+     *
      * @param id
      * @return
      */
     @Cacheable(key = "#p0")
     public Picture findById(Long id) {
         Optional<Picture> picture = pictureRepository.findById(id);
-        ValidationUtils.isNull(picture,"Picture","id",id);
-        return picture.get();
+        ValidationUtils.isNull(picture, "Picture", "id", id);
+        return picture.orElse(null);
     }
 
     /**
      * 删除图片
+     *
      * @param picture
      */
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void delete(Picture picture) {
         try {
-            String result= HttpUtil.get(picture.getDelete());
+            HttpUtil.get(picture.getDelete());
             pictureRepository.delete(picture);
-        } catch(Exception e){
-            pictureRepository.delete(picture);
+        } catch (Exception e) {
+            log.error("删除图片失败原因：" + e);
         }
 
     }
@@ -114,10 +122,10 @@ public class PictureService {
     }
 
     /**
-     * 分页
+     * 分页查询
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(Picture picture, Pageable pageable){
+    public Map<String, Object> queryAll(Picture picture, Pageable pageable) {
         return PageUtils.toPage(pictureRepository.findAll(PictureSpec.getSpec(picture), pageable));
     }
 }

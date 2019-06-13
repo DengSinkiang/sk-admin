@@ -190,7 +190,7 @@ public class UserController {
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
-        VerificationCode verificationCode = new VerificationCode(code, ElAdminConstant.RESET_MAIL, "email", user.getEmail());
+        VerificationCode verificationCode = new VerificationCode(code, SkAdminConstant.RESET_MAIL, "email", user.getEmail());
         verificationCodeService.validated(verificationCode);
         userService.updateEmail(userDetails.getUsername(), user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);

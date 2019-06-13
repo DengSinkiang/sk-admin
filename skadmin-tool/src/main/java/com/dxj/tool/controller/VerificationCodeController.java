@@ -4,7 +4,7 @@ import com.dxj.tool.domain.VerificationCode;
 import com.dxj.tool.domain.vo.EmailVo;
 import com.dxj.tool.service.EmailService;
 import com.dxj.tool.service.VerificationCodeService;
-import com.dxj.common.util.ElAdminConstant;
+import com.dxj.common.util.SkAdminConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class VerificationCodeController {
     }
 
     private void sendEmail(@RequestBody VerificationCode code) {
-        code.setScenes(ElAdminConstant.RESET_MAIL);
+        code.setScenes(SkAdminConstant.RESET_MAIL);
         EmailVo emailVo = verificationCodeService.sendEmail(code);
         emailService.send(emailVo, emailService.find());
     }

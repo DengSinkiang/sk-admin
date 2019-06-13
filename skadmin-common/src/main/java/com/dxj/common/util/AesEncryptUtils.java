@@ -13,8 +13,9 @@ import java.nio.charset.StandardCharsets;
  * @DATE: 2019-06-12
  */
 public class AesEncryptUtils {
+
     //可配置到Constant中，并读取配置文件注入,16位,自己定义
-    private static final String KEY = "dengsinkiang1995";
+    private static final String KEY = "DengSinkiang1995";
 
     //参数分别代表 算法名称/加密模式/数据填充方式
     private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";

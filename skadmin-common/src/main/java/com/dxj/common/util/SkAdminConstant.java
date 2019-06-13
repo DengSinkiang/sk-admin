@@ -6,7 +6,7 @@ package com.dxj.common.util;
  * @author dxj
  * @date 2019-04-26
  */
-public class ElAdminConstant {
+public class SkAdminConstant {
 
     public static final String RESET_PASS = "重置密码";
 
