@@ -36,7 +36,7 @@ public class EmailController {
     @Log("配置邮件")
     @PutMapping(value = "/email")
     public ResponseEntity<EmailConfig> emailConfig(@Validated @RequestBody EmailConfig emailConfig){
-        emailService.update(emailConfig, emailService.find());
+        emailService.update(emailConfig);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

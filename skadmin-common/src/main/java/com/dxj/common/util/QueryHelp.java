@@ -29,8 +29,8 @@ public class QueryHelp {
     public static <R, Q> Predicate getPredicate(Root<R> root, Q query, CriteriaBuilder cb) {
         List<Predicate> list = new ArrayList<>();
 
-        if(query == null){
-            return cb.and(list.toArray(new Predicate[list.size()]));
+        if (query == null) {
+            return cb.and(list.toArray(new Predicate[0]));
         }
         try {
             List<Field> fields = getAllFields(query.getClass(), new ArrayList<>());
@@ -60,35 +60,35 @@ public class QueryHelp {
                     }
                     switch (q.type()) {
                         case EQUAL:
-                            list.add(cb.equal(getExpression(attributeName,join,root)
-                                    .as((Class<? extends Comparable>) fieldType),val));
+                            list.add(cb.equal(getExpression(attributeName, join, root)
+                                    .as((Class<? extends Comparable>) fieldType), val));
                             break;
                         case GREATER_THAN:
-                            list.add(cb.greaterThanOrEqualTo(getExpression(attributeName,join,root)
+                            list.add(cb.greaterThanOrEqualTo(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
                         case LESS_THAN:
-                            list.add(cb.lessThanOrEqualTo(getExpression(attributeName,join,root)
+                            list.add(cb.lessThanOrEqualTo(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
                         case LESS_THAN_NQ:
-                            list.add(cb.lessThan(getExpression(attributeName,join,root)
+                            list.add(cb.lessThan(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
                         case INNER_LIKE:
-                            list.add(cb.like(getExpression(attributeName,join,root)
+                            list.add(cb.like(getExpression(attributeName, join, root)
                                     .as(String.class), "%" + val.toString() + "%"));
                             break;
                         case LEFT_LIKE:
-                            list.add(cb.like(getExpression(attributeName,join,root)
+                            list.add(cb.like(getExpression(attributeName, join, root)
                                     .as(String.class), "%" + val.toString()));
                             break;
                         case RIGHT_LIKE:
-                            list.add(cb.like(getExpression(attributeName,join,root)
+                            list.add(cb.like(getExpression(attributeName, join, root)
                                     .as(String.class), val.toString() + "%"));
                         case IN:
-                            if (CollUtil.isNotEmpty((Collection<Long>)val)) {
-                                list.add(getExpression(attributeName,join,root).in((Collection<Long>) val));
+                            if (CollUtil.isNotEmpty((Collection<Long>) val)) {
+                                list.add(getExpression(attributeName, join, root).in((Collection<Long>) val));
                             }
                             break;
                     }
@@ -98,7 +98,7 @@ public class QueryHelp {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-        return cb.and(list.toArray(new Predicate[list.size()]));
+        return cb.and(list.toArray(new Predicate[0]));
     }
 
     @SuppressWarnings("unchecked")
@@ -108,21 +108,19 @@ public class QueryHelp {
         } else return root.get(attributeName);
     }
 
-    @SuppressWarnings("unchecked")
-    public static boolean isBlank(final CharSequence cs) {
+    private static boolean isBlank(final CharSequence cs) {
         int strLen;
         if (cs == null || (strLen = cs.length()) == 0) {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
-            if (Character.isWhitespace(cs.charAt(i)) == false) {
+            if (!Character.isWhitespace(cs.charAt(i))) {
                 return false;
             }
         }
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     private static List<Field> getAllFields(Class clazz, List<Field> fields) {
         if (clazz != null) {
             fields.addAll(Arrays.asList(clazz.getDeclaredFields()));

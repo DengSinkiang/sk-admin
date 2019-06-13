@@ -36,17 +36,14 @@ public class EmailService {
     /**
      * 更新邮件配置
      * @param emailConfig
-     * @param old
      * @return
      */
     @CachePut(key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public EmailConfig update(EmailConfig emailConfig, EmailConfig old) {
+    public EmailConfig update(EmailConfig emailConfig) {
+        // 加密
         try {
-            if(!emailConfig.getPass().equals(old.getPass())){
-                // 加密
-                emailConfig.setPass(AesEncryptUtils.encrypt(emailConfig.getPass()));
-            }
+            emailConfig.setPass(AesEncryptUtils.encrypt(emailConfig.getPass()));
         } catch (Exception e) {
             e.printStackTrace();
         }

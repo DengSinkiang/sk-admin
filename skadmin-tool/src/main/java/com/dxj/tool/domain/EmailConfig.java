@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * 邮件配置类，数据存覆盖式存入数据存
+ * 邮件配置类，数据存覆盖存入数据存
  * @author dxj
  * @date 2019-05-26
  */
@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class EmailConfig implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
