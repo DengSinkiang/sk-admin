@@ -1,6 +1,6 @@
 package com.dxj.common.aspect;
 
-import com.dxj.common.annotation.Limit;
+import com.dxj.common.annotation.RateLimit;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.StringUtils;
 import com.google.common.collect.ImmutableList;
@@ -38,7 +38,7 @@ public class LimitAspect {
     }
 
 
-    @Pointcut("@annotation(com.dxj.common.annotation.Limit)")
+    @Pointcut("@annotation(com.dxj.common.annotation.RateLimit)")
     public void pointcut() {
     }
 
@@ -47,7 +47,7 @@ public class LimitAspect {
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method signatureMethod = signature.getMethod();
-        Limit limit = signatureMethod.getAnnotation(Limit.class);
+        RateLimit limit = signatureMethod.getAnnotation(RateLimit.class);
         LimitType limitType = limit.limitType();
         //String name = annotation.name();
         String key = limit.key();

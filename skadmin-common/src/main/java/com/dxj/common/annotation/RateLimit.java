@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 // Retention 注解的保留位置，注解会在class字节码文件中存在，在运行时可以通过反射获取到
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Limit {
+public @interface RateLimit {
 
     // 资源名称，用于描述接口功能
     String name() default "";

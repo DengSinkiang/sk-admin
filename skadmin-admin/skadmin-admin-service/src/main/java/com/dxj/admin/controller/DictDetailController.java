@@ -3,7 +3,7 @@ package com.dxj.admin.controller;
 import com.dxj.admin.domain.DictDetail;
 import com.dxj.admin.dto.DictDetailDTO;
 import com.dxj.admin.service.DictDetailService;
-import com.dxj.common.enums.EntityEnum;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.log.annotation.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class DictDetailController {
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_CREATE')")
     public ResponseEntity<DictDetailDTO> create(@Validated @RequestBody DictDetail resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnum.DICT_DETAIL_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + CommEnum.DICT_DETAIL_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(dictDetailService.create(resources), HttpStatus.CREATED);
     }

@@ -1,11 +1,19 @@
 package com.dxj.common.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 /**
  * @Author: dxj
  * @Date: 2019-04-30 15:54
  */
-public enum EntityEnum {
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public enum CommEnum {
 
+    // Entity
     USER_ENTITY("user"),
     DEPT_ENTITY("dept"),
     DICT_ENTITY("dict"),
@@ -15,19 +23,11 @@ public enum EntityEnum {
     ROLE_ENTITY("role"),
     PERMISSION_ENTITY("permission"),
     QUARTZ_ENTITY("quartzJob"),
+    //
+    RESET_MAIL("重置邮箱"),
+    SM_MS_URL("https://sm.ms/api/upload")
     ;
 
     private String entityName;
 
-    EntityEnum(String entityName) {
-        this.entityName = entityName;
-    }
-
-    public String getEntityName() {
-        return this.entityName;
-    }
-
-    public void setEntityName(String entityName) {
-        this.entityName = entityName;
-    }
 }
