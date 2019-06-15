@@ -21,22 +21,22 @@
 |  github   |  https://github.com/DengSinkiang/skadmin   |  https://github.com/DengSinkiang/skadmin-vue   |
 
 ##### 用户账号密码
-
+```
 - 管理员： admin
 - 密码： 123456
-
+```
 #### 开发环境
-
+```
 - JDK：8
 - IDE：IntelliJ IDEA
 - 依赖管理：Maven
 - 数据库：MySQL 5.7
-
+```
 #### 运行项目
-
+```
 - 本项目用到redis，没安装请自行百度安装
 - 直接运行 SkAdmin.java 即可启动后台服务
-
+```
 #### 功能模块
 ```
 - 系统管理
