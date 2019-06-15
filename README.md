@@ -104,21 +104,23 @@
 - skadmin-monitor 系统监控模块
 ```
 #### 后端技术栈
-
+```
 - 基础框架：Spring Boot 2.1.0.RELEASE
-- 持久层框架：Spring Boot Jpa
+- 持久层框架：Spring Boot JPA
 - 安全框架：Spring Security
 - 缓存框架：Redis
 - 日志打印：logback+log4jdbc
 - 接口文档 Swagger2
 - 其他：FastJson、AOP、MapStruct等
-
+```
 #### 前端技术栈
+```
 - node
 - vue
 - vue-router
 - axios
 - element ui
+```
 #### 系统预览
 
 <table>
