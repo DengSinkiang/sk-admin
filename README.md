@@ -68,10 +68,6 @@
     - 接口文档 使用的是 swagger-ui 
     - SM.MS免费图床 挺好用的一个图床，作为公共图片上传使用
     - 支付宝支付 
-- 组件管理
-    - 图标库 系统图标来自 https://www.iconfont.cn/
-    - 富文本 集成wangEditor富文本
-    - Markdown编辑器与Yaml编辑器
 ```
 #### 项目结构
 ```
