@@ -7,7 +7,7 @@ import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
-import com.dxj.common.enums.EntityEnum;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.*;
 import com.dxj.log.annotation.Log;
@@ -99,7 +99,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_CREATE')")
     public ResponseEntity<UserDTO> create(@Validated @RequestBody User resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnum.USER_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + CommEnum.USER_ENTITY + " cannot already have an ID");
         }
         checkLevel(resources);
         return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);
@@ -190,7 +190,7 @@ public class UserController {
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
-        VerificationCode verificationCode = new VerificationCode(code, SkAdminConstant.RESET_MAIL, "email", user.getEmail());
+        VerificationCode verificationCode = new VerificationCode(code, CommEnum.RESET_MAIL.getEntityName(), "email", user.getEmail());
         verificationCodeService.validated(verificationCode);
         userService.updateEmail(userDetails.getUsername(), user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);

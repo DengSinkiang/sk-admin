@@ -1,10 +1,10 @@
 package com.dxj.tool.controller;
 
+import com.dxj.common.enums.CommEnum;
 import com.dxj.tool.domain.VerificationCode;
 import com.dxj.tool.domain.vo.EmailVo;
 import com.dxj.tool.service.EmailService;
 import com.dxj.tool.service.VerificationCodeService;
-import com.dxj.common.util.SkAdminConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class VerificationCodeController {
     }
 
     private void sendEmail(@RequestBody VerificationCode code) {
-        code.setScenes(SkAdminConstant.RESET_MAIL);
+        code.setScenes(CommEnum.RESET_MAIL.getEntityName());
         EmailVo emailVo = verificationCodeService.sendEmail(code);
         emailService.send(emailVo, emailService.find());
     }

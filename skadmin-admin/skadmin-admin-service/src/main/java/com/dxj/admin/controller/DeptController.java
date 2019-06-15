@@ -4,7 +4,7 @@ import com.dxj.admin.config.DataScope;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.dto.DeptDTO;
 import com.dxj.admin.service.DeptService;
-import com.dxj.common.enums.EntityEnum;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.log.annotation.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class DeptController {
     @PreAuthorize("hasAnyRole('ADMIN','DEPT_ALL','DEPT_CREATE')")
     public ResponseEntity<DeptDTO> create(@Validated @RequestBody Dept resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnum.DEPT_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + CommEnum.DEPT_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(deptService.create(resources), HttpStatus.CREATED);
     }

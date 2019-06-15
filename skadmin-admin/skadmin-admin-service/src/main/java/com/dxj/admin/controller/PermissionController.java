@@ -3,7 +3,7 @@ package com.dxj.admin.controller;
 import com.dxj.admin.domain.Permission;
 import com.dxj.admin.dto.PermissionDTO;
 import com.dxj.admin.service.PermissionService;
-import com.dxj.common.enums.EntityEnum;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.log.annotation.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class PermissionController {
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_CREATE')")
     public ResponseEntity<PermissionDTO> create(@Validated @RequestBody Permission resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnum.PERMISSION_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + CommEnum.PERMISSION_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(permissionService.create(resources), HttpStatus.CREATED);
     }

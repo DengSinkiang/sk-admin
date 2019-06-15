@@ -4,13 +4,13 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.tool.service.spec.PictureSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.PictureRepository;
-import com.dxj.common.util.SkAdminConstant;
 import com.dxj.common.util.FileUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class PictureService {
         HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("smfile", file);
-        String result = HttpUtil.post(SkAdminConstant.Url.SM_MS_URL, paramMap);
+        String result = HttpUtil.post(CommEnum.SM_MS_URL.getEntityName(), paramMap);
 
         JSONObject jsonObject = JSONUtil.parseObj(result);
         Picture picture;

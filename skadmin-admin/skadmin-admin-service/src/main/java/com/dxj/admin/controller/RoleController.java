@@ -5,7 +5,7 @@ import com.dxj.admin.domain.Role;
 import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.service.RoleService;
-import com.dxj.common.enums.EntityEnum;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.Log;
@@ -72,7 +72,7 @@ public class RoleController {
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_CREATE')")
     public ResponseEntity<RoleDTO> create(@Validated @RequestBody Role resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new " + EntityEnum.ROLE_ENTITY + " cannot already have an ID");
+            throw new BadRequestException("A new " + CommEnum.ROLE_ENTITY + " cannot already have an ID");
         }
         return new ResponseEntity<>(roleService.create(resources), HttpStatus.CREATED);
     }
