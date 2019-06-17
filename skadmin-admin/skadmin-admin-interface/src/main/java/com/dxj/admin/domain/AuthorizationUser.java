@@ -1,5 +1,6 @@
 package com.dxj.admin.domain;
 
+import com.dxj.common.util.AesEncryptUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,6 @@ public class AuthorizationUser {
 
     @Override
     public String toString() {
-        return "{username=" + username + ", password= ******}";
+        return "{username=" + username + ", password=" + AesEncryptUtils.encryptPassword(username + password);
     }
 }

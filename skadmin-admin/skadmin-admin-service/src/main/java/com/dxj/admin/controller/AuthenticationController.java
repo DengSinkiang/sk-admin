@@ -51,7 +51,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
 
         final JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
-
+        System.out.println(jwtUser.getUsername());
         System.out.println(jwtUser.getPassword());
         System.out.println("-------------------");
         System.out.println(authorizationUser.getPassword());
