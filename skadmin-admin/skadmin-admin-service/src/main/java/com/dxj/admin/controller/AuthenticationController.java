@@ -50,16 +50,14 @@ public class AuthenticationController {
     @PostMapping(value = "${jwt.auth.path}")
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationUser authorizationUser) {
 
-        final JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
-        System.out.println(jwtUser.getUsername());
-        System.out.println(jwtUser.getPassword());
-        System.out.println("-------------------");
-        System.out.println(authorizationUser.getPassword());
+        JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authorizationUser.getUsername());
+
+        //验证密码
         if (!jwtUser.getPassword().equals(authorizationUser.getPassword())) {
             throw new AccountExpiredException("密码错误");
         }
 
-
+        //账号是否锁定
         if (!jwtUser.isEnabled()) {
             throw new AccountExpiredException("账号已停用，请联系管理员");
         }
