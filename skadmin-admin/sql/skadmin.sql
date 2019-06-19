@@ -2097,7 +2097,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES (1, 'https://i.loli.net/2019/06/10/5cfe4c40983ac41218.jpg', '2018-08-23 09:11:56', 'admin@skadmin.com', 1, 'e10adc3949ba59abbe56e057f20f883e', 'admin', '2019-06-10 21:37:46', 2, '18888888888', 11);
+INSERT INTO `user` VALUES (1, 'https://i.loli.net/2019/06/10/5cfe4c40983ac41218.jpg', '2018-08-23 09:11:56', 'admin@skadmin.com', 1, 'a66abb5684c45962d887564f08346e8d', 'admin', '2019-06-10 21:37:46', 2, '18888888888', 11);
 INSERT INTO `user` VALUES (3, 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2018-12-27 20:05:26', 'test@skadmin.com', 1, 'e10adc3949ba59abbe56e057f20f883e', 'test', '2019-04-01 09:15:24', 2, '17777777777', 12);
 INSERT INTO `user` VALUES (5, 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2019-04-02 10:07:12', 'hr@skadmin.com', 1, 'e10adc3949ba59abbe56e057f20f883e', 'hr', NULL, 11, '15555555555', 8);
 COMMIT;
