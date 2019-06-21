@@ -44,6 +44,9 @@ public class User implements Serializable {
     @NotNull
     private Boolean enabled;
 
+    @NotNull
+    private Boolean sex;
+
     private String password;
 
     @CreationTimestamp
