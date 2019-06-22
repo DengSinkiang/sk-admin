@@ -5,8 +5,10 @@ import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
 import com.dxj.admin.repository.UserRepository;
 import com.dxj.admin.service.spec.UserSpec;
+import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.exception.EntityNotFoundException;
+import com.dxj.common.util.AesEncryptUtils;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import com.dxj.monitor.service.RedisService;
@@ -67,8 +69,8 @@ public class UserService {
         }
 
         // 默认密码 123456，此密码是加密后的字符
-        resources.setPassword("e10adc3949ba59abbe56e057f20f883e");
-        resources.setAvatar("https://mmmlf.tmuyun.com/8918a306ea314404835a9196585c4b75.jpeg");
+        resources.setPassword(AesEncryptUtils.encryptPassword(resources.getUsername() + CommEnum.USER_PASSWORD.getEntityName()));
+        resources.setAvatar(CommEnum.USER_AVATAR.getEntityName());
         return userMapper.toDto(userRepository.save(resources));
     }
 

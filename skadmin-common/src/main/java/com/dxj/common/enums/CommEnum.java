@@ -23,9 +23,12 @@ public enum CommEnum {
     ROLE_ENTITY("role"),
     PERMISSION_ENTITY("permission"),
     QUARTZ_ENTITY("quartzJob"),
-    //
+    // 配置
     RESET_MAIL("重置邮箱"),
-    SM_MS_URL("https://sm.ms/api/upload")
+    SM_MS_URL("https://sm.ms/api/upload"),
+    // 默认密码
+    USER_PASSWORD("123456"),
+    USER_AVATAR("https://mmmlf.tmuyun.com/22D055BA216B5530C70FB565CAAB9574.jpg")
     ;
 
     private String entityName;
