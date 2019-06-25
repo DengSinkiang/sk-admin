@@ -59,5 +59,5 @@ public class Permission implements Serializable{
 				'}';
 	}
 
-	public interface Update{}
+	public @interface Update{}
 }

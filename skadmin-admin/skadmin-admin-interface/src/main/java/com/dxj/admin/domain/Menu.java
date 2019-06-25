@@ -61,5 +61,5 @@ public class Menu implements Serializable {
     @Column(name = "create_time")
     private Timestamp createTime;
 
-    public interface Update{}
+    public @interface Update{}
 }
