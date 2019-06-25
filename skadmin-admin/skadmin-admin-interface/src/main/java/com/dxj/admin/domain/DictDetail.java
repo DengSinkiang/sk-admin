@@ -46,5 +46,5 @@ public class DictDetail implements Serializable {
     @JoinColumn(name = "dict_id")
     private Dict dict;
 
-    public @interface Update {}
+    public interface Update {}
 }

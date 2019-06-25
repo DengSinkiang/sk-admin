@@ -56,5 +56,5 @@ public class Job implements Serializable {
     @CreationTimestamp
     private Timestamp createTime;
 
-    public @interface Update {}
+    public interface Update {}
 }

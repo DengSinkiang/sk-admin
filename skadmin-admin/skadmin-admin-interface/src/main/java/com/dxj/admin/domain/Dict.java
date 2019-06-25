@@ -40,5 +40,5 @@ public class Dict implements Serializable {
     @OneToMany(mappedBy = "dict",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
     private List<DictDetail> dictDetails;
 
-    public @interface Update {}
+    public interface Update {}
 }

@@ -86,5 +86,5 @@ public class Role implements Serializable {
         return Objects.hash(id);
     }
 
-    public @interface Update{}
+    public interface Update{}
 }

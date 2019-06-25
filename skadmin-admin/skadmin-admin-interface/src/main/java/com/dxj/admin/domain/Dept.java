@@ -54,5 +54,5 @@ public class Dept implements Serializable {
     @CreationTimestamp
     private Timestamp createTime;
 
-    public @interface Update {}
+    public interface Update {}
 }
