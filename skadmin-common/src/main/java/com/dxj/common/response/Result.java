@@ -3,7 +3,7 @@ package com.dxj.common.response;
 import lombok.Data;
 
 /**
- * @Author: 98050
+ * @Author: dxj
  * @Time: 2018-11-24 21:41
  * @Feature: 返回结果
  */
