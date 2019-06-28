@@ -85,10 +85,21 @@
         - controller 控制器
 	- repository 数据库操作
 	- service 业务实现
-	    - spec 业务查询条件	    
+	    - spec 业务查询条件
+	SkAdmin.java 启动类	    
 - skadmin-log 系统日志模块
-- skadmin-tools 系统第三方工具模块
-- skadmin-generator 系统代码生成模块(还在修改中...)
+    - skadmin-log-interface
+        - annotation
+        - domain
+        - dto
+        - mapper
+    - skadmin-log-service
+        - aspect
+        - controller
+        - respository
+        - service
+- skadmin-tool 系统第三方工具模块
+- skadmin-generator 系统代码生成模块
 - skadmin-quartz 定时任务模块
     - config 配置日志拦截器与WebSocket等
     - domain 实体类
