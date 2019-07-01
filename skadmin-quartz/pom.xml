@@ -21,7 +21,6 @@
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-log</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.dxj.service</groupId>

@@ -18,6 +18,7 @@
             <artifactId>skadmin-admin-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--代码生成器模块-->
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-generator</artifactId>
@@ -29,6 +30,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--系统工具模块-->
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-tool</artifactId>
@@ -46,11 +48,13 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
         </dependency>
+        <!--监控模块-->
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-monitor</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--任务调度模块-->
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-quartz</artifactId>
