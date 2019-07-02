@@ -2,11 +2,9 @@ package com.dxj.log.service;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
-import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.RequestHolder;
-import com.dxj.common.util.SecurityContextHolder;
-import com.dxj.common.util.StringUtils;
+import com.dxj.common.util.*;
 import com.dxj.log.domain.Log;
+import com.dxj.log.query.LogQuery;
 import com.dxj.log.repository.LogRepository;
 import com.dxj.log.mapper.LogErrorMapper;
 import com.dxj.log.mapper.LogSmallMapper;
@@ -36,10 +34,16 @@ public class LogService {
 
     private final LogRepository logRepository;
 
+    private final LogSmallMapper logSmallMapper;
+
+    private final LogErrorMapper logErrorMapper;
+
 
     @Autowired
-    public LogService(LogRepository logRepository) {
+    public LogService(LogRepository logRepository, LogSmallMapper logSmallMapper, LogErrorMapper logErrorMapper) {
         this.logRepository = logRepository;
+        this.logSmallMapper = logSmallMapper;
+        this.logErrorMapper = logErrorMapper;
     }
 
     /**
@@ -101,8 +105,18 @@ public class LogService {
     public Object findByErrDetail(Long id) {
         return Dict.create().set("exception", logRepository.findExceptionById(id));
     }
-    public Object queryAll(Log log, Pageable pageable){
+    public Object queryAll(LogQuery logQuery, Pageable pageable){
 
-        return logRepository.findAll(LogSpec.getSpec(log), pageable);
+        Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, logQuery, cb)),pageable);
+        if (logQuery.getLogType().equals("ERROR")) {
+            return PageUtils.toPage(page.map(logErrorMapper::toDto));
+        }
+
+        return page;
+    }
+
+    public Object queryAllByUser(LogQuery log, Pageable pageable) {
+        Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)),pageable);
+        return PageUtils.toPage(page.map(logSmallMapper::toDto));
     }
 }

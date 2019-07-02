@@ -1,8 +1,8 @@
 package com.dxj.log.controller;
 
 import com.dxj.common.util.SecurityContextHolder;
-import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;
+import com.dxj.log.query.LogQuery;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,21 +36,21 @@ public class LogController {
 
     @GetMapping(value = "/logs/operation")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Object> getLogs(Log log, Pageable pageable){
-        log.setLogType("INFO");
-        return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> getLogs(LogQuery logQuery, Pageable pageable){
+        logQuery.setLogType("INFO");
+        return new ResponseEntity<>(logService.queryAll(logQuery, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/user")
-    public ResponseEntity<Object> getUserLogs(Log log, Pageable pageable){
+    public ResponseEntity<Object> getUserLogs(LogQuery log, Pageable pageable){
         log.setLogType("INFO");
         log.setUsername(SecurityContextHolder.getUsername());
-        return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(logService.queryAllByUser(log, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/error")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Object> getErrorLogs(Log log, Pageable pageable){
+    public ResponseEntity<Object> getErrorLogs(LogQuery log, Pageable pageable){
         log.setLogType("ERROR");
         return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }

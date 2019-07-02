@@ -34,7 +34,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.QueryHelp;
+import com.dxj.common.util.BaseQuery;
 
 /**
 * @author ${author}
