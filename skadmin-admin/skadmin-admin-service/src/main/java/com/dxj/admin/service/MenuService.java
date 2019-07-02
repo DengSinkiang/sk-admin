@@ -9,7 +9,6 @@ import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.MenuMapper;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.MenuRepository;
-import com.dxj.admin.service.spec.MenuSpec;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;

@@ -8,7 +8,6 @@ import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.mapper.RoleSmallMapper;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.RoleRepository;
-import com.dxj.admin.service.spec.RoleSpec;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;

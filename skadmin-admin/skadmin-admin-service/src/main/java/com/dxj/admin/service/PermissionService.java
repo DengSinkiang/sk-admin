@@ -5,7 +5,6 @@ import com.dxj.admin.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.PermissionRepository;
-import com.dxj.admin.service.spec.PermissionSpec;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;
