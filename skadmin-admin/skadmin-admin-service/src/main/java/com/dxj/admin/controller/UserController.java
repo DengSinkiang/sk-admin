@@ -4,6 +4,7 @@ import com.dxj.admin.config.DataScope;
 import com.dxj.admin.domain.User;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.query.UserQuery;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
@@ -63,13 +64,13 @@ public class UserController {
     @Log("查询用户")
     @GetMapping(value = "/users")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT')")
-    public ResponseEntity<Map<String, Object>> getUsers(UserDTO userDTO, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getUsers(UserQuery query, Pageable pageable) {
         Set<Long> deptSet = new HashSet<>();
         Set<Long> result = new HashSet<>();
 
-        if (!ObjectUtils.isEmpty(userDTO.getDeptId())) {
-            deptSet.add(userDTO.getDeptId());
-            deptSet.addAll(dataScope.getDeptChildren(deptService.findByPid(userDTO.getDeptId())));
+        if (!ObjectUtils.isEmpty(query.getDeptId())) {
+            deptSet.add(query.getDeptId());
+            deptSet.addAll(dataScope.getDeptChildren(deptService.findByPid(query.getDeptId())));
         }
 
         // 数据权限
@@ -83,14 +84,16 @@ public class UserController {
             result.retainAll(deptIds);
 
             // 若无交集，则代表无数据权限
+            query.setDeptIds(result);
             if (result.size() == 0) {
                 return new ResponseEntity<>(PageUtils.toPage(null, 0), HttpStatus.OK);
-            } else return new ResponseEntity<>(userService.queryAll(userDTO, result, pageable), HttpStatus.OK);
+            } else return new ResponseEntity<>(userService.queryAll(query, pageable), HttpStatus.OK);
             // 否则取并集
         } else {
             result.addAll(deptSet);
             result.addAll(deptIds);
-            return new ResponseEntity<>(userService.queryAll(userDTO, result, pageable), HttpStatus.OK);
+            query.setDeptIds(result);
+            return new ResponseEntity<>(userService.queryAll(query, pageable), HttpStatus.OK);
         }
     }
 

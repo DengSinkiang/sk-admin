@@ -1,8 +1,10 @@
 package com.dxj.log.controller;
 
+import cn.hutool.core.lang.Dict;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.domain.LoginLog;
 import com.dxj.log.query.LogQuery;
+import com.dxj.log.query.LoginLogQuery;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,13 +59,13 @@ public class LogController {
 
     @GetMapping(value = "/logs/error/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Object> getErrorLogs(@PathVariable Long id){
+    public ResponseEntity<Dict> getErrorLogs(@PathVariable Long id){
         return new ResponseEntity<>(logService.findByErrDetail(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/login")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Page> getLoginLogs(LoginLog loginLog, Pageable pageable){
+    public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLogQuery loginLog, Pageable pageable){
         return new ResponseEntity<>(loginLogService.queryAll(loginLog, pageable), HttpStatus.OK);
     }
 }

@@ -1,12 +1,13 @@
 package com.dxj.log.service;
 
 import cn.hutool.json.JSONObject;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.common.util.StringUtils;
 import com.dxj.log.domain.LoginLog;
+import com.dxj.log.query.LoginLogQuery;
 import com.dxj.log.repository.LoginLogRepository;
-import com.dxj.log.service.spec.LoginLogSpec;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,7 @@ public class LoginLogService {
         logRepository.save(log);
     }
 
-    public Page queryAll(LoginLog log, Pageable pageable){
-        return logRepository.findAll(LoginLogSpec.getSpec(log), pageable);
+    public Page<LoginLog> queryAll(LoginLogQuery log, Pageable pageable){
+        return logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)),pageable);
     }
 }

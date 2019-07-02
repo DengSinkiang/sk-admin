@@ -7,10 +7,12 @@ import com.dxj.admin.domain.vo.MenuVo;
 import com.dxj.admin.dto.MenuDTO;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.MenuMapper;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.MenuRepository;
 import com.dxj.admin.service.spec.MenuSpec;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -214,7 +216,7 @@ public class MenuService {
      * 不分页
      */
     @Cacheable(key = "'queryAll:'+#p0")
-    public List<MenuDTO> queryAll(String name) {
-        return menuMapper.toDto(menuRepository.findAll(MenuSpec.getSpec(name)));
+    public List<MenuDTO> queryAll(CommonQuery query) {
+        return menuMapper.toDto(menuRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder)));
     }
 }

@@ -3,8 +3,10 @@ package com.dxj.admin.service;
 import com.dxj.admin.domain.Job;
 import com.dxj.admin.dto.JobDTO;
 import com.dxj.admin.mapper.JobMapper;
+import com.dxj.admin.query.JobQuery;
+import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.repository.JobRepository;
-import com.dxj.admin.service.spec.JobSpec;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author dxj
@@ -31,6 +31,9 @@ import java.util.Set;
 public class JobService {
 
     private final JobRepository jobRepository;
+
+    @Autowired
+    private DeptRepository deptRepository;
 
     private final JobMapper jobMapper;
 
@@ -73,8 +76,12 @@ public class JobService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(String name, Boolean enabled, Set<Long> deptIds, Long deptId, Pageable pageable) {
-        Page<Job> page = jobRepository.findAll(JobSpec.getSpec(new JobDTO(name, enabled), deptIds, deptId), pageable);
-        return PageUtils.toPage(page.map(jobMapper::toDto));
+    public Map<String, Object> queryAll(JobQuery query, Pageable pageable) {
+        Page<Job> page = jobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
+        List<JobDTO> jobs = new ArrayList<>();
+        for (Job job : page.getContent()) {
+            jobs.add(jobMapper.toDto(job,deptRepository.findNameById(job.getDept().getPid())));
+        }
+        return PageUtils.toPage(jobs,page.getTotalElements());
     }
 }

@@ -8,7 +8,6 @@ import com.dxj.log.query.LogQuery;
 import com.dxj.log.repository.LogRepository;
 import com.dxj.log.mapper.LogErrorMapper;
 import com.dxj.log.mapper.LogSmallMapper;
-import com.dxj.log.service.spec.LogSpec;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -102,7 +100,7 @@ public class LogService {
         log.setParams(params + " }");
         logRepository.save(log);
     }
-    public Object findByErrDetail(Long id) {
+    public Dict findByErrDetail(Long id) {
         return Dict.create().set("exception", logRepository.findExceptionById(id));
     }
     public Object queryAll(LogQuery logQuery, Pageable pageable){

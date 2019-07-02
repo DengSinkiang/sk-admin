@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Dict;
 import com.dxj.admin.domain.Role;
 import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.dto.RoleSmallDTO;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.service.RoleService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -59,8 +60,8 @@ public class RoleController {
     @Log("查询角色")
     @GetMapping(value = "/roles")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_SELECT')")
-    public ResponseEntity<Map<String, Object>> getRoles(@RequestParam(required = false) String name, Pageable pageable) {
-        return new ResponseEntity<>(roleService.queryAll(name, pageable), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getRoles(CommonQuery query, Pageable pageable) {
+        return new ResponseEntity<>(roleService.queryAll(query, pageable), HttpStatus.OK);
     }
     @GetMapping(value = "/roles/level")
     public ResponseEntity<Object> getLevel(){

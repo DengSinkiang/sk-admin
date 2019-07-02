@@ -2,6 +2,7 @@ package com.dxj.admin.controller;
 
 import com.dxj.admin.domain.Dict;
 import com.dxj.admin.dto.DictDTO;
+import com.dxj.admin.query.DictQuery;
 import com.dxj.admin.service.DictService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -35,8 +36,8 @@ public class DictController {
     @Log("查询字典")
     @GetMapping(value = "/dict")
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_SELECT')")
-    public ResponseEntity<Map<String, Object>> getDict(DictDTO resources, Pageable pageable) {
-        return new ResponseEntity<>(dictService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getDict(DictQuery query, Pageable pageable) {
+        return new ResponseEntity<>(dictService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     @Log("新增字典")

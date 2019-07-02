@@ -3,12 +3,13 @@ package com.dxj.admin.service;
 import com.dxj.admin.domain.User;
 import com.dxj.admin.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
+import com.dxj.admin.query.UserQuery;
 import com.dxj.admin.repository.UserRepository;
-import com.dxj.admin.service.spec.UserSpec;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.exception.EntityNotFoundException;
 import com.dxj.common.util.AesEncryptUtils;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import com.dxj.monitor.service.RedisService;
@@ -25,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author dxj
@@ -121,7 +121,7 @@ public class UserService {
     @Cacheable(key = "'loadUserByUsername:'+#p0")
     public UserDTO findByName(String userName) {
         User user;
-        if(ValidationUtils.isEmail(userName)){
+        if (ValidationUtils.isEmail(userName)) {
             user = userRepository.findByEmail(userName);
         } else {
             user = userRepository.findByUsername(userName);
@@ -155,8 +155,8 @@ public class UserService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(UserDTO user, Set<Long> deptIds, Pageable pageable) {
-        Page<User> page = userRepository.findAll(UserSpec.getSpec(user, deptIds), pageable);
+    public Map<String, Object> queryAll(UserQuery query, Pageable pageable) {
+        Page<User> page = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
         return PageUtils.toPage(page.map(userMapper::toDto));
     }
 }

@@ -3,10 +3,12 @@ package com.dxj.admin.service;
 import com.dxj.admin.domain.Permission;
 import com.dxj.admin.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.PermissionRepository;
 import com.dxj.admin.service.spec.PermissionSpec;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -144,7 +146,7 @@ public class PermissionService {
      * 不分页
      */
     @Cacheable(key = "'queryAll:'+#p0")
-    public List<PermissionDTO> queryAll(String name) {
-        return permissionMapper.toDto(permissionRepository.findAll(PermissionSpec.getSpec(name)));
+    public List<PermissionDTO> queryAll(CommonQuery query) {
+        return permissionMapper.toDto(permissionRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder)));
     }
 }

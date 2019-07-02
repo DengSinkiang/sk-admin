@@ -3,6 +3,7 @@ package com.dxj.admin.controller;
 import com.dxj.admin.config.DataScope;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.dto.DeptDTO;
+import com.dxj.admin.query.DeptQuery;
 import com.dxj.admin.service.DeptService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -39,10 +40,10 @@ public class DeptController {
     @Log("查询部门")
     @GetMapping(value = "/dept")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT','DEPT_ALL','DEPT_SELECT')")
-    public ResponseEntity<Map<String, Object>> getDept(DeptDTO resources) {
+    public ResponseEntity<Map<String, Object>> getDept(DeptQuery query) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
-        List<DeptDTO> deptDTOS = deptService.queryAll(resources, deptIds);
+        List<DeptDTO> deptDTOS = deptService.queryAll(query, deptIds);
         return new ResponseEntity<>(deptService.buildTree(deptDTOS), HttpStatus.OK);
     }
 

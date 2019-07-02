@@ -6,9 +6,11 @@ import com.dxj.admin.dto.RoleDTO;
 import com.dxj.admin.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.mapper.RoleSmallMapper;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.RoleRepository;
 import com.dxj.admin.service.spec.RoleSpec;
 import com.dxj.common.exception.EntityExistException;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +135,8 @@ public class RoleService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(String name, Pageable pageable) {
-        Page<Role> page = roleRepository.findAll(RoleSpec.getSpec(name), pageable);
+    public Map<String, Object> queryAll(CommonQuery query, Pageable pageable) {
+        Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
         return PageUtils.toPage(page.map(roleMapper::toDto));
     }
 
@@ -143,7 +145,7 @@ public class RoleService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public List<RoleDTO> queryAll(Pageable pageable){
-        List<Role> roles = roleRepository.findAll(RoleSpec.getSpec(null), pageable).getContent();
+        List<Role> roles = roleRepository.findAll(pageable).getContent();
         return roleMapper.toDto(roles);
     }
 }

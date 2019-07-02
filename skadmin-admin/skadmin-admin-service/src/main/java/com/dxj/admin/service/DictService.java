@@ -3,8 +3,9 @@ package com.dxj.admin.service;
 import com.dxj.admin.domain.Dict;
 import com.dxj.admin.dto.DictDTO;
 import com.dxj.admin.mapper.DictMapper;
+import com.dxj.admin.query.DictQuery;
 import com.dxj.admin.repository.DictRepository;
-import com.dxj.admin.service.spec.DictSpec;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,8 @@ public class DictService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(DictDTO dict, Pageable pageable) {
-        Page<Dict> page = dictRepository.findAll(DictSpec.getSpec(dict), pageable);
+    public Map<String, Object> queryAll(DictQuery query, Pageable pageable) {
+        Page<Dict> page = dictRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
         return PageUtils.toPage(page.map(dictMapper::toDto));
     }
 

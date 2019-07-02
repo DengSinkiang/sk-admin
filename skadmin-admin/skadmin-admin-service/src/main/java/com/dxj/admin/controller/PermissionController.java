@@ -2,6 +2,7 @@ package com.dxj.admin.controller;
 
 import com.dxj.admin.domain.Permission;
 import com.dxj.admin.dto.PermissionDTO;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.service.PermissionService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -45,8 +46,8 @@ public class PermissionController {
     @Log("查询权限")
     @GetMapping(value = "/permissions")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_SELECT')")
-    public ResponseEntity<Map<String, Object>> getPermissions(@RequestParam(required = false) String name) {
-        List<PermissionDTO> permissionDTOS = permissionService.queryAll(name);
+    public ResponseEntity<Map<String, Object>> getPermissions(CommonQuery query) {
+        List<PermissionDTO> permissionDTOS = permissionService.queryAll(query);
         return new ResponseEntity<>(permissionService.buildTree(permissionDTOS), HttpStatus.OK);
     }
 

@@ -4,16 +4,15 @@ import com.dxj.common.annotation.Query;
 import lombok.Data;
 
 /**
- * @Author: dxj
- * @Date: 2019-07-02 18:22
+ * @AUTHOR: sinkiang
+ * @DATE: 2019-07-02 20:02
  */
 @Data
-public class LogQuery {
+public class LoginLogQuery {
 
     @Query(type = Query.Type.LIKE)
     private String username;
 
     @Query
     private String logType;
-
 }

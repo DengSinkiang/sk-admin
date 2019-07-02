@@ -3,6 +3,7 @@ package com.dxj.admin.controller;
 import com.dxj.admin.config.DataScope;
 import com.dxj.admin.domain.Job;
 import com.dxj.admin.dto.JobDTO;
+import com.dxj.admin.query.JobQuery;
 import com.dxj.admin.service.JobService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -39,13 +40,10 @@ public class JobController {
     @Log("查询岗位")
     @GetMapping(value = "/job")
     @PreAuthorize("hasAnyRole('ADMIN', 'USERJOB_ALL', 'USERJOB_SELECT', 'USER_ALL', 'USER_SELECT')")
-    public ResponseEntity<Map<String, Object>> getJobs(@RequestParam(required = false) String name,
-                                                       @RequestParam(required = false) Long deptId,
-                                                       @RequestParam(required = false) Boolean enabled,
-                                                       Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getJobs(JobQuery query, Pageable pageable) {
         // 数据权限
         Set<Long> deptIds = dataScope.getDeptIds();
-        return new ResponseEntity<>(jobService.queryAll(name, enabled, deptIds, deptId, pageable), HttpStatus.OK);
+        return new ResponseEntity<>(jobService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     @Log("新增岗位")

@@ -2,6 +2,7 @@ package com.dxj.admin.controller;
 
 import com.dxj.admin.domain.DictDetail;
 import com.dxj.admin.dto.DictDetailDTO;
+import com.dxj.admin.query.DictDetailQuery;
 import com.dxj.admin.service.DictDetailService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
@@ -36,9 +37,9 @@ public class DictDetailController {
 
     @Log("查询字典详情")
     @GetMapping(value = "/dictDetail")
-    public ResponseEntity<Map<String, Object>> getDictDetails(DictDetailDTO resources,
-                                              @PageableDefault(sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return new ResponseEntity<>(dictDetailService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getDictDetail(DictDetailQuery query,
+                                                             @PageableDefault(sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return new ResponseEntity<>(dictDetailService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     @Log("新增字典详情")

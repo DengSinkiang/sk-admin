@@ -4,6 +4,7 @@ import com.dxj.admin.domain.Menu;
 import com.dxj.admin.domain.vo.MenuVo;
 import com.dxj.admin.dto.MenuDTO;
 import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.service.MenuService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
@@ -71,8 +72,8 @@ public class MenuController {
     @Log("查询菜单")
     @GetMapping(value = "/menus")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_SELECT')")
-    public ResponseEntity<Map<String, Object>> getMenus(@RequestParam(required = false) String name) {
-        List<MenuDTO> menuDTOList = menuService.queryAll(name);
+    public ResponseEntity<Map<String, Object>> getMenus(CommonQuery query) {
+        List<MenuDTO> menuDTOList = menuService.queryAll(query);
         return new ResponseEntity<>(menuService.buildTree(menuDTOList), HttpStatus.OK);
     }
 

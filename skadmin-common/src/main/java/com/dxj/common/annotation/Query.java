@@ -32,19 +32,15 @@ public @interface Query {
 
     enum Type {
         EQUAL
-        /** Dong ZhaoYang 2017/8/7 大于等于 */
+        // Dong ZhaoYang 2017/8/7 大于等于
         , GREATER_THAN
-        /** Dong ZhaoYang 2017/8/7 小于等于 */
+        // Dong ZhaoYang 2017/8/7 小于等于
         , LESS_THAN
-        /** Dong ZhaoYang 2017/8/7 中模糊查询 */
-        , INNER_LIKE
-        /** Dong ZhaoYang 2017/8/7 左模糊查询 */
-        , LEFT_LIKE
-        /** Dong ZhaoYang 2017/8/7 右模糊查询 */
-        , RIGHT_LIKE
-        /** Dong ZhaoYang 2017/8/7 小于 */
+        // Dong ZhaoYang 2017/8/7 中模糊查询
+        , LIKE
+        // Dong ZhaoYang 2017/8/7 小于
         , LESS_THAN_NQ
-        //** jie 2019/6/4 包含 */
+        // jie 2019/6/4 包含
         , IN
     }
 
@@ -53,9 +49,9 @@ public @interface Query {
      * 适用于简单连接查询，复杂的请自定义该注解，或者使用sql查询
      */
     enum Join {
-        /** jie 2019-6-4 13:18:30 左连接 */
+        // jie 2019-6-4 13:18:30 左连接
         LEFT
-        /** jie 2019-6-4 13:18:30 右连接 */
+        // jie 2019-6-4 13:18:30 右连接
         , RIGHT
     }
 

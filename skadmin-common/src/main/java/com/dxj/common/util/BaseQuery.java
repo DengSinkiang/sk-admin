@@ -75,17 +75,10 @@ public class BaseQuery {
                             list.add(cb.lessThan(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
-                        case INNER_LIKE:
+                        case LIKE:
                             list.add(cb.like(getExpression(attributeName, join, root)
                                     .as(String.class), "%" + val.toString() + "%"));
                             break;
-                        case LEFT_LIKE:
-                            list.add(cb.like(getExpression(attributeName, join, root)
-                                    .as(String.class), "%" + val.toString()));
-                            break;
-                        case RIGHT_LIKE:
-                            list.add(cb.like(getExpression(attributeName, join, root)
-                                    .as(String.class), val.toString() + "%"));
                         case IN:
                             if (CollUtil.isNotEmpty((Collection<Long>) val)) {
                                 list.add(getExpression(attributeName, join, root).in((Collection<Long>) val));

@@ -3,9 +3,10 @@ package com.dxj.admin.service;
 import com.dxj.admin.domain.Dept;
 import com.dxj.admin.dto.DeptDTO;
 import com.dxj.admin.mapper.DeptMapper;
+import com.dxj.admin.query.DeptQuery;
 import com.dxj.admin.repository.DeptRepository;
-import com.dxj.admin.service.spec.DeptSpec;
 import com.dxj.common.exception.BadRequestException;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -53,6 +54,7 @@ public class DeptService {
     public Set<Dept> findByRoleIds(Long id) {
         return deptRepository.findByRoles_Id(id);
     }
+
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> buildTree(List<DeptDTO> deptDTOS) {
         Set<DeptDTO> trees = new LinkedHashSet<>();
@@ -124,7 +126,7 @@ public class DeptService {
      * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public List<DeptDTO> queryAll(DeptDTO dept, Set<Long> deptIds) {
-        return deptMapper.toDto(deptRepository.findAll(DeptSpec.getSpec(dept, deptIds)));
+    public List<DeptDTO> queryAll(DeptQuery query, Set<Long> deptIds) {
+        return deptMapper.toDto(deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder)));
     }
 }
