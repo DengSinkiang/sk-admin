@@ -130,7 +130,6 @@ public class UserController {
     }
 
     /**
-     * zx
      * 验证密码
      *
      * @param user
@@ -153,7 +152,7 @@ public class UserController {
     }
 
     /**
-     *  修改密码
+     * 修改密码
      *
      * @param user
      * @return

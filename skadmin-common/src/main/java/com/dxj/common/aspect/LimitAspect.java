@@ -49,7 +49,6 @@ public class LimitAspect {
         Method signatureMethod = signature.getMethod();
         RateLimit limit = signatureMethod.getAnnotation(RateLimit.class);
         LimitType limitType = limit.limitType();
-        //String name = annotation.name();
         String key = limit.key();
         if (StringUtils.isEmpty(key)) {
             if (limitType == LimitType.IP) {

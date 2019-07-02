@@ -25,7 +25,7 @@ public class Result<T> {
      *  失败时候的调用
      * */
     public static  <T> Result<T> error(CodeMsg codeMsg){
-        return new Result<T>(codeMsg);
+        return new Result<>(codeMsg);
     }
 
     private Result(T data) {
