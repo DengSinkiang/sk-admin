@@ -18,8 +18,8 @@ public class LoginLogSpec {
             List<Predicate> list = new ArrayList<>();
 
 
-            if(!ObjectUtils.isEmpty(log.getUsername())){
-                list.add(cb.like(root.get("username").as(String.class),"%"+log.getUsername()+"%"));
+            if (!ObjectUtils.isEmpty(log.getUsername())) {
+                list.add(cb.like(root.get("username").as(String.class), "%" + log.getUsername() + "%"));
             }
 
             if (!ObjectUtils.isEmpty(log.getLogType())) {
