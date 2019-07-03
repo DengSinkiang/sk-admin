@@ -7,7 +7,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import java.nio.charset.Charset;
 
 /**
- * 重写序列化器
+ * 必须重写序列化器，否则@Cacheable注解的key会报类型转换错误
  *
  * @Author: dxj
  * @Date: 2019-05-14 09:58
