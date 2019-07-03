@@ -42,7 +42,7 @@ public class JobController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USERJOB_ALL', 'USERJOB_SELECT', 'USER_ALL', 'USER_SELECT')")
     public ResponseEntity<Map<String, Object>> getJobs(JobQuery query, Pageable pageable) {
         // 数据权限
-        Set<Long> deptIds = dataScope.getDeptIds();
+        query.setDeptIds(dataScope.getDeptIds());
         return new ResponseEntity<>(jobService.queryAll(query, pageable), HttpStatus.OK);
     }
 

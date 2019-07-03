@@ -131,16 +131,16 @@ public class MenuService {
         return menuRepository.findByPid(pid);
     }
 
-    public Map<String, Object> buildTree(List<MenuDTO> menuDTOS) {
+    public Map<String, Object> buildTree(List<MenuDTO> menuDTOs) {
         List<MenuDTO> trees = new ArrayList<>();
 
-        for (MenuDTO menuDTO : menuDTOS) {
+        for (MenuDTO menuDTO : menuDTOs) {
 
             if ("0".equals(menuDTO.getPid().toString())) {
                 trees.add(menuDTO);
             }
 
-            for (MenuDTO it : menuDTOS) {
+            for (MenuDTO it : menuDTOs) {
                 if (it.getPid().equals(menuDTO.getId())) {
                     if (menuDTO.getChildren() == null) {
                         menuDTO.setChildren(new ArrayList<>());
@@ -150,8 +150,8 @@ public class MenuService {
             }
         }
         Map<String, Object> map = new HashMap<>();
-        map.put("content", trees.size() == 0 ? menuDTOS : trees);
-        map.put("totalElements", menuDTOS.size());
+        map.put("content", trees.size() == 0 ? menuDTOs : trees);
+        map.put("totalElements", menuDTOs.size());
         return map;
     }
 
