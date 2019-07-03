@@ -4,7 +4,7 @@ import com.dxj.log.annotation.Log;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.quartz.domain.QuartzJob;
-import com.dxj.quartz.domain.QuartzLog;
+import com.dxj.quartz.query.QuartzJobQuery;
 import com.dxj.quartz.service.QuartzJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +34,21 @@ public class QuartzJobController {
     @Log("查询定时任务")
     @GetMapping(value = "/jobs")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
-    public ResponseEntity<Object> getJobs(QuartzJob resources, Pageable pageable) {
-        return new ResponseEntity<>(quartzJobService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> getJobs(QuartzJobQuery query, Pageable pageable) {
+        return new ResponseEntity<>(quartzJobService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     /**
      * 查询定时任务日志
      *
-     * @param resources
+     * @param query
      * @param pageable
      * @return
      */
     @GetMapping(value = "/jobLogs")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
-    public ResponseEntity<Object> getJobLogs(QuartzLog resources, Pageable pageable) {
-        return new ResponseEntity<>(quartzJobService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> getJobLogs(QuartzJobQuery query, Pageable pageable) {
+        return new ResponseEntity<>(quartzJobService.queryAllLog(query, pageable), HttpStatus.OK);
     }
 
     @Log("新增定时任务")

@@ -1,5 +1,7 @@
 package com.dxj.tool.service;
 
+import com.dxj.common.util.BaseQuery;
+import com.dxj.tool.query.QiniuContentQuery;
 import com.dxj.tool.service.spec.QiNiuSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.QiniuConfig;
@@ -240,7 +242,7 @@ public class QiNiuService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(QiniuContent qiniuContent, Pageable pageable) {
-        return PageUtils.toPage(qiniuContentRepository.findAll(QiNiuSpec.getSpec(qiniuContent), pageable));
+    public Object queryAll(QiniuContentQuery query, Pageable pageable) {
+        return PageUtils.toPage(qiniuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

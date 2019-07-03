@@ -5,6 +5,8 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.dxj.common.enums.CommEnum;
+import com.dxj.common.util.BaseQuery;
+import com.dxj.tool.query.PictureQuery;
 import com.dxj.tool.service.spec.PictureSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.Picture;
@@ -125,7 +127,7 @@ public class PictureService {
      * 分页查询
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> queryAll(Picture picture, Pageable pageable) {
-        return PageUtils.toPage(pictureRepository.findAll(PictureSpec.getSpec(picture), pageable));
+    public Map<String, Object> queryAll(PictureQuery query, Pageable pageable) {
+        return PageUtils.toPage(pictureRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

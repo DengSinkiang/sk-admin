@@ -1,13 +1,12 @@
 package com.dxj.quartz.service;
 
-import com.dxj.quartz.domain.QuartzLog;
+import com.dxj.common.util.BaseQuery;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.quartz.domain.QuartzJob;
+import com.dxj.quartz.query.QuartzJobQuery;
 import com.dxj.quartz.util.QuartzManage;
 import com.dxj.quartz.repository.QuartzJobRepository;
 import com.dxj.quartz.repository.QuartzLogRepository;
-import com.dxj.quartz.service.spec.QuartzJobSpec;
-import com.dxj.quartz.service.spec.QuartzLogSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.quartz.CronExpression;
@@ -107,11 +106,11 @@ public class QuartzJobService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(QuartzJob quartzJob, Pageable pageable) {
-        return PageUtils.toPage(quartzJobRepository.findAll(QuartzJobSpec.getSpec(quartzJob), pageable));
+    public Object queryAll(QuartzJobQuery query, Pageable pageable) {
+        return PageUtils.toPage(quartzJobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 
-    public Object queryAll(QuartzLog quartzLog, Pageable pageable) {
-        return PageUtils.toPage(quartzLogRepository.findAll(QuartzLogSpec.getSpec(quartzLog), pageable));
+    public Object queryAllLog(QuartzJobQuery query, Pageable pageable) {
+        return PageUtils.toPage(quartzLogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

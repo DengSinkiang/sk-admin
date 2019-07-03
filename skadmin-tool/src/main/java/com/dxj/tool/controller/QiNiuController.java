@@ -1,6 +1,7 @@
 package com.dxj.tool.controller;
 
 import com.dxj.common.response.Result;
+import com.dxj.tool.query.QiniuContentQuery;
 import com.dxj.tool.service.QiNiuService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.log.annotation.Log;
@@ -50,8 +51,8 @@ public class QiNiuController {
 
     @Log("查询文件")
     @GetMapping(value = "/qiNiuContent")
-    public ResponseEntity<Object> getRoles(QiniuContent resources, Pageable pageable) {
-        return new ResponseEntity<>(qiNiuService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> getRoles(QiniuContentQuery query, Pageable pageable) {
+        return new ResponseEntity<>(qiNiuService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     /**

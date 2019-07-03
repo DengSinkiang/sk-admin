@@ -2,6 +2,7 @@ package com.dxj.tool.controller;
 
 import com.dxj.log.annotation.Log;
 import com.dxj.tool.domain.Picture;
+import com.dxj.tool.query.PictureQuery;
 import com.dxj.tool.service.PictureService;
 import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class PictureController {
     @Log("查询图片")
     @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_SELECT')")
     @GetMapping(value = "/pictures")
-    public ResponseEntity<Map<String, Object>> getRoles(Picture resources, Pageable pageable) {
-        return new ResponseEntity<>(pictureService.queryAll(resources, pageable), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getRoles(PictureQuery query, Pageable pageable) {
+        return new ResponseEntity<>(pictureService.queryAll(query, pageable), HttpStatus.OK);
     }
 
     /**
