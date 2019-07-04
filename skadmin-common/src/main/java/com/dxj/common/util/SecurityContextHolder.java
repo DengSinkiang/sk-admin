@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * 获取当前登录的用户名
+ * 获取当前登录的用户信息
  *
  * @author dxj
  * @date 2019-04-17

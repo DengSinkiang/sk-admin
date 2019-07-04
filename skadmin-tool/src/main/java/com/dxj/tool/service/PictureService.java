@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSON;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.tool.query.PictureQuery;
-import com.dxj.tool.service.spec.PictureSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.Picture;
 import lombok.extern.slf4j.Slf4j;

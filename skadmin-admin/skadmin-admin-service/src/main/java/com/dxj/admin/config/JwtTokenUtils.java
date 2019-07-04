@@ -35,7 +35,7 @@ public class JwtTokenUtils implements Serializable {
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    public String getUsernameFromToken(String token) {
+    String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -111,7 +111,7 @@ public class JwtTokenUtils implements Serializable {
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    Boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
         final Date created = getIssuedAtDateFromToken(token);
 //        final Date expiration = getExpirationDateFromToken(token);

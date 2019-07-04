@@ -14,6 +14,8 @@ import com.dxj.common.util.*;
 import com.dxj.log.annotation.Log;
 import com.dxj.tool.domain.Picture;
 import com.dxj.tool.domain.VerificationCode;
+import com.dxj.tool.domain.vo.EmailVo;
+import com.dxj.tool.service.EmailService;
 import com.dxj.tool.service.PictureService;
 import com.dxj.tool.service.VerificationCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,14 +53,17 @@ public class UserController {
 
     private final VerificationCodeService verificationCodeService;
 
+    private final EmailService emailService;
+
     @Autowired
-    public UserController(UserService userService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService, RoleService roleService) {
+    public UserController(UserService userService, PictureService pictureService, DataScope dataScope, DeptService deptService, VerificationCodeService verificationCodeService, RoleService roleService, EmailService emailService) {
         this.userService = userService;
         this.pictureService = pictureService;
         this.dataScope = dataScope;
         this.deptService = deptService;
         this.verificationCodeService = verificationCodeService;
         this.roleService = roleService;
+        this.emailService = emailService;
     }
 
     @Log("查询用户")
@@ -194,12 +199,39 @@ public class UserController {
     @PostMapping(value = "/users/updateEmail/{code}")
     public ResponseEntity<Void> updateEmail(@PathVariable String code, @RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(user.getPassword()))) {
+        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
         VerificationCode verificationCode = new VerificationCode(code, CommEnum.RESET_MAIL.getEntityName(), "email", user.getEmail());
         verificationCodeService.validated(verificationCode);
         userService.updateEmail(userDetails.getUsername(), user.getEmail());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/code/resetEmail")
+    public ResponseEntity<Void> resetEmail(@RequestBody VerificationCode code) {
+        sendEmail(code);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private void sendEmail(@RequestBody VerificationCode code) {
+        code.setScenes(CommEnum.RESET_MAIL.getEntityName());
+        EmailVo emailVo = verificationCodeService.sendEmail(code);
+        emailService.send(emailVo, emailService.find());
+    }
+
+    @PostMapping(value = "/code/email/resetPass")
+    public ResponseEntity<Void> resetPass(@RequestParam String email) {
+        VerificationCode code = new VerificationCode();
+        code.setType("email");
+        code.setValue(email);
+        sendEmail(code);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/code/validated")
+    public ResponseEntity<Void> validated(VerificationCode code){
+        verificationCodeService.validated(code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

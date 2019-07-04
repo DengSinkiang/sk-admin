@@ -2,7 +2,6 @@ package com.dxj.tool.service;
 
 import com.dxj.common.util.BaseQuery;
 import com.dxj.tool.query.QiniuContentQuery;
-import com.dxj.tool.service.spec.QiNiuSpec;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.QiniuConfig;
 import com.dxj.tool.domain.QiniuContent;

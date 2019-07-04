@@ -32,15 +32,15 @@ public class JobService {
 
     private final JobRepository jobRepository;
 
-    @Autowired
-    private DeptRepository deptRepository;
+    private final DeptRepository deptRepository;
 
     private final JobMapper jobMapper;
 
     @Autowired
-    public JobService(JobRepository jobRepository, JobMapper jobMapper) {
+    public JobService(JobRepository jobRepository, JobMapper jobMapper, DeptRepository deptRepository) {
         this.jobRepository = jobRepository;
         this.jobMapper = jobMapper;
+        this.deptRepository = deptRepository;
     }
 
     @Cacheable(key = "#p0")
