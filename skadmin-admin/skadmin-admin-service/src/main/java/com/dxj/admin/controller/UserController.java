@@ -10,6 +10,8 @@ import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
+import com.dxj.common.response.CodeMsg;
+import com.dxj.common.response.Result;
 import com.dxj.common.util.*;
 import com.dxj.log.annotation.Log;
 import com.dxj.tool.domain.Picture;
@@ -152,11 +154,10 @@ public class UserController {
         System.out.println(userDetails.getUsername());
         System.out.println(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()));
         Map<String, Object> map = new HashMap<>();
-        map.put("status", 200);
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()))) {
-            map.put("status", 400);
+            return new ResponseEntity<>(new Result(CodeMsg.VALIDATE_ERROR), HttpStatus.OK);
         }
-        return new ResponseEntity<>(map, HttpStatus.OK);
+        return new ResponseEntity<>(new Result(CodeMsg.SUCCESS), HttpStatus.OK);
     }
 
     /**

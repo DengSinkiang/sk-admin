@@ -18,7 +18,7 @@ public class Result<T> {
      *  成功时候的调用
      * */
     public static  <T> Result<T> success(T data){
-        return new Result<T>(data);
+        return new Result<>(data);
     }
 
     /**
@@ -34,12 +34,12 @@ public class Result<T> {
         this.msg = "success";
     }
 
-    private Result(int code, String msg) {
+    public Result(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    private Result(CodeMsg codeMsg) {
+    public Result(CodeMsg codeMsg) {
         if(codeMsg != null) {
             this.code = codeMsg.getCode();
             this.msg = codeMsg.getMsg();
