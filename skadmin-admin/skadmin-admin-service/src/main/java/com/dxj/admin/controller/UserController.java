@@ -153,7 +153,6 @@ public class UserController {
         System.out.println("----------");
         System.out.println(userDetails.getUsername());
         System.out.println(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()));
-        Map<String, Object> map = new HashMap<>();
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()))) {
             return new ResponseEntity<>(new Result(CodeMsg.VALIDATE_ERROR), HttpStatus.OK);
         }
