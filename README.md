@@ -73,6 +73,7 @@
     - mapper mapstruct的通用mapper
     - enums 常量枚举
     - redis redis缓存相关配置
+    - response 统一封装返回信息
     - swagger 接口文档配置
     - util 通用工具
 - skadmin-admin 系统核心模块
@@ -80,12 +81,12 @@
         - domain
 	- dto
 	- mapper
+	- query 查询相关的条件
     - skadmin-admin-service
         - config 配置跨域与静态资源及JWT的安全过滤器配置
         - controller 控制器
 	- repository 数据库操作
 	- service 业务实现
-	    - spec 业务查询条件
 	SkAdmin.java 启动类	    
 - skadmin-log 系统日志模块
     - skadmin-log-interface
@@ -93,6 +94,7 @@
         - domain
         - dto
         - mapper
+        - query 查询条件
     - skadmin-log-service
         - aspect
         - controller
