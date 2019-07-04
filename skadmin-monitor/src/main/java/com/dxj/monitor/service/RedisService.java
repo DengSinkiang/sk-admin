@@ -44,7 +44,6 @@ public class RedisService {
                     PageUtils.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),
                     pageable, redisVos.size());
         }
-        // 释放资源还给连接池
 
     }
 
@@ -52,14 +51,12 @@ public class RedisService {
         try (Jedis jedis = pool.getResource()) {
             jedis.set(redisVo.getKey(), redisVo.getValue());
         }
-        // 释放资源还给连接池
     }
 
     public void delete(String key) {
         try (Jedis jedis = pool.getResource()) {
             jedis.del(key);
         }
-        // 释放资源还给连接池
 
     }
 
