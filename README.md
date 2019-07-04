@@ -100,14 +100,13 @@
         - service
 - skadmin-tool 系统第三方工具模块
 - skadmin-generator 系统代码生成模块
-- skadmin-quartz 定时任务模块
+- skadmin-monitor 系统监控模块
     - config 配置日志拦截器与WebSocket等
     - domain 实体类
     - repository 数据库操作
     - controller 控制器
     - service 业务实现
-        - spec 业务查询条件
-- skadmin-monitor 系统监控模块
+- skadmin-quartz 定时任务模块
 ```
 #### 后端技术栈
 ```
