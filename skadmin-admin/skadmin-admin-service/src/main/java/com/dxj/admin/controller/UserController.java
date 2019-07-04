@@ -208,31 +208,21 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 发送邮箱验证码
+     * @param code
+     * @return
+     */
     @PostMapping(value = "/code/resetEmail")
     public ResponseEntity<Void> resetEmail(@RequestBody VerificationCode code) {
         sendEmail(code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private void sendEmail(@RequestBody VerificationCode code) {
+    private void sendEmail(VerificationCode code) {
         code.setScenes(CommEnum.RESET_MAIL.getEntityName());
         EmailVo emailVo = verificationCodeService.sendEmail(code);
         emailService.send(emailVo, emailService.find());
-    }
-
-    @PostMapping(value = "/code/email/resetPass")
-    public ResponseEntity<Void> resetPass(@RequestParam String email) {
-        VerificationCode code = new VerificationCode();
-        code.setType("email");
-        code.setValue(email);
-        sendEmail(code);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/code/validated")
-    public ResponseEntity<Void> validated(VerificationCode code){
-        verificationCodeService.validated(code);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
