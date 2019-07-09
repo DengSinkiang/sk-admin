@@ -1,5 +1,6 @@
 package com.dxj.log.domain;
 
+import com.dxj.common.annotation.Query;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,28 +22,23 @@ public class LoginLog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 操作用户
-     */
+    // 操作用户
+    @Query(type = Query.Type.LIKE)
     private String username;
 
-    /**
-     * 日志类型
-     */
+    // 日志类型
     @Column(name = "log_type")
+    @Query
     private String logType;
-    /**
-     * 请求ip
-     */
+
+    // 请求ip
     @Column(name = "request_ip")
     private String requestIp;
-    /**
-     * 请求耗时
-     */
+
+    //请求耗时
     private Long time;
-    /**
-     * 创建日期
-     */
+
+    // 创建日期
     @CreationTimestamp
     @Column(name = "create_time")
     private Timestamp createTime;

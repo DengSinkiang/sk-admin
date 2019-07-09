@@ -1,10 +1,9 @@
 package com.dxj.tool.service;
 
 import com.dxj.common.util.BaseQuery;
-import com.dxj.tool.query.QiniuContentQuery;
+import com.dxj.tool.domain.QiNiuContent;
 import com.dxj.common.util.PageUtils;
-import com.dxj.tool.domain.QiniuConfig;
-import com.dxj.tool.domain.QiniuContent;
+import com.dxj.tool.domain.QiNiuConfig;
 import com.dxj.tool.util.QiNiuUtils;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
@@ -62,9 +61,9 @@ public class QiNiuService {
      * @return
      */
     @Cacheable(cacheNames = "qiNiuConfig", key = "'1'")
-    public QiniuConfig find() {
-        Optional<QiniuConfig> qiniuConfig = qiNiuConfigRepository.findById(1L);
-        return qiniuConfig.orElseGet(QiniuConfig::new);
+    public QiNiuConfig find() {
+        Optional<QiNiuConfig> qiniuConfig = qiNiuConfigRepository.findById(1L);
+        return qiniuConfig.orElseGet(QiNiuConfig::new);
     }
 
     /**
@@ -75,7 +74,7 @@ public class QiNiuService {
      */
     @CachePut(cacheNames = "qiNiuConfig", key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public QiniuConfig update(QiniuConfig qiniuConfig) {
+    public QiNiuConfig update(QiNiuConfig qiniuConfig) {
         if (!(qiniuConfig.getHost().toLowerCase().startsWith("http://") || qiniuConfig.getHost().toLowerCase().startsWith("https://"))) {
             throw new BadRequestException("外链域名必须以http://或者https://开头");
         }
@@ -91,7 +90,7 @@ public class QiNiuService {
      */
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public QiniuContent upload(MultipartFile file, QiniuConfig qiniuConfig) {
+    public QiNiuContent upload(MultipartFile file, QiNiuConfig qiniuConfig) {
 
         long size = maxSize * 1024 * 1024;
         if (file.getSize() > size) {
@@ -114,7 +113,7 @@ public class QiNiuService {
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
             //存入数据库
-            QiniuContent qiniuContent = new QiniuContent();
+            QiNiuContent qiniuContent = new QiNiuContent();
             qiniuContent.setBucket(qiniuConfig.getBucket());
             qiniuContent.setType(qiniuConfig.getType());
             qiniuContent.setKey(putRet.key);
@@ -133,10 +132,10 @@ public class QiNiuService {
      * @return
      */
     @Cacheable(key = "'content:'+#p0")
-    public QiniuContent findByContentId(Long id) {
-        Optional<QiniuContent> qiniuContent = qiniuContentRepository.findById(id);
-        ValidationUtils.isNull(qiniuContent, "QiniuContent", "id", id);
-        return qiniuContent.orElse(null);
+    public QiNiuContent findByContentId(Long id) {
+        Optional<QiNiuContent> qiNiuContent = qiniuContentRepository.findById(id);
+        ValidationUtils.isNull(qiNiuContent, "QiNiuContent", "id", id);
+        return qiNiuContent.orElse(null);
     }
 
     /**
@@ -146,7 +145,7 @@ public class QiNiuService {
      * @param config
      * @return
      */
-    public String download(QiniuContent content, QiniuConfig config) {
+    public String download(QiNiuContent content, QiNiuConfig config) {
         String finalUrl;
         String TYPE = "公开";
         if (TYPE.equals(content.getType())) {
@@ -169,7 +168,7 @@ public class QiNiuService {
      */
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public void delete(QiniuContent content, QiniuConfig config) {
+    public void delete(QiNiuContent content, QiNiuConfig config) {
         //构造一个带指定Zone对象的配置类
         Configuration cfg = QiNiuUtils.getConfiguration(config.getZone());
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
@@ -189,7 +188,7 @@ public class QiNiuService {
      */
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public void synchronize(QiniuConfig config) {
+    public void synchronize(QiNiuConfig config) {
         if (config.getId() == null) {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
@@ -207,11 +206,11 @@ public class QiNiuService {
         BucketManager.FileListIterator fileListIterator = bucketManager.createFileListIterator(config.getBucket(), prefix, limit, delimiter);
         while (fileListIterator.hasNext()) {
             //处理获取的file list结果
-            QiniuContent qiniuContent;
+            QiNiuContent qiniuContent;
             FileInfo[] items = fileListIterator.next();
             for (FileInfo item : items) {
                 if (qiniuContentRepository.findByKey(item.key) == null) {
-                    qiniuContent = new QiniuContent();
+                    qiniuContent = new QiNiuContent();
                     qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(item.fsize + "")));
                     qiniuContent.setKey(item.key);
                     qiniuContent.setType(config.getType());
@@ -231,7 +230,7 @@ public class QiNiuService {
      * @param config
      */
     @CacheEvict(allEntries = true)
-    public void deleteAll(Long[] ids, QiniuConfig config) {
+    public void deleteAll(Long[] ids, QiNiuConfig config) {
         for (Long id : ids) {
             delete(findByContentId(id), config);
         }
@@ -241,7 +240,7 @@ public class QiNiuService {
      * 分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(QiniuContentQuery query, Pageable pageable) {
+    public Object queryAll(QiNiuContent query, Pageable pageable) {
         return PageUtils.toPage(qiniuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

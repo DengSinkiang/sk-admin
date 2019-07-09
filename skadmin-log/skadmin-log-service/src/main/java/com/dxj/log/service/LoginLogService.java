@@ -6,7 +6,6 @@ import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.common.util.StringUtils;
 import com.dxj.log.domain.LoginLog;
-import com.dxj.log.query.LoginLogQuery;
 import com.dxj.log.repository.LoginLogRepository;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -82,7 +81,7 @@ public class LoginLogService {
         logRepository.save(log);
     }
 
-    public Page<LoginLog> queryAll(LoginLogQuery log, Pageable pageable){
+    public Page<LoginLog> queryAll(LoginLog log, Pageable pageable){
         return logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)),pageable);
     }
 }

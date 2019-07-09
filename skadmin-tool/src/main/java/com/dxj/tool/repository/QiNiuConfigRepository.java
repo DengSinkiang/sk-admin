@@ -1,11 +1,11 @@
 package com.dxj.tool.repository;
 
-import com.dxj.tool.domain.QiniuConfig;
+import com.dxj.tool.domain.QiNiuConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author dxj
  * @date 2019-05-31
  */
-public interface QiNiuConfigRepository extends JpaRepository<QiniuConfig, Long> {
+public interface QiNiuConfigRepository extends JpaRepository<QiNiuConfig, Long> {
 }

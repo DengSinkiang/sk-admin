@@ -1,5 +1,6 @@
 package com.dxj.log.domain;
 
+import com.dxj.common.annotation.Query;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,6 +26,7 @@ public class Log implements Serializable {
     /**
      * 操作用户
      */
+    @Query(type = Query.Type.LIKE)
     private String username;
 
     /**
@@ -47,6 +49,7 @@ public class Log implements Serializable {
      * 日志类型
      */
     @Column(name = "log_type")
+    @Query
     private String logType;
 
     /**

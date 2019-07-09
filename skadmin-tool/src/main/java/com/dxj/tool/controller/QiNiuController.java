@@ -1,12 +1,11 @@
 package com.dxj.tool.controller;
 
 import com.dxj.common.response.Result;
-import com.dxj.tool.query.QiniuContentQuery;
+import com.dxj.tool.domain.QiNiuContent;
 import com.dxj.tool.service.QiNiuService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.log.annotation.Log;
-import com.dxj.tool.domain.QiniuConfig;
-import com.dxj.tool.domain.QiniuContent;
+import com.dxj.tool.domain.QiNiuConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,20 +37,20 @@ public class QiNiuController {
     }
 
     @GetMapping(value = "/qiNiuConfig")
-    public ResponseEntity<QiniuConfig> get() {
+    public ResponseEntity<QiNiuConfig> get() {
         return new ResponseEntity<>(qiNiuService.find(), HttpStatus.OK);
     }
 
     @Log("配置七牛云存储")
     @PutMapping(value = "/qiNiuConfig")
-    public ResponseEntity<Void> emailConfig(@Validated @RequestBody QiniuConfig qiniuConfig) {
+    public ResponseEntity<Void> emailConfig(@Validated @RequestBody QiNiuConfig qiniuConfig) {
         qiNiuService.update(qiniuConfig);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Log("查询文件")
     @GetMapping(value = "/qiNiuContent")
-    public ResponseEntity<Object> getRoles(QiniuContentQuery query, Pageable pageable) {
+    public ResponseEntity<Object> getRoles(QiNiuContent query, Pageable pageable) {
         return new ResponseEntity<>(qiNiuService.queryAll(query, pageable), HttpStatus.OK);
     }
 
@@ -64,7 +63,7 @@ public class QiNiuController {
     @Log("上传文件")
     @PostMapping(value = "/qiNiuContent")
     public ResponseEntity<Result> upload(@RequestParam MultipartFile file) {
-        QiniuContent qiniuContent = qiNiuService.upload(file, qiNiuService.find());
+        QiNiuContent qiniuContent = qiNiuService.upload(file, qiNiuService.find());
         return new ResponseEntity<>(Result.success(qiniuContent), HttpStatus.OK);
     }
 

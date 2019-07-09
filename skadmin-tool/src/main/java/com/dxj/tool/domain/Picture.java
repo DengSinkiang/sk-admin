@@ -1,5 +1,6 @@
 package com.dxj.tool.domain;
 
+import com.dxj.common.annotation.Query;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,6 +23,7 @@ public class Picture implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Query(type = Query.Type.LIKE)
     private String filename;
 
     private String url;
@@ -38,6 +40,7 @@ public class Picture implements Serializable {
     @Column(name = "delete_url")
     private String delete;
 
+    @Query(type = Query.Type.LIKE)
     private String username;
 
     @CreationTimestamp

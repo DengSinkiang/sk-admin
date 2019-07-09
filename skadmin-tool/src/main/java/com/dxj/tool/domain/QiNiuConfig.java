@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "qiniu_config")
-public class QiniuConfig implements Serializable {
+public class QiNiuConfig implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

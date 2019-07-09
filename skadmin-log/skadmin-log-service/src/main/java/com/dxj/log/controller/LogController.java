@@ -2,9 +2,8 @@ package com.dxj.log.controller;
 
 import cn.hutool.core.lang.Dict;
 import com.dxj.common.util.SecurityContextHolder;
+import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;
-import com.dxj.log.query.LogQuery;
-import com.dxj.log.query.LoginLogQuery;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +37,13 @@ public class LogController {
 
     @GetMapping(value = "/logs/operation")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Object> getLogs(LogQuery logQuery, Pageable pageable){
+    public ResponseEntity<Object> getLogs(Log logQuery, Pageable pageable){
         logQuery.setLogType("INFO");
         return new ResponseEntity<>(logService.queryAll(logQuery, pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/logs/user")
-    public ResponseEntity<Object> getUserLogs(LogQuery log, Pageable pageable){
+    public ResponseEntity<Object> getUserLogs(Log log, Pageable pageable){
         log.setLogType("INFO");
         log.setUsername(SecurityContextHolder.getUsername());
         return new ResponseEntity<>(logService.queryAllByUser(log, pageable), HttpStatus.OK);
@@ -52,7 +51,7 @@ public class LogController {
 
     @GetMapping(value = "/logs/error")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Object> getErrorLogs(LogQuery log, Pageable pageable){
+    public ResponseEntity<Object> getErrorLogs(Log log, Pageable pageable){
         log.setLogType("ERROR");
         return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }
@@ -65,7 +64,7 @@ public class LogController {
 
     @GetMapping(value = "/logs/login")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLogQuery loginLog, Pageable pageable){
+    public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLog loginLog, Pageable pageable){
         return new ResponseEntity<>(loginLogService.queryAll(loginLog, pageable), HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.dxj.tool.domain;
 
+import com.dxj.common.annotation.Query;
 import lombok.Data;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +16,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name = "qiniu_content")
-public class QiniuContent implements Serializable {
+public class QiNiuContent implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,8 @@ public class QiniuContent implements Serializable {
     /**
      * 文件名，如qiniu.jpg
      */
-    @Column(name = "name",unique = false)
+    @Column(name = "name")
+    @Query(type = Query.Type.LIKE)
     private String key;
 
     /**

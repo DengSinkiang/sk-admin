@@ -4,7 +4,6 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
 import com.dxj.common.util.*;
 import com.dxj.log.domain.Log;
-import com.dxj.log.query.LogQuery;
 import com.dxj.log.repository.LogRepository;
 import com.dxj.log.mapper.LogErrorMapper;
 import com.dxj.log.mapper.LogSmallMapper;
@@ -103,7 +102,7 @@ public class LogService {
     public Dict findByErrDetail(Long id) {
         return Dict.create().set("exception", logRepository.findExceptionById(id));
     }
-    public Object queryAll(LogQuery logQuery, Pageable pageable){
+    public Object queryAll(Log logQuery, Pageable pageable){
 
         Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, logQuery, cb)),pageable);
         if (logQuery.getLogType().equals("ERROR")) {
@@ -113,7 +112,7 @@ public class LogService {
         return page;
     }
 
-    public Object queryAllByUser(LogQuery log, Pageable pageable) {
+    public Object queryAllByUser(Log log, Pageable pageable) {
         Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)),pageable);
         return PageUtils.toPage(page.map(logSmallMapper::toDto));
     }
