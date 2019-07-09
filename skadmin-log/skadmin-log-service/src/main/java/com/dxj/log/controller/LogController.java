@@ -35,34 +35,34 @@ public class LogController {
         this.logService = logService;
     }
 
-    @GetMapping(value = "/logs/operation")
+    @GetMapping(value = "/log/operation")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Object> getLogs(Log logQuery, Pageable pageable){
         logQuery.setLogType("INFO");
         return new ResponseEntity<>(logService.queryAll(logQuery, pageable), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/logs/user")
+    @GetMapping(value = "/log/user")
     public ResponseEntity<Object> getUserLogs(Log log, Pageable pageable){
         log.setLogType("INFO");
         log.setUsername(SecurityContextHolder.getUsername());
         return new ResponseEntity<>(logService.queryAllByUser(log, pageable), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/logs/error")
+    @GetMapping(value = "/log/error")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Object> getErrorLogs(Log log, Pageable pageable){
         log.setLogType("ERROR");
         return new ResponseEntity<>(logService.queryAll(log, pageable), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/logs/error/{id}")
+    @GetMapping(value = "/log/error/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Dict> getErrorLogs(@PathVariable Long id){
         return new ResponseEntity<>(logService.findByErrDetail(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/logs/login")
+    @GetMapping(value = "/log/login")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLog loginLog, Pageable pageable){
         return new ResponseEntity<>(loginLogService.queryAll(loginLog, pageable), HttpStatus.OK);
