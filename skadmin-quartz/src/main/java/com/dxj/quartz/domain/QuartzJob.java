@@ -1,5 +1,6 @@
 package com.dxj.quartz.domain;
 
+import com.dxj.common.annotation.Query;
 import lombok.Data;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,55 +26,40 @@ public class QuartzJob implements Serializable {
     @NotNull(groups = {Update.class})
     private Long id;
 
-    /**
-     * 定时器名称
-     */
+    // 定时器名称
     @Column(name = "job_name")
+    @Query(type = Query.Type.LIKE)
     private String jobName;
 
-    /**
-     * Bean名称
-     */
+    // Bean名称
     @Column(name = "bean_name")
     @NotBlank
     private String beanName;
 
-    /**
-     * 方法名称
-     */
+    // 方法名称
     @Column(name = "method_name")
     @NotBlank
     private String methodName;
 
-    /**
-     * 参数
-     */
+    // 参数
     @Column(name = "params")
     private String params;
 
-    /**
-     * cron表达式
-     */
+    // cron表达式
     @Column(name = "cron_expression")
     @NotBlank
     private String cronExpression;
 
-    /**
-     * 状态
-     */
+    // 状态
     @Column(name = "is_pause")
     private Boolean isPause = false;
 
-    /**
-     * 备注
-     */
+    // 备注
     @Column(name = "remark")
     @NotBlank
     private String remark;
 
-    /**
-     * 创建日期
-     */
+    // 创建日期
     @UpdateTimestamp
     @Column(name = "update_time")
     private Timestamp updateTime;

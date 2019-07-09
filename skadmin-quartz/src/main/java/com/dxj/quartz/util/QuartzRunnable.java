@@ -18,14 +18,14 @@ public class QuartzRunnable implements Runnable {
 
     private Object target;
     private Method method;
-    private String params;
+    private String param;
 
-    QuartzRunnable(String beanName, String methodName, String params)
+    QuartzRunnable(String beanName, String methodName, String param)
             throws NoSuchMethodException, SecurityException {
         this.target = SpringContextHolder.getBean(beanName);
-        this.params = params;
+        this.param = param;
 
-        if (StringUtils.isNotBlank(params)) {
+        if (StringUtils.isNotBlank(param)) {
             this.method = target.getClass().getDeclaredMethod(methodName, String.class);
         } else {
             this.method = target.getClass().getDeclaredMethod(methodName);
@@ -36,8 +36,8 @@ public class QuartzRunnable implements Runnable {
     public void run() {
         try {
             ReflectionUtils.makeAccessible(method);
-            if (StringUtils.isNotBlank(params)) {
-                method.invoke(target, params);
+            if (StringUtils.isNotBlank(param)) {
+                method.invoke(target, param);
             } else {
                 method.invoke(target);
             }

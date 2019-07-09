@@ -16,16 +16,6 @@ import java.util.List;
 public interface QuartzJobRepository extends JpaRepository<QuartzJob, Long>, JpaSpecificationExecutor<QuartzJob> {
 
     /**
-     * 更新状态
-     *
-     * @param id
-     */
-    @Transactional(rollbackFor = Exception.class)
-    @Modifying
-    @Query(value = "update quartz_job set is_pause = 1 where id = ?1", nativeQuery = true)
-    void updateIsPause(Long id);
-
-    /**
      * 查询不是启用的任务
      *
      * @return

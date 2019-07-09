@@ -42,7 +42,7 @@ public class AlipayUtils {
      * @param request
      * @return
      */
-    public boolean rsaCheck(HttpServletRequest request, AlipayConfig alipay){
+    public boolean rsaCheck(HttpServletRequest request, AlipayConfig aliPay){
 
         //获取支付宝POST过来反馈信息
         Map<String,String> params = new HashMap<>(1);
@@ -60,9 +60,9 @@ public class AlipayUtils {
 
         try {
             return AlipaySignature.rsaCheckV1(params,
-                    alipay.getPublicKey(),
-                    alipay.getCharset(),
-                    alipay.getSignType());
+                    aliPay.getPublicKey(),
+                    aliPay.getCharset(),
+                    aliPay.getSignType());
         } catch (AlipayApiException e) {
             return false;
         }
