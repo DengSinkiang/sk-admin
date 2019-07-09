@@ -24,16 +24,12 @@ public class Dict implements Serializable {
     @NotNull(groups = Update.class)
     private Long id;
 
-    /**
-     * 字典名称
-     */
+   // 字典名称
     @Column(name = "name",nullable = false,unique = true)
     @NotBlank
     private String name;
 
-    /**
-     * 描述
-     */
+    // 描述
     @Column(name = "remark")
     private String remark;
 

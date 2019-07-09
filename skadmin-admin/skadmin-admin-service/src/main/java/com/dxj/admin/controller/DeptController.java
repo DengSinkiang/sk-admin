@@ -42,9 +42,9 @@ public class DeptController {
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT','DEPT_ALL','DEPT_SELECT')")
     public ResponseEntity<Map<String, Object>> getDept(DeptQuery query) {
         // 数据权限
-        Set<Long> deptIds = dataScope.getDeptIds();
-        List<DeptDTO> deptDTOS = deptService.queryAll(query, deptIds);
-        return new ResponseEntity<>(deptService.buildTree(deptDTOS), HttpStatus.OK);
+        query.setIds(dataScope.getDeptIds());
+        List<DeptDTO> deptDTOList = deptService.queryAll(query);
+        return new ResponseEntity<>(deptService.buildTree(deptDTOList), HttpStatus.OK);
     }
 
     @Log("新增部门")

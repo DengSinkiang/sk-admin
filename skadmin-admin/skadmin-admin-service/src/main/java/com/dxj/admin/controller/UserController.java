@@ -147,12 +147,8 @@ public class UserController {
      */
     @PostMapping(value = "/users/validPass")
     public ResponseEntity<Object> validPass(@RequestBody User user) {
-        UserDetails userDetails = SecurityContextHolder.getUserDetails();
 
-        System.out.println(userDetails.getPassword());
-        System.out.println("----------");
-        System.out.println(userDetails.getUsername());
-        System.out.println(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()));
+        UserDetails userDetails = SecurityContextHolder.getUserDetails();
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()))) {
             return new ResponseEntity<>(new Result(CodeMsg.VALIDATE_ERROR), HttpStatus.OK);
         }

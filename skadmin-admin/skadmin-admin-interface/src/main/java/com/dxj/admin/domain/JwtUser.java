@@ -1,6 +1,5 @@
 package com.dxj.admin.domain;
 
-import com.dxj.common.util.AesEncryptUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

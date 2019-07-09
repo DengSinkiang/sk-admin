@@ -11,13 +11,9 @@ import java.io.Serializable;
 @Data
 public class DeptSmallDTO implements Serializable {
 
-    /**
-     * ID
-     */
+    // ID
     private Long id;
 
-    /**
-     * 名称
-     */
+    // 名称
     private String name;
 }

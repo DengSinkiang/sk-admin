@@ -27,7 +27,7 @@ public class RoleDTO implements Serializable {
 
     private Set<MenuDTO> menus;
 
-    private Set<DeptDTO> depts;
+    private Set<DeptDTO> deptList;
 
     private Timestamp createTime;
 }

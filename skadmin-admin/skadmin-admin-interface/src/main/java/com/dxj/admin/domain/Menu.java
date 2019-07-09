@@ -41,15 +41,11 @@ public class Menu implements Serializable {
 
     private String icon;
 
-    /**
-     * 上级菜单ID
-     */
+    // 上级菜单ID
     @Column(name = "pid",nullable = false)
     private Long pid;
 
-    /**
-     * 是否为外链 true/false
-     */
+    // 是否为外链 true/false
     @Column(name = "i_frame")
     private Boolean iFrame;
 

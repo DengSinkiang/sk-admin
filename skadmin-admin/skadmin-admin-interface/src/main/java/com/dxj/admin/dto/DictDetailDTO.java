@@ -13,23 +13,15 @@ public class DictDetailDTO implements Serializable {
 
     private Long id;
 
-    /**
-     * 字典标签
-     */
+    // 字典标签
     private String label;
 
-    /**
-     * 字典值
-     */
+    // 字典值
     private String value;
 
-    /**
-     * 排序
-     */
+    // 排序
     private String sort;
 
-    /**
-     * 字典id
-     */
+    // 字典id
     private String dictName;
 }

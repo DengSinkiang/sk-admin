@@ -60,7 +60,7 @@ public class RedisService {
 
     }
 
-    public void flushdb() {
+    public void flushDb() {
         try (Jedis jedis = pool.getResource()) {
             jedis.flushAll();
         }

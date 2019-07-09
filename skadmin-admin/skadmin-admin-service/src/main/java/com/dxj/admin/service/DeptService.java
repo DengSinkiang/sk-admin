@@ -56,17 +56,17 @@ public class DeptService {
     }
 
     @Cacheable(keyGenerator = "keyGenerator")
-    public Map<String, Object> buildTree(List<DeptDTO> deptDTOS) {
-        Set<DeptDTO> trees = new LinkedHashSet<>();
-        Set<DeptDTO> depts = new LinkedHashSet<>();
-        List<String> deptNames = deptDTOS.stream().map(DeptDTO::getName).collect(Collectors.toList());
+    public Map<String, Object> buildTree(List<DeptDTO> deptDTOList) {
+        Set<DeptDTO> treeSet = new LinkedHashSet<>();
+        Set<DeptDTO> deptSet = new LinkedHashSet<>();
+        List<String> deptNameList = deptDTOList.stream().map(DeptDTO::getName).collect(Collectors.toList());
         boolean isChild;
-        for (DeptDTO deptDTO : deptDTOS) {
+        for (DeptDTO deptDTO : deptDTOList) {
             isChild = false;
             if ("0".equals(deptDTO.getPid().toString())) {
-                trees.add(deptDTO);
+                treeSet.add(deptDTO);
             }
-            for (DeptDTO it : deptDTOS) {
+            for (DeptDTO it : deptDTOList) {
                 if (it.getPid().equals(deptDTO.getId())) {
                     isChild = true;
                     if (deptDTO.getChildren() == null) {
@@ -76,21 +76,21 @@ public class DeptService {
                 }
             }
             if (isChild) {
-                depts.add(deptDTO);
-            } else if (!deptNames.contains(deptRepository.findNameById(deptDTO.getPid()))) {
-                depts.add(deptDTO);
+                deptSet.add(deptDTO);
+            } else if (!deptNameList.contains(deptRepository.findNameById(deptDTO.getPid()))) {
+                deptSet.add(deptDTO);
             }
         }
 
-        if (CollectionUtils.isEmpty(trees)) {
-            trees = depts;
+        if (CollectionUtils.isEmpty(treeSet)) {
+            treeSet = deptSet;
         }
 
-        Integer totalElements = deptDTOS.size();
+        Integer totalElements = deptDTOList.size();
 
         Map<String, Object> map = new HashMap<>();
         map.put("totalElements", totalElements);
-        map.put("content", CollectionUtils.isEmpty(trees) ? deptDTOS : trees);
+        map.put("content", CollectionUtils.isEmpty(treeSet) ? deptDTOList : treeSet);
         return map;
     }
 
@@ -126,7 +126,7 @@ public class DeptService {
      * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public List<DeptDTO> queryAll(DeptQuery query, Set<Long> deptIds) {
+    public List<DeptDTO> queryAll(DeptQuery query) {
         return deptMapper.toDto(deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder)));
     }
 }

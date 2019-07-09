@@ -62,7 +62,7 @@ public class RedisController {
     @DeleteMapping(value = "/redis/all")
     @PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
     public ResponseEntity<Void> deleteAll() {
-        redisService.flushdb();
+        redisService.flushDb();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
