@@ -93,7 +93,6 @@
         - domain
         - dto
         - mapper
-        - query 查询条件
     - skadmin-log-service
         - aspect
         - controller
