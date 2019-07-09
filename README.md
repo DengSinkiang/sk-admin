@@ -62,7 +62,6 @@
     - 代码生成 高灵活度一键生成前后端代码，减少百分之80左右的工作任务
     - 接口文档 使用的是 swagger-ui 
     - SM.MS免费图床 挺好用的一个图床，作为公共图片上传使用
-    - 支付宝支付 
 ```
 #### 项目结构
 ```
@@ -113,7 +112,7 @@
 #### 后端技术栈
 ```
 - 基础框架：Spring Boot 2.1.0.RELEASE
-- 持久层框架：Spring Boot JPA
+- 持久层框架：Spring Data JPA
 - 安全框架：Spring Security
 - 缓存框架：Redis
 - 日志打印：logback+log4jdbc
