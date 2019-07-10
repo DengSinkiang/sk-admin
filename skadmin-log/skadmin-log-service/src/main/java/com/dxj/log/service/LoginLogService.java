@@ -81,7 +81,10 @@ public class LoginLogService {
         logRepository.save(log);
     }
 
-    public Page<LoginLog> queryAll(LoginLog log, Pageable pageable){
+    public Page<LoginLog> queryAll(LoginLog log, String startDate, String endDate, Pageable pageable){
+        if (startDate != null && !startDate.trim().equals("") && endDate != null && !endDate.trim().equals("")) {
+            return logRepository.findLoginLog(startDate, endDate, pageable);
+        }
         return logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)),pageable);
     }
 }

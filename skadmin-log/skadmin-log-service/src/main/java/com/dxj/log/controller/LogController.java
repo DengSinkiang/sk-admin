@@ -12,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author dxj
@@ -64,7 +61,9 @@ public class LogController {
 
     @GetMapping(value = "/log/login")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLog loginLog, Pageable pageable){
-        return new ResponseEntity<>(loginLogService.queryAll(loginLog, pageable), HttpStatus.OK);
+    public ResponseEntity<Page<LoginLog>> getLoginLogs(LoginLog loginLog, @RequestParam(value = "startDate", required=false) String startDate,
+                                                       @RequestParam(value = "endDate", required = false) String endDate,
+                                                       Pageable pageable){
+        return new ResponseEntity<>(loginLogService.queryAll(loginLog, startDate, endDate, pageable), HttpStatus.OK);
     }
 }

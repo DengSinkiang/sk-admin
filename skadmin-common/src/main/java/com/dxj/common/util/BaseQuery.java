@@ -63,11 +63,11 @@ public class BaseQuery {
                             list.add(cb.equal(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), val));
                             break;
-                        case GREATER_THAN:
+                        case GREATER_THAN_EQUAL:
                             list.add(cb.greaterThanOrEqualTo(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
-                        case LESS_THAN:
+                        case LESS_THAN_EQUAL:
                             list.add(cb.lessThanOrEqualTo(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
