@@ -71,7 +71,10 @@ public class BaseQuery {
                             list.add(cb.lessThanOrEqualTo(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;
-                        case LESS_THAN_NQ:
+                        case GREATER_THAN:
+                            list.add(cb.greaterThan(getExpression(attributeName, join, root)
+                                    .as((Class<? extends Comparable>) fieldType), (Comparable) val));
+                        case LESS_THAN:
                             list.add(cb.lessThan(getExpression(attributeName, join, root)
                                     .as((Class<? extends Comparable>) fieldType), (Comparable) val));
                             break;

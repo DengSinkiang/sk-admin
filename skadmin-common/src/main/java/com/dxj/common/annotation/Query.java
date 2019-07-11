@@ -32,15 +32,17 @@ public @interface Query {
 
     enum Type {
         EQUAL
-        // Dong ZhaoYang 2017/8/7 大于等于
+        // 大于等于
         , GREATER_THAN_EQUAL
-        // Dong ZhaoYang 2017/8/7 小于等于
+        // 小于等于
         , LESS_THAN_EQUAL
-        // Dong ZhaoYang 2017/8/7 中模糊查询
+        // 中模糊查询
         , LIKE
-        // Dong ZhaoYang 2017/8/7 小于
-        , LESS_THAN_NQ
-        // jie 2019/6/4 包含
+        // 小于
+        , LESS_THAN
+        // 大于
+        , GREATER_THAN
+        // 在之内
         , IN
     }
 

@@ -139,9 +139,7 @@ public class LogService {
             }
             if (!ObjectUtils.isEmpty(timeRange)) {
                 String startTime = timeRange.split("\\|")[0];
-                System.out.println(startTime);
                 String endTime = timeRange.split("\\|")[1];
-                System.out.println(endTime);
 
                 //起始日期
                 list.add(cb.greaterThanOrEqualTo(root.get("createTime").as(String.class), startTime));
