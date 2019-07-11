@@ -1,4 +1,4 @@
-package com.dxj.common.util;
+package com.dxj.common.interview;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
