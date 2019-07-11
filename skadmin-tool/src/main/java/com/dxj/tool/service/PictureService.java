@@ -115,6 +115,11 @@ public class PictureService {
 
     }
 
+    /**
+     * 批量删除图片
+     *
+     * @param ids
+     */
     @CacheEvict(allEntries = true)
     public void deleteAll(Long[] ids) {
         for (Long id : ids) {

@@ -16,7 +16,7 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.QiNiuConfigRepository;
-import com.dxj.tool.repository.QiniuContentRepository;
+import com.dxj.tool.repository.QiNiuContentRepository;
 import com.dxj.common.util.FileUtils;
 import com.dxj.common.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +44,15 @@ public class QiNiuService {
 
     private final QiNiuConfigRepository qiNiuConfigRepository;
 
-    private final QiniuContentRepository qiniuContentRepository;
+    private final QiNiuContentRepository qiNiuContentRepository;
 
     @Value("${qiniu.max-size}")
     private Long maxSize;
 
     @Autowired
-    public QiNiuService(QiNiuConfigRepository qiNiuConfigRepository, QiniuContentRepository qiniuContentRepository) {
+    public QiNiuService(QiNiuConfigRepository qiNiuConfigRepository, QiNiuContentRepository qiNiuContentRepository) {
         this.qiNiuConfigRepository = qiNiuConfigRepository;
-        this.qiniuContentRepository = qiniuContentRepository;
+        this.qiNiuContentRepository = qiNiuContentRepository;
     }
 
     /**
@@ -62,51 +62,51 @@ public class QiNiuService {
      */
     @Cacheable(cacheNames = "qiNiuConfig", key = "'1'")
     public QiNiuConfig find() {
-        Optional<QiNiuConfig> qiniuConfig = qiNiuConfigRepository.findById(1L);
-        return qiniuConfig.orElseGet(QiNiuConfig::new);
+        Optional<QiNiuConfig> qiNiuConfig = qiNiuConfigRepository.findById(1L);
+        return qiNiuConfig.orElseGet(QiNiuConfig::new);
     }
 
     /**
      * 修改配置
      *
-     * @param qiniuConfig
+     * @param qiNiuConfig
      * @return
      */
     @CachePut(cacheNames = "qiNiuConfig", key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public QiNiuConfig update(QiNiuConfig qiniuConfig) {
-        if (!(qiniuConfig.getHost().toLowerCase().startsWith("http://") || qiniuConfig.getHost().toLowerCase().startsWith("https://"))) {
+    public QiNiuConfig update(QiNiuConfig qiNiuConfig) {
+        if (!(qiNiuConfig.getHost().toLowerCase().startsWith("http://") || qiNiuConfig.getHost().toLowerCase().startsWith("https://"))) {
             throw new BadRequestException("外链域名必须以http://或者https://开头");
         }
-        qiniuConfig.setId(1L);
-        return qiNiuConfigRepository.save(qiniuConfig);
+        qiNiuConfig.setId(1L);
+        return qiNiuConfigRepository.save(qiNiuConfig);
     }
 
     /**
      * 上传文件
      *
      * @param file
-     * @param qiniuConfig
+     * @param qiNiuConfig
      */
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public QiNiuContent upload(MultipartFile file, QiNiuConfig qiniuConfig) {
+    public QiNiuContent upload(MultipartFile file, QiNiuConfig qiNiuConfig) {
 
         long size = maxSize * 1024 * 1024;
         if (file.getSize() > size) {
             throw new BadRequestException("文件超出规定大小");
         }
-        if (qiniuConfig.getId() == null) {
+        if (qiNiuConfig.getId() == null) {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtils.getConfiguration(qiniuConfig.getZone());
+        Configuration cfg = QiNiuUtils.getConfiguration(qiNiuConfig.getZone());
         UploadManager uploadManager = new UploadManager(cfg);
-        Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
-        String upToken = auth.uploadToken(qiniuConfig.getBucket());
+        Auth auth = Auth.create(qiNiuConfig.getAccessKey(), qiNiuConfig.getSecretKey());
+        String upToken = auth.uploadToken(qiNiuConfig.getBucket());
         try {
             String key = file.getOriginalFilename();
-            if (qiniuContentRepository.findByKey(key) != null) {
+            if (qiNiuContentRepository.findByKey(key) != null) {
                 key = QiNiuUtils.getKey(key);
             }
             Response response = uploadManager.put(file.getBytes(), key, upToken);
@@ -114,12 +114,12 @@ public class QiNiuService {
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
             //存入数据库
             QiNiuContent qiniuContent = new QiNiuContent();
-            qiniuContent.setBucket(qiniuConfig.getBucket());
-            qiniuContent.setType(qiniuConfig.getType());
+            qiniuContent.setBucket(qiNiuConfig.getBucket());
+            qiniuContent.setType(qiNiuConfig.getType());
             qiniuContent.setKey(putRet.key);
-            qiniuContent.setUrl(qiniuConfig.getHost() + "/" + putRet.key);
+            qiniuContent.setUrl(qiNiuConfig.getHost() + "/" + putRet.key);
             qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(file.getSize() + "")));
-            return qiniuContentRepository.save(qiniuContent);
+            return qiNiuContentRepository.save(qiniuContent);
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
@@ -133,7 +133,7 @@ public class QiNiuService {
      */
     @Cacheable(key = "'content:'+#p0")
     public QiNiuContent findByContentId(Long id) {
-        Optional<QiNiuContent> qiNiuContent = qiniuContentRepository.findById(id);
+        Optional<QiNiuContent> qiNiuContent = qiNiuContentRepository.findById(id);
         ValidationUtils.isNull(qiNiuContent, "QiNiuContent", "id", id);
         return qiNiuContent.orElse(null);
     }
@@ -175,9 +175,9 @@ public class QiNiuService {
         BucketManager bucketManager = new BucketManager(auth, cfg);
         try {
             bucketManager.delete(content.getBucket(), content.getKey());
-            qiniuContentRepository.delete(content);
+            qiNiuContentRepository.delete(content);
         } catch (QiniuException ex) {
-            qiniuContentRepository.delete(content);
+            qiNiuContentRepository.delete(content);
         }
     }
 
@@ -209,14 +209,14 @@ public class QiNiuService {
             QiNiuContent qiniuContent;
             FileInfo[] items = fileListIterator.next();
             for (FileInfo item : items) {
-                if (qiniuContentRepository.findByKey(item.key) == null) {
+                if (qiNiuContentRepository.findByKey(item.key) == null) {
                     qiniuContent = new QiNiuContent();
                     qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(item.fsize + "")));
                     qiniuContent.setKey(item.key);
                     qiniuContent.setType(config.getType());
                     qiniuContent.setBucket(config.getBucket());
                     qiniuContent.setUrl(config.getHost() + "/" + item.key);
-                    qiniuContentRepository.save(qiniuContent);
+                    qiNiuContentRepository.save(qiniuContent);
                 }
             }
         }
@@ -241,6 +241,6 @@ public class QiNiuService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(QiNiuContent query, Pageable pageable) {
-        return PageUtils.toPage(qiniuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
+        return PageUtils.toPage(qiNiuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

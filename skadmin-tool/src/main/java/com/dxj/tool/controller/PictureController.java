@@ -73,14 +73,15 @@ public class PictureController {
 
     /**
      * 删除多张图片
+     *
      * @param ids
      * @return
      */
     @Log("删除图片")
     @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_DELETE')")
     @DeleteMapping(value = "/pictures")
-    public ResponseEntity deleteAll(@RequestBody Long[] ids) {
+    public ResponseEntity<Void> deleteAll(@RequestBody Long[] ids) {
         pictureService.deleteAll(ids);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
