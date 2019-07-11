@@ -109,15 +109,8 @@ public class LoginLogService {
                 list.add(cb.equal(root.get("logType").as(String.class), log.getLogType()));
             }
             if (!ObjectUtils.isEmpty(timeRange)) {
-                String startTime = timeRange.split("\\|")[0];
-                System.out.println(startTime);
-                String endTime = timeRange.split("\\|")[1];
-                System.out.println(endTime);
 
-                //起始日期
-                list.add(cb.greaterThanOrEqualTo(root.get("createTime").as(String.class), startTime));
-                //结束日期
-                list.add(cb.lessThanOrEqualTo(root.get("createTime").as(String.class), endTime));
+                list.add(cb.between(root.get("createTime").as(String.class), timeRange.split("\\|")[0], timeRange.split("\\|")[1]));
             }
             Predicate[] p = new Predicate[list.size()];
             return cb.and(list.toArray(p));

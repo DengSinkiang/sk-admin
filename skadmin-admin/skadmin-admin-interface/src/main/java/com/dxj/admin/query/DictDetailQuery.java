@@ -1,6 +1,7 @@
 package com.dxj.admin.query;
 
 import com.dxj.common.annotation.Query;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**

@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -40,6 +41,18 @@ public class DictDetailController {
     public ResponseEntity<Map<String, Object>> getDictDetail(DictDetailQuery query,
                                                              @PageableDefault(sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return new ResponseEntity<>(dictDetailService.queryAll(query, pageable), HttpStatus.OK);
+    }
+
+    @Log("查询多个字典详情")
+    @GetMapping(value = "/dictDetail/map")
+    public ResponseEntity<Map<String, Object>> getDictDetailMaps(DictDetailQuery criteria,
+                                            @PageableDefault(sort = {"sort"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        String[] nameArr = criteria.getDictName().split(",");
+        Map<String, Object> map = new HashMap<>(nameArr.length);
+        for (String name : nameArr) {
+            map.put(name, dictDetailService.queryAll(criteria, pageable).get("content"));
+        }
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @Log("新增字典详情")

@@ -115,6 +115,7 @@ public class PictureService {
 
     }
 
+    @CacheEvict(allEntries = true)
     public void deleteAll(Long[] ids) {
         for (Long id : ids) {
             delete(findById(id));
