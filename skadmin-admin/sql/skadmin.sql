@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 10/07/2019 20:45:14
+ Date: 15/07/2019 21:27:51
 */
 
 SET NAMES utf8mb4;
@@ -144,6 +144,13 @@ CREATE TABLE `email_config` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of email_config
+-- ----------------------------
+BEGIN;
+INSERT INTO `email_config` VALUES (2, 'deng467822057@163.com', 'smtp.163.com', 'E181282297D614C47E8B45EE0D39E880', '465', 'Sinkiang');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for gen_config
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_config`;
@@ -209,7 +216,7 @@ CREATE TABLE `log` (
   `time` bigint(20) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6662 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6765 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of log
@@ -1782,6 +1789,109 @@ INSERT INTO `log` VALUES (6658, '2019-07-09 20:17:11', '修改菜单', NULL, 'IN
 INSERT INTO `log` VALUES (6659, '2019-07-09 20:17:11', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 6, 'admin');
 INSERT INTO `log` VALUES (6660, '2019-07-10 19:54:01', '查询文件', NULL, 'INFO', 'com.dxj.tool.controller.QiNiuController.getRoles()', '{ query: QiNiuContent(id=null, key=null, bucket=null, size=10, url=null, type=公开, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 37, 'admin');
 INSERT INTO `log` VALUES (6661, '2019-07-10 20:03:09', '登录', 'org.springframework.security.authentication.AccountExpiredException: 密码错误\n	at com.dxj.admin.controller.AuthenticationController.login(AuthenticationController.java:57)\n	at com.dxj.admin.controller.AuthenticationController$$FastClassBySpringCGLIB$$89273402.invoke(<generated>)\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\n	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:88)\n	at com.dxj.log.aspect.DataScopeAspect.loginLogAround(DataScopeAspect.java:71)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:633)\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)\n	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\n	at com.dxj.admin.controller.AuthenticationController$$EnhancerBySpringCGLIB$$763bac00.login(<generated>)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:215)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:142)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998)\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:901)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:875)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)\n	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)\n	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at com.dxj.admin.config.JwtAuthorizationTokenFilter.doFilterInternal(JwtAuthorizationTokenFilter.java:69)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)\n	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)\n	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)\n	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:770)\n	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\n', 'ERROR', 'com.dxj.admin.controller.AuthenticationController.login()', '{ authorizationUser: {username=admin, password=c31bf1e8b5500f6eba08fc435392a9cb }', '127.0.0.1', 2, 'admin');
+INSERT INTO `log` VALUES (6662, '2019-07-10 21:11:32', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 61, 'admin');
+INSERT INTO `log` VALUES (6663, '2019-07-10 21:11:32', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 71, 'admin');
+INSERT INTO `log` VALUES (6664, '2019-07-10 21:11:32', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 101, 'admin');
+INSERT INTO `log` VALUES (6665, '2019-07-10 21:11:46', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 80, 'admin');
+INSERT INTO `log` VALUES (6666, '2019-07-10 21:11:48', '查询权限', NULL, 'INFO', 'com.dxj.admin.controller.PermissionController.getPermissions()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 13, 'admin');
+INSERT INTO `log` VALUES (6667, '2019-07-10 21:11:59', '查询权限', NULL, 'INFO', 'com.dxj.admin.controller.PermissionController.getPermissions()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6668, '2019-07-10 21:12:00', '查询权限', NULL, 'INFO', 'com.dxj.admin.controller.PermissionController.getPermissions()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 3, 'admin');
+INSERT INTO `log` VALUES (6669, '2019-07-10 21:12:03', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 11, 'admin');
+INSERT INTO `log` VALUES (6670, '2019-07-10 21:12:06', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 3, 'admin');
+INSERT INTO `log` VALUES (6671, '2019-07-10 21:12:07', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6672, '2019-07-10 21:12:23', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=dept_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 4, 'admin');
+INSERT INTO `log` VALUES (6673, '2019-07-10 21:12:23', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 5, 'admin');
+INSERT INTO `log` VALUES (6674, '2019-07-10 21:12:26', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=job_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6675, '2019-07-10 21:12:26', '查询岗位', NULL, 'INFO', 'com.dxj.admin.controller.JobController.getJobs()', '{ query: JobQuery(name=null, enabled=null, deptId=null, deptIds=[]) pageable: Page request [number: 0, size 10, sort: sort: ASC] }', '127.0.0.1', 36, 'admin');
+INSERT INTO `log` VALUES (6676, '2019-07-10 21:13:39', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 2, 'admin');
+INSERT INTO `log` VALUES (6677, '2019-07-10 21:13:39', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 2, 'admin');
+INSERT INTO `log` VALUES (6678, '2019-07-10 21:13:39', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6679, '2019-07-15 20:55:56', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 15, 'admin');
+INSERT INTO `log` VALUES (6680, '2019-07-15 20:56:03', '删除菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.delete()', '{ id: 49 }', '127.0.0.1', 73, 'admin');
+INSERT INTO `log` VALUES (6681, '2019-07-15 20:56:03', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 8, 'admin');
+INSERT INTO `log` VALUES (6682, '2019-07-15 20:56:06', '删除菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.delete()', '{ id: 50 }', '127.0.0.1', 50, 'admin');
+INSERT INTO `log` VALUES (6683, '2019-07-15 20:56:06', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6684, '2019-07-15 20:56:08', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 4, 'admin');
+INSERT INTO `log` VALUES (6685, '2019-07-15 20:56:12', '查询文件', NULL, 'INFO', 'com.dxj.tool.controller.QiNiuController.getRoles()', '{ query: QiNiuContent(id=null, key=null, bucket=null, size=10, url=null, type=公开, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 17, 'admin');
+INSERT INTO `log` VALUES (6686, '2019-07-15 20:56:26', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 12, 'admin');
+INSERT INTO `log` VALUES (6687, '2019-07-15 20:56:41', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6688, '2019-07-15 20:56:49', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@2281873 }', '127.0.0.1', 19, 'admin');
+INSERT INTO `log` VALUES (6689, '2019-07-15 20:56:49', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6690, '2019-07-15 20:56:56', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 2, 'admin');
+INSERT INTO `log` VALUES (6691, '2019-07-15 20:57:00', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 2, 'admin');
+INSERT INTO `log` VALUES (6692, '2019-07-15 20:57:07', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 12, 'admin');
+INSERT INTO `log` VALUES (6693, '2019-07-15 20:57:24', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6694, '2019-07-15 20:57:26', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 3, 'admin');
+INSERT INTO `log` VALUES (6695, '2019-07-15 20:57:27', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6696, '2019-07-15 20:57:39', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@273f5abc }', '127.0.0.1', 10, 'admin');
+INSERT INTO `log` VALUES (6697, '2019-07-15 20:57:39', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 6, 'admin');
+INSERT INTO `log` VALUES (6698, '2019-07-15 20:57:46', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6699, '2019-07-15 20:57:52', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6700, '2019-07-15 20:58:04', '删除图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.deleteAll()', '{ ids: [Ljava.lang.Long;@bf671b8 }', '127.0.0.1', 4479, 'admin');
+INSERT INTO `log` VALUES (6701, '2019-07-15 20:58:04', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 6, 'admin');
+INSERT INTO `log` VALUES (6702, '2019-07-15 21:00:31', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6703, '2019-07-15 21:01:37', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@14a972bc }', '127.0.0.1', 10, 'admin');
+INSERT INTO `log` VALUES (6704, '2019-07-15 21:01:37', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 5, 'admin');
+INSERT INTO `log` VALUES (6705, '2019-07-15 21:01:44', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@6648ccaf }', '127.0.0.1', 10, 'admin');
+INSERT INTO `log` VALUES (6706, '2019-07-15 21:01:44', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6707, '2019-07-15 21:01:49', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@d1a58f3 }', '127.0.0.1', 10, 'admin');
+INSERT INTO `log` VALUES (6708, '2019-07-15 21:01:49', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 4, 'admin');
+INSERT INTO `log` VALUES (6709, '2019-07-15 21:01:54', '修改菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.update()', '{ resources: com.dxj.admin.domain.Menu@1781034c }', '127.0.0.1', 10, 'admin');
+INSERT INTO `log` VALUES (6710, '2019-07-15 21:01:54', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 6, 'admin');
+INSERT INTO `log` VALUES (6711, '2019-07-15 21:01:57', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6712, '2019-07-15 21:02:52', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6713, '2019-07-15 21:02:58', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6714, '2019-07-15 21:06:40', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 23, 'admin');
+INSERT INTO `log` VALUES (6715, '2019-07-15 21:06:53', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6716, '2019-07-15 21:07:00', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6717, '2019-07-15 21:09:34', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6718, '2019-07-15 21:09:37', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6719, '2019-07-15 21:09:49', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6720, '2019-07-15 21:09:49', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 0, 'admin');
+INSERT INTO `log` VALUES (6721, '2019-07-15 21:09:49', '上传图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.upload()', '{ file: org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@1736d6e2 }', '127.0.0.1', 777, 'admin');
+INSERT INTO `log` VALUES (6722, '2019-07-15 21:09:55', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 31, 'admin');
+INSERT INTO `log` VALUES (6723, '2019-07-15 21:10:01', '删除图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.delete()', '{ id: 7 }', '127.0.0.1', 2111, 'admin');
+INSERT INTO `log` VALUES (6724, '2019-07-15 21:10:01', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 6, 'admin');
+INSERT INTO `log` VALUES (6725, '2019-07-15 21:10:16', '上传图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.upload()', '{ file: org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@56f0c93c }', '127.0.0.1', 5125, 'admin');
+INSERT INTO `log` VALUES (6726, '2019-07-15 21:10:18', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6727, '2019-07-15 21:10:18', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 1, 'admin');
+INSERT INTO `log` VALUES (6728, '2019-07-15 21:10:26', '删除图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.delete()', '{ id: 8 }', '127.0.0.1', 1886, 'admin');
+INSERT INTO `log` VALUES (6729, '2019-07-15 21:10:26', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6730, '2019-07-15 21:10:40', '删除图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.deleteAll()', '{ ids: [Ljava.lang.Long;@6ea9c8b }', '127.0.0.1', 2122, 'admin');
+INSERT INTO `log` VALUES (6731, '2019-07-15 21:10:40', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 5, 'admin');
+INSERT INTO `log` VALUES (6732, '2019-07-15 21:15:40', '查询图片', NULL, 'INFO', 'com.dxj.tool.controller.PictureController.getRoles()', '{ query: Picture{filename=\'null\'} pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 18, 'admin');
+INSERT INTO `log` VALUES (6733, '2019-07-15 21:15:46', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6734, '2019-07-15 21:15:54', '更改定时任务状态', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.updateIsPause()', '{ id: 2 }', '127.0.0.1', 53, 'admin');
+INSERT INTO `log` VALUES (6735, '2019-07-15 21:15:54', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 23, 'admin');
+INSERT INTO `log` VALUES (6736, '2019-07-15 21:16:43', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 5, 'admin');
+INSERT INTO `log` VALUES (6737, '2019-07-15 21:17:01', '更改定时任务状态', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.updateIsPause()', '{ id: 2 }', '127.0.0.1', 11, 'admin');
+INSERT INTO `log` VALUES (6738, '2019-07-15 21:17:01', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6739, '2019-07-15 21:20:20', '查询定时任务', NULL, 'INFO', 'com.dxj.quartz.controller.QuartzJobController.getJob()', '{ query: QuartzJob(id=null, jobName=null, beanName=null, methodName=null, params=null, cronExpression=null, isPause=false, remark=null, updateTime=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 24, 'admin');
+INSERT INTO `log` VALUES (6740, '2019-07-15 21:20:24', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 7, 'admin');
+INSERT INTO `log` VALUES (6741, '2019-07-15 21:20:48', '新增菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.create()', '{ resources: com.dxj.admin.domain.Menu@1fb00473 }', '127.0.0.1', 27, 'admin');
+INSERT INTO `log` VALUES (6742, '2019-07-15 21:20:48', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 22, 'admin');
+INSERT INTO `log` VALUES (6743, '2019-07-15 21:20:56', '删除菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.delete()', '{ id: 51 }', '127.0.0.1', 34, 'admin');
+INSERT INTO `log` VALUES (6744, '2019-07-15 21:20:57', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 9, 'admin');
+INSERT INTO `log` VALUES (6745, '2019-07-15 21:25:57', '查询菜单', NULL, 'INFO', 'com.dxj.admin.controller.MenuController.getMenus()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 8, 'admin');
+INSERT INTO `log` VALUES (6746, '2019-07-15 21:26:00', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 66, 'admin');
+INSERT INTO `log` VALUES (6747, '2019-07-15 21:26:00', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 102, 'admin');
+INSERT INTO `log` VALUES (6748, '2019-07-15 21:26:00', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 106, 'admin');
+INSERT INTO `log` VALUES (6749, '2019-07-15 21:26:02', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=true, pid=null) }', '127.0.0.1', 36, 'admin');
+INSERT INTO `log` VALUES (6750, '2019-07-15 21:26:18', '查询岗位', NULL, 'INFO', 'com.dxj.admin.controller.JobController.getJobs()', '{ query: JobQuery(name=null, enabled=null, deptId=1, deptIds=[]) pageable: Page request [number: 0, size 2000, sort: UNSORTED] }', '127.0.0.1', 38, 'admin');
+INSERT INTO `log` VALUES (6751, '2019-07-15 21:26:25', '新增用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.create()', '{ resources: User{id=9, username=\'css\', avatar=\'https://mmmlf.tmuyun.com/22D055BA216B5530C70FB565CAAB9574.jpg\', email=\'ccd@qq.com\', enabled=false, password=\'7be0e8c13a4b6e1ae5401c015903384e\', createTime=2019-07-15 21:26:25.419, lastPasswordResetTime=null} }', '127.0.0.1', 52, 'admin');
+INSERT INTO `log` VALUES (6752, '2019-07-15 21:26:26', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 41, 'admin');
+INSERT INTO `log` VALUES (6753, '2019-07-15 21:26:31', '删除用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.delete()', '{ id: 9 }', '127.0.0.1', 20, 'admin');
+INSERT INTO `log` VALUES (6754, '2019-07-15 21:26:32', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 31, 'admin');
+INSERT INTO `log` VALUES (6755, '2019-07-15 21:26:35', '删除用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.delete()', '{ id: 8 }', '127.0.0.1', 13, 'admin');
+INSERT INTO `log` VALUES (6756, '2019-07-15 21:26:35', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 24, 'admin');
+INSERT INTO `log` VALUES (6757, '2019-07-15 21:26:38', '删除用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.delete()', '{ id: 7 }', '127.0.0.1', 11, 'admin');
+INSERT INTO `log` VALUES (6758, '2019-07-15 21:26:38', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 26, 'admin');
+INSERT INTO `log` VALUES (6759, '2019-07-15 21:26:44', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 40, 'admin');
+INSERT INTO `log` VALUES (6760, '2019-07-15 21:26:50', '新增角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.create()', '{ resources: Role{id=5, name=\'scs\', remark=\'cscs\', createDateTime=2019-07-15 21:26:50.378} }', '127.0.0.1', 14, 'admin');
+INSERT INTO `log` VALUES (6761, '2019-07-15 21:26:50', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 29, 'admin');
+INSERT INTO `log` VALUES (6762, '2019-07-15 21:26:55', '删除角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.delete()', '{ id: 5 }', '127.0.0.1', 8, 'admin');
+INSERT INTO `log` VALUES (6763, '2019-07-15 21:26:55', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 25, 'admin');
+INSERT INTO `log` VALUES (6764, '2019-07-15 21:27:04', '查询权限', NULL, 'INFO', 'com.dxj.admin.controller.PermissionController.getPermissions()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 16, 'admin');
 COMMIT;
 
 -- ----------------------------
@@ -1798,7 +1908,7 @@ CREATE TABLE `login_log` (
   `user_agent` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of login_log
@@ -1931,6 +2041,11 @@ INSERT INTO `login_log` VALUES (211, '2019-07-10 19:53:46', 'INFO', '登录', '1
 INSERT INTO `login_log` VALUES (212, '2019-07-10 20:01:35', 'INFO', '登录', '127.0.0.1', 180, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
 INSERT INTO `login_log` VALUES (213, '2019-07-10 20:03:09', 'ERROR', '登录', '127.0.0.1', 2, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
 INSERT INTO `login_log` VALUES (214, '2019-07-10 20:03:16', 'INFO', '登录', '127.0.0.1', 1, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (215, '2019-07-10 22:04:23', 'INFO', '登录', '127.0.0.1', 5, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (216, '2019-07-10 22:25:03', 'INFO', '登录', '127.0.0.1', 190, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (217, '2019-07-10 22:26:38', 'INFO', '登录', '127.0.0.1', 2, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (218, '2019-07-15 20:54:27', 'INFO', '登录', '127.0.0.1', 300, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (219, '2019-07-15 21:20:20', 'INFO', '登录', '127.0.0.1', 214, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
 COMMIT;
 
 -- ----------------------------
@@ -1948,7 +2063,7 @@ CREATE TABLE `menu` (
   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
   `path` varchar(255) DEFAULT NULL COMMENT '链接地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -1963,14 +2078,14 @@ INSERT INTO `menu` VALUES (6, '2018-12-18 15:17:48', b'0', '系统监控', NULL,
 INSERT INTO `menu` VALUES (8, '2018-12-18 15:19:01', b'0', '系统缓存', 'monitor/redis/index', 6, 13, 'redis', 'redis');
 INSERT INTO `menu` VALUES (9, '2018-12-18 15:19:34', b'0', 'SQL监控', 'monitor/sql/index', 6, 14, 'sqlMonitor', 'druid');
 INSERT INTO `menu` VALUES (12, '2018-12-24 20:37:35', b'0', '实时控制台', 'monitor/msg/msg', 6, 16, 'codeConsole', 'msg');
-INSERT INTO `menu` VALUES (16, '2018-12-28 09:36:53', b'0', '图床管理', 'tools/picture/index', 36, 25, '图库', 'pictures');
+INSERT INTO `menu` VALUES (16, '2018-12-28 09:36:53', b'0', '图床管理', 'tool/picture/index', 36, 25, '图库', 'picture');
 INSERT INTO `menu` VALUES (17, '2018-12-28 15:09:49', b'1', '项目地址', '', 0, 0, 'github', 'https://github.com/DengSinkiang/sk-admin');
-INSERT INTO `menu` VALUES (28, '2019-01-07 20:34:40', b'0', '定时任务', 'tools/timing/index', 36, 21, '定时任务', 'timing');
-INSERT INTO `menu` VALUES (30, '2019-01-11 15:45:55', b'0', '代码生成', 'tools/generator/index', 36, 22, 'dev', 'generator');
+INSERT INTO `menu` VALUES (28, '2019-01-07 20:34:40', b'0', '定时任务', 'tool/timing/index', 36, 21, '定时任务', 'timing');
+INSERT INTO `menu` VALUES (30, '2019-01-11 15:45:55', b'0', '代码生成', 'tool/generator/index', 36, 22, 'dev', 'generator');
 INSERT INTO `menu` VALUES (35, '2019-03-25 09:46:00', b'0', '部门管理', 'system/dept/index', 1, 6, '部门管理', 'dept');
-INSERT INTO `menu` VALUES (36, '2019-03-29 10:57:35', b'0', '系统工具', '', 0, 20, '系统_工具箱', 'sys-tools');
+INSERT INTO `menu` VALUES (36, '2019-03-29 10:57:35', b'0', '系统工具', '', 0, 20, '系统_工具箱', 'sys-tool');
 INSERT INTO `menu` VALUES (37, '2019-03-29 13:51:18', b'0', '岗位管理', 'system/job/index', 1, 7, 'Steve-Jobs', 'job');
-INSERT INTO `menu` VALUES (38, '2019-03-29 19:57:53', b'0', '接口文档', 'tools/swagger/index', 36, 23, 'swagger', 'swagger2');
+INSERT INTO `menu` VALUES (38, '2019-03-29 19:57:53', b'0', '接口文档', 'tool/swagger/index', 36, 23, 'swagger', 'swagger2');
 INSERT INTO `menu` VALUES (39, '2019-04-10 11:49:04', b'0', '字典管理', 'system/dict/index', 1, 8, '字典管理', 'dict');
 INSERT INTO `menu` VALUES (40, '2019-05-13 11:27:05', b'0', '日志管理', '', 0, 30, '12日志管理', 'log');
 INSERT INTO `menu` VALUES (41, '2019-05-13 11:28:19', b'0', '登录日志', 'log/login', 40, 31, '登录日志', 'login');
@@ -1981,8 +2096,6 @@ INSERT INTO `menu` VALUES (45, '2019-05-13 11:55:14', b'0', '短信服务', 'mes
 INSERT INTO `menu` VALUES (46, '2019-05-13 11:56:00', b'0', '邮件服务', 'message/email/index', 44, 37, 'email1', 'email');
 INSERT INTO `menu` VALUES (47, '2019-05-21 08:48:23', b'0', '云存储管理', '', 0, 38, '云存储', 'oss');
 INSERT INTO `menu` VALUES (48, '2019-05-21 08:50:18', b'0', '七牛云存储', 'oss/qiniu/index', 47, 39, '云存储 (1)', 'qiniu');
-INSERT INTO `menu` VALUES (49, '2019-05-21 08:53:14', b'0', '阿里云存储', 'oss/aliyun/index', 47, 40, '云存储2', 'aliyun');
-INSERT INTO `menu` VALUES (50, '2019-05-21 08:54:22', b'0', '腾讯云存储', 'oss/tencent/index', 47, 41, '云存储管理', 'tencent');
 COMMIT;
 
 -- ----------------------------
@@ -2069,16 +2182,7 @@ CREATE TABLE `picture` (
   `username` varchar(255) DEFAULT NULL COMMENT '用户名称',
   `width` varchar(255) DEFAULT NULL COMMENT '图片宽度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of picture
--- ----------------------------
-BEGIN;
-INSERT INTO `picture` VALUES (3, '2019-05-13 13:47:33', 'https://sm.ms/delete/p9xPysHbCAtXGLk', '22D055BA216B5530C70FB565CAAB9574.jpg', '639', '72.06KB   ', 'https://i.loli.net/2019/05/13/5cd904f465c9d62325.jpg', 'admin', '640');
-INSERT INTO `picture` VALUES (5, '2019-06-10 20:25:27', 'https://sm.ms/delete/c1fGX5yluvbREH7', '394EE2D0A64E082BB0C1CC732A813C2B.jpg', '1280', '344.35KB   ', 'https://i.loli.net/2019/06/10/5cfe4c367aa1841011.jpg', 'admin', '960');
-INSERT INTO `picture` VALUES (6, '2019-06-10 20:25:37', 'https://sm.ms/delete/LoDy354IlrH9i7q', '22D055BA216B5530C70FB565CAAB9574.jpg', '639', '72.06KB   ', 'https://i.loli.net/2019/06/10/5cfe4c40983ac41218.jpg', 'admin', '640');
-COMMIT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for qiniu_config
@@ -2111,6 +2215,13 @@ CREATE TABLE `qiniu_content` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of qiniu_content
+-- ----------------------------
+BEGIN;
+INSERT INTO `qiniu_content` VALUES (27, 'meizipublic', '22D055BA216B5530C70FB565CAAB9574.jpg', '72.06KB   ', '公开', '2019-06-22 10:48:29', 'https://mzvideo.8531.cn/22D055BA216B5530C70FB565CAAB9574.jpg');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for quartz_job
 -- ----------------------------
 DROP TABLE IF EXISTS `quartz_job`;
@@ -2132,7 +2243,7 @@ CREATE TABLE `quartz_job` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `quartz_job` VALUES (1, 'visitsTask', '0 0 0 * * ?', b'0', '更新访客记录', 'run', NULL, '每日0点创建新的访客记录', '2019-01-08 14:53:31');
-INSERT INTO `quartz_job` VALUES (2, 'testTask', '0/4 * * * * ?', b'1', '测试123', 'run1', 'test', '带参测试，多参使用json', '2019-06-15 13:01:12');
+INSERT INTO `quartz_job` VALUES (2, 'testTask', '0/4 * * * * ?', b'1', '测试123', 'run1', 'test', '带参测试，多参使用json', '2019-07-15 21:17:01');
 INSERT INTO `quartz_job` VALUES (3, 'testTask', '0/5 * * * * ?', b'1', '测试', 'run', '', '不带参测试', '2019-04-09 16:16:44');
 COMMIT;
 
@@ -2153,7 +2264,7 @@ CREATE TABLE `quartz_log` (
   `time` bigint(20) DEFAULT NULL,
   `bean_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quartz_log
@@ -2422,6 +2533,23 @@ INSERT INTO `quartz_log` VALUES (260, 'testTask', '2019-06-15 13:00:56', '0/4 * 
 INSERT INTO `quartz_log` VALUES (261, 'testTask', '2019-06-15 13:01:00', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, NULL);
 INSERT INTO `quartz_log` VALUES (262, 'testTask', '2019-06-15 13:01:04', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, NULL);
 INSERT INTO `quartz_log` VALUES (263, 'testTask', '2019-06-15 13:01:08', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, NULL);
+INSERT INTO `quartz_log` VALUES (264, NULL, '2019-07-15 21:15:56', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (265, NULL, '2019-07-15 21:16:00', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (266, NULL, '2019-07-15 21:16:04', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (267, NULL, '2019-07-15 21:16:08', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (268, NULL, '2019-07-15 21:16:12', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (269, NULL, '2019-07-15 21:16:16', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (270, NULL, '2019-07-15 21:16:20', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, 'testTask');
+INSERT INTO `quartz_log` VALUES (271, NULL, '2019-07-15 21:16:24', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (272, NULL, '2019-07-15 21:16:28', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (273, NULL, '2019-07-15 21:16:32', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, 'testTask');
+INSERT INTO `quartz_log` VALUES (274, NULL, '2019-07-15 21:16:36', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (275, NULL, '2019-07-15 21:16:40', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, 'testTask');
+INSERT INTO `quartz_log` VALUES (276, NULL, '2019-07-15 21:16:44', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (277, NULL, '2019-07-15 21:16:48', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (278, NULL, '2019-07-15 21:16:52', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (279, NULL, '2019-07-15 21:16:56', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 1, 'testTask');
+INSERT INTO `quartz_log` VALUES (280, NULL, '2019-07-15 21:17:00', '0/4 * * * * ?', NULL, b'1', '测试123', 'run1', 'test', 0, 'testTask');
 COMMIT;
 
 -- ----------------------------
@@ -2436,7 +2564,7 @@ CREATE TABLE `role` (
   `data_scope` varchar(255) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
@@ -2504,8 +2632,6 @@ INSERT INTO `roles_menus` VALUES (45, 1);
 INSERT INTO `roles_menus` VALUES (46, 1);
 INSERT INTO `roles_menus` VALUES (47, 1);
 INSERT INTO `roles_menus` VALUES (48, 1);
-INSERT INTO `roles_menus` VALUES (49, 1);
-INSERT INTO `roles_menus` VALUES (50, 1);
 INSERT INTO `roles_menus` VALUES (1, 2);
 INSERT INTO `roles_menus` VALUES (2, 2);
 INSERT INTO `roles_menus` VALUES (5, 2);
@@ -2544,8 +2670,6 @@ INSERT INTO `roles_menus` VALUES (45, 3);
 INSERT INTO `roles_menus` VALUES (46, 3);
 INSERT INTO `roles_menus` VALUES (47, 3);
 INSERT INTO `roles_menus` VALUES (48, 3);
-INSERT INTO `roles_menus` VALUES (49, 3);
-INSERT INTO `roles_menus` VALUES (50, 3);
 COMMIT;
 
 -- ----------------------------
@@ -2647,7 +2771,7 @@ CREATE TABLE `user` (
   KEY `FKfftoc2abhot8f2wu6cl9a5iky` (`job_id`),
   CONSTRAINT `FK5rwmryny6jthaaxkogownknqp` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`),
   CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -2656,8 +2780,6 @@ BEGIN;
 INSERT INTO `user` VALUES (1, 'https://i.loli.net/2019/06/10/5cfe4c40983ac41218.jpg', '2018-08-23 09:11:56', 'admin@skadmin.com', 1, 'a66abb5684c45962d887564f08346e8d', 'admin', '2019-06-10 21:37:46', 2, '18888888888', 11);
 INSERT INTO `user` VALUES (3, 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2018-12-27 20:05:26', 'test@skadmin.com', 1, 'a66abb5684c45962d887564f08346e8d', 'test', '2019-04-01 09:15:24', 2, '17777777777', 12);
 INSERT INTO `user` VALUES (5, 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2019-04-02 10:07:12', 'hr@skadmin.com', 1, 'a66abb5684c45962d887564f08346e8d', 'hr', NULL, 11, '15555555555', 8);
-INSERT INTO `user` VALUES (7, 'https://mmmlf.tmuyun.com/8918a306ea314404835a9196585c4b75.jpeg', '2019-06-21 20:34:49', 'dxj@126.com', 0, 'a66abb5684c45962d887564f08346e8d', 'sinkiang', NULL, 2, '13299999991', 10);
-INSERT INTO `user` VALUES (8, 'https://mmmlf.tmuyun.com/22D055BA216B5530C70FB565CAAB9574.jpg', '2019-06-21 20:41:18', 'dxj@8531.cn', 1, 'a66abb5684c45962d887564f08346e8d', 'dxj', NULL, 11, '14224242424', 8);
 COMMIT;
 
 -- ----------------------------
@@ -2679,9 +2801,7 @@ CREATE TABLE `users_roles` (
 BEGIN;
 INSERT INTO `users_roles` VALUES (1, 1);
 INSERT INTO `users_roles` VALUES (5, 2);
-INSERT INTO `users_roles` VALUES (8, 2);
 INSERT INTO `users_roles` VALUES (3, 3);
-INSERT INTO `users_roles` VALUES (7, 3);
 COMMIT;
 
 -- ----------------------------
@@ -2719,7 +2839,7 @@ CREATE TABLE `visits` (
   `week_day` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_11aksgq87euk9bcyeesfs4vtp` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of visits
@@ -2752,7 +2872,8 @@ INSERT INTO `visits` VALUES (44, '2019-06-28 20:15:04', '2019-06-28', 0, 5, 'Fri
 INSERT INTO `visits` VALUES (45, '2019-07-02 20:06:01', '2019-07-02', 1, 4, 'Tue');
 INSERT INTO `visits` VALUES (46, '2019-07-04 21:25:02', '2019-07-04', 0, 2, 'Thu');
 INSERT INTO `visits` VALUES (47, '2019-07-09 20:16:02', '2019-07-09', 0, 2, 'Tue');
-INSERT INTO `visits` VALUES (48, '2019-07-10 19:53:26', '2019-07-10', 0, 2, 'Wed');
+INSERT INTO `visits` VALUES (48, '2019-07-10 19:53:26', '2019-07-10', 1, 7, 'Wed');
+INSERT INTO `visits` VALUES (49, '2019-07-15 20:52:41', '2019-07-15', 1, 3, 'Mon');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
