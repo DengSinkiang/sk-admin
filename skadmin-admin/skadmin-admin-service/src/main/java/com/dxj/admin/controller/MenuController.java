@@ -50,7 +50,7 @@ public class MenuController {
      *
      * @return
      */
-    @GetMapping(value = "/menus/build")
+    @GetMapping(value = "/menu/build")
     public ResponseEntity<List<MenuVo>> buildMenus() {
         UserDTO user = userService.findByName(SecurityContextHolder.getUsername());
         List<MenuDTO> menuDTOList = menuService.findByRoles(roleService.findByUsers_Id(user.getId()));
@@ -63,14 +63,14 @@ public class MenuController {
      *
      * @return
      */
-    @GetMapping(value = "/menus/tree")
+    @GetMapping(value = "/menu/tree")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_CREATE','MENU_EDIT','ROLES_SELECT','ROLES_ALL')")
     public ResponseEntity<Object> getMenuTree() {
         return new ResponseEntity<>(menuService.getMenuTree(menuService.findByPid(0L)), HttpStatus.OK);
     }
 
     @Log("查询菜单")
-    @GetMapping(value = "/menus")
+    @GetMapping(value = "/menu")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_SELECT')")
     public ResponseEntity<Map<String, Object>> getMenus(CommonQuery query) {
         List<MenuDTO> menuDTOList = menuService.queryAll(query);
@@ -78,7 +78,7 @@ public class MenuController {
     }
 
     @Log("新增菜单")
-    @PostMapping(value = "/menus")
+    @PostMapping(value = "/menu")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_CREATE')")
     public ResponseEntity<MenuDTO> create(@Validated @RequestBody Menu resources) {
         if (resources.getId() != null) {
@@ -88,7 +88,7 @@ public class MenuController {
     }
 
     @Log("修改菜单")
-    @PutMapping(value = "/menus")
+    @PutMapping(value = "/menu")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_EDIT')")
     public ResponseEntity<Void> update(@Validated(Menu.Update.class) @RequestBody Menu resources) {
         menuService.update(resources);
@@ -96,7 +96,7 @@ public class MenuController {
     }
 
     @Log("删除菜单")
-    @DeleteMapping(value = "/menus/{id}")
+    @DeleteMapping(value = "/menu/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         List<Menu> menuList = menuService.findByPid(id);

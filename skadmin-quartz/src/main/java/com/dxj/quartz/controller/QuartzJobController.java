@@ -32,7 +32,7 @@ public class QuartzJobController {
     }
 
     @Log("查询定时任务")
-    @GetMapping(value = "/jobs")
+    @GetMapping(value = "/task")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
     public ResponseEntity<Object> getJob(QuartzJob query, Pageable pageable) {
         return new ResponseEntity<>(quartzJobService.queryAll(query, pageable), HttpStatus.OK);
@@ -45,14 +45,14 @@ public class QuartzJobController {
      * @param pageable
      * @return
      */
-    @GetMapping(value = "/jobLogs")
+    @GetMapping(value = "/taskLog")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_SELECT')")
     public ResponseEntity<Object> getJobLog(QuartzLog query, Pageable pageable) {
         return new ResponseEntity<>(quartzJobService.queryAllLog(query, pageable), HttpStatus.OK);
     }
 
     @Log("新增定时任务")
-    @PostMapping(value = "/jobs")
+    @PostMapping(value = "/task")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_CREATE')")
     public ResponseEntity<QuartzJob> create(@Validated @RequestBody QuartzJob resources) {
         if (resources.getId() != null) {
@@ -62,7 +62,7 @@ public class QuartzJobController {
     }
 
     @Log("修改定时任务")
-    @PutMapping(value = "/jobs")
+    @PutMapping(value = "/task")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_EDIT')")
     public ResponseEntity<Void> update(@Validated(QuartzJob.Update.class) @RequestBody QuartzJob resources) {
         quartzJobService.update(resources);
@@ -70,7 +70,7 @@ public class QuartzJobController {
     }
 
     @Log("更改定时任务状态")
-    @PutMapping(value = "/jobs/{id}")
+    @PutMapping(value = "/task/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_EDIT')")
     public ResponseEntity<Void> updateIsPause(@PathVariable Long id) {
         quartzJobService.updateIsPause(quartzJobService.findById(id));
@@ -78,7 +78,7 @@ public class QuartzJobController {
     }
 
     @Log("执行定时任务")
-    @PutMapping(value = "/jobs/exec/{id}")
+    @PutMapping(value = "/task/exec/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_EDIT')")
     public ResponseEntity<Void> execution(@PathVariable Long id) {
         quartzJobService.execution(quartzJobService.findById(id));
@@ -86,7 +86,7 @@ public class QuartzJobController {
     }
 
     @Log("删除定时任务")
-    @DeleteMapping(value = "/jobs/{id}")
+    @DeleteMapping(value = "/task/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','JOB_ALL','JOB_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         quartzJobService.delete(quartzJobService.findById(id));

@@ -32,7 +32,7 @@ public class PictureController {
 
     @Log("查询图片")
     @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_SELECT')")
-    @GetMapping(value = "/pictures")
+    @GetMapping(value = "/picture")
     public ResponseEntity<Map<String, Object>> getRoles(Picture query, Pageable pageable) {
         return new ResponseEntity<>(pictureService.queryAll(query, pageable), HttpStatus.OK);
     }
@@ -46,7 +46,7 @@ public class PictureController {
      */
     @Log("上传图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_UPLOAD')")
-    @PostMapping(value = "/pictures")
+    @PostMapping(value = "/picture")
     public ResponseEntity<Map<String, Object>> upload(@RequestParam MultipartFile file) {
         String userName = SecurityContextHolder.getUsername();
         Picture picture = pictureService.upload(file, userName);
@@ -65,7 +65,7 @@ public class PictureController {
      */
     @Log("删除图片")
     @PreAuthorize("hasAnyRole('ADMIN','PICTURE_ALL','PICTURE_DELETE')")
-    @DeleteMapping(value = "/pictures/{id}")
+    @DeleteMapping(value = "/picture/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         pictureService.delete(pictureService.findById(id));
         return new ResponseEntity<>(HttpStatus.OK);
@@ -79,7 +79,7 @@ public class PictureController {
      */
     @Log("删除图片")
     @PreAuthorize("hasAnyRole('ADMIN', 'PICTURE_ALL', 'PICTURE_DELETE')")
-    @DeleteMapping(value = "/pictures")
+    @DeleteMapping(value = "/picture")
     public ResponseEntity<Void> deleteAll(@RequestBody Long[] ids) {
         pictureService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);

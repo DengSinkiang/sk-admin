@@ -40,7 +40,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @GetMapping(value = "/roles/{id}")
+    @GetMapping(value = "/role/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_SELECT')")
     public ResponseEntity<RoleDTO> getRoles(@PathVariable Long id) {
         return new ResponseEntity<>(roleService.findById(id), HttpStatus.OK);
@@ -51,25 +51,25 @@ public class RoleController {
      *
      * @return
      */
-    @GetMapping(value = "/roles/all")
+    @GetMapping(value = "/role/all")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','USER_ALL','USER_CREATE','USER_EDIT')")
     public ResponseEntity<List<RoleDTO>> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return new ResponseEntity<>(roleService.queryAll(pageable), HttpStatus.OK);
     }
 
     @Log("查询角色")
-    @GetMapping(value = "/roles")
+    @GetMapping(value = "/role")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_SELECT')")
     public ResponseEntity<Map<String, Object>> getRoles(CommonQuery query, Pageable pageable) {
         return new ResponseEntity<>(roleService.queryAll(query, pageable), HttpStatus.OK);
     }
-    @GetMapping(value = "/roles/level")
+    @GetMapping(value = "/role/level")
     public ResponseEntity<Object> getLevel(){
         List<Integer> levels = roleService.findByUsers_Id(SecurityContextHolder.getUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList());
         return new ResponseEntity<>(Dict.create().set("level", Collections.min(levels)), HttpStatus.OK);
     }
     @Log("新增角色")
-    @PostMapping(value = "/roles")
+    @PostMapping(value = "/role")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_CREATE')")
     public ResponseEntity<RoleDTO> create(@Validated @RequestBody Role resources) {
         if (resources.getId() != null) {
@@ -79,7 +79,7 @@ public class RoleController {
     }
 
     @Log("修改角色")
-    @PutMapping(value = "/roles")
+    @PutMapping(value = "/role")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_EDIT')")
     public ResponseEntity<Void> update(@Validated(Role.Update.class) @RequestBody Role resources) {
         roleService.update(resources);
@@ -87,7 +87,7 @@ public class RoleController {
     }
 
     @Log("修改角色权限")
-    @PutMapping(value = "/roles/permission")
+    @PutMapping(value = "/role/permission")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_EDIT')")
     public ResponseEntity<Void> updatePermission(@RequestBody Role resources) {
         roleService.updatePermission(resources, roleService.findById(resources.getId()));
@@ -95,7 +95,7 @@ public class RoleController {
     }
 
     @Log("修改角色菜单")
-    @PutMapping(value = "/roles/menu")
+    @PutMapping(value = "/role/menu")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_EDIT')")
     public ResponseEntity<Void> updateMenu(@RequestBody Role resources) {
         roleService.updateMenu(resources, roleService.findById(resources.getId()));
@@ -103,7 +103,7 @@ public class RoleController {
     }
 
     @Log("删除角色")
-    @DeleteMapping(value = "/roles/{id}")
+    @DeleteMapping(value = "/role/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','ROLES_ALL','ROLES_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         roleService.delete(id);

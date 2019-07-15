@@ -37,14 +37,14 @@ public class PermissionController {
      *
      * @return
      */
-    @GetMapping(value = "/permissions/tree")
+    @GetMapping(value = "/permission/tree")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_CREATE','PERMISSION_EDIT','ROLES_SELECT','ROLES_ALL')")
     public ResponseEntity<Object> getTree() {
         return new ResponseEntity<>(permissionService.getPermissionTree(permissionService.findByPid(0L)), HttpStatus.OK);
     }
 
     @Log("查询权限")
-    @GetMapping(value = "/permissions")
+    @GetMapping(value = "/permission")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_SELECT')")
     public ResponseEntity<Map<String, Object>> getPermissions(CommonQuery query) {
         List<PermissionDTO> permissionDTOS = permissionService.queryAll(query);
@@ -52,7 +52,7 @@ public class PermissionController {
     }
 
     @Log("新增权限")
-    @PostMapping(value = "/permissions")
+    @PostMapping(value = "/permission")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_CREATE')")
     public ResponseEntity<PermissionDTO> create(@Validated @RequestBody Permission resources) {
         if (resources.getId() != null) {
@@ -62,7 +62,7 @@ public class PermissionController {
     }
 
     @Log("修改权限")
-    @PutMapping(value = "/permissions")
+    @PutMapping(value = "/permission")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_EDIT')")
     public ResponseEntity<Void> update(@Validated(Permission.Update.class) @RequestBody Permission resources) {
         permissionService.update(resources);
@@ -70,7 +70,7 @@ public class PermissionController {
     }
 
     @Log("删除权限")
-    @DeleteMapping(value = "/permissions/{id}")
+    @DeleteMapping(value = "/permission/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','PERMISSION_ALL','PERMISSION_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         permissionService.delete(id);

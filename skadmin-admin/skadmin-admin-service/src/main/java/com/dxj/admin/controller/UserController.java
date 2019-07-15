@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @Log("查询用户")
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/user")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_SELECT')")
     public ResponseEntity<Map<String, Object>> getUsers(UserQuery query, Pageable pageable) {
         Set<Long> deptSet = new HashSet<>();
@@ -105,7 +105,7 @@ public class UserController {
     }
 
     @Log("新增用户")
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/user")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_CREATE')")
     public ResponseEntity<UserDTO> create(@Validated @RequestBody User resources) {
         if (resources.getId() != null) {
@@ -116,7 +116,7 @@ public class UserController {
     }
 
     @Log("修改用户")
-    @PutMapping(value = "/users")
+    @PutMapping(value = "/user")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_EDIT')")
     public ResponseEntity<Void> update(@Validated(User.Update.class) @RequestBody User resources) {
         checkLevel(resources);
@@ -125,7 +125,7 @@ public class UserController {
     }
 
     @Log("删除用户")
-    @DeleteMapping(value = "/users/{id}")
+    @DeleteMapping(value = "/user/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER_ALL','USER_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
@@ -145,7 +145,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping(value = "/users/validPass")
+    @PostMapping(value = "/user/validPass")
     public ResponseEntity<Object> validPass(@RequestBody User user) {
 
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
@@ -161,7 +161,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping(value = "/users/updatePass")
+    @PostMapping(value = "/user/updatePass")
     public ResponseEntity<Void> updatePass(@RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         if (userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
@@ -177,7 +177,7 @@ public class UserController {
      * @param file
      * @return
      */
-    @PostMapping(value = "/users/updateAvatar")
+    @PostMapping(value = "/user/updateAvatar")
     public ResponseEntity<Void> updateAvatar(@RequestParam MultipartFile file) {
         Picture picture = pictureService.upload(file, SecurityContextHolder.getUsername());
         userService.updateAvatar(SecurityContextHolder.getUsername(), picture.getUrl());
@@ -192,7 +192,7 @@ public class UserController {
      * @return
      */
     @Log("修改邮箱")
-    @PostMapping(value = "/users/updateEmail/{code}")
+    @PostMapping(value = "/user/updateEmail/{code}")
     public ResponseEntity<Void> updateEmail(@PathVariable String code, @RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
         if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
