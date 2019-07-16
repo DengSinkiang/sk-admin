@@ -1,0 +1,13 @@
+server:
+  port: 8002
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: singwa_imooc
+      cluster-nodes: 127.0.0.1:9300
+
+logging:
+  level:
+    org.springframework:
+      debug
