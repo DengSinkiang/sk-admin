@@ -11,6 +11,13 @@ spring:
       repositories:
         enabled: false
 
+#  #配置 RabbitMQ
+#  rabbitmq:
+#    host: 127.0.0.1
+#    username: dxj
+#    password: 123456
+#    virtual-host: /leyou
+
   #配置 Jpa
   jpa:
     properties:
