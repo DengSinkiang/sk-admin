@@ -15,7 +15,7 @@ QQ群：149952596
 
 #### 注意
 
-dev 分支新增 RabbitMQ、ElasticSearch 的 demo，如需练习请自行百度安装
+dev 分支新增 RabbitMQ、ElasticSearch 的 demo，如需练习请自行百度安装，然后练习
 
 #### 项目源码
 
