@@ -26,15 +26,20 @@ public class TestCreateIndex {
     private ItemRepository itemRepository;
 
     @Test
-    public void testCreateIndex(){
+    public void testCreateIndex() {
         //创建索引库(数据库)
         esTemplate.createIndex(Item.class);
     }
 
     @Test
-    public void testPutMapping(){
+    public void testPutMapping() {
         //创建映射(表)
         esTemplate.putMapping(Item.class);
+    }
+
+    @Test
+    public void deleteIndex() {
+        esTemplate.deleteIndex("item");
     }
 
     @Test
@@ -47,7 +52,7 @@ public class TestCreateIndex {
     @Test
     public void indexList() {
         List<Item> list = new ArrayList<>();
-        list.add(new Item(2L, "坚果手机R1", " 手机", "锤子", 3699.00,"http://image.leyou.com/123.jpg"));
+        list.add(new Item(2L, "坚果手机R1", " 手机", "锤子", 3699.00, "http://image.leyou.com/123.jpg"));
         list.add(new Item(3L, "华为META10", " 手机", "华为", 4499.00, "http://image.leyou.com/3.jpg"));
         // 接收对象集合，实现批量新增
         itemRepository.saveAll(list);
@@ -64,6 +69,5 @@ public class TestCreateIndex {
         // 接收对象集合，实现批量新增
         itemRepository.saveAll(list);
     }
-
 
 }
