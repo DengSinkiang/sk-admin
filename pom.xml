@@ -16,7 +16,6 @@
         <module>skadmin-tool</module>
         <module>skadmin-monitor</module>
         <module>skadmin-quartz</module>
-        <module>skadmin-rabbitmq-demo</module>
     </modules>
 
     <parent>
