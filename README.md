@@ -62,11 +62,11 @@ Add the RabbitMQ and ElasticSearch demos to the dev branch. If you need to pract
     - QiNiu cloud storage file upload, download
 - Message management
     - Short message service # Ali dayu
-    - Email service Send text in html format with rich text
+    - Email service # Send text in html format with rich text
 - System Tool
     - Timed task # Integrate Quartz to do scheduled tasks, join the task log, and see the task running at a glance
-    - Code generation High flexibility, one-click generation of front and rear code, reducing work tasks by 80% or so
-    - Api document Using swagger-ui
+    - Code generation # High flexibility, one-click generation of front and rear code, reducing work tasks by 80% or so
+    - Api document # Using swagger-ui
     - SM.MS free map bed # A very easy to use picture bed, used as a public image upload
 ```
 #### Project structure
