@@ -1,4 +1,4 @@
-# Skadmin Management System
+# skadmin管理系统
 
 
 <div style="text-align: center">
@@ -9,91 +9,91 @@
 
 </div>
 
-#### Learning exchange group
+#### 学习交流
 
-QQ Group：149952596
+QQ群：149952596
 
-#### Pay attention
+#### 注意
 
-Add the RabbitMQ and ElasticSearch demos to the dev branch. If you need to practice, please install Baidu yourself and then practice.
+dev 分支新增 RabbitMQ、ElasticSearch 的 demo，如需练习请自行百度安装，然后练习
 
-#### The source code of the project
+#### 项目源码
 
-|     |   the source code of backend  |   the source code of front-end  |
+|     |   后端源码  |   前端源码  |
 |---  |--- | --- |
 |  github   |  https://github.com/DengSinkiang/skadmin   |  https://github.com/DengSinkiang/skadmin-vue   |
 
-##### User account password
+##### 用户账号密码
 ```
-- Administrator： admin
-- Password： 123456
+- 管理员： admin
+- 密码： 123456
 ```
-#### The development environment
+#### 开发环境
 ```
 - JDK：8
 - IDE：IntelliJ IDEA
-- The Dependency management：Maven
-- Database：MySQL 5.7
+- 依赖管理：Maven
+- 数据库：MySQL 5.7
 ```
-#### Running the project
+#### 运行项目
 ```
-- This project uses redis. If it is not installed, please install it by Baidu.
-- Run the SkAdmin.java directly to start the background service.
+- 本项目用到redis，没安装请自行百度安装
+- 直接运行 SkAdmin.java 即可启动后台服务
 ```
-#### The functional module
+#### 功能模块
 ```
-- System Management
-    - User Management # Provide user related configuration
-    - Role Management # Assign permissions and menus
-    - Authority Management # Permission refinement to interface
-    - Menu Management # Menu dynamic routing has been implemented, the backend is configurable, and multi-level menus are supported.
-    - Dept Management
-    - Job Management
-    - Dictionary Management
-- System monitoring
-    - System cache # Visualize caching operations with jedis and provide basic operations on redis
-    - Real-time console # Print logback logs in real time to better monitor the operating status of the system
-    - SQL monitoring # Monitor database access performance with druid, default username admin, password 123456
-- Log manageMent
-    - Login log # Use aop to log user login logs
-    - Operation log # Use aop to record user action logs
-    - Exception log # Record exceptions during operation and provide stack information for viewing exceptions
-- Cloud storage management
-    - QiNiu cloud storage file upload, download
-- Message management
-    - Short message service # Ali dayu
-    - Email service # Send text in html format with rich text
-- System Tool
-    - Timed task # Integrate Quartz to do scheduled tasks, join the task log, and see the task running at a glance
-    - Code generation # High flexibility, one-click generation of front and rear code, reducing work tasks by 80% or so
-    - Api document # Using swagger-ui
-    - SM.MS free map bed # A very easy to use picture bed, used as a public image upload
+- 系统管理
+    - 用户管理 提供用户的相关配置
+    - 角色管理 对权限与菜单进行分配
+    - 权限管理 权限细化到接口
+    - 菜单管理 已实现菜单动态路由，后端可配置化，支持多级菜单
+    - 部门管理
+    - 岗位管理
+    - 字典管理 
+- 系统监控
+    - 系统缓存 使用jedis将缓存操作可视化，并提供对redis的基本操作
+    - 实时控制台 实时打印logback日志，更好的监控系统的运行状态
+    - SQL监控 采用druid 监控数据库访问性能，默认用户名admin，密码123456
+- 日志管理
+    - 登录日志 使用aop记录用户登录日志
+    - 操作日志 使用aop记录用户操作日志
+    - 异常日志 记录操作过程中的异常，并且提供查看异常的堆栈信息
+- 云存储管理
+    - 七牛云存储 文件上传、下载
+- 消息管理
+    - 短信服务 阿里大于
+    - 邮件服务 配合富文本，发送html格式的邮件
+- 系统工具
+    - 定时任务 整合Quartz做定时任务，加入任务日志，任务运行情况一目了然
+    - 代码生成 高灵活度一键生成前后端代码，减少百分之80左右的工作任务
+    - 接口文档 使用的是 swagger-ui 
+    - SM.MS免费图床 挺好用的一个图床，作为公共图片上传使用
 ```
-#### Project structure
+#### 项目结构
 ```
-# Project module is as follows
-- skadmin-common # Common module
-    - annotation # Interface current limit custom annotation
-    - exception # Uniform exception handling
-    - mapper # Generic mapper for mapstruct
-    - enums # Constant enum
-    - redis # Redis cache related configuration
-    - response # Unified encapsulation return information
-    - swagger # Api document configuration
-    - util # General tool
-- skadmin-admin # System core module
+# 项目模块如下
+- skadmin-common 公共模块
+    - annotation 接口限流自定义注解
+    - exception 项目统一异常的处理
+    - mapper mapstruct的通用mapper
+    - enums 常量枚举
+    - redis redis缓存相关配置
+    - response 统一封装返回信息
+    - swagger 接口文档配置
+    - util 通用工具
+- skadmin-admin 系统核心模块
     - skadmin-admin-interface
         - domain
 	- dto
 	- mapper
-	- query # Query related conditions
+	- query 查询相关的条件
     - skadmin-admin-service
-        - config # Configure cross-domain and static resources and JWT security filter configuration
-        - controller 
-	- repository # Database operation
-	- service # Business realization
-	SkAdmin.java # Startup class	    
-- skadmin-log # System log module
+        - config 配置跨域与静态资源及JWT的安全过滤器配置
+        - controller 控制器
+	- repository 数据库操作
+	- service 业务实现
+	SkAdmin.java 启动类	    
+- skadmin-log 系统日志模块
     - skadmin-log-interface
         - annotation
         - domain
@@ -104,27 +104,27 @@ Add the RabbitMQ and ElasticSearch demos to the dev branch. If you need to pract
         - controller
         - respository
         - service
-- skadmin-tool # System third party tool module
-- skadmin-generator # System code generation module
-- skadmin-monitor # System monitoring module
-    - config # Configure log interceptors and WebSockets
-    - domain # Entity class
-    - repository # Database operation
-    - controller 
-    - service # Business realization
-- skadmin-quartz # Timed task module
+- skadmin-tool 系统第三方工具模块
+- skadmin-generator 系统代码生成模块
+- skadmin-monitor 系统监控模块
+    - config 配置日志拦截器与WebSocket等
+    - domain 实体类
+    - repository 数据库操作
+    - controller 控制器
+    - service 业务实现
+- skadmin-quartz 定时任务模块
 ```
-#### Backend technology stack
+#### 后端技术栈
 ```
-- Basic framework: Spring Boot 2.1.0.RELEASE
-- Dao framework: Spring Data JPA
-- Security framework: Spring Security
-- Cache framework: Redis
-- Log printing: logback+log4jdbc
-- Api document: Swagger2
-- Other: FastJson、AOP、MapStruct等
+- 基础框架：Spring Boot 2.1.0.RELEASE
+- 持久层框架：Spring Data JPA
+- 安全框架：Spring Security
+- 缓存框架：Redis
+- 日志打印：logback+log4jdbc
+- 接口文档 Swagger2
+- 其他：FastJson、AOP、MapStruct等
 ```
-#### Front-end technology stack
+#### 前端技术栈
 ```
 - node
 - vue
@@ -132,7 +132,7 @@ Add the RabbitMQ and ElasticSearch demos to the dev branch. If you need to pract
 - axios
 - element ui
 ```
-#### System preview
+#### 系统预览
 
 <table>
     <tr>
