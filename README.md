@@ -1,4 +1,4 @@
-# Skadmin management system
+# Skadmin Management System
 
 
 <div style="text-align: center">
