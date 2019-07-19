@@ -1,17 +1,17 @@
 /*
- Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : dxj
  Source Server Type    : MySQL
- Source Server Version : 50723
- Source Host           : localhost:3306
+ Source Server Version : 50724
+ Source Host           : 127.0.0.1:3306
  Source Schema         : skadmin
 
  Target Server Type    : MySQL
- Target Server Version : 50723
+ Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 15/07/2019 21:27:51
+ Date: 19/07/2019 11:23:57
 */
 
 SET NAMES utf8mb4;
@@ -23,9 +23,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `ali_content`;
 CREATE TABLE `ali_content` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for alipay_config
@@ -33,18 +33,18 @@ CREATE TABLE `ali_content` (
 DROP TABLE IF EXISTS `alipay_config`;
 CREATE TABLE `alipay_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `app_id` varchar(255) DEFAULT NULL COMMENT '应用ID',
-  `charset` varchar(255) DEFAULT NULL COMMENT '编码',
-  `format` varchar(255) DEFAULT NULL COMMENT '类型 固定格式json',
-  `gateway_url` varchar(255) DEFAULT NULL COMMENT '网关地址',
-  `notify_url` varchar(255) DEFAULT NULL COMMENT '异步回调',
-  `private_key` text COMMENT '私钥',
-  `public_key` text COMMENT '公钥',
-  `return_url` varchar(255) DEFAULT NULL COMMENT '回调地址',
-  `sign_type` varchar(255) DEFAULT NULL COMMENT '签名方式',
-  `sys_service_provider_id` varchar(255) DEFAULT NULL COMMENT '商户号',
+  `app_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '应用ID',
+  `charset` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '编码',
+  `format` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '类型 固定格式json',
+  `gateway_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '网关地址',
+  `notify_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '异步回调',
+  `private_key` text CHARACTER SET utf8 COMMENT '私钥',
+  `public_key` text CHARACTER SET utf8 COMMENT '公钥',
+  `return_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '回调地址',
+  `sign_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '签名方式',
+  `sys_service_provider_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '商户号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of alipay_config
@@ -59,12 +59,12 @@ COMMIT;
 DROP TABLE IF EXISTS `dept`;
 CREATE TABLE `dept` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(255) NOT NULL COMMENT '名称',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '名称',
   `pid` bigint(20) NOT NULL COMMENT '上级部门',
   `create_time` datetime DEFAULT NULL,
   `enabled` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of dept
@@ -88,10 +88,10 @@ COMMIT;
 DROP TABLE IF EXISTS `dict`;
 CREATE TABLE `dict` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '字典名称',
-  `remark` varchar(255) DEFAULT NULL COMMENT '描述',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典名称',
+  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of dict
@@ -108,14 +108,14 @@ COMMIT;
 DROP TABLE IF EXISTS `dict_detail`;
 CREATE TABLE `dict_detail` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) NOT NULL COMMENT '字典标签',
-  `value` varchar(255) NOT NULL COMMENT '字典值',
-  `sort` varchar(255) DEFAULT NULL COMMENT '排序',
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典标签',
+  `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '字典值',
+  `sort` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '排序',
   `dict_id` bigint(11) DEFAULT NULL COMMENT '字典id',
   PRIMARY KEY (`id`),
   KEY `FK5tpkputc6d9nboxojdbgnpmyb` (`dict_id`),
   CONSTRAINT `FK5tpkputc6d9nboxojdbgnpmyb` FOREIGN KEY (`dict_id`) REFERENCES `dict` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of dict_detail
@@ -135,13 +135,13 @@ COMMIT;
 DROP TABLE IF EXISTS `email_config`;
 CREATE TABLE `email_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `from_user` varchar(255) DEFAULT NULL COMMENT '收件人',
-  `host` varchar(255) DEFAULT NULL COMMENT '邮件服务器SMTP地址',
-  `pass` varchar(255) DEFAULT NULL COMMENT '密码',
-  `port` varchar(255) DEFAULT NULL COMMENT '端口',
-  `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
+  `from_user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '收件人',
+  `host` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮件服务器SMTP地址',
+  `pass` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+  `port` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '端口',
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '发件者用户名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of email_config
@@ -156,15 +156,15 @@ COMMIT;
 DROP TABLE IF EXISTS `gen_config`;
 CREATE TABLE `gen_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `author` varchar(255) DEFAULT NULL COMMENT '作者',
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者',
   `cover` bit(1) DEFAULT NULL COMMENT '是否覆盖',
-  `module_name` varchar(255) DEFAULT NULL COMMENT '模块名称',
-  `pack` varchar(255) DEFAULT NULL COMMENT '至于哪个包下',
-  `path` varchar(255) DEFAULT NULL COMMENT '前端代码生成的路径',
-  `api_path` varchar(255) DEFAULT NULL,
-  `prefix` varchar(255) DEFAULT NULL,
+  `module_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '模块名称',
+  `pack` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '至于哪个包下',
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '前端代码生成的路径',
+  `api_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of gen_config
@@ -179,7 +179,7 @@ COMMIT;
 DROP TABLE IF EXISTS `job`;
 CREATE TABLE `job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `enabled` bit(1) NOT NULL,
   `create_time` datetime DEFAULT NULL,
   `sort` bigint(20) NOT NULL,
@@ -187,7 +187,7 @@ CREATE TABLE `job` (
   PRIMARY KEY (`id`),
   KEY `FKmvhj0rogastlctflsxf1d6k3i` (`dept_id`),
   CONSTRAINT `FKmvhj0rogastlctflsxf1d6k3i` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of job
@@ -207,16 +207,16 @@ DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `exception_detail` text,
-  `log_type` varchar(255) DEFAULT NULL,
-  `method` varchar(255) DEFAULT NULL,
-  `params` text,
-  `request_ip` varchar(255) DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exception_detail` mediumtext COLLATE utf8mb4_unicode_ci,
+  `log_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `params` mediumtext COLLATE utf8mb4_unicode_ci,
+  `request_ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `time` bigint(20) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6765 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6781 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of log
@@ -1892,6 +1892,22 @@ INSERT INTO `log` VALUES (6761, '2019-07-15 21:26:50', '查询角色', NULL, 'IN
 INSERT INTO `log` VALUES (6762, '2019-07-15 21:26:55', '删除角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.delete()', '{ id: 5 }', '127.0.0.1', 8, 'admin');
 INSERT INTO `log` VALUES (6763, '2019-07-15 21:26:55', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 25, 'admin');
 INSERT INTO `log` VALUES (6764, '2019-07-15 21:27:04', '查询权限', NULL, 'INFO', 'com.dxj.admin.controller.PermissionController.getPermissions()', '{ query: CommonQuery(name=null) }', '127.0.0.1', 16, 'admin');
+INSERT INTO `log` VALUES (6765, '2019-07-16 08:41:51', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 153, 'admin');
+INSERT INTO `log` VALUES (6766, '2019-07-16 08:41:51', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 138, 'admin');
+INSERT INTO `log` VALUES (6767, '2019-07-16 08:41:51', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 138, 'admin');
+INSERT INTO `log` VALUES (6768, '2019-07-16 08:41:55', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 388, 'admin');
+INSERT INTO `log` VALUES (6769, '2019-07-17 12:51:48', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 419, 'admin');
+INSERT INTO `log` VALUES (6770, '2019-07-17 12:51:48', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 419, 'admin');
+INSERT INTO `log` VALUES (6771, '2019-07-17 12:51:48', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 370, 'admin');
+INSERT INTO `log` VALUES (6772, '2019-07-17 12:51:51', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 377, 'admin');
+INSERT INTO `log` VALUES (6773, '2019-07-17 12:51:53', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 14, 'admin');
+INSERT INTO `log` VALUES (6774, '2019-07-17 12:51:53', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 15, 'admin');
+INSERT INTO `log` VALUES (6775, '2019-07-17 12:51:53', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 22, 'admin');
+INSERT INTO `log` VALUES (6776, '2019-07-19 11:22:54', '登录', 'org.springframework.data.redis.RedisConnectionFailureException: Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool\n	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.fetchJedisConnector(JedisConnectionFactory.java:281)\n	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.getConnection(JedisConnectionFactory.java:464)\n	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.execute(DefaultRedisCacheWriter.java:238)\n	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:109)\n	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:82)\n	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58)\n	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73)\n	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:554)\n	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedItem(CacheAspectSupport.java:519)\n	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:401)\n	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:345)\n	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:61)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\n	at com.dxj.admin.service.UserService$$EnhancerBySpringCGLIB$$c7afba6a.findByName(<generated>)\n	at com.dxj.admin.service.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)\n	at com.dxj.admin.service.JwtUserDetailsService$$FastClassBySpringCGLIB$$49a0d3e8.invoke(<generated>)\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\n	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\n	at com.dxj.admin.service.JwtUserDetailsService$$EnhancerBySpringCGLIB$$41de99be.loadUserByUsername(<generated>)\n	at com.dxj.admin.controller.AuthenticationController.login(AuthenticationController.java:53)\n	at com.dxj.admin.controller.AuthenticationController$$FastClassBySpringCGLIB$$89273402.invoke(<generated>)\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\n	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:88)\n	at com.dxj.log.aspect.DataScopeAspect.loginLogAround(DataScopeAspect.java:71)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:633)\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)\n	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\n	at com.dxj.admin.controller.AuthenticationController$$EnhancerBySpringCGLIB$$8b99fcb.login(<generated>)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:215)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:142)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998)\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:901)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:875)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)\n	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)\n	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at com.dxj.admin.config.JwtAuthorizationTokenFilter.doFilterInternal(JwtAuthorizationTokenFilter.java:69)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)\n	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)\n	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)\n	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)\n	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:770)\n	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\nCaused by: redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool\n	at redis.clients.util.Pool.getResource(Pool.java:53)\n	at redis.clients.jedis.JedisPool.getResource(JedisPool.java:226)\n	at redis.clients.jedis.JedisPool.getResource(JedisPool.java:16)\n	at org.springframework.data.redis.connection.jedis.JedisConnectionFactory.fetchJedisConnector(JedisConnectionFactory.java:271)\n	... 126 more\nCaused by: redis.clients.jedis.exceptions.JedisConnectionException: java.net.ConnectException: Connection refused (Connection refused)\n	at redis.clients.jedis.Connection.connect(Connection.java:207)\n	at redis.clients.jedis.BinaryClient.connect(BinaryClient.java:93)\n	at redis.clients.jedis.BinaryJedis.connect(BinaryJedis.java:1767)\n	at redis.clients.jedis.JedisFactory.makeObject(JedisFactory.java:106)\n	at org.apache.commons.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:889)\n	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:433)\n	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:362)\n	at redis.clients.util.Pool.getResource(Pool.java:49)\n	... 129 more\nCaused by: java.net.ConnectException: Connection refused (Connection refused)\n	at java.net.PlainSocketImpl.socketConnect(Native Method)\n	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)\n	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)\n	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)\n	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)\n	at java.net.Socket.connect(Socket.java:589)\n	at redis.clients.jedis.Connection.connect(Connection.java:184)\n	... 136 more\n', 'ERROR', 'com.dxj.admin.controller.AuthenticationController.login()', '{ authorizationUser: {username=admin, password=b455650c9e488198cf4fbfe0aea5bf2b }', '127.0.0.1', 28, 'admin');
+INSERT INTO `log` VALUES (6777, '2019-07-19 11:23:20', '查询字典详情', NULL, 'INFO', 'com.dxj.admin.controller.DictDetailController.getDictDetail()', '{ query: DictDetailQuery(label=null, dictName=user_status) pageable: Page request [number: 0, size 2000, sort: sort: ASC] }', '127.0.0.1', 114, 'admin');
+INSERT INTO `log` VALUES (6778, '2019-07-19 11:23:20', '查询用户', NULL, 'INFO', 'com.dxj.admin.controller.UserController.getUsers()', '{ query: UserQuery(id=null, deptIds=[], username=null, email=null, enabled=null, deptId=null) pageable: Page request [number: 0, size 10, sort: id: DESC] }', '127.0.0.1', 110, 'admin');
+INSERT INTO `log` VALUES (6779, '2019-07-19 11:23:20', '查询部门', NULL, 'INFO', 'com.dxj.admin.controller.DeptController.getDept()', '{ query: DeptQuery(ids=[], name=null, enabled=null, pid=null) }', '127.0.0.1', 134, 'admin');
+INSERT INTO `log` VALUES (6780, '2019-07-19 11:23:22', '查询角色', NULL, 'INFO', 'com.dxj.admin.controller.RoleController.getRoles()', '{ query: CommonQuery(name=null) pageable: Page request [number: 0, size 10, sort: level: ASC] }', '127.0.0.1', 159, 'admin');
 COMMIT;
 
 -- ----------------------------
@@ -1901,14 +1917,14 @@ DROP TABLE IF EXISTS `login_log`;
 CREATE TABLE `login_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
-  `log_type` varchar(255) DEFAULT NULL,
-  `operation` varchar(255) DEFAULT NULL,
-  `request_ip` varchar(255) DEFAULT NULL,
+  `log_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `operation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `request_ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `time` bigint(20) DEFAULT NULL,
-  `user_agent` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of login_log
@@ -2046,6 +2062,10 @@ INSERT INTO `login_log` VALUES (216, '2019-07-10 22:25:03', 'INFO', '登录', '1
 INSERT INTO `login_log` VALUES (217, '2019-07-10 22:26:38', 'INFO', '登录', '127.0.0.1', 2, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
 INSERT INTO `login_log` VALUES (218, '2019-07-15 20:54:27', 'INFO', '登录', '127.0.0.1', 300, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
 INSERT INTO `login_log` VALUES (219, '2019-07-15 21:20:20', 'INFO', '登录', '127.0.0.1', 214, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (220, '2019-07-16 08:41:50', 'INFO', '登录', '127.0.0.1', 136, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (221, '2019-07-17 12:47:00', 'INFO', '登录', '127.0.0.1', 367, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (222, '2019-07-19 11:22:54', 'ERROR', '登录', '127.0.0.1', 28, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'admin');
+INSERT INTO `login_log` VALUES (223, '2019-07-19 11:23:16', 'INFO', '登录', '127.0.0.1', 558, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'admin');
 COMMIT;
 
 -- ----------------------------
@@ -2056,14 +2076,14 @@ CREATE TABLE `menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `i_frame` bit(1) DEFAULT NULL COMMENT '是否外链',
-  `name` varchar(255) DEFAULT NULL COMMENT '菜单名称',
-  `component` varchar(255) DEFAULT NULL COMMENT '组件',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '菜单名称',
+  `component` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '组件',
   `pid` bigint(20) NOT NULL COMMENT '上级菜单ID',
   `sort` bigint(20) NOT NULL COMMENT '排序',
-  `icon` varchar(255) DEFAULT NULL COMMENT '图标',
-  `path` varchar(255) DEFAULT NULL COMMENT '链接地址',
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图标',
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '链接地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of menu
@@ -2104,12 +2124,12 @@ COMMIT;
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE `permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `alias` varchar(255) DEFAULT NULL COMMENT '别名',
+  `alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '别名',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
   `pid` int(11) NOT NULL COMMENT '上级权限',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of permission
@@ -2174,15 +2194,15 @@ DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `create_time` datetime DEFAULT NULL COMMENT '上传日期',
-  `delete_url` varchar(255) DEFAULT NULL COMMENT '删除的URL',
-  `filename` varchar(255) DEFAULT NULL COMMENT '图片名称',
-  `height` varchar(255) DEFAULT NULL COMMENT '图片高度',
-  `size` varchar(255) DEFAULT NULL COMMENT '图片大小',
-  `url` varchar(255) DEFAULT NULL COMMENT '图片地址',
-  `username` varchar(255) DEFAULT NULL COMMENT '用户名称',
-  `width` varchar(255) DEFAULT NULL COMMENT '图片宽度',
+  `delete_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '删除的URL',
+  `filename` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片名称',
+  `height` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片高度',
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片大小',
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片地址',
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名称',
+  `width` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '图片宽度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for qiniu_config
@@ -2190,14 +2210,14 @@ CREATE TABLE `picture` (
 DROP TABLE IF EXISTS `qiniu_config`;
 CREATE TABLE `qiniu_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `access_key` text COMMENT 'accessKey',
-  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
-  `host` varchar(255) NOT NULL COMMENT '外链域名',
-  `secret_key` text COMMENT 'secretKey',
-  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
-  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
+  `access_key` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'accessKey',
+  `bucket` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Bucket 识别符',
+  `host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '外链域名',
+  `secret_key` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'secretKey',
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '空间类型',
+  `zone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '机房',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for qiniu_content
@@ -2205,14 +2225,14 @@ CREATE TABLE `qiniu_config` (
 DROP TABLE IF EXISTS `qiniu_content`;
 CREATE TABLE `qiniu_content` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
-  `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
-  `size` varchar(255) DEFAULT NULL COMMENT '文件大小',
-  `type` varchar(255) DEFAULT NULL COMMENT '文件类型：私有或公开',
+  `bucket` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Bucket 识别符',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文件名称',
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文件大小',
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文件类型：私有或公开',
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
-  `url` varchar(255) DEFAULT NULL COMMENT '文件url',
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文件url',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of qiniu_content
@@ -2227,16 +2247,16 @@ COMMIT;
 DROP TABLE IF EXISTS `quartz_job`;
 CREATE TABLE `quartz_job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `bean_name` varchar(255) DEFAULT NULL COMMENT 'Spring Bean名称',
-  `cron_expression` varchar(255) DEFAULT NULL COMMENT 'cron 表达式',
+  `bean_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Spring Bean名称',
+  `cron_expression` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'cron 表达式',
   `is_pause` bit(1) DEFAULT NULL COMMENT '状态：1暂停、0启用',
-  `job_name` varchar(255) DEFAULT NULL COMMENT '任务名称',
-  `method_name` varchar(255) DEFAULT NULL COMMENT '方法名称',
-  `params` varchar(255) DEFAULT NULL COMMENT '参数',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `job_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '任务名称',
+  `method_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '方法名称',
+  `params` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '参数',
+  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
   `update_time` datetime DEFAULT NULL COMMENT '创建或更新日期',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of quartz_job
@@ -2253,18 +2273,18 @@ COMMIT;
 DROP TABLE IF EXISTS `quartz_log`;
 CREATE TABLE `quartz_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `baen_name` varchar(255) DEFAULT NULL,
+  `baen_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `cron_expression` varchar(255) DEFAULT NULL,
-  `exception_detail` text,
+  `cron_expression` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exception_detail` mediumtext COLLATE utf8mb4_unicode_ci,
   `is_success` bit(1) DEFAULT NULL,
-  `job_name` varchar(255) DEFAULT NULL,
-  `method_name` varchar(255) DEFAULT NULL,
-  `params` varchar(255) DEFAULT NULL,
+  `job_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `method_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `params` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `time` bigint(20) DEFAULT NULL,
-  `bean_name` varchar(255) DEFAULT NULL,
+  `bean_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of quartz_log
@@ -2559,12 +2579,12 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `name` varchar(255) NOT NULL COMMENT '名称',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `data_scope` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '名称',
+  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
+  `data_scope` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of role
@@ -2586,7 +2606,7 @@ CREATE TABLE `roles_depts` (
   KEY `FK7qg6itn5ajdoa9h9o78v9ksur` (`dept_id`),
   CONSTRAINT `FK7qg6itn5ajdoa9h9o78v9ksur` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`),
   CONSTRAINT `FKrg1ci4cxxfbja0sb0pddju7k` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for roles_menus
@@ -2599,7 +2619,7 @@ CREATE TABLE `roles_menus` (
   KEY `FKcngg2qadojhi3a651a5adkvbq` (`role_id`) USING BTREE,
   CONSTRAINT `FKcngg2qadojhi3a651a5adkvbq` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `FKq1knxf8ykt26we8k331naabjx` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of roles_menus
@@ -2683,7 +2703,7 @@ CREATE TABLE `roles_permissions` (
   KEY `FKboeuhl31go7wer3bpy6so7exi` (`permission_id`) USING BTREE,
   CONSTRAINT `FK4hrolwj4ned5i7qe8kyiaak6m` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `FKboeuhl31go7wer3bpy6so7exi` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of roles_permissions
@@ -2723,12 +2743,12 @@ COMMIT;
 DROP TABLE IF EXISTS `sms_config`;
 CREATE TABLE `sms_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `access_key` varchar(255) DEFAULT NULL,
-  `access_secret` varchar(255) DEFAULT NULL,
-  `sign_name` varchar(255) DEFAULT NULL,
-  `template_code` varchar(255) DEFAULT NULL,
+  `access_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_secret` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sign_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `template_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of sms_config
@@ -2742,11 +2762,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
-  `name` varchar(255) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for user
@@ -2754,15 +2774,15 @@ CREATE TABLE `tb_user` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `avatar` varchar(255) DEFAULT NULL COMMENT '头像地址',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像地址',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
   `enabled` bigint(20) DEFAULT NULL COMMENT '状态：1启用、0禁用',
-  `password` varchar(255) DEFAULT NULL COMMENT '密码',
-  `username` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
   `last_password_reset_time` datetime DEFAULT NULL COMMENT '最后修改密码的日期',
   `dept_id` bigint(20) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `job_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `UK_kpubos9gc2cvtkb0thktkbkes` (`email`) USING BTREE,
@@ -2771,7 +2791,7 @@ CREATE TABLE `user` (
   KEY `FKfftoc2abhot8f2wu6cl9a5iky` (`job_id`),
   CONSTRAINT `FK5rwmryny6jthaaxkogownknqp` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`),
   CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of user
@@ -2793,7 +2813,7 @@ CREATE TABLE `users_roles` (
   KEY `FKq4eq273l04bpu4efj0jd0jb98` (`role_id`) USING BTREE,
   CONSTRAINT `users_roles_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `users_roles_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of users_roles
@@ -2810,14 +2830,14 @@ COMMIT;
 DROP TABLE IF EXISTS `verification_code`;
 CREATE TABLE `verification_code` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `code` varchar(255) DEFAULT NULL COMMENT '验证码',
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '验证码',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `status` bit(1) DEFAULT NULL COMMENT '状态：1有效、0过期',
-  `type` varchar(255) DEFAULT NULL COMMENT '验证码类型：email或者短信',
-  `value` varchar(255) DEFAULT NULL COMMENT '接收邮箱或者手机号码',
-  `scenes` varchar(255) DEFAULT NULL COMMENT '业务名称：如重置邮箱、重置密码等',
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '验证码类型：email或者短信',
+  `value` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '接收邮箱或者手机号码',
+  `scenes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '业务名称：如重置邮箱、重置密码等',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of verification_code
@@ -2833,13 +2853,13 @@ DROP TABLE IF EXISTS `visits`;
 CREATE TABLE `visits` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
-  `date` varchar(255) DEFAULT NULL,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ip_counts` bigint(20) DEFAULT NULL,
   `pv_counts` bigint(20) DEFAULT NULL,
-  `week_day` varchar(255) DEFAULT NULL,
+  `week_day` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_11aksgq87euk9bcyeesfs4vtp` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of visits
@@ -2874,6 +2894,8 @@ INSERT INTO `visits` VALUES (46, '2019-07-04 21:25:02', '2019-07-04', 0, 2, 'Thu
 INSERT INTO `visits` VALUES (47, '2019-07-09 20:16:02', '2019-07-09', 0, 2, 'Tue');
 INSERT INTO `visits` VALUES (48, '2019-07-10 19:53:26', '2019-07-10', 1, 7, 'Wed');
 INSERT INTO `visits` VALUES (49, '2019-07-15 20:52:41', '2019-07-15', 1, 3, 'Mon');
+INSERT INTO `visits` VALUES (50, '2019-07-17 08:59:31', '2019-07-17', 0, 2, 'Wed');
+INSERT INTO `visits` VALUES (51, '2019-07-19 11:22:46', '2019-07-19', 1, 2, 'Fri');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
