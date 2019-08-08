@@ -121,6 +121,7 @@ public class RoleService {
     public List<RoleSmallDTO> findByUsers_Id(Long id) {
         return roleSmallMapper.toDto(new ArrayList<>(roleRepository.findByUsers_Id(id)));
     }
+
     @Cacheable(keyGenerator = "keyGenerator")
     public Integer findByRoles(Set<Role> roles) {
         Set<RoleDTO> roleDTOS = new HashSet<>();
@@ -143,8 +144,7 @@ public class RoleService {
      * 不分页
      */
     @Cacheable(keyGenerator = "keyGenerator")
-    public List<RoleDTO> queryAll(Pageable pageable){
-        List<Role> roles = roleRepository.findAll(pageable).getContent();
-        return roleMapper.toDto(roles);
+    public List<RoleDTO> queryAll(Pageable pageable) {
+        return roleMapper.toDto(roleRepository.findAll(pageable).getContent());
     }
 }

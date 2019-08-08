@@ -29,8 +29,6 @@ public class UserDTO implements Serializable {
 
     private Boolean enabled;
 
-    private Boolean sex;
-
     @JsonIgnore
     private String password;
 
