@@ -18,6 +18,7 @@
         <module>skadmin-quartz</module>
         <module>skadmin-rabbitmq-demo</module>
         <module>skadmin-es-demo</module>
+        <module>skadmin-social</module>
     </modules>
 
     <parent>
@@ -62,10 +63,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+
         <!--elasticsearch-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <!--gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
