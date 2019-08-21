@@ -65,7 +65,7 @@ public class AesEncryptUtils {
     }
 
     public static void main(String[] args) throws Exception {
-        String pass = "sinkiang123456";
+        String pass = "hr123456";
         System.out.println(encryptPassword(pass));
         String str = "15235215Xin";
         String encrypt = encrypt(str);

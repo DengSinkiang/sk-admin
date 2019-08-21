@@ -27,7 +27,7 @@ public class ExecutionJob extends QuartzJobBean {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void executeInternal(JobExecutionContext context) {
