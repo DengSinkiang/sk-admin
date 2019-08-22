@@ -100,7 +100,7 @@ public class QiNiuService {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtils.getConfiguration(qiNiuConfig.getZone());
+        Configuration cfg = new Configuration(QiNiuUtils.getRegion(qiNiuConfig.getZone()));
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(qiNiuConfig.getAccessKey(), qiNiuConfig.getSecretKey());
         String upToken = auth.uploadToken(qiNiuConfig.getBucket());
@@ -170,15 +170,19 @@ public class QiNiuService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(QiNiuContent content, QiNiuConfig config) {
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtils.getConfiguration(config.getZone());
-        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
-        BucketManager bucketManager = new BucketManager(auth, cfg);
+        BucketManager bucketManager = getBucketManager(config);
         try {
             bucketManager.delete(content.getBucket(), content.getKey());
             qiNiuContentRepository.delete(content);
         } catch (QiniuException ex) {
             qiNiuContentRepository.delete(content);
         }
+    }
+
+    private BucketManager getBucketManager(QiNiuConfig config) {
+        Configuration cfg = new Configuration(QiNiuUtils.getRegion(config.getZone()));
+        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
+        return new BucketManager(auth, cfg);
     }
 
     /**
@@ -193,9 +197,7 @@ public class QiNiuService {
             throw new BadRequestException("请先添加相应配置，再操作");
         }
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = QiNiuUtils.getConfiguration(config.getZone());
-        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
-        BucketManager bucketManager = new BucketManager(auth, cfg);
+        BucketManager bucketManager = getBucketManager(config);
         //文件名前缀
         String prefix = "";
         //每次迭代的长度限制，最大1000，推荐值 1000
