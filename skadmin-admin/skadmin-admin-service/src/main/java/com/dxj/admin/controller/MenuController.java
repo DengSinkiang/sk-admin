@@ -108,6 +108,7 @@ public class MenuController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 获取需要删除的菜单及子菜单
     private  List<Menu> treeList(List<Menu> menuList, Long id) {
 
         menuList.add(menuService.findOne(id));
