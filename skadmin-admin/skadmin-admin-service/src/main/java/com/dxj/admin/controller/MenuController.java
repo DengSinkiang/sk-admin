@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,6 @@ public class MenuController {
     private final UserService userService;
 
     private final RoleService roleService;
-
 
 
     @Autowired
@@ -99,15 +99,29 @@ public class MenuController {
     @DeleteMapping(value = "/menu/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','MENU_ALL','MENU_DELETE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        List<Menu> menuList = menuService.findByPid(id);
 
-        // 特殊情况，对级联删除进行处理
-        for (Menu menu : menuList) {
+        List<Menu> test = new ArrayList<>();
+        for (Menu menu : treeList(test, id)) {
             roleService.untiedMenu(menu);
             menuService.delete(menu.getId());
         }
-        roleService.untiedMenu(menuService.findOne(id));
-        menuService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    private  List<Menu> treeList(List<Menu> menuList, Long id) {
+
+        menuList.add(menuService.findOne(id));
+
+        List<Menu> menu1 = menuService.findByPid(id);
+
+        if (menu1 == null || menu1.size() == 0) {
+            return menuList;
+        }
+
+        for(Menu menu2 : menu1) {
+            treeList(menuList, menu2.getId());
+        }
+        return menuList;
+    }
+
 }

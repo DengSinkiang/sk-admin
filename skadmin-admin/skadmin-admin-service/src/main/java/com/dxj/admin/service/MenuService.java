@@ -49,7 +49,6 @@ public class MenuService {
         ValidationUtils.isNull(menu, "Menu", "id", id);
         return menuMapper.toDto(menu.orElse(null));
     }
-
     public List<MenuDTO> findByRoles(List<RoleSmallDTO> roles) {
         Set<Menu> menus = new LinkedHashSet<>();
         for (RoleSmallDTO role : roles) {
