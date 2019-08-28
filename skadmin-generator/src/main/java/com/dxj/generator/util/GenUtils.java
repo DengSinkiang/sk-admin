@@ -62,8 +62,6 @@ public class GenUtils {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("api");
         templateNames.add("index");
-        templateNames.add("header");
-        templateNames.add("edit");
         templateNames.add("eForm");
         return templateNames;
     }
@@ -229,19 +227,11 @@ public class GenUtils {
         }
 
         if ("index".equals(templateName)) {
-            return path + File.separator + "index.vue";
-        }
-
-        if ("header".equals(templateName)) {
-            return path + File.separator + "module" + File.separator + "header.vue";
-        }
-
-        if ("edit".equals(templateName)) {
-            return path + File.separator + "module" + File.separator + "edit.vue";
+            return path  + File.separator + "index.vue";
         }
 
         if ("eForm".equals(templateName)) {
-            return path + File.separator + "module" + File.separator + "form.vue";
+            return path  + File.separator + File.separator + "form.vue";
         }
         return null;
     }

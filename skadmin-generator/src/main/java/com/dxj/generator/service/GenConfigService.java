@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.Optional;
 
 /**
@@ -34,6 +35,22 @@ public class GenConfigService {
     @CacheEvict(allEntries = true)
     public GenConfig update(GenConfig genConfig) {
         genConfig.setId(1L);
+        // 自动设置Api路径，注释掉前需要同步取消前端的注释
+        String separator = File.separator;
+        String[] paths;
+        if (separator.equals("\\")) {
+            paths = "\\\\".split(genConfig.getPath());
+        } else paths = genConfig.getPath().split(File.separator);
+        StringBuilder api = new StringBuilder();
+        for (String path : paths) {
+            api.append(path);
+            api.append(separator);
+            if (path.equals("src")) {
+                api.append("api");
+                break;
+            }
+        }
+        genConfig.setApiPath(api.toString());
         return genConfigRepository.save(genConfig);
     }
 }

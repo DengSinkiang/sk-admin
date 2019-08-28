@@ -101,28 +101,12 @@ public class MenuController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
         List<Menu> test = new ArrayList<>();
-        for (Menu menu : treeList(test, id)) {
+        for (Menu menu : menuService.treeList(test, id)) {
             roleService.untiedMenu(menu);
             menuService.delete(menu.getId());
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // 获取需要删除的菜单及子菜单
-    private  List<Menu> treeList(List<Menu> menuList, Long id) {
-
-        menuList.add(menuService.findOne(id));
-
-        List<Menu> menu1 = menuService.findByPid(id);
-
-        if (menu1 == null || menu1.size() == 0) {
-            return menuList;
-        }
-
-        for(Menu menu2 : menu1) {
-            treeList(menuList, menu2.getId());
-        }
-        return menuList;
-    }
 
 }

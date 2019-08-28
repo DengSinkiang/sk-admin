@@ -106,6 +106,23 @@ public class MenuService {
         menuRepository.deleteById(id);
     }
 
+    // 获取需要删除的菜单及子菜单
+    public  List<Menu> treeList(List<Menu> menuList, Long id) {
+
+        menuList.add(findOne(id));
+
+        List<Menu> menu1 = findByPid(id);
+
+        if (menu1 == null || menu1.size() == 0) {
+            return menuList;
+        }
+
+        for(Menu menu2 : menu1) {
+            treeList(menuList, menu2.getId());
+        }
+        return menuList;
+    }
+
     @Cacheable(key = "'tree'")
     public List<Map<String, Object>> getMenuTree(List<Menu> menus) {
         List<Map<String, Object>> list = new LinkedList<>();
