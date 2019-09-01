@@ -2,7 +2,7 @@ package ${package}.service;
 
 import ${package}.domain.${className};
 import ${package}.dto.${className}DTO;
-import ${package}.dto.${className}QueryCriteria;
+import ${package}.dto.${className}Query;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -58,9 +58,9 @@ public class ${className}Service {
     * @return
     */
     @Cacheable(keyGenerator = "keyGenerator")
-    Object queryAll(${className}QueryCriteria criteria, Pageable pageable) {
-        Page<${className}> page = ${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
-        return PageUtil.toPage(page.map(${changeClassName}Mapper::toDto));
+    public Object queryAll(${className}Query criteria, Pageable pageable) {
+        Page<${className}> page = ${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root,criteria,criteriaBuilder),pageable);
+        return PageUtils.toPage(page.map(${changeClassName}Mapper::toDto));
     }
 
     /**
@@ -69,8 +69,8 @@ public class ${className}Service {
     * @return
     */
     @Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(${className}QueryCriteria criteria) {
-        return ${changeClassName}Mapper.toDto(${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder)));
+    public Object queryAll(${className}Query criteria) {
+        return ${changeClassName}Mapper.toDto(${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root,criteria,criteriaBuilder)));
 
     }
 
@@ -80,10 +80,10 @@ public class ${className}Service {
      * @return
      */
     @Cacheable(key = "#p0")
-    ${className}DTO findById(${pkColumnType} ${pkChangeColName}) {
+    public ${className}DTO findById(${pkColumnType} ${pkChangeColName}) {
         Optional<${className}> ${changeClassName} = ${changeClassName}Repository.findById(${pkChangeColName});
-        ValidationUtil.isNull(${changeClassName},"${className}","${pkChangeColName}",${pkChangeColName});
-        return ${changeClassName}Mapper.toDto(${changeClassName}.get());
+        ValidationUtils.isNull(${changeClassName},"${className}","${pkChangeColName}",${pkChangeColName});
+        return ${changeClassName}Mapper.toDto(${changeClassName}.orElse(null));
     }
 
     /**
@@ -92,7 +92,7 @@ public class ${className}Service {
      * @return
      */
     @CacheEvict(allEntries = true)
-    ${className}DTO create(${className} resources) {
+    public ${className}DTO create(${className} resources) {
 <#if !auto && pkColumnType = 'Long'>
         Snowflake snowflake = IdUtil.createSnowflake(1, 1);
         resources.set${pkCapitalColName}(snowflake.nextId());
@@ -117,11 +117,11 @@ public class ${className}Service {
      * @param resources
      */
     @CacheEvict(allEntries = true)
-    void update(${className} resources) {
+    public void update(${className} resources) {
         Optional<${className}> optional${className} = ${changeClassName}Repository.findById(resources.get${pkCapitalColName}());
-        ValidationUtil.isNull( optional${className},"${className}","id",resources.get${pkCapitalColName}());
+        ValidationUtils.isNull( optional${className},"${className}","id",resources.get${pkCapitalColName}());
 
-${className} ${changeClassName} = optional${className}.get();
+        ${className} ${changeClassName} = optional${className}.orElse(null);
 <#if columns??>
     <#list columns as column>
         <#if column.columnKey = 'UNI'>
@@ -136,6 +136,7 @@ ${className} ${changeClassName} = optional${className}.get();
     </#list>
 </#if>
         // 此处需自己修改
+        assert ${changeClassName} != null;
         resources.set${pkCapitalColName}(${changeClassName}.get${pkCapitalColName}());
         ${changeClassName}Repository.save(resources);
     }
@@ -145,7 +146,7 @@ ${className} ${changeClassName} = optional${className}.get();
      * @param ${pkChangeColName}
      */
     @CacheEvict(allEntries = true)
-    void delete(${pkColumnType} ${pkChangeColName}) {
+    public void delete(${pkColumnType} ${pkChangeColName}) {
         ${changeClassName}Repository.deleteById(${pkChangeColName});
     }
 }

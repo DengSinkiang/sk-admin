@@ -3,7 +3,8 @@ package ${package}.controller;
 import com.dxj.log.annotation.Log;
 import ${package}.domain.${className};
 import ${package}.service.${className}Service;
-import ${package}.dto.${className}QueryCriteria;
+import ${package}.dto.${className}Query;
+import ${package}.dto.${className}DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,14 +28,14 @@ public class ${className}Controller {
     @Log("查询${className}")
     @GetMapping(value = "/${changeClassName}")
     @PreAuthorize("hasAnyRole('ADMIN', '${upperCaseClassName}_ALL', '${upperCaseClassName}_SELECT')")
-    public ResponseEntity get${className}s(${className}QueryCriteria criteria, Pageable pageable) {
-        return new ResponseEntity(${changeClassName}Service.queryAll(criteria,pageable), HttpStatus.OK);
+    public ResponseEntity<Object> get${className}s(${className}Query criteria, Pageable pageable) {
+        return new ResponseEntity<>(${changeClassName}Service.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @Log("新增${className}")
     @PostMapping(value = "/${changeClassName}")
     @PreAuthorize("hasAnyRole('ADMIN', '${upperCaseClassName}_ALL', '${upperCaseClassName}_CREATE')")
-    public ResponseEntity<Object> create(@Validated @RequestBody ${className} resources) {
+    public ResponseEntity<${className}DTO> create(@Validated @RequestBody ${className} resources) {
         return new ResponseEntity<>(${changeClassName}Service.create(resources), HttpStatus.CREATED);
     }
 

@@ -16,13 +16,13 @@ import com.dxj.common.annotation.Query;
 * @date ${date}
 */
 @Data
-public class ${className}QueryCriteria{
+public class ${className}Query {
 <#if queryColumns??>
     <#list queryColumns as column>
 
     <#if column.columnQuery = '1'>
     // 模糊
-    @Query(type = Query.Type.INNER_LIKE)
+    @Query(type = Query.Type.LIKE)
     </#if>
     <#if column.columnQuery = '2'>
     // 精确
