@@ -17,6 +17,10 @@ QQ群：149952596
 
 dev 分支新增 RabbitMQ、ElasticSearch 的 demo，如需练习请自行百度安装，然后练习
 
+#### 在线文档
+
+https://www.kancloud.cn/book/sinkiang/skadmin_document/preview
+
 #### 项目源码
 
 |     |   后端源码  |   前端源码  |
