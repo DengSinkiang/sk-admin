@@ -13,7 +13,7 @@ spring:
   freemarker:
     check-template-location: false
 
-  #  #配置 RabbitMQ
+#  #配置 RabbitMQ
 #  rabbitmq:
 #    host: 127.0.0.1
 #    username: dxj
