@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * 七牛云存储工具类
+ *
  * @author dxj
  * @date 2019-05-31
  */
@@ -23,18 +24,19 @@ public class QiNiuUtils {
 
     /**
      * 得到机房的对应关系
+     *
      * @param zone
      * @return
      */
-    public static Region getRegion(String zone){
+    public static Region getRegion(String zone) {
 
-        if(HUAD.equals(zone)){
+        if (HUAD.equals(zone)) {
             return Region.huadong();
-        } else if(HUAB.equals(zone)){
+        } else if (HUAB.equals(zone)) {
             return Region.huabei();
-        } else if(HUAN.equals(zone)){
+        } else if (HUAN.equals(zone)) {
             return Region.huanan();
-        } else if (BEIM.equals(zone)){
+        } else if (BEIM.equals(zone)) {
             return Region.beimei();
             // 否则就是东南亚
         } else {
@@ -44,10 +46,11 @@ public class QiNiuUtils {
 
     /**
      * 默认不指定key的情况下，以文件内容的hash值作为文件名
+     *
      * @param file
      * @return
      */
-    public static String getKey(String file){
+    public static String getKey(String file) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         return FileUtils.getFileNameNoEx(file) + "-" +

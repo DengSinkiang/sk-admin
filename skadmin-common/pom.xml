@@ -11,4 +11,11 @@
 
     <groupId>com.dxj.common</groupId>
     <artifactId>skadmin-common</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.2.10.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>
