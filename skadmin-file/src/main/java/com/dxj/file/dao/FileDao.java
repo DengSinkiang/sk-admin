@@ -8,6 +8,6 @@ import com.dxj.file.entity.File;
  *
  * @author Sinkiang
  */
-public interface FileDao extends SbootBaseDao<File, String> {
+public interface FileDao extends BaseDao<File, String> {
 
 }

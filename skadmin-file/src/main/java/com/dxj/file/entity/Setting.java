@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @ApiModel(value = "配置")
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Setting extends SbootBaseEntity {
+public class Setting extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_file")
 @ApiModel(value = "文件")
-public class File extends SbootBaseEntity {
+public class File extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

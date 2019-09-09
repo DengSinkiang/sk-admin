@@ -1,6 +1,6 @@
 package com.dxj.file.service;
 
-import com.dxj.file.dao.SbootBaseDao;
+import com.dxj.file.dao.BaseDao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +16,7 @@ import java.util.List;
 @FunctionalInterface
 public interface SbootBaseService<E, ID extends Serializable> {
 
-    SbootBaseDao<E, ID> getRepository();
+    BaseDao<E, ID> getRepository();
 
     /**
      * 根据ID获取
