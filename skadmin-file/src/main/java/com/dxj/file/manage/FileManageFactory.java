@@ -1,12 +1,12 @@
 package com.dxj.file.manage;
 
 import cn.hutool.core.util.StrUtil;
-import com.dxj.sboot.common.constant.CommonConstant;
-import com.dxj.sboot.common.constant.SettingConstant;
-import com.dxj.sboot.common.exception.SbootException;
-import com.dxj.sboot.module.base.entity.Setting;
-import com.dxj.sboot.module.base.service.SettingService;
-import com.dxj.sboot.module.file.manage.impl.*;
+import com.dxj.common.constant.CommonConstant;
+import com.dxj.common.constant.SettingConstant;
+import com.dxj.common.exception.BadRequestException;
+import com.dxj.file.entity.Setting;
+import com.dxj.file.manage.impl.*;
+import com.dxj.file.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +46,7 @@ public class FileManageFactory {
 
         Setting setting = settingService.get(SettingConstant.OSS_USED);
         if (setting == null || StrUtil.isBlank(setting.getValue())) {
-            throw new SbootException("您还未配置OSS存储服务");
+            throw new BadRequestException("您还未配置OSS存储服务");
         }
         String type = setting.getValue();
         if ((type.equals(SettingConstant.QINIU_OSS) && location == null) || CommonConstant.OSS_QINIU.equals(location)) {
@@ -60,7 +60,7 @@ public class FileManageFactory {
         } else if ((type.equals(SettingConstant.LOCAL_OSS) && location == null) || CommonConstant.OSS_LOCAL.equals(location)) {
             return localFileManage;
         } else {
-            throw new SbootException("暂不支持该存储配置，请检查配置");
+            throw new BadRequestException("暂不支持该存储配置，请检查配置");
         }
     }
 }

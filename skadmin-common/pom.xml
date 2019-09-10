@@ -17,5 +17,9 @@
             <artifactId>reactor-core</artifactId>
             <version>3.2.10.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
     </dependencies>
 </project>

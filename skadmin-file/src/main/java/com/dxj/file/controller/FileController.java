@@ -5,10 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import com.dxj.common.constant.CommonConstant;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.common.util.Base64DecodeMultipartFile;
-import com.dxj.common.util.CommonUtil;
-import com.dxj.common.util.PageUtil;
-import com.dxj.common.util.ResultUtil;
+import com.dxj.common.redis.RedisRaterLimiter;
+import com.dxj.common.util.*;
 import com.dxj.common.vo.PageVo;
 import com.dxj.common.vo.Result;
 import com.dxj.file.entity.File;
@@ -25,7 +23,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,11 +41,17 @@ import java.util.Objects;
  * @author Sinkiang
  */
 @Slf4j
-@Controller
+@RestController
 @Api(description = "文件管理管理接口")
 @RequestMapping("api")
 @Transactional
 public class FileController {
+
+    @Autowired
+    IpInfoUtil ipInfoUtil;
+
+    @Autowired
+    RedisRaterLimiter redisRaterLimiter;
 
     @Autowired
     private FileService fileService;
@@ -188,11 +191,11 @@ public class FileController {
             return new ResultUtil<>().setErrorMsg(501, "您还未配置OSS存储服务");
         }
 
-//        // IP限流 在线Demo所需 1分钟限1个请求
-//        String token = redisRaterLimiter.acquireTokenFromBucket("upload:" + ipInfoUtil.getIpAddr(request), 1, 60000);
-//        if (StrUtil.isBlank(token)) {
-//            throw new BadRequestException("上传那么多干嘛，等等再传吧");
-//        }
+        // IP限流 在线Demo所需 1分钟限1个请求
+        String token = redisRaterLimiter.acquireTokenFromBucket("upload:" + ipInfoUtil.getIpAddr(request), 1, 60000);
+        if (StrUtil.isBlank(token)) {
+            throw new BadRequestException("上传那么多干嘛，等等再传吧");
+        }
 
         if (StrUtil.isNotBlank(base64)) {
             // base64上传
