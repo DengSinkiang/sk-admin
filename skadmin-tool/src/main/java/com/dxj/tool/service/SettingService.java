@@ -1,8 +1,7 @@
-package com.dxj.file.service.impl;
+package com.dxj.tool.service;
 
-import com.dxj.file.dao.SettingDao;
-import com.dxj.file.entity.Setting;
-import com.dxj.file.service.SettingService;
+import com.dxj.tool.domain.Setting;
+import com.dxj.tool.repository.SettingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -11,8 +10,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 /**
- * 配置接口实现
+ * 配置接口
  *
  * @author Sinkiang
  */
@@ -20,22 +20,32 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @CacheConfig(cacheNames = "setting")
-public class SettingServiceImpl implements SettingService {
+public class SettingService {
 
     @Autowired
-    private SettingDao settingDao;
+    private SettingRepository settingRepository;
 
-    @Override
+    /**
+     * 通过id获取
+     *
+     * @param id
+     * @return
+     */
     @Cacheable(key = "#id")
     public Setting get(String id) {
 
-        return settingDao.findById(id).orElse(new Setting(id));
+        return settingRepository.findById(id).orElse(new Setting(id));
     }
 
-    @Override
+    /**
+     * 修改
+     *
+     * @param setting
+     * @return
+     */
     @CacheEvict(key = "#setting.id")
     public Setting saveOrUpdate(Setting setting) {
 
-        return settingDao.saveAndFlush(setting);
+        return settingRepository.saveAndFlush(setting);
     }
 }

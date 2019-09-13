@@ -1,5 +1,6 @@
-package com.dxj.file.entity;
+package com.dxj.common.base;
 
+import com.dxj.common.constant.CommonConstant;
 import com.dxj.common.util.SnowFlakeUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,5 +55,5 @@ public abstract class BaseEntity implements Serializable {
     private Date updateTime;
 
     @ApiModelProperty(value = "删除标志 默认0")
-    private Integer delFlag = 0;
+    private Integer delFlag = CommonConstant.STATUS_NORMAL;
 }

@@ -1,4 +1,4 @@
-package com.dxj.file.vo;
+package com.dxj.common.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

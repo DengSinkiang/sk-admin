@@ -1,4 +1,4 @@
-package com.dxj.file.vo;
+package com.dxj.tool.domain.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -38,6 +38,6 @@ public class OssSetting implements Serializable {
     @ApiModelProperty(value = "本地存储路径")
     private String filePath;
 
-    @ApiModelProperty(value = "是否改变secrectKey")
+    @ApiModelProperty(value = "是否改变secretKey")
     private Boolean changed;
 }

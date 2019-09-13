@@ -1,6 +1,5 @@
-package com.dxj.file.service;
+package com.dxj.common.base;
 
-import com.dxj.file.dao.BaseDao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,9 +13,9 @@ import java.util.List;
  */
 // JDK8函数式接口注解 仅能包含一个抽象方法
 @FunctionalInterface
-public interface SbootBaseService<E, ID extends Serializable> {
+public interface BaseService<E, ID extends Serializable> {
 
-    BaseDao<E, ID> getRepository();
+    BaseRepository<E, ID> getRepository();
 
     /**
      * 根据ID获取

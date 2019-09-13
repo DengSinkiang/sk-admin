@@ -1,5 +1,6 @@
-package com.dxj.file.entity;
+package com.dxj.tool.domain;
 
+import com.dxj.common.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

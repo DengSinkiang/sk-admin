@@ -1,4 +1,4 @@
-package com.dxj.file.dao;
+package com.dxj.common.base;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +12,6 @@ import java.io.Serializable;
  */
 // 自定义接口 不会创建接口的实例 必须加此注解
 @NoRepositoryBean
-public interface BaseDao<E, ID extends Serializable> extends JpaRepository<E, ID>, JpaSpecificationExecutor<E> {
+public interface BaseRepository<E, ID extends Serializable> extends JpaRepository<E, ID>, JpaSpecificationExecutor<E> {
 
 }
