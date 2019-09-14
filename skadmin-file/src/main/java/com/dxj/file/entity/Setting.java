@@ -1,4 +1,4 @@
-package com.dxj.tool.domain;
+package com.dxj.file.entity;
 
 import com.dxj.common.base.BaseEntity;
 import io.swagger.annotations.ApiModel;

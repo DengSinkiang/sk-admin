@@ -1,13 +1,13 @@
-package com.dxj.tool.controller;
+package com.dxj.file.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.util.CommonUtil;
 import com.dxj.common.util.ResultUtil;
 import com.dxj.common.vo.Result;
-import com.dxj.tool.domain.Setting;
-import com.dxj.tool.domain.vo.*;
-import com.dxj.tool.service.SettingService;
+import com.dxj.file.entity.Setting;
+import com.dxj.file.entity.vo.*;
+import com.dxj.file.service.SettingService;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,13 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @AUTHOR: sinkiang
- * @DATE: 2019-09-13 07:55
+ * @author Sinkiang
  */
 @Slf4j
 @RestController
 @Api(description = "基本配置接口")
-@RequestMapping("/api/setting")
+@RequestMapping("api/setting")
 public class SettingController {
 
     @Autowired
