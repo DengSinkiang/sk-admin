@@ -1,6 +1,7 @@
 package com.dxj.tool.service;
 
 import com.dxj.common.util.BaseQuery;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.tool.domain.QiNiuContent;
 import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.QiNiuConfig;
@@ -17,8 +18,7 @@ import com.qiniu.util.Auth;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.QiNiuConfigRepository;
 import com.dxj.tool.repository.QiNiuContentRepository;
-import com.dxj.common.util.FileUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
@@ -118,7 +118,7 @@ public class QiNiuService {
             qiniuContent.setType(qiNiuConfig.getType());
             qiniuContent.setKey(putRet.key);
             qiniuContent.setUrl(qiNiuConfig.getHost() + "/" + putRet.key);
-            qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(file.getSize() + "")));
+            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
             return qiNiuContentRepository.save(qiniuContent);
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
@@ -134,7 +134,7 @@ public class QiNiuService {
     @Cacheable(key = "'content:'+#p0")
     public QiNiuContent findByContentId(Long id) {
         Optional<QiNiuContent> qiNiuContent = qiNiuContentRepository.findById(id);
-        ValidationUtils.isNull(qiNiuContent, "QiNiuContent", "id", id);
+        ValidationUtil.isNull(qiNiuContent, "QiNiuContent", "id", id);
         return qiNiuContent.orElse(null);
     }
 
@@ -213,7 +213,7 @@ public class QiNiuService {
             for (FileInfo item : items) {
                 if (qiNiuContentRepository.findByKey(item.key) == null) {
                     qiniuContent = new QiNiuContent();
-                    qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(item.fsize + "")));
+                    qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(item.fsize + "")));
                     qiniuContent.setKey(item.key);
                     qiniuContent.setType(config.getType());
                     qiniuContent.setBucket(config.getBucket());

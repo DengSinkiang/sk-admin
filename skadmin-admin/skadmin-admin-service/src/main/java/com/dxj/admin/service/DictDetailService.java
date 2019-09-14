@@ -7,7 +7,7 @@ import com.dxj.admin.query.DictDetailQuery;
 import com.dxj.admin.repository.DictDetailRepository;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -43,7 +43,7 @@ public class DictDetailService {
     @Cacheable(key = "#p0")
     public DictDetailDTO findById(Long id) {
         Optional<DictDetail> dictDetail = dictDetailRepository.findById(id);
-        ValidationUtils.isNull(dictDetail, "DictDetail", "id", id);
+        ValidationUtil.isNull(dictDetail, "DictDetail", "id", id);
         return dictDetailMapper.toDto(dictDetail.orElse(null));
     }
 
@@ -57,7 +57,7 @@ public class DictDetailService {
     @Transactional(rollbackFor = Exception.class)
     public void update(DictDetail resources) {
         Optional<DictDetail> optionalDictDetail = dictDetailRepository.findById(resources.getId());
-        ValidationUtils.isNull(optionalDictDetail, "DictDetail", "id", resources.getId());
+        ValidationUtil.isNull(optionalDictDetail, "DictDetail", "id", resources.getId());
 
         DictDetail dictDetail = optionalDictDetail.orElse(null);
         // 此处需自己修改

@@ -8,10 +8,10 @@ import com.dxj.admin.repository.UserRepository;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.exception.EntityNotFoundException;
-import com.dxj.common.util.AesEncryptUtils;
+import com.dxj.common.util.AesEncryptUtil;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.monitor.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -52,7 +52,7 @@ public class UserService {
     @Cacheable(key = "#p0")
     public UserDTO findById(long id) {
         Optional<User> user = userRepository.findById(id);
-        ValidationUtils.isNull(user, "User", "id", id);
+        ValidationUtil.isNull(user, "User", "id", id);
         return userMapper.toDto(user.orElse(null));
     }
 
@@ -69,7 +69,7 @@ public class UserService {
         }
 
         // 默认密码 123456，此密码是加密后的字符
-        resources.setPassword(AesEncryptUtils.encryptPassword(resources.getUsername() + CommEnum.USER_PASSWORD.getEntityName()));
+        resources.setPassword(AesEncryptUtil.encryptPassword(resources.getUsername() + CommEnum.USER_PASSWORD.getEntityName()));
         resources.setAvatar(CommEnum.USER_AVATAR.getEntityName());
         return userMapper.toDto(userRepository.save(resources));
     }
@@ -78,7 +78,7 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void update(User resources) {
         Optional<User> userOptional = userRepository.findById(resources.getId());
-        ValidationUtils.isNull(userOptional, "User", "id", resources.getId());
+        ValidationUtil.isNull(userOptional, "User", "id", resources.getId());
 
         User user = userOptional.orElse(null);
 
@@ -121,7 +121,7 @@ public class UserService {
     @Cacheable(key = "'loadUserByUsername:'+#p0")
     public UserDTO findByName(String userName) {
         User user;
-        if (ValidationUtils.isEmail(userName)) {
+        if (ValidationUtil.isEmail(userName)) {
             user = userRepository.findByEmail(userName);
         } else {
             user = userRepository.findByUsername(userName);

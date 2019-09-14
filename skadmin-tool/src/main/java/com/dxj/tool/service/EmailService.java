@@ -2,7 +2,7 @@ package com.dxj.tool.service;
 
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
-import com.dxj.common.util.AesEncryptUtils;
+import com.dxj.common.util.AesEncryptUtil;
 import com.dxj.tool.domain.EmailConfig;
 import com.dxj.tool.domain.vo.EmailVo;
 import com.dxj.common.exception.BadRequestException;
@@ -43,7 +43,7 @@ public class EmailService {
     public EmailConfig update(EmailConfig emailConfig) {
         // 加密
         try {
-            emailConfig.setPass(AesEncryptUtils.encrypt(emailConfig.getPass()));
+            emailConfig.setPass(AesEncryptUtil.encrypt(emailConfig.getPass()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class EmailService {
         account.setAuth(true);
         try {
             // 解密
-            account.setPass(AesEncryptUtils.decrypt(emailConfig.getPass()));
+            account.setPass(AesEncryptUtil.decrypt(emailConfig.getPass()));
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }

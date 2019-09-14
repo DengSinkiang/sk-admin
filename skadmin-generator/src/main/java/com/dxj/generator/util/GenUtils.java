@@ -2,7 +2,7 @@ package com.dxj.generator.util;
 
 import cn.hutool.extra.template.*;
 import cn.hutool.core.util.StrUtil;
-import com.dxj.common.util.FileUtils;
+import com.dxj.common.util.FileUtil;
 import com.dxj.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.generator.domain.GenConfig;
@@ -166,7 +166,7 @@ public class GenUtils {
     private static void getCodeTemplate(GenConfig genConfig, Map<String, Object> map, Template template, File file) throws IOException {
         // 如果非覆盖生成
         if (!genConfig.getCover()) {
-            if (FileUtils.exist(file)) {
+            if (FileUtil.exist(file)) {
                 return;
             }
         }
@@ -240,7 +240,7 @@ public class GenUtils {
         // 生成目标文件
         Writer writer = null;
         try {
-            FileUtils.touch(file);
+            FileUtil.touch(file);
             writer = new FileWriter(file);
             template.render(map, writer);
         } catch (TemplateException | IOException e) {

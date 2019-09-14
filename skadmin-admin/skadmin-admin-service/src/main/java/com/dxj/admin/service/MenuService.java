@@ -12,7 +12,7 @@ import com.dxj.admin.repository.MenuRepository;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -46,7 +46,7 @@ public class MenuService {
     @Cacheable(key = "#p0")
     public MenuDTO findById(long id) {
         Optional<Menu> menu = menuRepository.findById(id);
-        ValidationUtils.isNull(menu, "Menu", "id", id);
+        ValidationUtil.isNull(menu, "Menu", "id", id);
         return menuMapper.toDto(menu.orElse(null));
     }
     public List<MenuDTO> findByRoles(List<RoleSmallDTO> roles) {
@@ -77,7 +77,7 @@ public class MenuService {
             throw new BadRequestException("上级不能为自己");
         }
         Optional<Menu> optionalPermission = menuRepository.findById(resources.getId());
-        ValidationUtils.isNull(optionalPermission, "Permission", "id", resources.getId());
+        ValidationUtil.isNull(optionalPermission, "Permission", "id", resources.getId());
 
         if (resources.getIFrame()) {
             if (!(resources.getPath().toLowerCase().startsWith("http://") || resources.getPath().toLowerCase().startsWith("https://"))) {
@@ -223,7 +223,7 @@ public class MenuService {
 
     public Menu findOne(Long id) {
         Optional<Menu> menu = menuRepository.findById(id);
-        ValidationUtils.isNull(menu, "Menu", "id", id);
+        ValidationUtil.isNull(menu, "Menu", "id", id);
         return menu.orElse(null);
     }
 

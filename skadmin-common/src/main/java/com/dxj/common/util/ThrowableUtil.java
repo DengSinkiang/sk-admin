@@ -9,7 +9,7 @@ import java.io.StringWriter;
  * @author dxj
  * @date 2019-04-06
  */
-public class ThrowableUtils {
+public class ThrowableUtil {
 
     /**
      * 获取堆栈信息

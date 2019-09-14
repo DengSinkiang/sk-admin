@@ -7,7 +7,7 @@ import com.dxj.admin.query.DeptQuery;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -42,7 +42,7 @@ public class DeptService {
     @Cacheable(key = "#p0")
     public DeptDTO findById(Long id) {
         Optional<Dept> dept = deptRepository.findById(id);
-        ValidationUtils.isNull(dept, "Dept", "id", id);
+        ValidationUtil.isNull(dept, "Dept", "id", id);
         return deptMapper.toDto(dept.orElse(null));
     }
 
@@ -107,7 +107,7 @@ public class DeptService {
             throw new BadRequestException("上级不能为自己");
         }
         Optional<Dept> optionalDept = deptRepository.findById(resources.getId());
-        ValidationUtils.isNull(optionalDept, "Dept", "id", resources.getId());
+        ValidationUtil.isNull(optionalDept, "Dept", "id", resources.getId());
 
         Dept dept = optionalDept.orElse(null);
         // 此处需自己修改

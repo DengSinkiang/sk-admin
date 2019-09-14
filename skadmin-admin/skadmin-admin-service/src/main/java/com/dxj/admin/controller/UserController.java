@@ -149,7 +149,7 @@ public class UserController {
     public ResponseEntity<Object> validPass(@RequestBody User user) {
 
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername()+ user.getPassword()))) {
+        if (!userDetails.getPassword().equals(AesEncryptUtil.encryptPassword(userDetails.getUsername()+ user.getPassword()))) {
             return new ResponseEntity<>(new Result(CodeMsg.VALIDATE_ERROR), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result(CodeMsg.SUCCESS), HttpStatus.OK);
@@ -164,10 +164,10 @@ public class UserController {
     @PostMapping(value = "/user/updatePass")
     public ResponseEntity<Void> updatePass(@RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
+        if (userDetails.getPassword().equals(AesEncryptUtil.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
             throw new BadRequestException("新密码不能与旧密码相同");
         }
-        userService.updatePass(userDetails.getUsername(), AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()));
+        userService.updatePass(userDetails.getUsername(), AesEncryptUtil.encryptPassword(userDetails.getUsername() + user.getPassword()));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -195,7 +195,7 @@ public class UserController {
     @PostMapping(value = "/user/updateEmail/{code}")
     public ResponseEntity<Void> updateEmail(@PathVariable String code, @RequestBody User user) {
         UserDetails userDetails = SecurityContextHolder.getUserDetails();
-        if (!userDetails.getPassword().equals(AesEncryptUtils.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
+        if (!userDetails.getPassword().equals(AesEncryptUtil.encryptPassword(userDetails.getUsername() + user.getPassword()))) {
             throw new BadRequestException("密码错误");
         }
         VerificationCode verificationCode = new VerificationCode(code, CommEnum.RESET_MAIL.getEntityName(), "email", user.getEmail());

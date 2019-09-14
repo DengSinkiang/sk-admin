@@ -16,7 +16,7 @@ import org.springframework.cache.annotation.Cacheable;
         </#if>
     </#list>
 </#if>
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import ${package}.repository.${className}Repository;
 import ${package}.mapper.${className}Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

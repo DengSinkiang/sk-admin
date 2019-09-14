@@ -1,6 +1,6 @@
 package com.dxj.tool.util;
 
-import com.dxj.common.util.FileUtils;
+import com.dxj.common.util.FileUtil;
 import com.qiniu.storage.Region;
 
 import java.text.SimpleDateFormat;
@@ -53,9 +53,9 @@ public class QiNiuUtils {
     public static String getKey(String file) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
-        return FileUtils.getFileNameNoEx(file) + "-" +
+        return FileUtil.getFileNameNoEx(file) + "-" +
                 sdf.format(date) +
                 "." +
-                FileUtils.getExtensionName(file);
+                FileUtil.getExtensionName(file);
     }
 }

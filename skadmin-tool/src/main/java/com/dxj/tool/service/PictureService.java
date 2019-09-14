@@ -11,8 +11,8 @@ import com.dxj.tool.domain.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.PictureRepository;
-import com.dxj.common.util.FileUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.FileUtil;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -61,7 +61,7 @@ public class PictureService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public Picture upload(MultipartFile multipartFile, String username) {
-        File file = FileUtils.toFile(multipartFile);
+        File file = FileUtil.toFile(multipartFile);
 
         HashMap<String, Object> paramMap = new HashMap<>();
 
@@ -75,12 +75,12 @@ public class PictureService {
         }
         //转成实体类
         picture = JSON.parseObject(jsonObject.get("data").toString(), Picture.class);
-        picture.setSize(FileUtils.getSize(Integer.valueOf(picture.getSize())));
+        picture.setSize(FileUtil.getSize(Integer.valueOf(picture.getSize())));
         picture.setUsername(username);
-        picture.setFilename(FileUtils.getFileNameNoEx(multipartFile.getOriginalFilename()) + "." + FileUtils.getExtensionName(multipartFile.getOriginalFilename()));
+        picture.setFilename(FileUtil.getFileNameNoEx(multipartFile.getOriginalFilename()) + "." + FileUtil.getExtensionName(multipartFile.getOriginalFilename()));
         pictureRepository.save(picture);
         //删除临时文件
-        FileUtils.deleteFile(file);
+        FileUtil.deleteFile(file);
         return picture;
 
     }
@@ -94,7 +94,7 @@ public class PictureService {
     @Cacheable(key = "#p0")
     public Picture findById(Long id) {
         Optional<Picture> picture = pictureRepository.findById(id);
-        ValidationUtils.isNull(picture, "Picture", "id", id);
+        ValidationUtil.isNull(picture, "Picture", "id", id);
         return picture.orElse(null);
     }
 

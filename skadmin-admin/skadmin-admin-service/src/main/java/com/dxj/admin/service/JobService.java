@@ -8,7 +8,7 @@ import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.repository.JobRepository;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -46,7 +46,7 @@ public class JobService {
     @Cacheable(key = "#p0")
     public JobDTO findById(Long id) {
         Optional<Job> job = jobRepository.findById(id);
-        ValidationUtils.isNull(job, "Job", "id", id);
+        ValidationUtil.isNull(job, "Job", "id", id);
         return jobMapper.toDto(job.orElse(null));
     }
 
@@ -60,7 +60,7 @@ public class JobService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Job resources) {
         Optional<Job> optionalJob = jobRepository.findById(resources.getId());
-        ValidationUtils.isNull(optionalJob, "Job", "id", resources.getId());
+        ValidationUtil.isNull(optionalJob, "Job", "id", resources.getId());
 
         Job job = optionalJob.orElse(null);
         // 此处需自己修改

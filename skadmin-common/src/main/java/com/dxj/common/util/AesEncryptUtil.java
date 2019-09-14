@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  * @AUTHOR: sinkiang
  * @DATE: 2019-06-12
  */
-public class AesEncryptUtils {
+public class AesEncryptUtil {
 
     //可配置到Constant中，并读取配置文件注入,16位,自己定义
     private static final String KEY = "DengSinkiang1995";

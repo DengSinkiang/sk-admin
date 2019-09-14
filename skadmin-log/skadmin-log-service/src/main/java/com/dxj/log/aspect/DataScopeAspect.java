@@ -1,6 +1,6 @@
 package com.dxj.log.aspect;
 
-import com.dxj.common.util.ThrowableUtils;
+import com.dxj.common.util.ThrowableUtil;
 import com.dxj.log.domain.Log;
 import com.dxj.log.domain.LoginLog;
 import com.dxj.log.service.LogService;
@@ -86,7 +86,7 @@ public class DataScopeAspect {
         currentTime = System.currentTimeMillis();
         //异常日志
         Log log = new Log("ERROR",System.currentTimeMillis() - currentTime);
-        log.setExceptionDetail(ThrowableUtils.getStackTrace(e));
+        log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
         logService.save((ProceedingJoinPoint)joinPoint, log);
 
     }
@@ -107,7 +107,7 @@ public class DataScopeAspect {
         //同时记录在异常日志中
         Log log = new Log("ERROR", time);
         log.setDescription("登录");
-        log.setExceptionDetail(ThrowableUtils.getStackTrace(e));
+        log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
         logService.save((ProceedingJoinPoint)joinPoint, log);
 
     }

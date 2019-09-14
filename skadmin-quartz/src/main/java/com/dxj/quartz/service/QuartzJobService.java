@@ -2,13 +2,13 @@ package com.dxj.quartz.service;
 
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.exception.BadRequestException;
+import com.dxj.common.util.ValidationUtil;
 import com.dxj.quartz.domain.QuartzJob;
 import com.dxj.quartz.domain.QuartzLog;
 import com.dxj.quartz.util.QuartzManage;
 import com.dxj.quartz.repository.QuartzJobRepository;
 import com.dxj.quartz.repository.QuartzLogRepository;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.ValidationUtils;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -45,7 +45,7 @@ public class QuartzJobService {
     @Cacheable(key = "#p0")
     public QuartzJob findById(Long id) {
         Optional<QuartzJob> quartzJob = quartzJobRepository.findById(id);
-        ValidationUtils.isNull(quartzJob, "QuartzJob", "id", id);
+        ValidationUtil.isNull(quartzJob, "QuartzJob", "id", id);
         return quartzJob.orElse(null);
     }
 

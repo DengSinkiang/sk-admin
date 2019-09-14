@@ -11,7 +11,7 @@ import com.dxj.admin.repository.RoleRepository;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtils;
-import com.dxj.common.util.ValidationUtils;
+import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -50,7 +50,7 @@ public class RoleService {
     @Cacheable(key = "#p0")
     public RoleDTO findById(long id) {
         Optional<Role> role = roleRepository.findById(id);
-        ValidationUtils.isNull(role, "Role", "id", id);
+        ValidationUtil.isNull(role, "Role", "id", id);
         return roleMapper.toDto(role.orElse(null));
     }
 
@@ -68,7 +68,7 @@ public class RoleService {
     public void update(Role resources) {
 
         Optional<Role> optionalRole = roleRepository.findById(resources.getId());
-        ValidationUtils.isNull(optionalRole, "Role", "id", resources.getId());
+        ValidationUtil.isNull(optionalRole, "Role", "id", resources.getId());
 
         Role role = optionalRole.orElse(null);
 
