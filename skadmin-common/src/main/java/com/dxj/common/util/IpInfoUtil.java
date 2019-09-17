@@ -7,6 +7,8 @@ import com.dxj.common.vo.IpInfo;
 import com.dxj.common.vo.IpLocate;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,8 @@ import java.net.UnknownHostException;
 @Slf4j
 @Component
 public class IpInfoUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(IpInfoUtil.class);
 
     @Value("${skadmin.mob.appKey}")
     private String appKey;
@@ -154,5 +158,33 @@ public class IpInfoUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取服务器内网IP
+     *
+     * @return
+     */
+    public static String getHostIp() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            logger.error("IpInfoUtil get server host IP exception", e);
+        }
+        return "127.0.0.1";
+    }
+
+    /**
+     * 获取服务器内网名称
+     *
+     * @return
+     */
+    public static String getHostName() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            logger.error("IpInfoUtil get server host name exception", e);
+        }
+        return "未知";
     }
 }
