@@ -2,6 +2,10 @@ package com.dxj.monitor.domain;
 
 import com.dxj.common.util.DataHandleUtils;
 import com.dxj.common.util.FileUtil;
+import com.dxj.monitor.domain.server.Cpu;
+import com.dxj.monitor.domain.server.Jvm;
+import com.dxj.monitor.domain.server.Mem;
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,6 +25,7 @@ import oshi.hardware.HardwareAbstractionLayer;
  * ServerInstantEntity.java
  */
 @Component
+@Data
 public class ServerInstantEntity {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerInstantEntity.class);
@@ -41,30 +46,6 @@ public class ServerInstantEntity {
      * JVM相关信息
      */
     private Jvm jvm = new Jvm();
-
-    public Cpu getCpu() {
-        return cpu;
-    }
-
-    public void setCpu(Cpu cpu) {
-        this.cpu = cpu;
-    }
-
-    public Mem getMem() {
-        return mem;
-    }
-
-    public void setMem(Mem mem) {
-        this.mem = mem;
-    }
-
-    public Jvm getJvm() {
-        return jvm;
-    }
-
-    public void setJvm(Jvm jvm) {
-        this.jvm = jvm;
-    }
 
     public void init() {
         HardwareAbstractionLayer hal = systemInfo.getHardware();

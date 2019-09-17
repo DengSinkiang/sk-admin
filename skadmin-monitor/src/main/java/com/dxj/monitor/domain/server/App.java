@@ -1,16 +1,9 @@
-package com.dxj.monitor.domain;
+package com.dxj.monitor.domain.server;
 
 import lombok.Data;
 
 /**
- * 🙃
- * 🙃 App项目应用 信息
- * 🙃
- *
- * @author:zhaozhenghao
- * @Email :736720794@qq.com
- * @date :2019/04/06 22:36
- * App.java
+ * App项目应用 信息
  */
 
 @Data
