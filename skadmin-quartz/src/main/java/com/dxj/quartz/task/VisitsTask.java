@@ -1,6 +1,6 @@
 package com.dxj.quartz.task;
 
-import com.dxj.monitor.service.VisitsService;
+import com.dxj.monitor.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class VisitsTask {
 
-    private final VisitsService visitsService;
+    private final VisitService visitService;
 
     @Autowired
-    public VisitsTask(VisitsService visitsService) {
-        this.visitsService = visitsService;
+    public VisitsTask(VisitService visitService) {
+        this.visitService = visitService;
     }
 
     public void run() {
-        visitsService.save();
+        visitService.save();
     }
 }

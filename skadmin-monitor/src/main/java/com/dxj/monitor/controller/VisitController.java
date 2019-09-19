@@ -1,6 +1,6 @@
 package com.dxj.monitor.controller;
 
-import com.dxj.monitor.service.VisitsService;
+import com.dxj.monitor.service.VisitService;
 import com.dxj.common.util.RequestHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,26 +18,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class VisitController {
 
-    private final VisitsService visitsService;
+    private final VisitService visitService;
 
     @Autowired
-    public VisitController(VisitsService visitsService) {
-        this.visitsService = visitsService;
+    public VisitController(VisitService visitService) {
+        this.visitService = visitService;
     }
 
     @PostMapping(value = "/visits")
     public ResponseEntity<Void> create() {
-        visitsService.count(RequestHolder.getHttpServletRequest());
+        visitService.count(RequestHolder.getHttpServletRequest());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/visits")
     public ResponseEntity<Object> get() {
-        return new ResponseEntity<>(visitsService.get(), HttpStatus.OK);
+        return new ResponseEntity<>(visitService.get(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/visits/chartData")
     public ResponseEntity<Object> getChartData() {
-        return new ResponseEntity<>(visitsService.getChartData(), HttpStatus.OK);
+        return new ResponseEntity<>(visitService.getChartData(), HttpStatus.OK);
     }
 }

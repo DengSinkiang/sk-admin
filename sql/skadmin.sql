@@ -2847,10 +2847,10 @@ INSERT INTO `verification_code` VALUES (4, '622636', '2019-06-10 20:37:12', b'1'
 COMMIT;
 
 -- ----------------------------
--- Table structure for visits
+-- Table structure for visit
 -- ----------------------------
-DROP TABLE IF EXISTS `visits`;
-CREATE TABLE `visits` (
+DROP TABLE IF EXISTS `visit`;
+CREATE TABLE `visit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
   `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2862,40 +2862,40 @@ CREATE TABLE `visits` (
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
--- Records of visits
+-- Records of visit
 -- ----------------------------
 BEGIN;
-INSERT INTO `visits` VALUES (20, '2019-05-13 11:10:35', '2019-05-13', 1, 37, 'Mon');
-INSERT INTO `visits` VALUES (22, '2019-05-16 20:05:30', '2019-05-16', 1, 12, 'Thu');
-INSERT INTO `visits` VALUES (23, '2019-05-18 17:45:37', '2019-05-18', 1, 7, 'Sat');
-INSERT INTO `visits` VALUES (24, '2019-05-19 16:58:38', '2019-05-19', 1, 15, 'Sun');
-INSERT INTO `visits` VALUES (25, '2019-05-20 20:17:04', '2019-05-20', 1, 3, 'Mon');
-INSERT INTO `visits` VALUES (26, '2019-05-26 14:07:51', '2019-05-26', 1, 1, 'Sun');
-INSERT INTO `visits` VALUES (27, '2019-05-27 21:26:48', '2019-05-27', 0, 2, 'Mon');
-INSERT INTO `visits` VALUES (28, '2019-05-28 21:50:57', '2019-05-28', 0, 2, 'Tue');
-INSERT INTO `visits` VALUES (29, '2019-06-01 15:20:55', '2019-06-01', 1, 9, 'Sat');
-INSERT INTO `visits` VALUES (30, '2019-06-02 20:04:49', '2019-06-02', 0, 2, 'Sun');
-INSERT INTO `visits` VALUES (31, '2019-06-03 20:32:10', '2019-06-03', 1, 1, 'Mon');
-INSERT INTO `visits` VALUES (32, '2019-06-04 19:55:28', '2019-06-04', 0, 2, 'Tue');
-INSERT INTO `visits` VALUES (33, '2019-06-07 16:15:37', '2019-06-07', 1, 1, 'Fri');
-INSERT INTO `visits` VALUES (34, '2019-06-08 15:13:12', '2019-06-08', 0, 8, 'Sat');
-INSERT INTO `visits` VALUES (35, '2019-06-10 20:15:30', '2019-06-10', 1, 4, 'Mon');
-INSERT INTO `visits` VALUES (36, '2019-06-11 20:50:10', '2019-06-11', 0, 3, 'Tue');
-INSERT INTO `visits` VALUES (37, '2019-06-12 20:20:04', '2019-06-12', 1, 3, 'Wed');
-INSERT INTO `visits` VALUES (38, '2019-06-13 21:04:13', '2019-06-13', 1, 11, 'Thu');
-INSERT INTO `visits` VALUES (39, '2019-06-15 11:53:52', '2019-06-15', 1, 4, 'Sat');
-INSERT INTO `visits` VALUES (40, '2019-06-17 20:39:40', '2019-06-17', 1, 10, 'Mon');
-INSERT INTO `visits` VALUES (41, '2019-06-21 20:29:09', '2019-06-21', 1, 3, 'Fri');
-INSERT INTO `visits` VALUES (42, '2019-06-22 09:38:44', '2019-06-22', 0, 2, 'Sat');
-INSERT INTO `visits` VALUES (43, '2019-06-27 22:51:34', '2019-06-27', 0, 3, 'Thu');
-INSERT INTO `visits` VALUES (44, '2019-06-28 20:15:04', '2019-06-28', 0, 5, 'Fri');
-INSERT INTO `visits` VALUES (45, '2019-07-02 20:06:01', '2019-07-02', 1, 4, 'Tue');
-INSERT INTO `visits` VALUES (46, '2019-07-04 21:25:02', '2019-07-04', 0, 2, 'Thu');
-INSERT INTO `visits` VALUES (47, '2019-07-09 20:16:02', '2019-07-09', 0, 2, 'Tue');
-INSERT INTO `visits` VALUES (48, '2019-07-10 19:53:26', '2019-07-10', 1, 7, 'Wed');
-INSERT INTO `visits` VALUES (49, '2019-07-15 20:52:41', '2019-07-15', 1, 3, 'Mon');
-INSERT INTO `visits` VALUES (50, '2019-07-17 08:59:31', '2019-07-17', 0, 2, 'Wed');
-INSERT INTO `visits` VALUES (51, '2019-07-19 11:22:46', '2019-07-19', 1, 2, 'Fri');
+INSERT INTO `visit` VALUES (20, '2019-05-13 11:10:35', '2019-05-13', 1, 37, 'Mon');
+INSERT INTO `visit` VALUES (22, '2019-05-16 20:05:30', '2019-05-16', 1, 12, 'Thu');
+INSERT INTO `visit` VALUES (23, '2019-05-18 17:45:37', '2019-05-18', 1, 7, 'Sat');
+INSERT INTO `visit` VALUES (24, '2019-05-19 16:58:38', '2019-05-19', 1, 15, 'Sun');
+INSERT INTO `visit` VALUES (25, '2019-05-20 20:17:04', '2019-05-20', 1, 3, 'Mon');
+INSERT INTO `visit` VALUES (26, '2019-05-26 14:07:51', '2019-05-26', 1, 1, 'Sun');
+INSERT INTO `visit` VALUES (27, '2019-05-27 21:26:48', '2019-05-27', 0, 2, 'Mon');
+INSERT INTO `visit` VALUES (28, '2019-05-28 21:50:57', '2019-05-28', 0, 2, 'Tue');
+INSERT INTO `visit` VALUES (29, '2019-06-01 15:20:55', '2019-06-01', 1, 9, 'Sat');
+INSERT INTO `visit` VALUES (30, '2019-06-02 20:04:49', '2019-06-02', 0, 2, 'Sun');
+INSERT INTO `visit` VALUES (31, '2019-06-03 20:32:10', '2019-06-03', 1, 1, 'Mon');
+INSERT INTO `visit` VALUES (32, '2019-06-04 19:55:28', '2019-06-04', 0, 2, 'Tue');
+INSERT INTO `visit` VALUES (33, '2019-06-07 16:15:37', '2019-06-07', 1, 1, 'Fri');
+INSERT INTO `visit` VALUES (34, '2019-06-08 15:13:12', '2019-06-08', 0, 8, 'Sat');
+INSERT INTO `visit` VALUES (35, '2019-06-10 20:15:30', '2019-06-10', 1, 4, 'Mon');
+INSERT INTO `visit` VALUES (36, '2019-06-11 20:50:10', '2019-06-11', 0, 3, 'Tue');
+INSERT INTO `visit` VALUES (37, '2019-06-12 20:20:04', '2019-06-12', 1, 3, 'Wed');
+INSERT INTO `visit` VALUES (38, '2019-06-13 21:04:13', '2019-06-13', 1, 11, 'Thu');
+INSERT INTO `visit` VALUES (39, '2019-06-15 11:53:52', '2019-06-15', 1, 4, 'Sat');
+INSERT INTO `visit` VALUES (40, '2019-06-17 20:39:40', '2019-06-17', 1, 10, 'Mon');
+INSERT INTO `visit` VALUES (41, '2019-06-21 20:29:09', '2019-06-21', 1, 3, 'Fri');
+INSERT INTO `visit` VALUES (42, '2019-06-22 09:38:44', '2019-06-22', 0, 2, 'Sat');
+INSERT INTO `visit` VALUES (43, '2019-06-27 22:51:34', '2019-06-27', 0, 3, 'Thu');
+INSERT INTO `visit` VALUES (44, '2019-06-28 20:15:04', '2019-06-28', 0, 5, 'Fri');
+INSERT INTO `visit` VALUES (45, '2019-07-02 20:06:01', '2019-07-02', 1, 4, 'Tue');
+INSERT INTO `visit` VALUES (46, '2019-07-04 21:25:02', '2019-07-04', 0, 2, 'Thu');
+INSERT INTO `visit` VALUES (47, '2019-07-09 20:16:02', '2019-07-09', 0, 2, 'Tue');
+INSERT INTO `visit` VALUES (48, '2019-07-10 19:53:26', '2019-07-10', 1, 7, 'Wed');
+INSERT INTO `visit` VALUES (49, '2019-07-15 20:52:41', '2019-07-15', 1, 3, 'Mon');
+INSERT INTO `visit` VALUES (50, '2019-07-17 08:59:31', '2019-07-17', 0, 2, 'Wed');
+INSERT INTO `visit` VALUES (51, '2019-07-19 11:22:46', '2019-07-19', 1, 2, 'Fri');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

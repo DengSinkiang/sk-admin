@@ -1,6 +1,6 @@
 package com.dxj.monitor.repository;
 
-import com.dxj.monitor.domain.Visits;
+import com.dxj.monitor.domain.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2019-04-13
  */
 @Repository
-public interface VisitsRepository extends JpaRepository<Visits, Long> {
+public interface VisitRepository extends JpaRepository<Visit, Long> {
 
     /**
      * findByDate
@@ -20,7 +20,7 @@ public interface VisitsRepository extends JpaRepository<Visits, Long> {
      * @param date
      * @return
      */
-    Visits findByDate(String date);
+    Visit findByDate(String date);
 
     /**
      * 获得一个时间段的记录
@@ -31,5 +31,5 @@ public interface VisitsRepository extends JpaRepository<Visits, Long> {
      */
     @Query(value = "select * FROM visits where " +
             "create_time between ?1 and ?2", nativeQuery = true)
-    List<Visits> findAllVisits(String date1, String date2);
+    List<Visit> findAllVisits(String date1, String date2);
 }
