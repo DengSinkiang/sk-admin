@@ -12,14 +12,12 @@ import java.util.Date;
 /**
  * 日期工具类
  *
- * @author:zhaozhenghao
- * @Email :736720794@qq.com
- * @date :2017年11月22日 下午2:43:47
- * DateUtils.java
+ * @author: Sinkiang
+ * @date :2019年9月19日 下午2:43:47
  */
-public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
+public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
 
-    private DateUtils() {
+    private DateUtil() {
     }
 
     public static final String YYYY = "yyyy";

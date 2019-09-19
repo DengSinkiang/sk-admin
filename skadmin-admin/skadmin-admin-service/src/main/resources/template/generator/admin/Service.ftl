@@ -33,7 +33,7 @@ import java.util.Optional;
 </#if>
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.BaseQuery;
 
 /**

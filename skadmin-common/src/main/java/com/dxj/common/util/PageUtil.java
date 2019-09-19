@@ -2,18 +2,73 @@ package com.dxj.common.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.dxj.common.vo.PageVo;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 /**
- * @author Sinkiang
+ * 分页工具
+ *
+ * @author dxj
+ * @date 2019-04-10
  */
-public class PageUtil {
+public class PageUtil extends cn.hutool.core.util.PageUtil {
+
+    /**
+     * List 分页
+     *
+     * @param page
+     * @param size
+     * @param list
+     * @return
+     */
+    public static List toPage(int page, int size, List list) {
+        int fromIndex = page * size;
+        int toIndex = page * size + size;
+
+        if (fromIndex > list.size()) {
+            return new ArrayList();
+        } else if (toIndex >= list.size()) {
+            return list.subList(fromIndex, list.size());
+        } else {
+            return list.subList(fromIndex, toIndex);
+        }
+    }
+
+    /**
+     * Page 数据处理，预防redis反序列化报错
+     *
+     * @param page
+     * @return
+     */
+    public static Map<String, Object> toPage(Page page) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("content", page.getContent());
+        map.put("totalElements", page.getTotalElements());
+
+        return map;
+    }
+
+    /**
+     * @param object
+     * @param totalElements
+     * @return
+     */
+    public static Map<String, Object> toPage(Object object, Object totalElements) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("content", object);
+        map.put("totalElements", totalElements);
+
+        return map;
+    }
 
     /**
      * JPA分页封装
@@ -50,34 +105,4 @@ public class PageUtil {
         return pageable;
     }
 
-    /**
-     * List 手动分页
-     *
-     * @param page
-     * @param list
-     * @return
-     */
-    public static List listToPage(PageVo page, List list) {
-
-        int pageNumber = page.getPageNumber() - 1;
-        int pageSize = page.getPageSize();
-
-        if (pageNumber < 0) {
-            pageNumber = 0;
-        }
-        if (pageSize < 1) {
-            pageSize = 10;
-        }
-
-        int fromIndex = pageNumber * pageSize;
-        int toIndex = pageNumber * pageSize + pageSize;
-
-        if (fromIndex > list.size()) {
-            return new ArrayList();
-        } else if (toIndex >= list.size()) {
-            return list.subList(fromIndex, list.size());
-        } else {
-            return list.subList(fromIndex, toIndex);
-        }
-    }
 }

@@ -1,9 +1,9 @@
 package com.dxj.tool.service;
 
 import com.dxj.common.util.BaseQuery;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import com.dxj.tool.domain.QiNiuContent;
-import com.dxj.common.util.PageUtils;
 import com.dxj.tool.domain.QiNiuConfig;
 import com.dxj.tool.util.QiNiuUtils;
 import com.google.gson.Gson;
@@ -243,6 +243,6 @@ public class QiNiuService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(QiNiuContent query, Pageable pageable) {
-        return PageUtils.toPage(qiNiuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
+        return PageUtil.toPage(qiNiuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

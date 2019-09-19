@@ -10,7 +10,7 @@ import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.exception.EntityNotFoundException;
 import com.dxj.common.util.AesEncryptUtil;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import com.dxj.monitor.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,6 +157,6 @@ public class UserService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(UserQuery query, Pageable pageable) {
         Page<User> page = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
-        return PageUtils.toPage(page.map(userMapper::toDto));
+        return PageUtil.toPage(page.map(userMapper::toDto));
     }
 }

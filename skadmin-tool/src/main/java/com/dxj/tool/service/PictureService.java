@@ -6,7 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.tool.domain.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
@@ -132,6 +132,6 @@ public class PictureService {
      */
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(Picture query, Pageable pageable) {
-        return PageUtils.toPage(pictureRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
+        return PageUtil.toPage(pictureRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

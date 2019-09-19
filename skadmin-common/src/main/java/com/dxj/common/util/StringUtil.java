@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2019-04-17
  */
 
-public class StringUtils extends org.apache.commons.lang3.StringUtils {
+public class StringUtil extends org.apache.commons.lang3.StringUtils {
 
     private static final char SEPARATOR = '_';
 

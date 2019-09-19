@@ -1,6 +1,6 @@
 package com.dxj.monitor.domain.server;
 
-import com.dxj.common.util.DataHandleUtils;
+import com.dxj.common.util.CommonUtil;
 import com.dxj.common.util.FileUtil;
 import com.dxj.common.util.IpInfoUtil;
 import org.slf4j.Logger;
@@ -123,7 +123,7 @@ public class ServerBaseEntity {
             sysDisk.setUsed(FileUtil.convertFileSize(used));
             int percent = 0;
             try {
-                percent = Integer.parseInt(DataHandleUtils.accuracy(used, total, 0));
+                percent = Integer.parseInt(CommonUtil.accuracy(used, total, 0));
             } catch (NumberFormatException e) {
                 logger.error("percent number format exception", e);
             }

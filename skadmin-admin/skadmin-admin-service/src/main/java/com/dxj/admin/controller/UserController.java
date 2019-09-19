@@ -93,7 +93,7 @@ public class UserController {
             // 若无交集，则代表无数据权限
             query.setDeptIds(result);
             if (result.size() == 0) {
-                return new ResponseEntity<>(PageUtils.toPage(null, 0), HttpStatus.OK);
+                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
             } else return new ResponseEntity<>(userService.queryAll(query, pageable), HttpStatus.OK);
             // 否则取并集
         } else {

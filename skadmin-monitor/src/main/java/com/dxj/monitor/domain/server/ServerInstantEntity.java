@@ -1,6 +1,6 @@
 package com.dxj.monitor.domain.server;
 
-import com.dxj.common.util.DataHandleUtils;
+import com.dxj.common.util.CommonUtil;
 import com.dxj.common.util.FileUtil;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -62,7 +62,7 @@ public class ServerInstantEntity {
         mem.setFree(FileUtil.convertFileSize(memory.getAvailable()));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy((double) (memory.getTotal() - memory.getAvailable()), (double) memory.getTotal(), 0));
+            percent = Integer.parseInt(CommonUtil.accuracy((double) (memory.getTotal() - memory.getAvailable()), (double) memory.getTotal(), 0));
         } catch (NumberFormatException e) {
             logger.error("percent number format exception", e);
         }
@@ -82,7 +82,7 @@ public class ServerInstantEntity {
         jvm.setMax(FileUtil.convertFileSize(max));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy((double) (total - free), (double) total, 0));
+            percent = Integer.parseInt(CommonUtil.accuracy((double) (total - free), (double) total, 0));
         } catch (NumberFormatException e) {
             logger.error("percent number format exception", e);
         }

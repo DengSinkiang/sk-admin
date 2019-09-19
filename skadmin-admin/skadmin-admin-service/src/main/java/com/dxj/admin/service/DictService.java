@@ -6,7 +6,7 @@ import com.dxj.admin.mapper.DictMapper;
 import com.dxj.admin.query.DictQuery;
 import com.dxj.admin.repository.DictRepository;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -78,7 +78,7 @@ public class DictService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(DictQuery query, Pageable pageable) {
         Page<Dict> page = dictRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
-        return PageUtils.toPage(page.map(dictMapper::toDto));
+        return PageUtil.toPage(page.map(dictMapper::toDto));
     }
 
 

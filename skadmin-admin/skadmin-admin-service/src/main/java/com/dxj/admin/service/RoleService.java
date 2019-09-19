@@ -10,7 +10,7 @@ import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.RoleRepository;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -137,7 +137,7 @@ public class RoleService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(CommonQuery query, Pageable pageable) {
         Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
-        return PageUtils.toPage(page.map(roleMapper::toDto));
+        return PageUtil.toPage(page.map(roleMapper::toDto));
     }
 
     /**

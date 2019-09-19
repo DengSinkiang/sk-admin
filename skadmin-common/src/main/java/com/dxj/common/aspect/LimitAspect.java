@@ -3,7 +3,7 @@ package com.dxj.common.aspect;
 import com.dxj.common.annotation.RateLimit;
 import com.dxj.common.util.IpInfoUtil;
 import com.dxj.common.util.RequestHolder;
-import com.dxj.common.util.StringUtils;
+import com.dxj.common.util.StringUtil;
 import com.google.common.collect.ImmutableList;
 import com.dxj.common.exception.BadRequestException;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -51,7 +51,7 @@ public class LimitAspect {
         RateLimit limit = signatureMethod.getAnnotation(RateLimit.class);
         LimitType limitType = limit.limitType();
         String key = limit.key();
-        if (StringUtils.isEmpty(key)) {
+        if (StringUtil.isEmpty(key)) {
             if (limitType == LimitType.IP) {
                 key = IpInfoUtil.getIpAddr(request);
             } else {
@@ -59,7 +59,7 @@ public class LimitAspect {
             }
         }
 
-        ImmutableList keys = ImmutableList.of(StringUtils.join(limit.prefix(), "_", key, "_", request.getRequestURI().replaceAll("/", "_")));
+        ImmutableList keys = ImmutableList.of(StringUtil.join(limit.prefix(), "_", key, "_", request.getRequestURI().replaceAll("/", "_")));
 
         String luaScript = buildLuaScript();
         RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);

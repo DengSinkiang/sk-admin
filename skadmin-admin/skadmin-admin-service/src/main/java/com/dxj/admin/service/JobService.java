@@ -7,7 +7,7 @@ import com.dxj.admin.query.JobQuery;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.repository.JobRepository;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -82,6 +82,6 @@ public class JobService {
         for (Job job : page.getContent()) {
             jobs.add(jobMapper.toDto(job,deptRepository.findNameById(job.getDept().getPid())));
         }
-        return PageUtils.toPage(jobs,page.getTotalElements());
+        return PageUtil.toPage(jobs,page.getTotalElements());
     }
 }

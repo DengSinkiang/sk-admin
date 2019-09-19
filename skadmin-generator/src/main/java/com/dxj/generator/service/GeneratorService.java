@@ -1,11 +1,11 @@
 package com.dxj.generator.service;
 
+import com.dxj.common.util.PageUtil;
 import com.dxj.generator.domain.GenConfig;
 import com.dxj.generator.domain.vo.ColumnInfo;
 import com.dxj.generator.domain.vo.TableInfo;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.generator.util.GenUtils;
-import com.dxj.common.util.PageUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -51,7 +51,7 @@ public class GeneratorService {
         }
         Query query1 = em.createNativeQuery("SELECT COUNT(*) from information_schema.tables where table_schema = (select database())");
         Object totalElements = query1.getSingleResult();
-        return PageUtils.toPage(tableInfos, totalElements);
+        return PageUtil.toPage(tableInfos, totalElements);
     }
 
     /**
@@ -72,7 +72,7 @@ public class GeneratorService {
         for (Object[] obj : result) {
             columnInfoList.add(new ColumnInfo(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], null, "true"));
         }
-        return PageUtils.toPage(columnInfoList, columnInfoList.size());
+        return PageUtil.toPage(columnInfoList, columnInfoList.size());
     }
 
     /**

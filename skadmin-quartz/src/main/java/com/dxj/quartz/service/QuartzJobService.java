@@ -2,13 +2,13 @@ package com.dxj.quartz.service;
 
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.exception.BadRequestException;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import com.dxj.quartz.domain.QuartzJob;
 import com.dxj.quartz.domain.QuartzLog;
 import com.dxj.quartz.util.QuartzManage;
 import com.dxj.quartz.repository.QuartzJobRepository;
 import com.dxj.quartz.repository.QuartzLogRepository;
-import com.dxj.common.util.PageUtils;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -107,10 +107,10 @@ public class QuartzJobService {
 
     @Cacheable(keyGenerator = "keyGenerator")
     public Object queryAll(QuartzJob query, Pageable pageable) {
-        return PageUtils.toPage(quartzJobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
+        return PageUtil.toPage(quartzJobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 
     public Object queryAllLog(QuartzLog query, Pageable pageable) {
-        return PageUtils.toPage(quartzLogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
+        return PageUtil.toPage(quartzLogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable));
     }
 }

@@ -3,7 +3,7 @@ package com.dxj.monitor.service;
 import com.dxj.monitor.domain.Visits;
 import com.dxj.monitor.repository.VisitsRepository;
 import com.dxj.log.repository.LogRepository;
-import com.dxj.common.util.StringUtils;
+import com.dxj.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class VisitsService {
         Visits visits = visitsRepository.findByDate(localDate.toString());
         if (visits == null) {
             visits = new Visits();
-            visits.setWeekDay(StringUtils.getWeekDay());
+            visits.setWeekDay(StringUtil.getWeekDay());
             visits.setPvCounts(1L);
             visits.setIpCounts(1L);
             visits.setDate(localDate.toString());

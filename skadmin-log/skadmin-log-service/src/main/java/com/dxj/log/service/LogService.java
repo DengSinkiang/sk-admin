@@ -114,7 +114,7 @@ public class LogService {
 
         Page<Log> page = logRepository.findAll(getSpec(logQuery, timeRange), pageable);
         if (logQuery.getLogType().equals("ERROR")) {
-            return PageUtils.toPage(page.map(logErrorMapper::toDto));
+            return PageUtil.toPage(page.map(logErrorMapper::toDto));
         }
 
         return page;
@@ -153,6 +153,6 @@ public class LogService {
 
     public Object queryAllByUser(Log log, Pageable pageable) {
         Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> BaseQuery.getPredicate(root, log, cb)), pageable);
-        return PageUtils.toPage(page.map(logSmallMapper::toDto));
+        return PageUtil.toPage(page.map(logSmallMapper::toDto));
     }
 }

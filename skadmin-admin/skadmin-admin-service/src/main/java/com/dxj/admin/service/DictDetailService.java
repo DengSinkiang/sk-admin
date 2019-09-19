@@ -6,7 +6,7 @@ import com.dxj.admin.mapper.DictDetailMapper;
 import com.dxj.admin.query.DictDetailQuery;
 import com.dxj.admin.repository.DictDetailRepository;
 import com.dxj.common.util.BaseQuery;
-import com.dxj.common.util.PageUtils;
+import com.dxj.common.util.PageUtil;
 import com.dxj.common.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -78,6 +78,6 @@ public class DictDetailService {
     @Cacheable(keyGenerator = "keyGenerator")
     public Map<String, Object> queryAll(DictDetailQuery query, Pageable pageable) {
         Page<DictDetail> page = dictDetailRepository.findAll((root, criteriaQuery, criteriaBuilder) -> BaseQuery.getPredicate(root, query, criteriaBuilder), pageable);
-        return PageUtils.toPage(page.map(dictDetailMapper::toDto));
+        return PageUtil.toPage(page.map(dictDetailMapper::toDto));
     }
 }
