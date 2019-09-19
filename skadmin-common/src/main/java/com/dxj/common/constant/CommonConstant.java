@@ -60,7 +60,7 @@ public interface CommonConstant {
     /**
      * 限流标识
      */
-    String LIMIT_ALL = "XBOOT_LIMIT_ALL";
+    String LIMIT_ALL = "SKADMIN_LIMIT_ALL";
 
     /**
      * 顶部菜单类型权限
@@ -135,12 +135,12 @@ public interface CommonConstant {
     /**
      * 短信验证码key前缀
      */
-    String PRE_SMS = "XBOOT_PRE_SMS:";
+    String PRE_SMS = "SKADMIN_PRE_SMS:";
 
     /**
      * 邮件验证码key前缀
      */
-    String PRE_EMAIL = "XBOOT_PRE_EMAIL:";
+    String PRE_EMAIL = "SKADMIN_PRE_EMAIL:";
 
     /**
      * 本地文件存储

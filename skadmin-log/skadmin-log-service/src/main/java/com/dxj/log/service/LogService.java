@@ -87,7 +87,7 @@ public class LogService {
         }
 
         // 获取IP地址
-        log.setRequestIp(StringUtils.getIP(request));
+        log.setRequestIp(IpInfoUtil.getIpAddr(request));
 
         String loginPath = "login";
         if (!loginPath.equals(signature.getName())) {

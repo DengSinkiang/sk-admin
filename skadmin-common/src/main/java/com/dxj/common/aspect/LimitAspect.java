@@ -1,6 +1,7 @@
 package com.dxj.common.aspect;
 
 import com.dxj.common.annotation.RateLimit;
+import com.dxj.common.util.IpInfoUtil;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.StringUtils;
 import com.google.common.collect.ImmutableList;
@@ -52,7 +53,7 @@ public class LimitAspect {
         String key = limit.key();
         if (StringUtils.isEmpty(key)) {
             if (limitType == LimitType.IP) {
-                key = StringUtils.getIP(request);
+                key = IpInfoUtil.getIpAddr(request);
             } else {
                 key = signatureMethod.getName();
             }

@@ -1,6 +1,7 @@
 package com.dxj.log.service;
 
 import cn.hutool.json.JSONObject;
+import com.dxj.common.util.IpInfoUtil;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.common.util.StringUtils;
@@ -69,7 +70,7 @@ public class LoginLogService {
 
         // 获取IP地址
 
-        log.setRequestIp(StringUtils.getIP(request));
+        log.setRequestIp(IpInfoUtil.getIpAddr(request));
 
         if (!"login".equals(signature.getName())) {
             UserDetails userDetails = SecurityContextHolder.getUserDetails();
