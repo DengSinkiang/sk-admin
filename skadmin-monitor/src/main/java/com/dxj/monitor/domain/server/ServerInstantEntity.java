@@ -1,10 +1,7 @@
-package com.dxj.monitor.domain;
+package com.dxj.monitor.domain.server;
 
 import com.dxj.common.util.DataHandleUtils;
 import com.dxj.common.util.FileUtil;
-import com.dxj.monitor.domain.server.Cpu;
-import com.dxj.monitor.domain.server.Jvm;
-import com.dxj.monitor.domain.server.Mem;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,14 +12,7 @@ import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
 
 /**
- * 🙃
- * 🙃 服务器实时信息
- * 🙃
- *
- * @author:zhaozhenghao
- * @Email :736720794@qq.com
- * @date :2019/04/06 17:26
- * ServerInstantEntity.java
+ * 服务器实时信息
  */
 @Component
 @Data

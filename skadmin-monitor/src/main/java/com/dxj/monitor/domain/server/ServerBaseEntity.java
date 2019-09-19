@@ -1,12 +1,8 @@
-package com.dxj.monitor.domain;
+package com.dxj.monitor.domain.server;
 
 import com.dxj.common.util.DataHandleUtils;
 import com.dxj.common.util.FileUtil;
 import com.dxj.common.util.IpInfoUtil;
-import com.dxj.monitor.domain.server.App;
-import com.dxj.monitor.domain.server.Jvm;
-import com.dxj.monitor.domain.server.Sys;
-import com.dxj.monitor.domain.server.SysDisk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -20,14 +16,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * 🙃
- * 🙃 服务器基础信息
- * 🙃
- *
- * @author:zhaozhenghao
- * @Email :736720794@qq.com
- * @date :2019/04/06 17:25
- * ServerBaseEntity.java
+ * 服务器基础信息
  */
 @Component
 public class ServerBaseEntity {

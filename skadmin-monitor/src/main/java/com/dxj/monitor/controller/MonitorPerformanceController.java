@@ -16,15 +16,12 @@ import java.util.List;
  *
  * 性能监控
  *
- * @author:Sinkiang
+ * @author :Sinkiang
  * @date :2019/09/17 13:37
  */
 @Controller
 @RequestMapping("api/monitor/performance")
 public class MonitorPerformanceController {
-
-    @Value("api")
-    private String apiPrefix;
 
     private static final String forwardPath = "forward:/actuator/metrics/";
 
@@ -86,7 +83,7 @@ public class MonitorPerformanceController {
     }
 
     private ResponseEntity<String> getStringResponseEntity(@PathVariable String actuator, List<String> jvmParamsList) {
-        String forwardApi = "forward:" + apiPrefix + "/monitor/performance/error";
+        String forwardApi = "forward:" + "api/monitor/performance/error";
         if (validateChain(jvmParamsList, actuator)) {
             forwardApi = forwardPath + actuator;
         }

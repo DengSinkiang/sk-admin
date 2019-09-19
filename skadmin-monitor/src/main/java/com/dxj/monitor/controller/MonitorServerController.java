@@ -1,7 +1,7 @@
 package com.dxj.monitor.controller;
 
-import com.dxj.monitor.domain.ServerBaseEntity;
-import com.dxj.monitor.domain.ServerInstantEntity;
+import com.dxj.monitor.domain.server.ServerBaseEntity;
+import com.dxj.monitor.domain.server.ServerInstantEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
