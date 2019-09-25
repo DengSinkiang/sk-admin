@@ -1,4 +1,4 @@
-package com.dxj.common.util;
+package com.dxj.file.util;
 
 import org.springframework.web.multipart.MultipartFile;
 import reactor.util.annotation.Nullable;

@@ -5,7 +5,7 @@ import com.dxj.common.constant.CommonConstant;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.redis.RedisRaterLimiter;
-import com.dxj.common.util.Base64DecodeMultipartFile;
+import com.dxj.file.util.Base64DecodeMultipartFile;
 import com.dxj.common.util.CommonUtil;
 import com.dxj.common.util.IpInfoUtil;
 import com.dxj.common.util.ResultUtil;
