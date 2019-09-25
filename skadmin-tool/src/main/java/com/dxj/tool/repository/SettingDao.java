@@ -1,7 +1,7 @@
-package com.dxj.file.dao;
+package com.dxj.tool.repository;
 
 import com.dxj.common.base.BaseRepository;
-import com.dxj.file.entity.Setting;
+import com.dxj.tool.domain.Setting;
 
 /**
  * 配置数据处理层

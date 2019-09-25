@@ -1,6 +1,6 @@
-package com.dxj.file.service;
+package com.dxj.tool.service;
 
-import com.dxj.file.entity.Setting;
+import com.dxj.tool.domain.Setting;
 import org.springframework.stereotype.Service;
 
 

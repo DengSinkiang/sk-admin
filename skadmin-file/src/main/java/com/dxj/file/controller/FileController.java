@@ -13,7 +13,6 @@ import com.dxj.file.entity.vo.OssSetting;
 import com.dxj.file.manage.FileManageFactory;
 import com.dxj.file.manage.impl.LocalFileManage;
 import com.dxj.file.service.FileService;
-import com.dxj.file.service.SettingService;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

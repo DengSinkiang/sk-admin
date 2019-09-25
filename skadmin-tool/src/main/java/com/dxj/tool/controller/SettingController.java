@@ -1,13 +1,13 @@
-package com.dxj.file.controller;
+package com.dxj.tool.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.util.CommonUtil;
 import com.dxj.common.util.ResultUtil;
 import com.dxj.common.vo.Result;
-import com.dxj.file.entity.Setting;
-import com.dxj.file.entity.vo.*;
-import com.dxj.file.service.SettingService;
+import com.dxj.tool.domain.Setting;
+import com.dxj.tool.domain.vo.*;
+import com.dxj.tool.service.SettingService;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

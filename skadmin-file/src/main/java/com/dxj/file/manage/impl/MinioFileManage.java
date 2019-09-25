@@ -6,7 +6,6 @@ import com.dxj.common.exception.BadRequestException;
 import com.dxj.file.entity.Setting;
 import com.dxj.file.entity.vo.OssSetting;
 import com.dxj.file.manage.FileManage;
-import com.dxj.file.service.SettingService;
 import com.google.gson.Gson;
 import io.minio.MinioClient;
 import org.springframework.beans.factory.annotation.Autowired;

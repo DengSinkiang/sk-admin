@@ -1,8 +1,8 @@
-package com.dxj.file.service.impl;
+package com.dxj.tool.service.impl;
 
-import com.dxj.file.dao.SettingDao;
-import com.dxj.file.entity.Setting;
-import com.dxj.file.service.SettingService;
+import com.dxj.tool.domain.Setting;
+import com.dxj.tool.repository.SettingDao;
+import com.dxj.tool.service.SettingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

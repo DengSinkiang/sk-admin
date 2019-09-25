@@ -1,4 +1,4 @@
-package com.dxj.file.util;
+package com.dxj.tool.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.aliyuncs.DefaultAcsClient;
@@ -11,9 +11,9 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.file.entity.Setting;
-import com.dxj.file.entity.vo.SmsSetting;
-import com.dxj.file.service.SettingService;
+import com.dxj.tool.domain.Setting;
+import com.dxj.tool.domain.vo.SmsSetting;
+import com.dxj.tool.service.SettingService;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
