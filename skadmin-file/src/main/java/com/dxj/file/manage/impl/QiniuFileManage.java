@@ -3,7 +3,6 @@ package com.dxj.file.manage.impl;
 import cn.hutool.core.util.StrUtil;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.file.entity.Setting;
 import com.dxj.file.entity.vo.OssSetting;
 import com.dxj.file.manage.FileManage;
 import com.google.gson.Gson;

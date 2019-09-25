@@ -42,22 +42,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-
-        <!-- quartz -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-        </dependency>
         <!--监控模块-->
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-monitor</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!--任务调度模块-->
-        <dependency>
-            <groupId>com.dxj.service</groupId>
-            <artifactId>skadmin-quartz</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
