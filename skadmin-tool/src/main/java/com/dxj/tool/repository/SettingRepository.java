@@ -8,6 +8,6 @@ import com.dxj.tool.domain.Setting;
  *
  * @author Sinkiang
  */
-public interface SettingDao extends BaseRepository<Setting, String> {
+public interface SettingRepository extends BaseRepository<Setting, String> {
 
 }

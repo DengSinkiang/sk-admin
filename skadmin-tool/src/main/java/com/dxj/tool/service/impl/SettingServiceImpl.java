@@ -1,7 +1,7 @@
 package com.dxj.tool.service.impl;
 
 import com.dxj.tool.domain.Setting;
-import com.dxj.tool.repository.SettingDao;
+import com.dxj.tool.repository.SettingRepository;
 import com.dxj.tool.service.SettingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SettingServiceImpl implements SettingService {
 
     @Autowired
-    private SettingDao settingDao;
+    private SettingRepository settingDao;
 
     @Override
     @Cacheable(key = "#id")

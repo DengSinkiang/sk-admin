@@ -5,7 +5,7 @@ import com.dxj.generator.domain.GenConfig;
 import com.dxj.generator.domain.vo.ColumnInfo;
 import com.dxj.generator.domain.vo.TableInfo;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.generator.util.GenUtils;
+import com.dxj.generator.util.GenUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -87,7 +87,7 @@ public class GeneratorService {
             throw new BadRequestException("请先配置生成器");
         }
         try {
-            GenUtils.generatorCode(columnInfoList, genConfig, tableName);
+            GenUtil.generatorCode(columnInfoList, genConfig, tableName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
