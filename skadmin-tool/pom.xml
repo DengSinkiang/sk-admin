@@ -45,7 +45,10 @@
             <artifactId>qiniu-java-sdk</artifactId>
             <version>${qiniu.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.dxj.common</groupId>
             <artifactId>skadmin-common</artifactId>
@@ -54,6 +57,11 @@
         <dependency>
             <groupId>com.dxj.service</groupId>
             <artifactId>skadmin-log-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dxj.service</groupId>
+            <artifactId>skadmin-monitor</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

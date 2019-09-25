@@ -1,8 +1,8 @@
-package com.dxj.quartz.config;
+package com.dxj.tool.config;
 
-import com.dxj.quartz.domain.QuartzJob;
-import com.dxj.quartz.util.QuartzManage;
-import com.dxj.quartz.repository.QuartzJobRepository;
+import com.dxj.tool.domain.QuartzJob;
+import com.dxj.tool.repository.QuartzJobRepository;
+import com.dxj.tool.util.QuartzManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

@@ -1,6 +1,6 @@
-package com.dxj.quartz.repository;
+package com.dxj.tool.repository;
 
-import com.dxj.quartz.domain.QuartzLog;
+import com.dxj.tool.domain.QuartzLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

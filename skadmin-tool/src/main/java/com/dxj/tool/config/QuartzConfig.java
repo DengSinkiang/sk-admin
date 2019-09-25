@@ -1,4 +1,4 @@
-package com.dxj.quartz.config;
+package com.dxj.tool.config;
 
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;

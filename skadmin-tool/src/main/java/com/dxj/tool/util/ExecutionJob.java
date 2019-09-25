@@ -1,11 +1,11 @@
-package com.dxj.quartz.util;
+package com.dxj.tool.util;
 
 import com.dxj.common.util.SpringContextHolder;
 import com.dxj.common.util.ThrowableUtil;
-import com.dxj.quartz.domain.QuartzJob;
-import com.dxj.quartz.domain.QuartzLog;
-import com.dxj.quartz.repository.QuartzLogRepository;
-import com.dxj.quartz.service.QuartzJobService;
+import com.dxj.tool.domain.QuartzJob;
+import com.dxj.tool.domain.QuartzLog;
+import com.dxj.tool.repository.QuartzLogRepository;
+import com.dxj.tool.service.QuartzJobService;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

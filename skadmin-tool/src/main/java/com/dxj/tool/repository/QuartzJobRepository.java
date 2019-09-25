@@ -1,11 +1,8 @@
-package com.dxj.quartz.repository;
+package com.dxj.tool.repository;
 
-import com.dxj.quartz.domain.QuartzJob;
+import com.dxj.tool.domain.QuartzJob;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

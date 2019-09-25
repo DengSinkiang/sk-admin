@@ -1,4 +1,4 @@
-package com.dxj.quartz.task;
+package com.dxj.tool.task;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,11 +1,11 @@
-package com.dxj.quartz.controller;
+package com.dxj.tool.controller;
 
-import com.dxj.log.annotation.Log;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.quartz.domain.QuartzJob;
-import com.dxj.quartz.domain.QuartzLog;
-import com.dxj.quartz.service.QuartzJobService;
+import com.dxj.log.annotation.Log;
+import com.dxj.tool.domain.QuartzJob;
+import com.dxj.tool.domain.QuartzLog;
+import com.dxj.tool.service.QuartzJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

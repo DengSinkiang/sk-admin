@@ -4,24 +4,30 @@ import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.dxj.common.util.IpInfoUtil;
 import com.dxj.tool.domain.SmsConfig;
 import com.dxj.tool.domain.vo.SmsVo;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.SmsRepository;
+import com.dxj.tool.util.SmsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: dxj
@@ -34,6 +40,15 @@ import java.util.Optional;
 public class SmsService {
 
     private final SmsRepository smsRepository;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private SmsUtil smsUtil;
+
+    @Autowired
+    private IpInfoUtil ipInfoUtil;
 
     @Autowired
     public SmsService(SmsRepository smsRepository) {
@@ -70,32 +85,24 @@ public class SmsService {
      */
     @Async
     @Transactional(rollbackFor = Exception.class)
-    public void send(SmsVo smsVo, SmsConfig smsConfig){
+    public void send(SmsVo smsVo, SmsConfig smsConfig, HttpServletRequest request){
 
         if(smsConfig == null){
             throw new BadRequestException("请先配置，再操作");
         }
 
-        DefaultProfile profile = DefaultProfile.getProfile("default", "<accessKeyId>", "<accessSecret>");
-        IAcsClient client = new DefaultAcsClient(profile);
-        String phoneNums= String.join(",", smsVo.getTos());
-        System.out.println(smsVo.getContent());
-        CommonRequest request = new CommonRequest();
-        request.setMethod(MethodType.POST);
-        request.setDomain("dysmsapi.aliyuncs.com");
-        request.setVersion("2017-05-25");
-        request.setAction("SendSms");
-
-        request.putQueryParameter("PhoneNumbers", phoneNums);
-        request.putQueryParameter("SignName", smsConfig.getSignName());
-        request.putQueryParameter("TemplateCode", smsConfig.getTemplateCode());
-        request.putQueryParameter("TemplateParam", smsVo.getContent());
         try {
-            CommonResponse response = client.getCommonResponse(request);
-            log.info("发送短信成功 {}", response.getData());
+            SendSmsResponse response = smsUtil.sendCode("","", "");
+            if (response.getCode() != null && ("OK").equals(response.getMessage())) {
+                // 请求成功 标记限流
+                redisTemplate.opsForValue().set("", "sended", 1L, TimeUnit.MINUTES);
+            } else {
+                log.error("请求发送验证码失败，" + response.getMessage());
+            }
         } catch (ClientException e) {
-            log.error("发送短信失败原因：{}", e);
+            log.error("请求发送短信验证码失败，" + e);
         }
+
 
     }
 }

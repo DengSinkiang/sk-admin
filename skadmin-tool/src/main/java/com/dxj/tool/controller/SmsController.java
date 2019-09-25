@@ -59,7 +59,7 @@ public class SmsController {
     @PostMapping(value = "/sms")
     public ResponseEntity<Void> send(@Validated @RequestBody SmsVo smsVo) {
         log.warn("REST request to send Sms : {}" + smsVo);
-        smsService.send(smsVo, smsService.find());
+        //smsService.send(smsVo, smsService.find());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

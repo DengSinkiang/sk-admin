@@ -1,4 +1,4 @@
-package com.dxj.quartz.util;
+package com.dxj.tool.util;
 
 import com.dxj.common.util.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;

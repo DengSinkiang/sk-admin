@@ -15,7 +15,6 @@
         <module>skadmin-admin</module>
         <module>skadmin-tool</module>
         <module>skadmin-monitor</module>
-        <module>skadmin-quartz</module>
         <module>skadmin-file</module>
     </modules>
 
