@@ -5,6 +5,8 @@ import com.dxj.common.constant.CommonConstant;
 import com.dxj.common.constant.SettingConstant;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.file.manage.impl.*;
+import com.dxj.tool.domain.Setting;
+import com.dxj.tool.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

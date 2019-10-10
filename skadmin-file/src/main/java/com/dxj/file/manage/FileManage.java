@@ -1,6 +1,6 @@
 package com.dxj.file.manage;
 
-import com.dxj.file.entity.vo.OssSetting;
+import com.dxj.tool.domain.vo.OssSetting;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;

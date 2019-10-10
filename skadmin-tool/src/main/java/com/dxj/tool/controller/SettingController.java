@@ -171,7 +171,7 @@ public class SettingController {
         if (name.equals(SettingConstant.QINIU_OSS) || name.equals(SettingConstant.ALI_OSS)
                 || name.equals(SettingConstant.TENCENT_OSS) || name.equals(SettingConstant.MINIO_OSS)) {
 
-            // 判断是否修改secrectKey 保留原secrectKey 避免保存***加密字符
+            // 判断是否修改secretKey 保留原secretKey 避免保存***加密字符
             if (StrUtil.isNotBlank(setting.getValue()) && !ossSetting.getChanged()) {
                 String secrectKey = new Gson().fromJson(setting.getValue(), OssSetting.class).getSecretKey();
                 ossSetting.setSecretKey(secrectKey);
