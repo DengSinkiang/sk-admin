@@ -1,6 +1,8 @@
 package com.dxj.generator.service;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.dxj.common.util.PageUtil;
+import com.dxj.common.util.StringUtil;
 import com.dxj.generator.domain.GenConfig;
 import com.dxj.generator.domain.vo.ColumnInfo;
 import com.dxj.generator.domain.vo.TableInfo;
@@ -34,20 +36,19 @@ public class GeneratorService {
      * @return
      */
     public Object getTableList(String name, int[] startEnd) {
-        StringBuilder sql = new StringBuilder("select table_name tableName,create_time createTime from information_schema.tables where table_schema = (select database()) ");
-        if (!ObjectUtils.isEmpty(name)) {
-            sql.append("and table_name like '%").append(name).append("%' ");
-        }
-        sql.append("order by table_name");
-        Query query = em.createNativeQuery(sql.toString());
+        // 使用预编译防止sql注入
+        String sql = "select table_name ,create_time , engine, table_collation, table_comment from information_schema.tables " +
+                "where table_schema = (select database()) " +
+                "and table_name like ? order by create_time desc";
+        Query query = em.createNativeQuery(sql);
         query.setFirstResult(startEnd[0]);
         query.setMaxResults(startEnd[1] - startEnd[0]);
-
-        System.out.println(sql.toString());
-        List<Object[]> result = query.getResultList();
+        query.setParameter(1, StringUtil.isNotBlank(name) ? ("%" + name + "%") : "%%");
+        List result = query.getResultList();
         List<TableInfo> tableInfos = new ArrayList<>();
-        for (Object[] obj : result) {
-            tableInfos.add(new TableInfo(obj[0], obj[1]));
+        for (Object obj : result) {
+            Object[] arr = (Object[]) obj;
+            tableInfos.add(new TableInfo(arr[0], arr[1], arr[2], arr[3], ObjectUtil.isNotEmpty(arr[4]) ? arr[4] : "-"));
         }
         Query query1 = em.createNativeQuery("SELECT COUNT(*) from information_schema.tables where table_schema = (select database())");
         Object totalElements = query1.getSingleResult();
@@ -61,18 +62,18 @@ public class GeneratorService {
      * @return
      */
     public Object getColumnList(String name) {
-        StringBuilder sql = new StringBuilder("select column_name, is_nullable, data_type, column_comment, column_key, extra from information_schema.columns where ");
-        if (!ObjectUtils.isEmpty(name)) {
-            sql.append("table_name = '").append(name).append("' ");
+        // 使用预编译防止sql注入
+        String sql = "select column_name, is_nullable, data_type, column_comment, column_key, extra from information_schema.columns " +
+                "where table_name = ? and table_schema = (select database()) order by ordinal_position";
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, StringUtil.isNotBlank(name) ? name : null);
+        List result = query.getResultList();
+        List<ColumnInfo> columnInfos = new ArrayList<>();
+        for (Object obj : result) {
+            Object[] arr = (Object[]) obj;
+            columnInfos.add(new ColumnInfo(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], null, "true"));
         }
-        sql.append("and table_schema = (select database()) order by ordinal_position");
-        Query query = em.createNativeQuery(sql.toString());
-        List<Object[]> result = query.getResultList();
-        List<ColumnInfo> columnInfoList = new ArrayList<>();
-        for (Object[] obj : result) {
-            columnInfoList.add(new ColumnInfo(obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], null, "true"));
-        }
-        return PageUtil.toPage(columnInfoList, columnInfoList.size());
+        return PageUtil.toPage(columnInfos, columnInfos.size());
     }
 
     /**

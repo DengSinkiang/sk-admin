@@ -39,8 +39,10 @@ public class GenConfigService {
         String separator = File.separator;
         String[] paths;
         if (separator.equals("\\")) {
-            paths = "\\\\".split(genConfig.getPath());
-        } else paths = genConfig.getPath().split(File.separator);
+            paths = genConfig.getPath().split("\\\\");
+        } else {
+            paths = genConfig.getPath().split(File.separator);
+        }
         StringBuilder api = new StringBuilder();
         for (String path : paths) {
             api.append(path);
