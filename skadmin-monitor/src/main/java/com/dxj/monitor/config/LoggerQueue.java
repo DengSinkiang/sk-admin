@@ -1,6 +1,6 @@
 package com.dxj.monitor.config;
 
-import com.dxj.monitor.domain.LogMessage;
+import com.dxj.monitor.entity.LogMessage;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

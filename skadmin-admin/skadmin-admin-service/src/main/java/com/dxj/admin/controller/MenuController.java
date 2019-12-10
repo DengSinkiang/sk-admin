@@ -1,9 +1,9 @@
 package com.dxj.admin.controller;
 
-import com.dxj.admin.domain.Menu;
-import com.dxj.admin.domain.vo.MenuVo;
-import com.dxj.admin.dto.MenuDTO;
-import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.entity.Menu;
+import com.dxj.admin.entity.vo.MenuVo;
+import com.dxj.admin.entity.dto.MenuDTO;
+import com.dxj.admin.entity.dto.UserDTO;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.service.MenuService;
 import com.dxj.admin.service.RoleService;

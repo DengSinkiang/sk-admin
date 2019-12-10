@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.User;
-import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.entity.User;
+import com.dxj.admin.entity.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
 import com.dxj.admin.query.UserQuery;
 import com.dxj.admin.repository.UserRepository;

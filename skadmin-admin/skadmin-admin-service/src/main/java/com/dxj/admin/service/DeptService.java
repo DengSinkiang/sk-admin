@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.Dept;
-import com.dxj.admin.dto.DeptDTO;
+import com.dxj.admin.entity.Dept;
+import com.dxj.admin.entity.dto.DeptDTO;
 import com.dxj.admin.mapper.DeptMapper;
 import com.dxj.admin.query.DeptQuery;
 import com.dxj.admin.repository.DeptRepository;

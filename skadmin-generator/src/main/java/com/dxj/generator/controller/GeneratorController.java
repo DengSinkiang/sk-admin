@@ -1,7 +1,7 @@
 package com.dxj.generator.controller;
 
 import cn.hutool.core.util.PageUtil;
-import com.dxj.generator.domain.vo.ColumnInfo;
+import com.dxj.generator.entity.vo.ColumnInfo;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.generator.service.GenConfigService;
 import com.dxj.generator.service.GeneratorService;

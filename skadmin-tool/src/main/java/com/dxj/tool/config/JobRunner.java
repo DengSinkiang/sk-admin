@@ -1,6 +1,6 @@
 package com.dxj.tool.config;
 
-import com.dxj.tool.domain.QuartzJob;
+import com.dxj.tool.entity.QuartzJob;
 import com.dxj.tool.repository.QuartzJobRepository;
 import com.dxj.tool.util.QuartzManage;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -97,14 +97,14 @@ public class RedisConfig extends CachingConfigurerSupport {
         // 全局开启AutoType，不建议使用
         // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         // 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.dto");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.quartz.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.monitor.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.log.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.generator.domain");
-        ParserConfig.getGlobalInstance().addAccept("com.dxj.tool.domain");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.entity.dto");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.quartz.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.monitor.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.log.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.generator.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.dxj.tool.entity");
         ParserConfig.getGlobalInstance().addAccept("com.dxj.admin.config");
         // key的序列化采用StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());

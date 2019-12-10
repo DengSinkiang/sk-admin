@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.Menu;
-import com.dxj.admin.domain.Role;
-import com.dxj.admin.dto.RoleDTO;
-import com.dxj.admin.dto.RoleSmallDTO;
+import com.dxj.admin.entity.Menu;
+import com.dxj.admin.entity.Role;
+import com.dxj.admin.entity.dto.RoleDTO;
+import com.dxj.admin.entity.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.mapper.RoleSmallMapper;
 import com.dxj.admin.query.CommonQuery;

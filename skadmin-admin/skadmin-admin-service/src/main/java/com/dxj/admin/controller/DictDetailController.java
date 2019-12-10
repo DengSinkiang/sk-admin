@@ -1,7 +1,7 @@
 package com.dxj.admin.controller;
 
-import com.dxj.admin.domain.DictDetail;
-import com.dxj.admin.dto.DictDetailDTO;
+import com.dxj.admin.entity.DictDetail;
+import com.dxj.admin.entity.dto.DictDetailDTO;
 import com.dxj.admin.query.DictDetailQuery;
 import com.dxj.admin.service.DictDetailService;
 import com.dxj.common.enums.CommEnum;

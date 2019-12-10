@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.Permission;
-import com.dxj.admin.dto.PermissionDTO;
+import com.dxj.admin.entity.Permission;
+import com.dxj.admin.entity.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.PermissionRepository;

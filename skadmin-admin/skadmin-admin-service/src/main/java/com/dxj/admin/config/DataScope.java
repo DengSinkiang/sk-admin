@@ -1,8 +1,8 @@
 package com.dxj.admin.config;
 
-import com.dxj.admin.domain.Dept;
-import com.dxj.admin.dto.RoleSmallDTO;
-import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.entity.Dept;
+import com.dxj.admin.entity.dto.RoleSmallDTO;
+import com.dxj.admin.entity.dto.UserDTO;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;

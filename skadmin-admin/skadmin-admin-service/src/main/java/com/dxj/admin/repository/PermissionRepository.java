@@ -1,12 +1,10 @@
 package com.dxj.admin.repository;
 
-import com.dxj.admin.domain.Permission;
-import com.dxj.admin.domain.Role;
+import com.dxj.admin.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author dxj

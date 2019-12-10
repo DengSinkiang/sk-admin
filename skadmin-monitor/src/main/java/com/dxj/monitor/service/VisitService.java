@@ -1,6 +1,6 @@
 package com.dxj.monitor.service;
 
-import com.dxj.monitor.domain.Visit;
+import com.dxj.monitor.entity.Visit;
 import com.dxj.monitor.repository.VisitRepository;
 import com.dxj.log.repository.LogRepository;
 import com.dxj.common.util.StringUtil;

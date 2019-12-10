@@ -1,7 +1,7 @@
 package com.dxj.tool.controller;
 
 import com.dxj.log.annotation.Log;
-import com.dxj.tool.domain.Picture;
+import com.dxj.tool.entity.Picture;
 import com.dxj.tool.service.PictureService;
 import com.dxj.common.util.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;

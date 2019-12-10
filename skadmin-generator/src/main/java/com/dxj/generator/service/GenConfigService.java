@@ -1,6 +1,6 @@
 package com.dxj.generator.service;
 
-import com.dxj.generator.domain.GenConfig;
+import com.dxj.generator.entity.GenConfig;
 import com.dxj.generator.repository.GenConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

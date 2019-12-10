@@ -1,8 +1,8 @@
 package com.dxj.log.mapper;
 
 import com.dxj.common.mapper.EntityMapper;
-import com.dxj.log.domain.Log;
-import com.dxj.log.dto.LogSmallDTO;
+import com.dxj.log.entity.Log;
+import com.dxj.log.entity.dto.LogSmallDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Service;

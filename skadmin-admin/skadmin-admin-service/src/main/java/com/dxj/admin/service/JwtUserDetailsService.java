@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.dto.*;
-import com.dxj.admin.domain.JwtUser;
+import com.dxj.admin.entity.dto.*;
+import com.dxj.admin.entity.JwtUser;
 import com.dxj.common.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

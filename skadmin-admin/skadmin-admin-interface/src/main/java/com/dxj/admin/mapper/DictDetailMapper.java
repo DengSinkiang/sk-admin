@@ -1,7 +1,7 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.admin.domain.DictDetail;
-import com.dxj.admin.dto.DictDetailDTO;
+import com.dxj.admin.entity.DictDetail;
+import com.dxj.admin.entity.dto.DictDetailDTO;
 import com.dxj.common.mapper.EntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -5,8 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import com.dxj.common.util.FileUtil;
 import com.dxj.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import com.dxj.generator.domain.GenConfig;
-import com.dxj.generator.domain.vo.ColumnInfo;
+import com.dxj.generator.entity.GenConfig;
+import com.dxj.generator.entity.vo.ColumnInfo;
 import org.springframework.util.ObjectUtils;
 
 import java.io.File;
@@ -185,7 +185,7 @@ public class GenUtil {
         }
 
         if ("Entity".equals(templateName)) {
-            return packagePath + "domain" + File.separator + className + ".java";
+            return packagePath + "entity" + File.separator + className + ".java";
         }
 
         if ("Controller".equals(templateName)) {

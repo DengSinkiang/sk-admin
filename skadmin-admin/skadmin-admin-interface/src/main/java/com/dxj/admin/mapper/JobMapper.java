@@ -1,7 +1,7 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.admin.domain.Job;
-import com.dxj.admin.dto.JobDTO;
+import com.dxj.admin.entity.Job;
+import com.dxj.admin.entity.dto.JobDTO;
 import com.dxj.common.mapper.EntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

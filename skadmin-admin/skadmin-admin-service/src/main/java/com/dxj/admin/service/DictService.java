@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.Dict;
-import com.dxj.admin.dto.DictDTO;
+import com.dxj.admin.entity.Dict;
+import com.dxj.admin.entity.dto.DictDTO;
 import com.dxj.admin.mapper.DictMapper;
 import com.dxj.admin.query.DictQuery;
 import com.dxj.admin.repository.DictRepository;

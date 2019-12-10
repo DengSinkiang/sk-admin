@@ -1,6 +1,6 @@
 package com.dxj.monitor.config;
 
-import com.dxj.monitor.domain.LogMessage;
+import com.dxj.monitor.entity.LogMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

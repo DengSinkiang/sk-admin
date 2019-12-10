@@ -2,8 +2,8 @@ package com.dxj.tool.util;
 
 import com.dxj.common.util.SpringContextHolder;
 import com.dxj.common.util.ThrowableUtil;
-import com.dxj.tool.domain.QuartzJob;
-import com.dxj.tool.domain.QuartzLog;
+import com.dxj.tool.entity.QuartzJob;
+import com.dxj.tool.entity.QuartzLog;
 import com.dxj.tool.repository.QuartzLogRepository;
 import com.dxj.tool.service.QuartzJobService;
 import org.quartz.JobExecutionContext;

@@ -1,9 +1,9 @@
 package com.dxj.admin.controller;
 
 import cn.hutool.core.lang.Dict;
-import com.dxj.admin.domain.Role;
-import com.dxj.admin.dto.RoleDTO;
-import com.dxj.admin.dto.RoleSmallDTO;
+import com.dxj.admin.entity.Role;
+import com.dxj.admin.entity.dto.RoleDTO;
+import com.dxj.admin.entity.dto.RoleSmallDTO;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.service.RoleService;
 import com.dxj.common.enums.CommEnum;

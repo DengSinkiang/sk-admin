@@ -1,6 +1,6 @@
 package com.dxj.tool.repository;
 
-import com.dxj.tool.domain.SmsConfig;
+import com.dxj.tool.entity.SmsConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

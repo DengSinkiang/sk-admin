@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.util.BaseQuery;
 import com.dxj.common.util.PageUtil;
-import com.dxj.tool.domain.Picture;
+import com.dxj.tool.entity.Picture;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.PictureRepository;

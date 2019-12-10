@@ -1,6 +1,6 @@
 package com.dxj.monitor.repository;
 
-import com.dxj.monitor.domain.Visit;
+import com.dxj.monitor.entity.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

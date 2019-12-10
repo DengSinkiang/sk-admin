@@ -1,6 +1,6 @@
 package com.dxj.generator.repository;
 
-import com.dxj.generator.domain.GenConfig;
+import com.dxj.generator.entity.GenConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

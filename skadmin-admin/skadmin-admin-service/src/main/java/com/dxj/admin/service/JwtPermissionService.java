@@ -1,7 +1,7 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.domain.Role;
-import com.dxj.admin.dto.UserDTO;
+import com.dxj.admin.entity.Role;
+import com.dxj.admin.entity.dto.UserDTO;
 import com.dxj.admin.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

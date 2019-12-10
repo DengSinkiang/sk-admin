@@ -1,16 +1,10 @@
 package com.dxj.tool.service;
 
-import com.aliyuncs.CommonRequest;
-import com.aliyuncs.CommonResponse;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
 import com.dxj.common.util.IpInfoUtil;
-import com.dxj.tool.domain.SmsConfig;
-import com.dxj.tool.domain.vo.SmsVo;
+import com.dxj.tool.entity.SmsConfig;
+import com.dxj.tool.entity.vo.SmsVo;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.tool.repository.SmsRepository;
 import com.dxj.tool.util.SmsUtil;

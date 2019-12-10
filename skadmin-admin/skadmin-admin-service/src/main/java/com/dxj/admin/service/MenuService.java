@@ -1,11 +1,11 @@
 package com.dxj.admin.service;
 
 import cn.hutool.core.util.StrUtil;
-import com.dxj.admin.domain.Menu;
-import com.dxj.admin.domain.vo.MenuMetaVo;
-import com.dxj.admin.domain.vo.MenuVo;
-import com.dxj.admin.dto.MenuDTO;
-import com.dxj.admin.dto.RoleSmallDTO;
+import com.dxj.admin.entity.Menu;
+import com.dxj.admin.entity.vo.MenuMetaVo;
+import com.dxj.admin.entity.vo.MenuVo;
+import com.dxj.admin.entity.dto.MenuDTO;
+import com.dxj.admin.entity.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.MenuMapper;
 import com.dxj.admin.query.CommonQuery;
 import com.dxj.admin.repository.MenuRepository;

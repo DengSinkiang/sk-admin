@@ -1,6 +1,6 @@
 package com.dxj.generator.controller;
 
-import com.dxj.generator.domain.GenConfig;
+import com.dxj.generator.entity.GenConfig;
 import com.dxj.generator.service.GenConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

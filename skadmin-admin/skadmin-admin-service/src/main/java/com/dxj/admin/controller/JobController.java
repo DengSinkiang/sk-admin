@@ -1,8 +1,8 @@
 package com.dxj.admin.controller;
 
 import com.dxj.admin.config.DataScope;
-import com.dxj.admin.domain.Job;
-import com.dxj.admin.dto.JobDTO;
+import com.dxj.admin.entity.Job;
+import com.dxj.admin.entity.dto.JobDTO;
 import com.dxj.admin.query.JobQuery;
 import com.dxj.admin.service.JobService;
 import com.dxj.common.enums.CommEnum;

@@ -3,7 +3,7 @@ package com.dxj.monitor.config;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
-import com.dxj.monitor.domain.LogMessage;
+import com.dxj.monitor.entity.LogMessage;
 
 import java.text.DateFormat;
 import java.util.Date;
