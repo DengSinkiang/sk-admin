@@ -41,7 +41,7 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 ```
 #### 运行项目
 ```
-- 本项目用到redis，没安装请自行百度安装
+- 本项目用到 redis，没安装请自行百度安装
 - 直接运行 SkAdmin.java 即可启动后台服务
 ```
 #### 功能模块
@@ -55,23 +55,23 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
     - 岗位管理
     - 字典管理 
 - 系统监控
-    - 系统缓存 使用jedis将缓存操作可视化，并提供对redis的基本操作
-    - 实时控制台 实时打印logback日志，更好的监控系统的运行状态
-    - SQL监控 采用druid 监控数据库访问性能，默认用户名admin，密码123456
+    - 系统缓存 使用 jedis 将缓存操作可视化，并提供对 redis 的基本操作
+    - 实时控制台 实时打印 logback 日志，更好的监控系统的运行状态
+    - SQL 监控 采用 druid 监控数据库访问性能，默认用户名 admin，密码 123456
 - 日志管理
-    - 登录日志 使用aop记录用户登录日志
-    - 操作日志 使用aop记录用户操作日志
+    - 登录日志 使用 aop 记录用户登录日志
+    - 操作日志 使用 aop 记录用户操作日志
     - 异常日志 记录操作过程中的异常，并且提供查看异常的堆栈信息
 - 云存储管理
     - 七牛云存储 文件上传、下载
 - 消息管理
     - 短信服务 阿里大于
-    - 邮件服务 配合富文本，发送html格式的邮件
+    - 邮件服务 配合富文本，发送 html 格式的邮件
 - 系统工具
-    - 定时任务 整合Quartz做定时任务，加入任务日志，任务运行情况一目了然
-    - 代码生成 高灵活度一键生成前后端代码，减少百分之80左右的工作任务
+    - 定时任务 整合 Quartz 做定时任务，加入任务日志，任务运行情况一目了然
+    - 代码生成 高灵活度一键生成前后端代码，减少百分之 80 左右的工作任务
     - 接口文档 使用的是 swagger-ui 
-    - SM.MS免费图床 挺好用的一个图床，作为公共图片上传使用
+    - SM.MS 免费图床 挺好用的一个图床，作为公共图片上传使用
 ```
 #### 项目结构
 ```
@@ -79,20 +79,20 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 - skadmin-common 公共模块
     - annotation 接口限流自定义注解
     - exception 项目统一异常的处理
-    - mapper mapstruct的通用mapper
+    - mapper mapstruct 的通用 mapper
     - enums 常量枚举
-    - redis redis缓存相关配置
+    - redis redis 缓存相关配置
     - response 统一封装返回信息
     - swagger 接口文档配置
     - util 通用工具
 - skadmin-admin 系统核心模块
     - skadmin-admin-interface
-        - domain
-	- dto
+        - entity
+	    - dto
 	- mapper
 	- query 查询相关的条件
     - skadmin-admin-service
-        - config 配置跨域与静态资源及JWT的安全过滤器配置
+        - config 配置跨域与静态资源及 JWT 的安全过滤器配置
         - controller 控制器
 	- repository 数据库操作
 	- service 业务实现
@@ -100,8 +100,8 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 - skadmin-log 系统日志模块
     - skadmin-log-interface
         - annotation
-        - domain
-        - dto
+        - entity
+            - dto
         - mapper
     - skadmin-log-service
         - aspect
@@ -111,8 +111,8 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 - skadmin-tool 系统第三方工具模块
 - skadmin-generator 系统代码生成模块
 - skadmin-monitor 系统监控模块
-    - config 配置日志拦截器与WebSocket等
-    - domain 实体类
+    - config 配置日志拦截器与 WebSocket 等
+    - entity 实体类
     - repository 数据库操作
     - controller 控制器
     - service 业务实现
@@ -126,7 +126,7 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 - 缓存框架：Redis
 - 日志打印：logback+log4jdbc
 - 接口文档 Swagger2
-- 其他：FastJson、AOP、MapStruct等
+- 其他：FastJson、AOP、MapStruct 等
 ```
 #### 前端技术栈
 ```
