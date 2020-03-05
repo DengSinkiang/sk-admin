@@ -1,10 +1,10 @@
 package com.dxj.admin.controller;
 
 import com.dxj.admin.config.DataScope;
-import com.dxj.admin.entity.User;
-import com.dxj.admin.entity.dto.RoleSmallDTO;
-import com.dxj.admin.entity.dto.UserDTO;
-import com.dxj.admin.query.UserQuery;
+import com.dxj.admin.domain.entity.User;
+import com.dxj.admin.domain.dto.RoleSmallDTO;
+import com.dxj.admin.domain.dto.UserDTO;
+import com.dxj.admin.domain.query.UserQuery;
 import com.dxj.admin.service.DeptService;
 import com.dxj.admin.service.RoleService;
 import com.dxj.admin.service.UserService;
@@ -14,9 +14,9 @@ import com.dxj.common.response.CodeMsg;
 import com.dxj.common.response.Result;
 import com.dxj.common.util.*;
 import com.dxj.log.annotation.Log;
-import com.dxj.tool.entity.Picture;
-import com.dxj.tool.entity.VerificationCode;
-import com.dxj.tool.entity.vo.EmailVo;
+import com.dxj.tool.domain.entity.Picture;
+import com.dxj.tool.domain.entity.VerificationCode;
+import com.dxj.tool.domain.vo.EmailVo;
 import com.dxj.tool.service.EmailService;
 import com.dxj.tool.service.PictureService;
 import com.dxj.tool.service.VerificationCodeService;

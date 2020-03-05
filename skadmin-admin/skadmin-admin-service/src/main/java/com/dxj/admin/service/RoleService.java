@@ -1,12 +1,12 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.entity.Menu;
-import com.dxj.admin.entity.Role;
-import com.dxj.admin.entity.dto.RoleDTO;
-import com.dxj.admin.entity.dto.RoleSmallDTO;
+import com.dxj.admin.domain.entity.Menu;
+import com.dxj.admin.domain.entity.Role;
+import com.dxj.admin.domain.dto.RoleDTO;
+import com.dxj.admin.domain.dto.RoleSmallDTO;
 import com.dxj.admin.mapper.RoleMapper;
 import com.dxj.admin.mapper.RoleSmallMapper;
-import com.dxj.admin.query.CommonQuery;
+import com.dxj.admin.domain.query.CommonQuery;
 import com.dxj.admin.repository.RoleRepository;
 import com.dxj.common.exception.EntityExistException;
 import com.dxj.common.util.BaseQuery;

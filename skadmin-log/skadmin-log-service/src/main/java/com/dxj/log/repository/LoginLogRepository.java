@@ -1,6 +1,6 @@
 package com.dxj.log.repository;
 
-import com.dxj.log.entity.LoginLog;
+import com.dxj.log.domain.entity.LoginLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

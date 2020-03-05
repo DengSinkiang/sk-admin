@@ -4,7 +4,7 @@ import cn.hutool.json.JSONObject;
 import com.dxj.common.util.IpInfoUtil;
 import com.dxj.common.util.RequestHolder;
 import com.dxj.common.util.SecurityContextHolder;
-import com.dxj.log.entity.LoginLog;
+import com.dxj.log.domain.entity.LoginLog;
 import com.dxj.log.repository.LoginLogRepository;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;

@@ -1,6 +1,6 @@
 package com.dxj.admin.config;
 
-import com.dxj.admin.entity.JwtUser;
+import com.dxj.admin.domain.entity.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;

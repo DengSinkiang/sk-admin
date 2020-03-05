@@ -1,7 +1,7 @@
 package com.dxj.tool.controller;
 
-import com.dxj.tool.entity.SmsConfig;
-import com.dxj.tool.entity.vo.SmsVo;
+import com.dxj.tool.domain.entity.SmsConfig;
+import com.dxj.tool.domain.vo.SmsVo;
 import com.dxj.tool.service.SmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

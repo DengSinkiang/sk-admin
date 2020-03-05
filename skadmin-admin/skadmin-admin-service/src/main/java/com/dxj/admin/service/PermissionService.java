@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.entity.Permission;
-import com.dxj.admin.entity.dto.PermissionDTO;
+import com.dxj.admin.domain.entity.Permission;
+import com.dxj.admin.domain.dto.PermissionDTO;
 import com.dxj.admin.mapper.PermissionMapper;
-import com.dxj.admin.query.CommonQuery;
+import com.dxj.admin.domain.query.CommonQuery;
 import com.dxj.admin.repository.PermissionRepository;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.exception.EntityExistException;

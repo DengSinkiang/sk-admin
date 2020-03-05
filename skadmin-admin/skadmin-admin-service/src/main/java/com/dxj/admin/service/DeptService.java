@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.entity.Dept;
-import com.dxj.admin.entity.dto.DeptDTO;
+import com.dxj.admin.domain.entity.Dept;
+import com.dxj.admin.domain.dto.DeptDTO;
 import com.dxj.admin.mapper.DeptMapper;
-import com.dxj.admin.query.DeptQuery;
+import com.dxj.admin.domain.query.DeptQuery;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.common.exception.BadRequestException;
 import com.dxj.common.util.BaseQuery;

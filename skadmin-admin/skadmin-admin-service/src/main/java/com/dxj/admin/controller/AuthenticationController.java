@@ -1,9 +1,9 @@
 package com.dxj.admin.controller;
 
 import com.dxj.admin.config.JwtTokenUtils;
-import com.dxj.admin.entity.AuthenticationInfo;
-import com.dxj.admin.entity.AuthorizationUser;
-import com.dxj.admin.entity.JwtUser;
+import com.dxj.admin.domain.entity.AuthenticationInfo;
+import com.dxj.admin.domain.entity.AuthorizationUser;
+import com.dxj.admin.domain.entity.JwtUser;
 import com.dxj.common.util.SecurityContextHolder;
 import com.dxj.log.annotation.LoginLog;
 import lombok.extern.slf4j.Slf4j;

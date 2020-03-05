@@ -1,11 +1,11 @@
 package com.dxj.tool.controller;
 
 import com.dxj.common.response.Result;
-import com.dxj.tool.entity.QiNiuContent;
+import com.dxj.tool.domain.entity.QiNiuContent;
 import com.dxj.tool.service.QiNiuService;
 import lombok.extern.slf4j.Slf4j;
 import com.dxj.log.annotation.Log;
-import com.dxj.tool.entity.QiNiuConfig;
+import com.dxj.tool.domain.entity.QiNiuConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

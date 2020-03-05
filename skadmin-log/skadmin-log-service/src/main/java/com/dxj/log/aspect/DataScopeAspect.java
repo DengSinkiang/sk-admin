@@ -1,8 +1,8 @@
 package com.dxj.log.aspect;
 
 import com.dxj.common.util.ThrowableUtil;
-import com.dxj.log.entity.Log;
-import com.dxj.log.entity.LoginLog;
+import com.dxj.log.domain.entity.Log;
+import com.dxj.log.domain.entity.LoginLog;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import lombok.extern.slf4j.Slf4j;

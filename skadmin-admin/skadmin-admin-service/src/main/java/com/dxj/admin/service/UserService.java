@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.entity.User;
-import com.dxj.admin.entity.dto.UserDTO;
+import com.dxj.admin.domain.entity.User;
+import com.dxj.admin.domain.dto.UserDTO;
 import com.dxj.admin.mapper.UserMapper;
-import com.dxj.admin.query.UserQuery;
+import com.dxj.admin.domain.query.UserQuery;
 import com.dxj.admin.repository.UserRepository;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.EntityExistException;

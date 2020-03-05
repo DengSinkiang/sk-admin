@@ -1,7 +1,7 @@
 package com.dxj.monitor.service;
 
 import com.dxj.common.util.PageUtil;
-import com.dxj.monitor.entity.vo.RedisVo;
+import com.dxj.monitor.domain.vo.RedisVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -1,6 +1,6 @@
 package com.dxj.tool.service.impl;
 
-import com.dxj.tool.entity.Setting;
+import com.dxj.tool.domain.entity.Setting;
 import com.dxj.tool.repository.SettingRepository;
 import com.dxj.tool.service.SettingService;
 import lombok.extern.slf4j.Slf4j;

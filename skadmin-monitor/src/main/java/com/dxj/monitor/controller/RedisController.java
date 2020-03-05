@@ -1,7 +1,7 @@
 package com.dxj.monitor.controller;
 
 import com.dxj.log.annotation.Log;
-import com.dxj.monitor.entity.vo.RedisVo;
+import com.dxj.monitor.domain.vo.RedisVo;
 import com.dxj.monitor.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

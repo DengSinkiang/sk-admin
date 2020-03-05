@@ -1,7 +1,7 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.admin.entity.Permission;
-import com.dxj.admin.entity.dto.PermissionDTO;
+import com.dxj.admin.domain.entity.Permission;
+import com.dxj.admin.domain.dto.PermissionDTO;
 import com.dxj.common.mapper.EntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

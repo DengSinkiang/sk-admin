@@ -1,9 +1,9 @@
 package com.dxj.admin.controller;
 
 import com.dxj.admin.config.DataScope;
-import com.dxj.admin.entity.Dept;
-import com.dxj.admin.entity.dto.DeptDTO;
-import com.dxj.admin.query.DeptQuery;
+import com.dxj.admin.domain.entity.Dept;
+import com.dxj.admin.domain.dto.DeptDTO;
+import com.dxj.admin.domain.query.DeptQuery;
 import com.dxj.admin.service.DeptService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;

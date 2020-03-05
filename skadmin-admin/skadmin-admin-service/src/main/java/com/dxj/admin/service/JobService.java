@@ -1,9 +1,9 @@
 package com.dxj.admin.service;
 
-import com.dxj.admin.entity.Job;
-import com.dxj.admin.entity.dto.JobDTO;
+import com.dxj.admin.domain.entity.Job;
+import com.dxj.admin.domain.dto.JobDTO;
 import com.dxj.admin.mapper.JobMapper;
-import com.dxj.admin.query.JobQuery;
+import com.dxj.admin.domain.query.JobQuery;
 import com.dxj.admin.repository.DeptRepository;
 import com.dxj.admin.repository.JobRepository;
 import com.dxj.common.util.BaseQuery;

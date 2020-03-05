@@ -1,6 +1,6 @@
 package com.dxj.tool.repository;
 
-import com.dxj.tool.entity.EmailConfig;
+import com.dxj.tool.domain.entity.EmailConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

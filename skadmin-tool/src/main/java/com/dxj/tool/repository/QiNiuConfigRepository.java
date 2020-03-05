@@ -1,6 +1,6 @@
 package com.dxj.tool.repository;
 
-import com.dxj.tool.entity.QiNiuConfig;
+import com.dxj.tool.domain.entity.QiNiuConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

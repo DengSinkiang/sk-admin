@@ -3,7 +3,7 @@ package com.dxj.log.service;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
 import com.dxj.common.util.*;
-import com.dxj.log.entity.Log;
+import com.dxj.log.domain.entity.Log;
 import com.dxj.log.repository.LogRepository;
 import com.dxj.log.mapper.LogErrorMapper;
 import com.dxj.log.mapper.LogSmallMapper;

@@ -1,8 +1,8 @@
 package com.dxj.admin.controller;
 
-import com.dxj.admin.entity.Permission;
-import com.dxj.admin.entity.dto.PermissionDTO;
-import com.dxj.admin.query.CommonQuery;
+import com.dxj.admin.domain.entity.Permission;
+import com.dxj.admin.domain.dto.PermissionDTO;
+import com.dxj.admin.domain.query.CommonQuery;
 import com.dxj.admin.service.PermissionService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;

@@ -2,8 +2,8 @@ package com.dxj.log.controller;
 
 import cn.hutool.core.lang.Dict;
 import com.dxj.common.util.SecurityContextHolder;
-import com.dxj.log.entity.Log;
-import com.dxj.log.entity.LoginLog;
+import com.dxj.log.domain.entity.Log;
+import com.dxj.log.domain.entity.LoginLog;
 import com.dxj.log.service.LogService;
 import com.dxj.log.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.dxj.admin.repository;
 
-import com.dxj.admin.entity.Permission;
+import com.dxj.admin.domain.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

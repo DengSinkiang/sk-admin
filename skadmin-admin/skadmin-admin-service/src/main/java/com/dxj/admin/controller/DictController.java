@@ -1,8 +1,8 @@
 package com.dxj.admin.controller;
 
-import com.dxj.admin.entity.Dict;
-import com.dxj.admin.entity.dto.DictDTO;
-import com.dxj.admin.query.DictQuery;
+import com.dxj.admin.domain.entity.Dict;
+import com.dxj.admin.domain.dto.DictDTO;
+import com.dxj.admin.domain.query.DictQuery;
 import com.dxj.admin.service.DictService;
 import com.dxj.common.enums.CommEnum;
 import com.dxj.common.exception.BadRequestException;

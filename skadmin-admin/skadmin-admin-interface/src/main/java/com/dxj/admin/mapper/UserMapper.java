@@ -1,7 +1,7 @@
 package com.dxj.admin.mapper;
 
-import com.dxj.admin.entity.User;
-import com.dxj.admin.entity.dto.UserDTO;
+import com.dxj.admin.domain.entity.User;
+import com.dxj.admin.domain.dto.UserDTO;
 import com.dxj.common.mapper.EntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

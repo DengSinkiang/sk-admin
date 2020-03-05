@@ -1,6 +1,6 @@
 package com.dxj.tool.repository;
 
-import com.dxj.tool.entity.QuartzJob;
+import com.dxj.tool.domain.entity.QuartzJob;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

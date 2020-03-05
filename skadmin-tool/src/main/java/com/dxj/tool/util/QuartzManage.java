@@ -1,7 +1,7 @@
 package com.dxj.tool.util;
 
 import com.dxj.common.exception.BadRequestException;
-import com.dxj.tool.entity.QuartzJob;
+import com.dxj.tool.domain.entity.QuartzJob;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.triggers.CronTriggerImpl;
