@@ -1,6 +1,7 @@
 package com.dxj.module.security.service;
 
 import com.dxj.module.security.config.SecurityProperties;
+import com.dxj.module.security.domain.dto.OnlineUserDTO;
 import com.dxj.module.security.domain.vo.JwtUser;
 import com.dxj.module.security.domain.vo.OnlineUser;
 import com.dxj.util.*;
@@ -139,8 +140,8 @@ public class OnlineUserService {
      * @param key /
      * @return /
      */
-    public OnlineUser getOne(String key) {
-        return (OnlineUser) redisUtils.get(key);
+    public OnlineUserDTO getOne(String key) {
+        return (OnlineUserDTO) redisUtils.get(key);
     }
 
     /**
