@@ -51,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Cacheable
-    public Object queryAll(Pageable pageable) {
+    public List<RoleDTO> queryAll(Pageable pageable) {
         return roleMapper.toDto(roleRepository.findAll(pageable).getContent());
     }
 

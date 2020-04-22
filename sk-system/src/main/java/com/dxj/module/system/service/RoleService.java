@@ -78,7 +78,7 @@ public interface RoleService {
      * @param pageable 分页参数
      * @return /
      */
-    Object queryAll(Pageable pageable);
+    List<RoleDTO> queryAll(Pageable pageable);
 
     /**
      * 待条件分页查询

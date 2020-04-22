@@ -2,7 +2,6 @@ package com.dxj.module.security.domain.entity;
 
 import com.dxj.module.security.config.SecurityProperties;
 import com.dxj.module.security.domain.dto.OnlineUserDTO;
-import com.dxj.module.security.domain.vo.OnlineUser;
 import com.dxj.module.security.service.OnlineUserService;
 import com.dxj.util.SpringContextHolder;
 import io.jsonwebtoken.ExpiredJwtException;
