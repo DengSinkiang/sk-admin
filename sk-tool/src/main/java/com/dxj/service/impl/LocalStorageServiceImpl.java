@@ -1,6 +1,7 @@
 package com.dxj.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.dxj.config.FileProperties;
 import com.dxj.dao.LocalStorageDao;
 import com.dxj.domain.entity.LocalStorage;
 import com.dxj.domain.dto.LocalStorageDTO;
@@ -41,15 +42,12 @@ public class LocalStorageServiceImpl implements LocalStorageService {
 
     private final LocalStorageMapper localStorageMapper;
 
-    @Value("${file.path}")
-    private String path;
+    private final FileProperties properties;
 
-    @Value("${file.maxSize}")
-    private long maxSize;
-
-    public LocalStorageServiceImpl(LocalStorageDao localStorageDao, LocalStorageMapper localStorageMapper) {
+    public LocalStorageServiceImpl(LocalStorageDao localStorageDao, LocalStorageMapper localStorageMapper, FileProperties properties) {
         this.localStorageDao = localStorageDao;
         this.localStorageMapper = localStorageMapper;
+        this.properties = properties;
     }
 
     @Override
@@ -77,10 +75,10 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public LocalStorageDTO create(String name, MultipartFile multipartFile) {
-        FileUtils.checkSize(maxSize, multipartFile.getSize());
+        FileUtils.checkSize(properties.getMaxSize(), multipartFile.getSize());
         String suffix = FileUtils.getExtensionName(multipartFile.getOriginalFilename());
         String type = FileUtils.getFileType(suffix);
-        File file = FileUtils.upload(multipartFile, path + type +  File.separator);
+        File file = FileUtils.upload(multipartFile, properties.getPath().getPath() + type +  File.separator);
         if(ObjectUtil.isNull(file)){
             throw new SkException("上传失败");
         }
@@ -93,7 +91,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
                     file.getPath(),
                     type,
                     FileUtils.getSize(multipartFile.getSize()),
-                    SecurityUtils.getUsername()
+                    SecurityUtils.getCurrentUsername()
             );
             return localStorageMapper.toDto(localStorageDao.save(localStorage));
         }catch (Exception e){

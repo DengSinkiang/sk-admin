@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Configuration
-@Component
 @ConfigurationProperties(prefix = "jwt")
 public class SecurityProperties {
 

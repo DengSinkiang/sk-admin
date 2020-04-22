@@ -25,7 +25,7 @@ https://www.kancloud.cn/sinkiang/skadmin_document/content
 
 |     |   后端源码  |   前端源码  |
 |---  |--- | --- |
-|  github   |  https://github.com/DengSinkiang/skadmin   |  https://github.com/DengSinkiang/skadmin-vue   |
+|  github   |  https://github.com/DengSinkiang/sk-admin   |  https://github.com/DengSinkiang/sk-admin-web   |
 
 ##### 用户账号密码
 ```

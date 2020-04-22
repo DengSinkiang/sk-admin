@@ -75,7 +75,7 @@ public class LogAspect {
 
     public String getUsername() {
         try {
-            return SecurityUtils.getUsername();
+            return SecurityUtils.getCurrentUsername();
         } catch (Exception e) {
             log.error("获取系统用户异常：", e);
             return "";

@@ -65,8 +65,15 @@ swagger:
 
 # 文件存储路径
 file:
-  path: /Users/jianghehe/local/file/
-  avatar: /Users/jianghehe/local/file/avatar/
+  mac:
+    path: ~/file/
+    avatar: ~/avatar/
+  linux:
+    path: /home/sk-admin/file/
+    avatar: /home/sk-admin/avatar/
+  windows:
+    path: C:\sk-admin\file\
+    avatar: C:\sk-admin\avatar\
   # 文件大小 /M
   maxSize: 100
   avatarMaxSize: 5

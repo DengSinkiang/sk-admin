@@ -1,5 +1,7 @@
 package com.dxj.module.system.service.impl;
 
+import cn.hutool.core.io.FileUtil;
+import com.dxj.config.FileProperties;
 import com.dxj.exception.EntityExistException;
 import com.dxj.exception.EntityNotFoundException;
 import com.dxj.module.system.dao.UserAvatarDao;
@@ -13,7 +15,6 @@ import com.dxj.module.system.domain.query.UserQuery;
 import com.dxj.module.system.domain.mapper.UserMapper;
 import com.dxj.util.*;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -39,39 +40,38 @@ import java.util.stream.Collectors;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    private final UserDao userRepository;
     private final UserMapper userMapper;
     private final RedisUtils redisUtils;
     private final UserAvatarDao userAvatarRepository;
+    private final FileProperties properties;
 
-    @Value("${file.avatar}")
-    private String avatar;
-
-    public UserServiceImpl(UserDao userDao, UserMapper userMapper, RedisUtils redisUtils, UserAvatarDao userAvatarRepository) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserDao userRepository, UserMapper userMapper, RedisUtils redisUtils, UserAvatarDao userAvatarRepository, FileProperties properties) {
+        this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.redisUtils = redisUtils;
+        this.properties = properties;
         this.userAvatarRepository = userAvatarRepository;
     }
 
     @Override
     @Cacheable
     public Object queryAll(UserQuery criteria, Pageable pageable) {
-        Page<User> page = userDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+        Page<User> page = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(userMapper::toDto));
     }
 
     @Override
     @Cacheable
     public List<UserDTO> queryAll(UserQuery criteria) {
-        List<User> users = userDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+        List<User> users = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
         return userMapper.toDto(users);
     }
 
     @Override
     @Cacheable(key = "#p0")
     public UserDTO findById(long id) {
-        User user = userDao.findById(id).orElseGet(User::new);
+        User user = userRepository.findById(id).orElseGet(User::new);
         ValidationUtil.isNull(user.getId(), "User", "id", id);
         return userMapper.toDto(user);
     }
@@ -80,23 +80,23 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public UserDTO create(User resources) {
-        if (userDao.findByUsername(resources.getUsername()) != null) {
+        if (userRepository.findByUsername(resources.getUsername()) != null) {
             throw new EntityExistException(User.class, "username", resources.getUsername());
         }
-        if (userDao.findByEmail(resources.getEmail()) != null) {
+        if (userRepository.findByEmail(resources.getEmail()) != null) {
             throw new EntityExistException(User.class, "email", resources.getEmail());
         }
-        return userMapper.toDto(userDao.save(resources));
+        return userMapper.toDto(userRepository.save(resources));
     }
 
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(User resources) {
-        User user = userDao.findById(resources.getId()).orElseGet(User::new);
+        User user = userRepository.findById(resources.getId()).orElseGet(User::new);
         ValidationUtil.isNull(user.getId(), "User", "id", resources.getId());
-        User user1 = userDao.findByUsername(user.getUsername());
-        User user2 = userDao.findByEmail(user.getEmail());
+        User user1 = userRepository.findByUsername(resources.getUsername());
+        User user2 = userRepository.findByEmail(resources.getEmail());
 
         if (user1 != null && !user.getId().equals(user1.getId())) {
             throw new EntityExistException(User.class, "username", resources.getUsername());
@@ -123,18 +123,18 @@ public class UserServiceImpl implements UserService {
         user.setPhone(resources.getPhone());
         user.setNickName(resources.getNickName());
         user.setSex(resources.getSex());
-        userDao.save(user);
+        userRepository.save(user);
     }
 
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateCenter(User resources) {
-        User user = userDao.findById(resources.getId()).orElseGet(User::new);
+        User user = userRepository.findById(resources.getId()).orElseGet(User::new);
         user.setNickName(resources.getNickName());
         user.setPhone(resources.getPhone());
         user.setSex(resources.getSex());
-        userDao.save(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Set<Long> ids) {
         for (Long id : ids) {
-            userDao.deleteById(id);
+            userRepository.deleteById(id);
         }
     }
 
@@ -151,9 +151,9 @@ public class UserServiceImpl implements UserService {
     public UserDTO findByName(String userName) {
         User user;
         if (ValidationUtil.isEmail(userName)) {
-            user = userDao.findByEmail(userName);
+            user = userRepository.findByEmail(userName);
         } else {
-            user = userDao.findByUsername(userName);
+            user = userRepository.findByUsername(userName);
         }
         if (user == null) {
             throw new EntityNotFoundException(User.class, "name", userName);
@@ -166,26 +166,26 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updatePass(String username, String pass) {
-        userDao.updatePass(username, pass, new Date());
+        userRepository.updatePass(username, pass, new Date());
     }
 
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateAvatar(MultipartFile multipartFile) {
-        User user = userDao.findByUsername(SecurityUtils.getUsername());
+        User user = userRepository.findByUsername(SecurityUtils.getCurrentUsername());
         UserAvatar userAvatar = user.getUserAvatar();
         String oldPath = "";
         if (userAvatar != null) {
             oldPath = userAvatar.getPath();
         }
-        File file = FileUtils.upload(multipartFile, avatar);
+        File file = FileUtils.upload(multipartFile, properties.getPath().getAvatar());
         assert file != null;
         userAvatar = userAvatarRepository.save(new UserAvatar(userAvatar, file.getName(), file.getPath(), FileUtils.getSize(multipartFile.getSize())));
         user.setUserAvatar(userAvatar);
-        userDao.save(user);
+        userRepository.save(user);
         if (StringUtils.isNotBlank(oldPath)) {
-            FileUtils.del(oldPath);
+            FileUtil.del(oldPath);
         }
     }
 
@@ -193,7 +193,7 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateEmail(String username, String email) {
-        userDao.updateEmail(username, email);
+        userRepository.updateEmail(username, email);
     }
 
     @Override
