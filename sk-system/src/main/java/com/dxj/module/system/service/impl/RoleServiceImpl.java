@@ -58,13 +58,13 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Cacheable
     public List<RoleDTO> queryAll(RoleQuery criteria) {
-        return roleMapper.toDto(roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder)));
+        return roleMapper.toDto(roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Cacheable
     public Object queryAll(RoleQuery criteria, Pageable pageable) {
-        Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
+        Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(roleMapper::toDto));
     }
 
@@ -72,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
     @Cacheable(key = "#p0")
     public RoleDTO findById(long id) {
         Role role = roleRepository.findById(id).orElseGet(Role::new);
-        ValidationUtil.isNull(role.getId(),"Role","id",id);
+        ValidationUtil.isNull(role.getId(), "Role", "id", id);
         return roleMapper.toDto(role);
     }
 
@@ -80,8 +80,8 @@ public class RoleServiceImpl implements RoleService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public RoleDTO create(Role resources) {
-        if(roleRepository.findByName(resources.getName()) != null){
-            throw new EntityExistException(Role.class,"username",resources.getName());
+        if (roleRepository.findByName(resources.getName()) != null) {
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
         return roleMapper.toDto(roleRepository.save(resources));
     }
@@ -91,16 +91,16 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(rollbackFor = Exception.class)
     public void update(Role resources) {
         Role role = roleRepository.findById(resources.getId()).orElseGet(Role::new);
-        ValidationUtil.isNull(role.getId(),"Role","id",resources.getId());
+        ValidationUtil.isNull(role.getId(), "Role", "id", resources.getId());
 
         Role role1 = roleRepository.findByName(resources.getName());
 
-        if(role1 != null && !role1.getId().equals(role.getId())){
-            throw new EntityExistException(Role.class,"username",resources.getName());
+        if (role1 != null && !role1.getId().equals(role.getId())) {
+            throw new EntityExistException(Role.class, "username", resources.getName());
         }
         role1 = roleRepository.findByPermission(resources.getPermission());
-        if(role1 != null && !role1.getId().equals(role.getId())){
-            throw new EntityExistException(Role.class,"permission",resources.getPermission());
+        if (role1 != null && !role1.getId().equals(role.getId())) {
+            throw new EntityExistException(Role.class, "permission", resources.getPermission());
         }
         role.setName(resources.getName());
         role.setRemark(resources.getRemark());
@@ -153,7 +153,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Cacheable(key = "'loadPermissionByUser:' + #p0.username")
-    public Collection<GrantedAuthority> mapToGrantedAuthorities(UserDTO user) {
+    public List<GrantedAuthority> mapToGrantedAuthorities(UserDTO user) {
         Set<Role> roles = roleRepository.findByUsers_Id(user.getId());
         Set<String> permissions = roles.stream().filter(role -> StringUtils.isNotBlank(role.getPermission())).map(Role::getPermission).collect(Collectors.toSet());
         permissions.addAll(
@@ -169,7 +169,7 @@ public class RoleServiceImpl implements RoleService {
     public void download(List<RoleDTO> roles, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
         for (RoleDTO role : roles) {
-            Map<String,Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("角色名称", role.getName());
             map.put("默认权限", role.getPermission());
             map.put("角色级别", role.getLevel());

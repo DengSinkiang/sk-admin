@@ -1,6 +1,7 @@
 package com.dxj.module.security.service;
 
 import com.dxj.module.security.config.SecurityProperties;
+import com.dxj.module.security.domain.dto.JwtUserDTO;
 import com.dxj.module.security.domain.dto.OnlineUserDTO;
 import com.dxj.module.security.domain.vo.JwtUser;
 import com.dxj.module.security.domain.vo.OnlineUser;
@@ -34,22 +35,22 @@ public class OnlineUserService {
     /**
      * 保存在线用户信息
      *
-     * @param jwtUser /
-     * @param token   /
-     * @param request /
+     * @param jwtUserDto /
+     * @param token      /
+     * @param request    /
      */
-    public void save(JwtUser jwtUser, String token, HttpServletRequest request) {
-        String job = jwtUser.getDept() + "/" + jwtUser.getJob();
+    public void save(JwtUserDTO jwtUserDto, String token, HttpServletRequest request) {
+        String job = jwtUserDto.getUser().getDept().getName() + "/" + jwtUserDto.getUser().getJob().getName();
         String ip = StringUtils.getIp(request);
         String browser = StringUtils.getBrowser(request);
         String address = StringUtils.getCityInfo(ip);
-        OnlineUser onlineUser = null;
+        OnlineUserDTO onlineUserDto = null;
         try {
-            onlineUser = new OnlineUser(jwtUser.getUsername(), jwtUser.getNickName(), job, browser, ip, address, EncryptUtils.desEncrypt(token), new Date());
+            onlineUserDto = new OnlineUserDTO(jwtUserDto.getUsername(), jwtUserDto.getUser().getNickName(), job, browser, ip, address, EncryptUtils.desEncrypt(token), new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        redisUtils.set(properties.getOnlineKey() + token, onlineUser, properties.getTokenValidityInSeconds() / 1000);
+        redisUtils.set(properties.getOnlineKey() + token, onlineUserDto, properties.getTokenValidityInSeconds() / 1000);
     }
 
     /**
@@ -60,10 +61,10 @@ public class OnlineUserService {
      * @return /
      */
     public Map<String, Object> getAll(String filter, Pageable pageable) {
-        List<OnlineUser> onlineUsers = getAll(filter);
+        List<OnlineUserDTO> onlineUserDtos = getAll(filter);
         return PageUtil.toPage(
-                PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), onlineUsers),
-                onlineUsers.size()
+                PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), onlineUserDtos),
+                onlineUserDtos.size()
         );
     }
 
@@ -73,32 +74,31 @@ public class OnlineUserService {
      * @param filter /
      * @return /
      */
-    public List<OnlineUser> getAll(String filter) {
+    public List<OnlineUserDTO> getAll(String filter) {
         List<String> keys = redisUtils.scan(properties.getOnlineKey() + "*");
         Collections.reverse(keys);
-        List<OnlineUser> onlineUsers = new ArrayList<>();
+        List<OnlineUserDTO> onlineUserDtos = new ArrayList<>();
         for (String key : keys) {
-            OnlineUser onlineUser = (OnlineUser) redisUtils.get(key);
+            OnlineUserDTO onlineUserDto = (OnlineUserDTO) redisUtils.get(key);
             if (StringUtils.isNotBlank(filter)) {
-                if (onlineUser.toString().contains(filter)) {
-                    onlineUsers.add(onlineUser);
+                if (onlineUserDto.toString().contains(filter)) {
+                    onlineUserDtos.add(onlineUserDto);
                 }
             } else {
-                onlineUsers.add(onlineUser);
+                onlineUserDtos.add(onlineUserDto);
             }
         }
-        onlineUsers.sort((o1, o2) -> o2.getLoginTime().compareTo(o1.getLoginTime()));
-        return onlineUsers;
+        onlineUserDtos.sort((o1, o2) -> o2.getLoginTime().compareTo(o1.getLoginTime()));
+        return onlineUserDtos;
     }
 
     /**
      * 踢出用户
      *
      * @param key /
-     * @throws Exception /
      */
-    public void kickOut(String key) throws Exception {
-        key = properties.getOnlineKey() + EncryptUtils.desDecrypt(key);
+    public void kickOut(String key) {
+        key = properties.getOnlineKey() + key;
         redisUtils.del(key);
     }
 
@@ -119,9 +119,9 @@ public class OnlineUserService {
      * @param response /
      * @throws IOException /
      */
-    public void download(List<OnlineUser> all, HttpServletResponse response) throws IOException {
+    public void download(List<OnlineUserDTO> all, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
-        for (OnlineUser user : all) {
+        for (OnlineUserDTO user : all) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("用户名", user.getUserName());
             map.put("岗位", user.getJob());
@@ -150,18 +150,18 @@ public class OnlineUserService {
      * @param userName 用户名
      */
     public void checkLoginOnUser(String userName, String igoreToken) {
-        List<OnlineUser> onlineUsers = getAll(userName);
-        if (onlineUsers == null || onlineUsers.isEmpty()) {
+        List<OnlineUserDTO> onlineUserDtos = getAll(userName);
+        if (onlineUserDtos == null || onlineUserDtos.isEmpty()) {
             return;
         }
-        for (OnlineUser onlineUser : onlineUsers) {
-            if (onlineUser.getUserName().equals(userName)) {
+        for (OnlineUserDTO onlineUserDto : onlineUserDtos) {
+            if (onlineUserDto.getUserName().equals(userName)) {
                 try {
-                    String token = EncryptUtils.desDecrypt(onlineUser.getKey());
+                    String token = EncryptUtils.desDecrypt(onlineUserDto.getKey());
                     if (StringUtils.isNotBlank(igoreToken) && !igoreToken.equals(token)) {
-                        this.kickOut(onlineUser.getKey());
+                        this.kickOut(token);
                     } else if (StringUtils.isBlank(igoreToken)) {
-                        this.kickOut(onlineUser.getKey());
+                        this.kickOut(token);
                     }
                 } catch (Exception e) {
                     log.error("checkUser is error", e);

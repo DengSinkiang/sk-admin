@@ -7,9 +7,9 @@ import com.dxj.annotation.AnonymousAccess;
 import com.dxj.annotation.Log;
 import com.dxj.exception.SkException;
 import com.dxj.module.security.config.SecurityProperties;
+import com.dxj.module.security.domain.dto.AuthUserDTO;
+import com.dxj.module.security.domain.dto.JwtUserDTO;
 import com.dxj.module.security.domain.entity.TokenProvider;
-import com.dxj.module.security.domain.vo.AuthUser;
-import com.dxj.module.security.domain.vo.JwtUser;
 import com.dxj.module.security.service.OnlineUserService;
 import com.dxj.util.RedisUtils;
 import com.dxj.util.SecurityUtils;
@@ -47,22 +47,20 @@ import java.util.concurrent.TimeUnit;
 public class AuthController {
 
     @Value("${loginCode.expiration}")
-    private Long expiration;
+    private long expiration;
     @Value("${rsa.private_key}")
     private String privateKey;
     @Value("${single.login:false}")
-    private Boolean singleLogin;
+    private boolean singleLogin;
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
-    private final UserDetailsService userDetailsService;
     private final OnlineUserService onlineUserService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    public AuthController(SecurityProperties properties, RedisUtils redisUtils, OnlineUserService onlineUserService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.properties = properties;
         this.redisUtils = redisUtils;
-        this.userDetailsService = userDetailsService;
         this.onlineUserService = onlineUserService;
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
@@ -72,7 +70,7 @@ public class AuthController {
     @ApiOperation("登录授权")
     @AnonymousAccess
     @PostMapping(value = "/login")
-    public ResponseEntity<Object> login(@Validated @RequestBody AuthUser authUser, HttpServletRequest request) {
+    public ResponseEntity<Object> login(@Validated @RequestBody AuthUserDTO authUser, HttpServletRequest request) {
         // 密码解密
         RSA rsa = new RSA(privateKey, null);
         String password = new String(rsa.decrypt(authUser.getPassword(), KeyType.PrivateKey));
@@ -93,13 +91,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // 生成令牌
         String token = tokenProvider.createToken(authentication);
-        final JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
+        final JwtUserDTO jwtUserDto = (JwtUserDTO) authentication.getPrincipal();
         // 保存在线信息
-        onlineUserService.save(jwtUser, token, request);
+        onlineUserService.save(jwtUserDto, token, request);
         // 返回 token 与 用户信息
         Map<String, Object> authInfo = new HashMap<String, Object>(2) {{
             put("token", properties.getTokenStartWith() + token);
-            put("user", jwtUser);
+            put("user", jwtUserDto);
         }};
         if (singleLogin) {
             //踢掉之前已经登录的token

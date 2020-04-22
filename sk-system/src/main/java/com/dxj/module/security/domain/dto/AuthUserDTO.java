@@ -1,4 +1,4 @@
-package com.dxj.module.security.domain.vo;
+package com.dxj.module.security.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Getter
 @Setter
-public class AuthUser {
+public class AuthUserDTO {
 
     @NotBlank
     private String username;
