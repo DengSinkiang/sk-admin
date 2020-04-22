@@ -1,4 +1,4 @@
-# skadmin管理系统
+# sk-admin 管理系统
 
 
 <div style="text-align: center">
@@ -11,7 +11,7 @@
 
 #### 学习交流
 
-QQ群：149952596
+QQ 群：149952596
 
 #### 注意
 
