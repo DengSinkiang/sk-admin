@@ -15,6 +15,7 @@ import java.util.Set;
 
 /**
  * 角色
+ *
  * @author Sinkiang
  * @date 2018-11-22
  */
@@ -33,38 +34,46 @@ public class Role implements Serializable {
     @NotBlank
     private String name;
 
-    /** 数据权限类型 全部 、 本级 、 自定义 */
+    /**
+     * 数据权限类型 全部 、 本级 、 自定义
+     */
     @Column(name = "data_scope")
     private String dataScope = "本级";
 
-    /** 数值越小，级别越大 */
+    /**
+     * 数值越小，级别越大
+     */
     @Column(name = "level")
     private Integer level = 3;
 
     @Column
     private String remark;
 
-    /** 权限 */
+    /**
+     * 权限
+     */
     @Column(name = "permission")
     private String permission;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
+    @org.hibernate.annotations.ForeignKey(name = "none")
     private Set<User> users;
 
     @ManyToMany
-    @JoinTable(name = "roles_menus", joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "id")})
+    @JoinTable(name = "roles_menus", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))}, inverseJoinColumns = {@JoinColumn(name = "menu_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "none"))})
     private Set<Menu> menus;
 
     @ManyToMany
-    @JoinTable(name = "roles_depts", joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "id")})
+    @JoinTable(name = "roles_depts", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))}, inverseJoinColumns = {@JoinColumn(name = "dept_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "none"))})
     private Set<Dept> depts;
 
     @Column(name = "create_time")
     @CreationTimestamp
     private Timestamp createTime;
 
-    public @interface Update {}
+    public @interface Update {
+    }
 
     @Override
     public boolean equals(Object o) {

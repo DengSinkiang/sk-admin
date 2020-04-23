@@ -30,7 +30,6 @@ public class Job implements Serializable {
     @NotBlank
     private String name;
 
-    @Column(unique = true)
     @NotNull
     private Long sort;
 

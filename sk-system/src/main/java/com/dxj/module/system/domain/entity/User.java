@@ -30,7 +30,6 @@ public class User implements Serializable {
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
     private String username;
 
     /** 用户昵称 */
@@ -41,7 +40,7 @@ public class User implements Serializable {
     private String sex;
 
     @OneToOne
-    @JoinColumn(name = "avatar_id")
+    @JoinColumn(name = "avatar_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private UserAvatar userAvatar;
 
     @NotBlank
@@ -64,15 +63,15 @@ public class User implements Serializable {
     private Date lastPasswordResetTime;
 
     @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
+    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))}, inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "none"))})
     private Set<Role> roles;
 
     @OneToOne
-    @JoinColumn(name = "job_id")
+    @JoinColumn(name = "job_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Job job;
 
     @OneToOne
-    @JoinColumn(name = "dept_id")
+    @JoinColumn(name = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Dept dept;
 
     public @interface Update {}

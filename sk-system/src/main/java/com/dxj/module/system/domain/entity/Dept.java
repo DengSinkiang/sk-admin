@@ -42,6 +42,7 @@ public class Dept implements Serializable {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "depts")
+    @org.hibernate.annotations.ForeignKey(name = "none")
     private Set<Role> roles;
 
     @Column(name = "create_time")

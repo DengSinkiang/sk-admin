@@ -31,7 +31,6 @@ public class Menu implements Serializable {
     @NotBlank
     private String name;
 
-    @Column(unique = true)
     private Long sort = 999L;
 
     @Column(name = "path")
@@ -47,7 +46,7 @@ public class Menu implements Serializable {
     @Column(name = "permission")
     private String permission;
 
-    @Column(unique = true,name = "component_name")
+    @Column(name = "component_name")
     private String componentName;
 
     private String icon;
@@ -67,6 +66,7 @@ public class Menu implements Serializable {
     private Boolean iFrame;
 
     @ManyToMany(mappedBy = "menus")
+    @org.hibernate.annotations.ForeignKey(name = "none")
     @JsonIgnore
     private Set<Role> roles;
 
