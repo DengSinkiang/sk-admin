@@ -95,7 +95,7 @@ public class AuthController {
         // 保存在线信息
         onlineUserService.save(jwtUserDto, token, request);
         // 返回 token 与 用户信息
-        Map<String, Object> authInfo = new HashMap<String, Object>(2) {{
+        Map<String, Object> authInfo = new HashMap<String, Object>(4) {{
             put("token", properties.getTokenStartWith() + token);
             put("user", jwtUserDto);
         }};
