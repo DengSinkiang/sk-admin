@@ -25,8 +25,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +48,7 @@ public class AuthController {
     private long expiration;
     @Value("${rsa.private_key}")
     private String privateKey;
-    @Value("${single.login:false}")
+    @Value("${single.login:true}")
     private boolean singleLogin;
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
@@ -108,7 +106,7 @@ public class AuthController {
 
     @ApiOperation("获取用户信息")
     @GetMapping(value = "/info")
-    public ResponseEntity<UserDetails> getUserInfo() {
+    public ResponseEntity<Object> getUserInfo() {
         return ResponseEntity.ok(SecurityUtils.getCurrentUser());
     }
 

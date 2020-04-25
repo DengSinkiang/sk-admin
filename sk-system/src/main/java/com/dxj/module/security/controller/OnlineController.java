@@ -2,6 +2,7 @@ package com.dxj.module.security.controller;
 
 import com.dxj.annotation.Log;
 import com.dxj.module.security.service.OnlineUserService;
+import com.dxj.util.EncryptUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +49,8 @@ public class OnlineController {
     @PreAuthorize("@sk.check()")
     public ResponseEntity<Object> delete(@RequestBody Set<String> keys) throws Exception {
         for (String key : keys) {
+            // 解密Key
+            key = EncryptUtils.desDecrypt(key);
             onlineUserService.kickOut(key);
         }
         return new ResponseEntity<>(HttpStatus.OK);
