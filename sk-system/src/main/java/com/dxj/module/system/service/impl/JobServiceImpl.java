@@ -6,7 +6,7 @@ import com.dxj.module.system.domain.entity.Job;
 import com.dxj.module.system.service.JobService;
 import com.dxj.module.system.domain.dto.JobDTO;
 import com.dxj.module.system.domain.query.JobQuery;
-import com.dxj.module.system.domain.mapper.JobMapper;
+import com.dxj.module.system.domain.mapstruct.JobMapper;
 import com.dxj.util.FileUtils;
 import com.dxj.util.PageUtil;
 import com.dxj.util.QueryHelp;

@@ -7,7 +7,7 @@ import com.dxj.module.system.service.DictService;
 import com.dxj.module.system.domain.dto.DictDetailDTO;
 import com.dxj.module.system.domain.dto.DictDTO;
 import com.dxj.module.system.domain.query.DictQuery;
-import com.dxj.module.system.domain.mapper.DictMapper;
+import com.dxj.module.system.domain.mapstruct.DictMapper;
 import com.dxj.util.FileUtils;
 import com.dxj.util.PageUtil;
 import com.dxj.util.QueryHelp;

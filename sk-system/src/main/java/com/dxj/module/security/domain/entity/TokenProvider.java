@@ -1,10 +1,15 @@
 package com.dxj.module.security.domain.entity;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.dxj.module.security.config.SecurityProperties;
+import com.dxj.util.RedisUtils;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -27,83 +33,74 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class TokenProvider implements InitializingBean {
 
-   private final SecurityProperties properties;
-   private static final String AUTHORITIES_KEY = "auth";
-   private Key key;
+    private final SecurityProperties properties;
+    private final RedisUtils redisUtils;
+    private static final String AUTHORITIES_KEY = "auth";
+    private Key key;
 
-   public TokenProvider(SecurityProperties properties) {
-      this.properties = properties;
-   }
+    @Override
+    public void afterPropertiesSet() {
+        byte[] keyBytes = Decoders.BASE64.decode(properties.getBase64Secret());
+        this.key = Keys.hmacShaKeyFor(keyBytes);
+    }
 
+    public String createToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
-   @Override
-   public void afterPropertiesSet() {
-      byte[] keyBytes = Decoders.BASE64.decode(properties.getBase64Secret());
-      this.key = Keys.hmacShaKeyFor(keyBytes);
-   }
+        return Jwts.builder()
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(key, SignatureAlgorithm.HS512)
+                // 加入ID确保生成的 Token 都不一致
+                .setId(IdUtil.simpleUUID())
+                .compact();
+    }
 
-   public String createToken(Authentication authentication) {
-      String authorities = authentication.getAuthorities().stream()
-         .map(GrantedAuthority::getAuthority)
-         .collect(Collectors.joining(","));
+    Authentication getAuthentication(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(token)
+                .getBody();
 
-      long now = (new Date()).getTime();
-      Date validity = new Date(now + properties.getTokenValidityInSeconds());
+        // fix bug: 当前用户如果没有任何权限时，在输入用户名后，刷新验证码会抛IllegalArgumentException
+        Object authoritiesStr = claims.get(AUTHORITIES_KEY);
+        Collection<? extends GrantedAuthority> authorities =
+                ObjectUtil.isNotEmpty(authoritiesStr) ?
+                        Arrays.stream(authoritiesStr.toString().split(","))
+                                .map(SimpleGrantedAuthority::new)
+                                .collect(Collectors.toList()) : Collections.emptyList();
 
-      return Jwts.builder()
-         .setSubject(authentication.getName())
-         .claim(AUTHORITIES_KEY, authorities)
-         .signWith(key, SignatureAlgorithm.HS512)
-         .setExpiration(validity)
-         .compact();
-   }
+        User principal = new User(claims.getSubject(), "", authorities);
 
-   Authentication getAuthentication(String token) {
-      Claims claims = Jwts.parser()
-         .setSigningKey(key)
-         .parseClaimsJws(token)
-         .getBody();
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+    }
 
-      // fix bug: 当前用户如果没有任何权限时，在输入用户名后，刷新验证码会抛IllegalArgumentException
-       Object authoritiesStr = claims.get(AUTHORITIES_KEY);
-      Collection<? extends GrantedAuthority> authorities =
-              ObjectUtil.isNotEmpty(authoritiesStr) ?
-       Arrays.stream(authoritiesStr.toString().split(","))
-            .map(SimpleGrantedAuthority::new)
-            .collect(Collectors.toList()) : Collections.emptyList();
+    /**
+     * @param token 需要检查的token
+     */
+    void checkRenewal(String token) {
+        // 判断是否续期token,计算token的过期时间
+        long time = redisUtils.getExpire(properties.getOnlineKey() + token) * 1000;
+        Date expireDate = DateUtil.offset(new Date(), DateField.MILLISECOND, (int) time);
+        // 判断当前时间与过期时间的时间差
+        long differ = expireDate.getTime() - System.currentTimeMillis();
+        // 如果在续期检查的范围内，则续期
+        if (differ <= properties.getDetect()) {
+            long renew = time + properties.getReNew();
+            redisUtils.expire(properties.getOnlineKey() + token, renew, TimeUnit.MILLISECONDS);
+        }
+    }
 
-      User principal = new User(claims.getSubject(), "", authorities);
-
-      return new UsernamePasswordAuthenticationToken(principal, token, authorities);
-   }
-
-   boolean validateToken(String authToken) {
-      try {
-         Jwts.parser().setSigningKey(key).parseClaimsJws(authToken);
-         return true;
-      } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-         log.info("Invalid JWT signature.");
-         e.printStackTrace();
-      } catch (ExpiredJwtException e) {
-         log.info("Expired JWT token.");
-         e.printStackTrace();
-      } catch (UnsupportedJwtException e) {
-         log.info("Unsupported JWT token.");
-         e.printStackTrace();
-      } catch (IllegalArgumentException e) {
-         log.info("JWT token compact of handler are invalid.");
-         e.printStackTrace();
-      }
-      return false;
-   }
-
-   public String getToken(HttpServletRequest request){
-      final String requestHeader = request.getHeader(properties.getHeader());
-      if (requestHeader != null && requestHeader.startsWith(properties.getTokenStartWith())) {
-         return requestHeader.substring(7);
-      }
-      return null;
-   }
+    public String getToken(HttpServletRequest request) {
+        final String requestHeader = request.getHeader(properties.getHeader());
+        if (requestHeader != null && requestHeader.startsWith(properties.getTokenStartWith())) {
+            return requestHeader.substring(7);
+        }
+        return null;
+    }
 }

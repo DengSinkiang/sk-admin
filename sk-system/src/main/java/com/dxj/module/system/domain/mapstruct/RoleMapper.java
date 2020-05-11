@@ -1,4 +1,4 @@
-package com.dxj.module.system.domain.mapper;
+package com.dxj.module.system.domain.mapstruct;
 
 import com.dxj.base.BaseMapper;
 import com.dxj.module.system.domain.entity.Role;

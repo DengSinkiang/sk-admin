@@ -6,7 +6,7 @@ import com.dxj.module.system.domain.entity.Dept;
 import com.dxj.module.system.service.DeptService;
 import com.dxj.module.system.domain.dto.DeptDTO;
 import com.dxj.module.system.domain.query.DeptQuery;
-import com.dxj.module.system.domain.mapper.DeptMapper;
+import com.dxj.module.system.domain.mapstruct.DeptMapper;
 import com.dxj.util.FileUtils;
 import com.dxj.util.QueryHelp;
 import com.dxj.util.ValidationUtil;

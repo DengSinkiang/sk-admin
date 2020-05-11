@@ -5,7 +5,7 @@ import com.dxj.module.system.domain.entity.DictDetail;
 import com.dxj.module.system.service.DictDetailService;
 import com.dxj.module.system.domain.dto.DictDetailDTO;
 import com.dxj.module.system.domain.query.DictDetailQuery;
-import com.dxj.module.system.domain.mapper.DictDetailMapper;
+import com.dxj.module.system.domain.mapstruct.DictDetailMapper;
 import com.dxj.util.PageUtil;
 import com.dxj.util.QueryHelp;
 import com.dxj.util.ValidationUtil;

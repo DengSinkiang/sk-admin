@@ -12,7 +12,7 @@ import com.dxj.module.system.service.UserService;
 import com.dxj.module.system.domain.dto.RoleSmallDTO;
 import com.dxj.module.system.domain.dto.UserDTO;
 import com.dxj.module.system.domain.query.UserQuery;
-import com.dxj.module.system.domain.mapper.UserMapper;
+import com.dxj.module.system.domain.mapstruct.UserMapper;
 import com.dxj.util.*;
 
 import org.springframework.cache.annotation.CacheConfig;

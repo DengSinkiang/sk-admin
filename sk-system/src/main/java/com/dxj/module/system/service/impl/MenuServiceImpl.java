@@ -13,7 +13,7 @@ import com.dxj.module.system.service.RoleService;
 import com.dxj.module.system.domain.dto.MenuDTO;
 import com.dxj.module.system.domain.query.MenuQuery;
 import com.dxj.module.system.domain.dto.RoleSmallDTO;
-import com.dxj.module.system.domain.mapper.MenuMapper;
+import com.dxj.module.system.domain.mapstruct.MenuMapper;
 import com.dxj.util.FileUtils;
 import com.dxj.util.QueryHelp;
 import com.dxj.util.StringUtils;
