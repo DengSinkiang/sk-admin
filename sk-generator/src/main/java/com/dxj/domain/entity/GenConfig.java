@@ -20,7 +20,7 @@ public class GenConfig {
 
     public GenConfig(String tableName) {
         this.cover = false;
-        this.moduleName = "eladmin-system";
+        this.moduleName = "sk-admin-system";
         this.tableName = tableName;
     }
 

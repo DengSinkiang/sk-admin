@@ -92,14 +92,14 @@ public class GenUtil {
     }
 
     public static String download(List<ColumnInfo> columns, GenConfig genConfig) throws IOException {
-        String tempPath = System.getProperty("java.io.tmpdir") + "eladmin-gen-temp" + File.separator + genConfig.getTableName() + File.separator;
+        String tempPath = System.getProperty("java.io.tmpdir") + "sk-admin-gen-temp" + File.separator + genConfig.getTableName() + File.separator;
         Map<String, Object> genMap = getGenMap(columns, genConfig);
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         // 生成后端代码
         List<String> templates = getAdminTemplateNames();
         for (String templateName : templates) {
             Template template = engine.getTemplate("generator/admin/" + templateName + ".ftl");
-            String filePath = getAdminFilePath(templateName, genConfig, genMap.get("className").toString(), tempPath + "eladmin" + File.separator);
+            String filePath = getAdminFilePath(templateName, genConfig, genMap.get("className").toString(), tempPath + "sk-admin" + File.separator);
             assert filePath != null;
             File file = new File(filePath);
             // 如果非覆盖生成
