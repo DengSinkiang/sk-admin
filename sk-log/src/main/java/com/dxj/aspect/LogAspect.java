@@ -77,7 +77,6 @@ public class LogAspect {
         try {
             return SecurityUtils.getCurrentUsername();
         } catch (Exception e) {
-            log.error("获取系统用户异常：", e);
             return "";
         }
     }

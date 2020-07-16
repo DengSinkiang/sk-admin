@@ -1,14 +1,14 @@
 package com.dxj.module.quartz.domain.entity;
 
+import com.dxj.base.BEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  * @author Sinkiang
@@ -17,51 +17,57 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name = "quartz_job")
-public class QuartzJob  implements Serializable {
+@Table(name = "sys_quartz_job")
+public class QuartzJob extends BEntity implements Serializable {
 
     public static final String JOB_KEY = "JOB_KEY";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "job_id")
     @NotNull(groups = {Update.class})
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** 定时器名称 */
-    @Column(name = "job_name")
+    @Transient
+    @ApiModelProperty(value = "用于子任务唯一标识", hidden = true)
+    private String uuid;
+
+    @ApiModelProperty(value = "定时器名称")
     private String jobName;
 
-    /** Bean名称 */
-    @Column(name = "bean_name")
     @NotBlank
+    @ApiModelProperty(value = "Bean名称")
     private String beanName;
 
-    /** 方法名称 */
-    @Column(name = "method_name")
     @NotBlank
+    @ApiModelProperty(value = "方法名称")
     private String methodName;
 
-    /** 参数 */
-    @Column(name = "params")
+    @ApiModelProperty(value = "参数")
     private String params;
 
-    /** cron表达式 */
-    @Column(name = "cron_expression")
     @NotBlank
+    @ApiModelProperty(value = "cron表达式")
     private String cronExpression;
 
-    /** 状态 */
-    @Column(name = "is_pause")
+    @ApiModelProperty(value = "状态，暂时或启动")
     private Boolean isPause = false;
 
-    /** 备注 */
-    @Column(name = "remark")
-    @NotBlank
-    private String remark;
+    @ApiModelProperty(value = "负责人")
+    private String personInCharge;
 
-    @Column(name = "create_time")
-    @CreationTimestamp
-    private Timestamp createTime;
+    @ApiModelProperty(value = "报警邮箱")
+    private String email;
+
+    @ApiModelProperty(value = "子任务")
+    private String subTask;
+
+    @ApiModelProperty(value = "失败后暂停")
+    private Boolean pauseAfterFailure;
+
+    @NotBlank
+    @ApiModelProperty(value = "备注")
+    private String description;
 
     public @interface Update {}
 }

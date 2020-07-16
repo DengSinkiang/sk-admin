@@ -10,6 +10,6 @@ import lombok.Data;
 @Data
 public class DictQuery {
 
-    @Query(blurry = "name,remark")
+    @Query(blurry = "name,description")
     private String blurry;
 }

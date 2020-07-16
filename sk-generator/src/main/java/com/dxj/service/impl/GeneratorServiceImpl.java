@@ -13,6 +13,9 @@ import com.dxj.util.FileUtils;
 import com.dxj.util.GenUtil;
 import com.dxj.util.PageUtil;
 import com.dxj.util.StringUtils;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,17 +37,13 @@ import java.util.stream.Collectors;
  * @date 2019-01-02
  */
 @Service
-@SuppressWarnings({"unchecked", "all"})
+@RequiredArgsConstructor
 public class GeneratorServiceImpl implements GeneratorService {
-
+    private static final Logger log = LoggerFactory.getLogger(GeneratorServiceImpl.class);
     @PersistenceContext
     private EntityManager em;
 
-    private final ColumnInfoDao columnInfoDao;
-
-    public GeneratorServiceImpl(ColumnInfoDao columnInfoDao) {
-        this.columnInfoDao = columnInfoDao;
-    }
+    private final ColumnInfoDao columnInfoRepository;
 
     @Override
     public Object getTables() {
@@ -67,24 +66,24 @@ public class GeneratorServiceImpl implements GeneratorService {
         query.setMaxResults(startEnd[1] - startEnd[0]);
         query.setParameter(1, StringUtils.isNotBlank(name) ? ("%" + name + "%") : "%%");
         List result = query.getResultList();
-        List<TableInfo> tableInfo = new ArrayList<>();
+        List<TableInfo> tableInfos = new ArrayList<>();
         for (Object obj : result) {
             Object[] arr = (Object[]) obj;
-            tableInfo.add(new TableInfo(arr[0], arr[1], arr[2], arr[3], ObjectUtil.isNotEmpty(arr[4]) ? arr[4] : "-"));
+            tableInfos.add(new TableInfo(arr[0], arr[1], arr[2], arr[3], ObjectUtil.isNotEmpty(arr[4]) ? arr[4] : "-"));
         }
         Query query1 = em.createNativeQuery("SELECT COUNT(*) from information_schema.tables where table_schema = (select database())");
         Object totalElements = query1.getSingleResult();
-        return PageUtil.toPage(tableInfo, totalElements);
+        return PageUtil.toPage(tableInfos, totalElements);
     }
 
     @Override
     public List<ColumnInfo> getColumns(String tableName) {
-        List<ColumnInfo> columnInfos = columnInfoDao.findByTableNameOrderByIdAsc(tableName);
+        List<ColumnInfo> columnInfos = columnInfoRepository.findByTableNameOrderByIdAsc(tableName);
         if (CollectionUtil.isNotEmpty(columnInfos)) {
             return columnInfos;
         } else {
             columnInfos = query(tableName);
-            return columnInfoDao.saveAll(columnInfos);
+            return columnInfoRepository.saveAll(columnInfos);
         }
     }
 
@@ -118,7 +117,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         // 第一种情况，数据库类字段改变或者新增字段
         for (ColumnInfo columnInfo : columnInfoList) {
             // 根据字段名称查找
-            List<ColumnInfo> columns = new ArrayList<>(columnInfos.stream().filter(c -> c.getColumnName().equals(columnInfo.getColumnName())).collect(Collectors.toList()));
+            List<ColumnInfo> columns = columnInfos.stream().filter(c -> c.getColumnName().equals(columnInfo.getColumnName())).collect(Collectors.toList());
             // 如果能找到，就修改部分可能被字段
             if (CollectionUtil.isNotEmpty(columns)) {
                 ColumnInfo column = columns.get(0);
@@ -128,26 +127,26 @@ public class GeneratorServiceImpl implements GeneratorService {
                 if (StringUtils.isBlank(column.getRemark())) {
                     column.setRemark(columnInfo.getRemark());
                 }
-                columnInfoDao.save(column);
+                columnInfoRepository.save(column);
             } else {
                 // 如果找不到，则保存新字段信息
-                columnInfoDao.save(columnInfo);
+                columnInfoRepository.save(columnInfo);
             }
         }
         // 第二种情况，数据库字段删除了
         for (ColumnInfo columnInfo : columnInfos) {
             // 根据字段名称查找
-            List<ColumnInfo> columns = new ArrayList<ColumnInfo>(columnInfoList.stream().filter(c -> c.getColumnName().equals(columnInfo.getColumnName())).collect(Collectors.toList()));
+            List<ColumnInfo> columns = columnInfoList.stream().filter(c -> c.getColumnName().equals(columnInfo.getColumnName())).collect(Collectors.toList());
             // 如果找不到，就代表字段被删除了，则需要删除该字段
             if (CollectionUtil.isEmpty(columns)) {
-                columnInfoDao.delete(columnInfo);
+                columnInfoRepository.delete(columnInfo);
             }
         }
     }
 
     @Override
     public void save(List<ColumnInfo> columnInfos) {
-        columnInfoDao.saveAll(columnInfos);
+        columnInfoRepository.saveAll(columnInfos);
     }
 
     @Override
@@ -158,7 +157,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         try {
             GenUtil.generatorCode(columns, genConfig);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
             throw new SkException("生成失败，请手动处理已生成的文件");
         }
     }

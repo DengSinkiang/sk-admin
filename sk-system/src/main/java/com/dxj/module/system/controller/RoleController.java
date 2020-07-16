@@ -3,17 +3,17 @@ package com.dxj.module.system.controller;
 import cn.hutool.core.lang.Dict;
 import com.dxj.annotation.Log;
 import com.dxj.exception.SkException;
-import com.dxj.module.system.domain.entity.Role;
 import com.dxj.module.system.domain.dto.RoleDTO;
+import com.dxj.module.system.domain.entity.Role;
 import com.dxj.module.system.domain.query.RoleQuery;
 import com.dxj.module.system.domain.dto.RoleSmallDTO;
-import com.dxj.module.system.domain.dto.UserDTO;
 import com.dxj.module.system.service.RoleService;
 import com.dxj.module.system.service.UserService;
 import com.dxj.util.SecurityUtils;
 import com.dxj.util.ThrowableUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -34,25 +34,20 @@ import java.util.stream.Collectors;
  * @author Sinkiang
  * @date 2018-12-03
  */
-@Api(tags = "系统：角色管理")
 @RestController
+@RequiredArgsConstructor
+@Api(tags = "系统：角色管理")
 @RequestMapping("/api/roles")
 public class RoleController {
 
     private final RoleService roleService;
-    private final UserService userService;
 
     private static final String ENTITY_NAME = "role";
-
-    public RoleController(RoleService roleService, UserService userService) {
-        this.roleService = roleService;
-        this.userService = userService;
-    }
 
     @ApiOperation("获取单个role")
     @GetMapping(value = "/{id}")
     @PreAuthorize("@sk.check('roles:list')")
-    public ResponseEntity<Object> getRoles(@PathVariable Long id) {
+    public ResponseEntity<Object> query(@PathVariable Long id) {
         return new ResponseEntity<>(roleService.findById(id), HttpStatus.OK);
     }
 
@@ -67,15 +62,15 @@ public class RoleController {
     @ApiOperation("返回全部的角色")
     @GetMapping(value = "/all")
     @PreAuthorize("@sk.check('roles:list','user:add','user:edit')")
-    public ResponseEntity<Object> getAll(@PageableDefault(value = 2000, sort = {"level"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return new ResponseEntity<>(roleService.queryAll(pageable), HttpStatus.OK);
+    public ResponseEntity<Object> query() {
+        return new ResponseEntity<>(roleService.queryAll(), HttpStatus.OK);
     }
 
     @Log("查询角色")
     @ApiOperation("查询角色")
     @GetMapping
     @PreAuthorize("@sk.check('roles:list')")
-    public ResponseEntity<Object> getRoles(RoleQuery criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(RoleQuery criteria, Pageable pageable) {
         return new ResponseEntity<>(roleService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -94,7 +89,8 @@ public class RoleController {
             throw new SkException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
         getLevels(resources.getLevel());
-        return new ResponseEntity<>(roleService.create(resources), HttpStatus.CREATED);
+        roleService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Log("修改角色")
@@ -127,11 +123,9 @@ public class RoleController {
             RoleDTO role = roleService.findById(id);
             getLevels(role.getLevel());
         }
-        try {
-            roleService.delete(ids);
-        } catch (Throwable e) {
-            ThrowableUtil.throwForeignKeyException(e, "所选角色存在用户关联，请取消关联后再试");
-        }
+        // 验证是否被用户关联
+        roleService.verification(ids);
+        roleService.delete(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

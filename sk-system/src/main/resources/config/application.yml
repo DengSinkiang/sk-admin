@@ -12,11 +12,15 @@ spring:
     redis:
       repositories:
         enabled: false
+
+  #配置 Jpa
   jpa:
     properties:
       hibernate:
+        ddl-auto: none
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: true
+
   redis:
     #数据库索引
     database: 0
@@ -42,13 +46,9 @@ qiniu:
   # 文件大小 /M
   max-size: 15
 
-#邮箱验证码有效时间/分钟
+#邮箱验证码有效时间/秒
 code:
-  expiration: 5
-
-#登录图形验证码有效时间/分钟
-loginCode:
-  expiration: 2
+  expiration: 300
 
 #密码加密传输，前端公钥加密，后端私钥解密
 rsa:
@@ -56,4 +56,4 @@ rsa:
 
 # sm.ms 图床的 token
 smms:
-  token: SqLaYJUcuXaNrOJYHcdsHAuc8iwh1B6s
+  token: 1oOP3ykFDI0K6ifmtvU7c8Y1eTWZSlyl

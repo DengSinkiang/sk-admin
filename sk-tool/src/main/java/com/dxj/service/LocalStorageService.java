@@ -42,9 +42,8 @@ public interface LocalStorageService {
      * 上传
      * @param name 文件名称
      * @param file 文件
-     * @return /
      */
-    LocalStorageDTO create(String name, MultipartFile file);
+    void create(String name, MultipartFile file);
 
     /**
      * 编辑
@@ -60,9 +59,9 @@ public interface LocalStorageService {
 
     /**
      * 导出数据
-     * @param localStorageDTOS 待导出的数据
+     * @param localStorageDtos 待导出的数据
      * @param response /
      * @throws IOException /
      */
-    void download(List<LocalStorageDTO> localStorageDTOS, HttpServletResponse response) throws IOException;
+    void download(List<LocalStorageDTO> localStorageDtos, HttpServletResponse response) throws IOException;
 }

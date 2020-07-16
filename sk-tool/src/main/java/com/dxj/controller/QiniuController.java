@@ -7,6 +7,7 @@ import com.dxj.domain.dto.QiNiuQuery;
 import com.dxj.service.QiNiuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,31 +23,29 @@ import java.util.Map;
 
 /**
  * 发送邮件
+ *
  * @author Sinkiang
  * @date 2018/09/28 6:55:53
  */
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/qiNiuContent")
 @Api(tags = "工具：七牛云存储管理")
 public class QiniuController {
 
     private final QiNiuService qiNiuService;
 
-    public QiniuController(QiNiuService qiNiuService) {
-        this.qiNiuService = qiNiuService;
-    }
-
     @GetMapping(value = "/config")
-    public ResponseEntity<Object> get(){
+    public ResponseEntity<Object> queryConfig() {
         return new ResponseEntity<>(qiNiuService.find(), HttpStatus.OK);
     }
 
     @Log("配置七牛云存储")
     @ApiOperation("配置七牛云存储")
     @PutMapping(value = "/config")
-    public ResponseEntity<Object> emailConfig(@Validated @RequestBody QiniuConfig qiniuConfig){
-        qiNiuService.update(qiniuConfig);
+    public ResponseEntity<Object> updateConfig(@Validated @RequestBody QiniuConfig qiniuConfig) {
+        qiNiuService.config(qiniuConfig);
         qiNiuService.update(qiniuConfig.getType());
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -61,26 +60,26 @@ public class QiniuController {
     @Log("查询文件")
     @ApiOperation("查询文件")
     @GetMapping
-    public ResponseEntity<Object> getRoles(QiNiuQuery criteria, Pageable pageable){
-        return new ResponseEntity<>(qiNiuService.queryAll(criteria,pageable), HttpStatus.OK);
+    public ResponseEntity<Object> query(QiNiuQuery criteria, Pageable pageable) {
+        return new ResponseEntity<>(qiNiuService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @Log("上传文件")
     @ApiOperation("上传文件")
     @PostMapping
-    public ResponseEntity<Object> upload(@RequestParam MultipartFile file){
-        QiniuContent qiniuContent = qiNiuService.upload(file,qiNiuService.find());
-        Map<String,Object> map = new HashMap<>(3);
-        map.put("id",qiniuContent.getId());
-        map.put("errno",0);
-        map.put("data",new String[]{qiniuContent.getUrl()});
+    public ResponseEntity<Object> upload(@RequestParam MultipartFile file) {
+        QiniuContent qiniuContent = qiNiuService.upload(file, qiNiuService.find());
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("id", qiniuContent.getId());
+        map.put("errno", 0);
+        map.put("data", new String[]{qiniuContent.getUrl()});
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @Log("同步七牛云数据")
     @ApiOperation("同步七牛云数据")
     @PostMapping(value = "/synchronize")
-    public ResponseEntity<Object> synchronize(){
+    public ResponseEntity<Object> synchronize() {
         qiNiuService.synchronize(qiNiuService.find());
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -88,17 +87,17 @@ public class QiniuController {
     @Log("下载文件")
     @ApiOperation("下载文件")
     @GetMapping(value = "/download/{id}")
-    public ResponseEntity<Object> download(@PathVariable Long id){
-        Map<String,Object> map = new HashMap<>(1);
-        map.put("url", qiNiuService.download(qiNiuService.findByContentId(id),qiNiuService.find()));
+    public ResponseEntity<Object> download(@PathVariable Long id) {
+        Map<String, Object> map = new HashMap<>(1);
+        map.put("url", qiNiuService.download(qiNiuService.findByContentId(id), qiNiuService.find()));
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @Log("删除文件")
     @ApiOperation("删除文件")
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id){
-        qiNiuService.delete(qiNiuService.findByContentId(id),qiNiuService.find());
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        qiNiuService.delete(qiNiuService.findByContentId(id), qiNiuService.find());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

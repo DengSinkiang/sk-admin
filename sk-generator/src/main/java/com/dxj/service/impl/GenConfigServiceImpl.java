@@ -4,6 +4,7 @@ import com.dxj.dao.GenConfigDao;
 import com.dxj.domain.entity.GenConfig;
 import com.dxj.service.GenConfigService;
 import com.dxj.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,17 +17,12 @@ import java.io.File;
  * @date 2019-01-14
  */
 @Service
-@CacheConfig(cacheNames = "genConfig")
+@RequiredArgsConstructor
 public class GenConfigServiceImpl implements GenConfigService {
 
     private final GenConfigDao genConfigDao;
 
-    public GenConfigServiceImpl(GenConfigDao genConfigDao) {
-        this.genConfigDao = genConfigDao;
-    }
-
     @Override
-    @Cacheable(key = "#p0")
     public GenConfig find(String tableName) {
         GenConfig genConfig = genConfigDao.findByTableName(tableName);
         if(genConfig == null){
@@ -36,7 +32,6 @@ public class GenConfigServiceImpl implements GenConfigService {
     }
 
     @Override
-    @CachePut(key = "#p0")
     public GenConfig update(String tableName, GenConfig genConfig) {
         // 如果 api 路径为空，则自动生成路径
         if(StringUtils.isBlank(genConfig.getApiPath())){

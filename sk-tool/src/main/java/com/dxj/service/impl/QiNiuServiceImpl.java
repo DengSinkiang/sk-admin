@@ -17,6 +17,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -37,54 +38,46 @@ import java.util.*;
  * @date 2018-12-31
  */
 @Service
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = "qiNiu")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QiNiuServiceImpl implements QiNiuService {
 
-    private final QiNiuConfigDao qiNiuConfigDao;
-
-    private final QiniuContentDao qiniuContentDao;
-
-    public QiNiuServiceImpl(QiNiuConfigDao qiNiuConfigDao, QiniuContentDao qiniuContentDao) {
-        this.qiNiuConfigDao = qiNiuConfigDao;
-        this.qiniuContentDao = qiniuContentDao;
-    }
+    private final QiNiuConfigDao qiNiuConfigRepository;
+    private final QiniuContentDao qiniuContentRepository;
 
     @Value("${qiniu.max-size}")
     private Long maxSize;
 
     @Override
-    @Cacheable
-    public Object queryAll(QiNiuQuery criteria, Pageable pageable) {
-        return PageUtil.toPage(qiniuContentDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
-    }
-
-    @Override
-    public List<QiniuContent> queryAll(QiNiuQuery criteria) {
-        return qiniuContentDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
-    }
-
-    @Override
-    @Cacheable(key = "'1'")
+    @Cacheable(key = "'config'")
     public QiniuConfig find() {
-        Optional<QiniuConfig> qiniuConfig = qiNiuConfigDao.findById(1L);
+        Optional<QiniuConfig> qiniuConfig = qiNiuConfigRepository.findById(1L);
         return qiniuConfig.orElseGet(QiniuConfig::new);
     }
 
     @Override
-    @CachePut(cacheNames = "qiNiuConfig", key = "'1'")
+    @CachePut(key = "'config'")
     @Transactional(rollbackFor = Exception.class)
-    public QiniuConfig update(QiniuConfig qiniuConfig) {
+    public QiniuConfig config(QiniuConfig qiniuConfig) {
+        qiniuConfig.setId(1L);
         String http = "http://", https = "https://";
         if (!(qiniuConfig.getHost().toLowerCase().startsWith(http) || qiniuConfig.getHost().toLowerCase().startsWith(https))) {
             throw new SkException("外链域名必须以http://或者https://开头");
         }
-        qiniuConfig.setId(1L);
-        return qiNiuConfigDao.save(qiniuConfig);
+        return qiNiuConfigRepository.save(qiniuConfig);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    public Object queryAll(QiNiuQuery criteria, Pageable pageable) {
+        return PageUtil.toPage(qiniuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
+    }
+
+    @Override
+    public List<QiniuContent> queryAll(QiNiuQuery criteria) {
+        return qiniuContentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public QiniuContent upload(MultipartFile file, QiniuConfig qiniuConfig) {
         FileUtils.checkSize(maxSize, file.getSize());
@@ -98,37 +91,39 @@ public class QiNiuServiceImpl implements QiNiuService {
         String upToken = auth.uploadToken(qiniuConfig.getBucket());
         try {
             String key = file.getOriginalFilename();
-            if (qiniuContentDao.findByKey(key) != null) {
+            if (qiniuContentRepository.findByKey(key) != null) {
                 key = QiNiuUtil.getKey(key);
             }
             Response response = uploadManager.put(file.getBytes(), key, upToken);
             //解析上传成功的结果
 
             DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
-            //存入数据库
-            QiniuContent qiniuContent = new QiniuContent();
-            qiniuContent.setSuffix(FileUtils.getExtensionName(putRet.key));
-            qiniuContent.setBucket(qiniuConfig.getBucket());
-            qiniuContent.setType(qiniuConfig.getType());
-            qiniuContent.setKey(FileUtils.getFileNameNoEx(putRet.key));
-            qiniuContent.setUrl(qiniuConfig.getHost() + "/" + putRet.key);
-            qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(file.getSize() + "")));
-            return qiniuContentDao.save(qiniuContent);
+            QiniuContent content = qiniuContentRepository.findByKey(FileUtils.getFileNameNoEx(putRet.key));
+            if (content == null) {
+                //存入数据库
+                QiniuContent qiniuContent = new QiniuContent();
+                qiniuContent.setSuffix(FileUtils.getExtensionName(putRet.key));
+                qiniuContent.setBucket(qiniuConfig.getBucket());
+                qiniuContent.setType(qiniuConfig.getType());
+                qiniuContent.setKey(FileUtils.getFileNameNoEx(putRet.key));
+                qiniuContent.setUrl(qiniuConfig.getHost() + "/" + putRet.key);
+                qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(file.getSize() + "")));
+                return qiniuContentRepository.save(qiniuContent);
+            }
+            return content;
         } catch (Exception e) {
             throw new SkException(e.getMessage());
         }
     }
 
     @Override
-    @Cacheable
     public QiniuContent findByContentId(Long id) {
-        QiniuContent qiniuContent = qiniuContentDao.findById(id).orElseGet(QiniuContent::new);
+        QiniuContent qiniuContent = qiniuContentRepository.findById(id).orElseGet(QiniuContent::new);
         ValidationUtil.isNull(qiniuContent.getId(), "QiniuContent", "id", id);
         return qiniuContent;
     }
 
     @Override
-    @Cacheable
     public String download(QiniuContent content, QiniuConfig config) {
         String finalUrl;
         String type = "公开";
@@ -144,7 +139,6 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void delete(QiniuContent content, QiniuConfig config) {
         //构造一个带指定Zone对象的配置类
@@ -153,14 +147,13 @@ public class QiNiuServiceImpl implements QiNiuService {
         BucketManager bucketManager = new BucketManager(auth, cfg);
         try {
             bucketManager.delete(content.getBucket(), content.getKey() + "." + content.getSuffix());
-            qiniuContentDao.delete(content);
+            qiniuContentRepository.delete(content);
         } catch (QiniuException ex) {
-            qiniuContentDao.delete(content);
+            qiniuContentRepository.delete(content);
         }
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void synchronize(QiniuConfig config) {
         if (config.getId() == null) {
@@ -183,7 +176,7 @@ public class QiNiuServiceImpl implements QiNiuService {
             QiniuContent qiniuContent;
             FileInfo[] items = fileListIterator.next();
             for (FileInfo item : items) {
-                if (qiniuContentDao.findByKey(FileUtils.getFileNameNoEx(item.key)) == null) {
+                if (qiniuContentRepository.findByKey(FileUtils.getFileNameNoEx(item.key)) == null) {
                     qiniuContent = new QiniuContent();
                     qiniuContent.setSize(FileUtils.getSize(Integer.parseInt(item.fsize + "")));
                     qiniuContent.setSuffix(FileUtils.getExtensionName(item.key));
@@ -191,14 +184,13 @@ public class QiNiuServiceImpl implements QiNiuService {
                     qiniuContent.setType(config.getType());
                     qiniuContent.setBucket(config.getBucket());
                     qiniuContent.setUrl(config.getHost() + "/" + item.key);
-                    qiniuContentDao.save(qiniuContent);
+                    qiniuContentRepository.save(qiniuContent);
                 }
             }
         }
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     public void deleteAll(Long[] ids, QiniuConfig config) {
         for (Long id : ids) {
             delete(findByContentId(id), config);
@@ -206,10 +198,9 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(String type) {
-        qiNiuConfigDao.update(type);
+        qiNiuConfigRepository.update(type);
     }
 
     @Override

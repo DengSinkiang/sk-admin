@@ -9,12 +9,18 @@ import java.util.List;
 
 
 /**
- * @author Sinkiang
+ * @author jianghehe
+ * JDK8函数式接口注解 仅能包含一个抽象方法
+ * @param <E>
+ * @param <ID>
  */
-// JDK8函数式接口注解 仅能包含一个抽象方法
 @FunctionalInterface
 public interface BaseService<E, ID extends Serializable> {
 
+    /**
+     * xxx
+     * @return
+     */
     BaseDao<E, ID> getRepository();
 
     /**

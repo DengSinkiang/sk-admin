@@ -1,5 +1,6 @@
 package com.dxj.util;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.template.*;
 import com.dxj.domain.entity.ColumnInfo;
@@ -24,8 +25,10 @@ import java.util.Map;
  * @date 2019-01-02
  */
 @Slf4j
-@SuppressWarnings("all")
+@SuppressWarnings({"unchecked", "all"})
 public class GenUtil {
+
+    public static final String SYS_TEM_DIR = System.getProperty("java.io.tmpdir") + File.separator;
 
     private static final String TIMESTAMP = "Timestamp";
 
@@ -92,7 +95,9 @@ public class GenUtil {
     }
 
     public static String download(List<ColumnInfo> columns, GenConfig genConfig) throws IOException {
-        String tempPath = System.getProperty("java.io.tmpdir") + "eladmin-gen-temp" + File.separator + genConfig.getTableName() + File.separator;
+        // 拼接的路径：/tmpeladmin-gen-temp/，这个路径在Linux下需要root用户才有权限创建,非root用户会权限错误而失败，更改为： /tmp/eladmin-gen-temp/
+        // String tempPath =SYS_TEM_DIR + "eladmin-gen-temp" + File.separator + genConfig.getTableName() + File.separator;
+        String tempPath = SYS_TEM_DIR + "eladmin-gen-temp" + File.separator + genConfig.getTableName() + File.separator;
         Map<String, Object> genMap = getGenMap(columns, genConfig);
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         // 生成后端代码
@@ -103,7 +108,7 @@ public class GenUtil {
             assert filePath != null;
             File file = new File(filePath);
             // 如果非覆盖生成
-            if (!genConfig.getCover() && FileUtils.exist(file)) {
+            if (!genConfig.getCover() && FileUtil.exist(file)) {
                 continue;
             }
             // 生成代码
@@ -120,7 +125,7 @@ public class GenUtil {
             assert filePath != null;
             File file = new File(filePath);
             // 如果非覆盖生成
-            if (!genConfig.getCover() && FileUtils.exist(file)) {
+            if (!genConfig.getCover() && FileUtil.exist(file)) {
                 continue;
             }
             // 生成代码
@@ -142,7 +147,7 @@ public class GenUtil {
             File file = new File(filePath);
 
             // 如果非覆盖生成
-            if (!genConfig.getCover() && FileUtils.exist(file)) {
+            if (!genConfig.getCover() && FileUtil.exist(file)) {
                 continue;
             }
             // 生成代码
@@ -159,7 +164,7 @@ public class GenUtil {
             File file = new File(filePath);
 
             // 如果非覆盖生成
-            if (!genConfig.getCover() && FileUtils.exist(file)) {
+            if (!genConfig.getCover() && FileUtil.exist(file)) {
                 continue;
             }
             // 生成代码
@@ -232,9 +237,9 @@ public class GenUtil {
             // 主键类型
             String colType = ColUtil.cloToJava(column.getColumnType());
             // 小写开头的字段名
-            String changeColumnName = StringUtils.toCamelCase(column.getColumnName().toString());
+            String changeColumnName = StringUtils.toCamelCase(column.getColumnName());
             // 大写开头的字段名
-            String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName().toString());
+            String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName());
             if (PK.equals(column.getKeyType())) {
                 // 存储主键类型
                 genMap.put("pkColumnType", colType);
@@ -390,7 +395,7 @@ public class GenUtil {
         // 生成目标文件
         Writer writer = null;
         try {
-            FileUtils.touch(file);
+            FileUtil.touch(file);
             writer = new FileWriter(file);
             template.render(map, writer);
         } catch (TemplateException | IOException e) {

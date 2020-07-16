@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class LocalStorageQuery {
 
-    @Query(blurry = "name,suffix,type,operate,size")
+    @Query(blurry = "name,suffix,type,createBy,size")
     private String blurry;
 
     @Query(type = Query.Type.BETWEEN)

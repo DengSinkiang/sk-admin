@@ -1,26 +1,22 @@
 package com.dxj.module.system.controller;
 
-import cn.hutool.crypto.asymmetric.KeyType;
-import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.core.collection.CollectionUtil;
 import com.dxj.annotation.Log;
-import com.dxj.config.DataScope;
-import com.dxj.constant.CommonConstant;
-import com.dxj.domain.entity.VerificationCode;
+import com.dxj.config.RsaProperties;
+import com.dxj.enumeration.CodeEnum;
 import com.dxj.exception.SkException;
-import com.dxj.module.system.domain.entity.User;
 import com.dxj.module.system.domain.dto.RoleSmallDTO;
 import com.dxj.module.system.domain.dto.UserDTO;
+import com.dxj.module.system.domain.entity.User;
 import com.dxj.module.system.domain.query.UserQuery;
 import com.dxj.module.system.domain.vo.UserPassVo;
-import com.dxj.module.system.service.DeptService;
-import com.dxj.module.system.service.RoleService;
-import com.dxj.module.system.service.UserService;
-import com.dxj.service.VerificationCodeService;
+import com.dxj.module.system.service.*;
 import com.dxj.util.PageUtil;
+import com.dxj.util.RsaUtils;
 import com.dxj.util.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -45,26 +41,16 @@ import java.util.stream.Collectors;
  */
 @Api(tags = "系统：用户管理")
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Value("${rsa.private_key}")
-    private String privateKey;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final DataScope dataScope;
+    private final DataService dataService;
     private final DeptService deptService;
     private final RoleService roleService;
-    private final VerificationCodeService verificationCodeService;
-
-    public UserController(PasswordEncoder passwordEncoder, UserService userService, DataScope dataScope, DeptService deptService, RoleService roleService, VerificationCodeService verificationCodeService) {
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-        this.dataScope = dataScope;
-        this.deptService = deptService;
-        this.roleService = roleService;
-        this.verificationCodeService = verificationCodeService;
-    }
+    private final VerifyService verificationCodeService;
 
     @Log("导出用户数据")
     @ApiOperation("导出用户数据")
@@ -78,34 +64,27 @@ public class UserController {
     @ApiOperation("查询用户")
     @GetMapping
     @PreAuthorize("@sk.check('user:list')")
-    public ResponseEntity<Object> getUsers(UserQuery criteria, Pageable pageable) {
-        Set<Long> deptSet = new HashSet<>();
-        Set<Long> result = new HashSet<>();
+    public ResponseEntity<Object> query(UserQuery criteria, Pageable pageable) {
         if (!ObjectUtils.isEmpty(criteria.getDeptId())) {
-            deptSet.add(criteria.getDeptId());
-            deptSet.addAll(dataScope.getDeptChildren(deptService.findByPid(criteria.getDeptId())));
+            criteria.getDeptIds().add(criteria.getDeptId());
+            criteria.getDeptIds().addAll(deptService.getDeptChildren(criteria.getDeptId(),
+                    deptService.findByPid(criteria.getDeptId())));
         }
         // 数据权限
-        Set<Long> deptIds = dataScope.getDeptIds();
-        // 查询条件不为空并且数据权限不为空则取交集
-        if (!CollectionUtils.isEmpty(deptIds) && !CollectionUtils.isEmpty(deptSet)) {
+        List<Long> dataScopes = dataService.getDeptIds(userService.findByName(SecurityUtils.getCurrentUsername()));
+        // criteria.getDeptIds() 不为空并且数据权限不为空则取交集
+        if (!CollectionUtils.isEmpty(criteria.getDeptIds()) && !CollectionUtils.isEmpty(dataScopes)) {
             // 取交集
-            result.addAll(deptSet);
-            result.retainAll(deptIds);
-            // 若无交集，则代表无数据权限
-            criteria.setDeptIds(result);
-            if (result.size() == 0) {
-                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
-            } else {
+            criteria.getDeptIds().retainAll(dataScopes);
+            if (!CollectionUtil.isEmpty(criteria.getDeptIds())) {
                 return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
             }
-            // 否则取并集
         } else {
-            result.addAll(deptSet);
-            result.addAll(deptIds);
-            criteria.setDeptIds(result);
+            // 否则取并集
+            criteria.getDeptIds().addAll(dataScopes);
             return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
         }
+        return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
     }
 
     @Log("新增用户")
@@ -116,7 +95,8 @@ public class UserController {
         checkLevel(resources);
         // 默认密码 123456
         resources.setPassword(passwordEncoder.encode("123456"));
-        return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);
+        userService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Log("修改用户")
@@ -133,7 +113,7 @@ public class UserController {
     @ApiOperation("修改用户：个人中心")
     @PutMapping(value = "center")
     public ResponseEntity<Object> center(@Validated(User.Update.class) @RequestBody User resources) {
-        if(!resources.getId().equals(SecurityUtils.getCurrentUserId())){
+        if (!resources.getId().equals(SecurityUtils.getCurrentUserId())) {
             throw new SkException("不能修改他人资料");
         }
         userService.updateCenter(resources);
@@ -146,8 +126,8 @@ public class UserController {
     @PreAuthorize("@sk.check('user:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
         for (Long id : ids) {
-            Integer currentLevel =  Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
-            Integer optLevel =  Collections.min(roleService.findByUsersId(id).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+            Integer currentLevel = Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+            Integer optLevel = Collections.min(roleService.findByUsersId(id).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
             if (currentLevel > optLevel) {
                 throw new SkException("角色权限不足，不能删除：" + userService.findById(id).getUsername());
             }
@@ -158,11 +138,9 @@ public class UserController {
 
     @ApiOperation("修改密码")
     @PostMapping(value = "/updatePass")
-    public ResponseEntity<Object> updatePass(@RequestBody UserPassVo passVo) {
-        // 密码解密
-        RSA rsa = new RSA(privateKey, null);
-        String oldPass = new String(rsa.decrypt(passVo.getOldPass(), KeyType.PrivateKey));
-        String newPass = new String(rsa.decrypt(passVo.getNewPass(), KeyType.PrivateKey));
+    public ResponseEntity<Object> updatePass(@RequestBody UserPassVo passVo) throws Exception {
+        String oldPass = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, passVo.getOldPass());
+        String newPass = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, passVo.getNewPass());
         UserDTO user = userService.findByName(SecurityUtils.getCurrentUsername());
         if (!passwordEncoder.matches(oldPass, user.getPassword())) {
             throw new SkException("修改失败，旧密码错误");
@@ -176,25 +154,21 @@ public class UserController {
 
     @ApiOperation("修改头像")
     @PostMapping(value = "/updateAvatar")
-    public ResponseEntity<Object> updateAvatar(@RequestParam MultipartFile file) {
-        userService.updateAvatar(file);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Object> updateAvatar(@RequestParam MultipartFile avatar) {
+        return new ResponseEntity<>(userService.updateAvatar(avatar), HttpStatus.OK);
     }
 
     @Log("修改邮箱")
     @ApiOperation("修改邮箱")
     @PostMapping(value = "/updateEmail/{code}")
-    public ResponseEntity<Object> updateEmail(@PathVariable String code,@RequestBody User user){
-        // 密码解密
-        RSA rsa = new RSA(privateKey, null);
-        String password = new String(rsa.decrypt(user.getPassword(), KeyType.PrivateKey));
+    public ResponseEntity<Object> updateEmail(@PathVariable String code, @RequestBody User user) throws Exception {
+        String password = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, user.getPassword());
         UserDTO userDto = userService.findByName(SecurityUtils.getCurrentUsername());
-        if(!passwordEncoder.matches(password, userDto.getPassword())){
+        if (!passwordEncoder.matches(password, userDto.getPassword())) {
             throw new SkException("密码错误");
         }
-        VerificationCode verificationCode = new VerificationCode(code, CommonConstant.RESET_MAIL,"email",user.getEmail());
-        verificationCodeService.validated(verificationCode);
-        userService.updateEmail(userDto.getUsername(),user.getEmail());
+        verificationCodeService.validated(CodeEnum.EMAIL_RESET_EMAIL_CODE.getKey() + user.getEmail(), code);
+        userService.updateEmail(userDto.getUsername(), user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -204,7 +178,7 @@ public class UserController {
      * @param resources /
      */
     private void checkLevel(User resources) {
-        Integer currentLevel =  Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
+        Integer currentLevel = Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDTO::getLevel).collect(Collectors.toList()));
         Integer optLevel = roleService.findByRoles(resources.getRoles());
         if (currentLevel > optLevel) {
             throw new SkException("角色权限不足");

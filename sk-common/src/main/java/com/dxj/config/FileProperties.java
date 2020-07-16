@@ -4,6 +4,10 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author jianghehe
+ * @date
+ */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "file")
@@ -27,9 +31,11 @@ public class FileProperties {
 
     public SkPath getPath() {
         String os = System.getProperty("os.name");
-        if (os.toLowerCase().startsWith("win")) {
+        String win = "win";
+        String macName = "mac";
+        if (os.toLowerCase().startsWith(win)) {
             return windows;
-        } else if (os.toLowerCase().startsWith("mac")) {
+        } else if (os.toLowerCase().startsWith(macName)) {
             return mac;
         }
         return linux;

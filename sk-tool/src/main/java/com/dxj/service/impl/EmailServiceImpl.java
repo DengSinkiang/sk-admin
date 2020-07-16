@@ -8,6 +8,7 @@ import com.dxj.domain.vo.EmailVo;
 import com.dxj.exception.SkException;
 import com.dxj.service.EmailService;
 import com.dxj.util.EncryptUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,46 +23,40 @@ import java.util.Optional;
  * @date 2018-12-26
  */
 @Service
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = "email")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class EmailServiceImpl implements EmailService {
 
-    private final EmailDao emailDao;
-
-    public EmailServiceImpl(EmailDao emailDao) {
-        this.emailDao = emailDao;
-    }
+    private final EmailDao emailRepository;
 
     @Override
-    @CachePut(key = "'1'")
+    @CachePut(key = "'config'")
     @Transactional(rollbackFor = Exception.class)
-    public EmailConfig update(EmailConfig emailConfig, EmailConfig old) {
-        try {
-            if(!emailConfig.getPass().equals(old.getPass())){
-                // 对称加密
-                emailConfig.setPass(EncryptUtils.desEncrypt(emailConfig.getPass()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public EmailConfig config(EmailConfig emailConfig, EmailConfig old) throws Exception {
+        emailConfig.setId(1L);
+        if (!emailConfig.getPass().equals(old.getPass())) {
+            // 对称加密
+            emailConfig.setPass(EncryptUtils.desEncrypt(emailConfig.getPass()));
         }
-        return emailDao.save(emailConfig);
+        return emailRepository.save(emailConfig);
     }
 
     @Override
-    @Cacheable(key = "'1'")
+    @Cacheable(key = "'config'")
     public EmailConfig find() {
-        Optional<EmailConfig> emailConfig = emailDao.findById(1L);
+        Optional<EmailConfig> emailConfig = emailRepository.findById(1L);
         return emailConfig.orElseGet(EmailConfig::new);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void send(EmailVo emailVo, EmailConfig emailConfig){
-        if(emailConfig == null){
+    public void send(EmailVo emailVo, EmailConfig emailConfig) {
+        if (emailConfig == null) {
             throw new SkException("请先配置，再操作");
         }
         // 封装
         MailAccount account = new MailAccount();
+        account.setUser(emailConfig.getUser());
         account.setHost(emailConfig.getHost());
         account.setPort(Integer.parseInt(emailConfig.getPort()));
         account.setAuth(true);
@@ -71,9 +66,11 @@ public class EmailServiceImpl implements EmailService {
         } catch (Exception e) {
             throw new SkException(e.getMessage());
         }
-        account.setFrom(emailConfig.getUser()+"<"+emailConfig.getFromUser()+">");
+        account.setFrom(emailConfig.getUser() + "<" + emailConfig.getFromUser() + ">");
         // ssl方式发送
         account.setSslEnable(true);
+        // 使用STARTTLS安全连接
+        account.setStarttlsEnable(true);
         String content = emailVo.getContent();
         // 发送
         try {
@@ -86,9 +83,8 @@ public class EmailServiceImpl implements EmailService {
                     //关闭session
                     .setUseGlobalSession(false)
                     .send();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new SkException(e.getMessage());
         }
     }
-
 }

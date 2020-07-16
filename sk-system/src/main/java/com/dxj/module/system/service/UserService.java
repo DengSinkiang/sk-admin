@@ -1,7 +1,7 @@
 package com.dxj.module.system.service;
 
-import com.dxj.module.system.domain.entity.User;
 import com.dxj.module.system.domain.dto.UserDTO;
+import com.dxj.module.system.domain.entity.User;
 import com.dxj.module.system.domain.query.UserQuery;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -27,9 +28,8 @@ public interface UserService {
     /**
      * 新增用户
      * @param resources /
-     * @return /
      */
-    UserDTO create(User resources);
+    void create(User resources);
 
     /**
      * 编辑用户
@@ -60,8 +60,9 @@ public interface UserService {
     /**
      * 修改头像
      * @param file 文件
+     * @return /
      */
-    void updateAvatar(MultipartFile file);
+    Map<String, String> updateAvatar(MultipartFile file);
 
     /**
      * 修改邮箱

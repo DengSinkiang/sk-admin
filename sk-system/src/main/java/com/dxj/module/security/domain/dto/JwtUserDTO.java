@@ -4,6 +4,7 @@ import com.dxj.module.system.domain.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,12 +18,15 @@ import java.util.stream.Collectors;
  */
 @Getter
 @AllArgsConstructor
+@ToString
 public class JwtUserDTO implements UserDetails {
 
-    private UserDTO user;
+    private final UserDTO user;
+
+    private final List<Long> dataScopes;
 
     @JsonIgnore
-    private List<GrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
 
     public Set<String> getRoles() {
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());

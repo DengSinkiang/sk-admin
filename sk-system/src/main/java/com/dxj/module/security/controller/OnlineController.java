@@ -5,6 +5,7 @@ import com.dxj.module.security.service.OnlineUserService;
 import com.dxj.util.EncryptUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,21 +20,18 @@ import java.util.Set;
  * @author Sinkiang
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/auth/online")
 @Api(tags = "系统：在线用户管理")
 public class OnlineController {
 
     private final OnlineUserService onlineUserService;
 
-    public OnlineController(OnlineUserService onlineUserService) {
-        this.onlineUserService = onlineUserService;
-    }
-
     @ApiOperation("查询在线用户")
     @GetMapping
     @PreAuthorize("@sk.check()")
-    public ResponseEntity<Object> getAll(String filter, Pageable pageable) {
-        return new ResponseEntity<>(onlineUserService.getAll(filter, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> query(String filter, Pageable pageable){
+        return new ResponseEntity<>(onlineUserService.getAll(filter, pageable),HttpStatus.OK);
     }
 
     @Log("导出数据")

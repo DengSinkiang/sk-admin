@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class UserQuery implements Serializable {
     private Long id;
 
     @Query(propName = "id", type = Query.Type.IN, joinName = "dept")
-    private Set<Long> deptIds;
+    private Set<Long> deptIds = new HashSet<>();
 
     @Query(blurry = "email,username,nickName")
     private String blurry;

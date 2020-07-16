@@ -6,6 +6,7 @@ import com.dxj.domain.dto.LocalStorageQuery;
 import com.dxj.service.LocalStorageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +22,19 @@ import java.io.IOException;
  * @author Sinkiang
  * @date 2019-09-05
  */
-@Api(tags = "工具：本地存储管理")
 @RestController
+@RequiredArgsConstructor
+@Api(tags = "工具：本地存储管理")
 @RequestMapping("/api/localStorage")
 public class LocalStorageController {
 
     private final LocalStorageService localStorageService;
 
-    public LocalStorageController(LocalStorageService localStorageService) {
-        this.localStorageService = localStorageService;
-    }
-
     @ApiOperation("查询文件")
     @GetMapping
     @PreAuthorize("@sk.check('storage:list')")
-    public ResponseEntity<Object> getLocalStorages(LocalStorageQuery criteria, Pageable pageable) {
-        return new ResponseEntity<>(localStorageService.queryAll(criteria, pageable), HttpStatus.OK);
+    public ResponseEntity<Object> query(LocalStorageQuery criteria, Pageable pageable){
+        return new ResponseEntity<>(localStorageService.queryAll(criteria,pageable),HttpStatus.OK);
     }
 
     @Log("导出数据")
@@ -50,14 +48,15 @@ public class LocalStorageController {
     @ApiOperation("上传文件")
     @PostMapping
     @PreAuthorize("@sk.check('storage:add')")
-    public ResponseEntity<Object> create(@RequestParam String name, @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(localStorageService.create(name, file), HttpStatus.CREATED);
+    public ResponseEntity<Object> create(@RequestParam String name, @RequestParam("file") MultipartFile file){
+        localStorageService.create(name, file);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @ApiOperation("修改文件")
     @PutMapping
     @PreAuthorize("@sk.check('storage:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody LocalStorage resources) {
+    public ResponseEntity<Object> update(@Validated @RequestBody LocalStorage resources){
         localStorageService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -65,7 +64,7 @@ public class LocalStorageController {
     @Log("多选删除")
     @DeleteMapping
     @ApiOperation("多选删除")
-    public ResponseEntity<Object> deleteAll(@RequestBody Long[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
         localStorageService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

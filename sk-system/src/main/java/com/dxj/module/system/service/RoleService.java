@@ -1,7 +1,7 @@
 package com.dxj.module.system.service;
 
-import com.dxj.module.system.domain.entity.Role;
 import com.dxj.module.system.domain.dto.RoleDTO;
+import com.dxj.module.system.domain.entity.Role;
 import com.dxj.module.system.domain.query.RoleQuery;
 import com.dxj.module.system.domain.dto.RoleSmallDTO;
 import com.dxj.module.system.domain.dto.UserDTO;
@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +18,12 @@ import java.util.Set;
  * @date 2018-12-03
  */
 public interface RoleService {
+
+    /**
+     * 查询全部数据
+     * @return /
+     */
+    List<RoleDTO> queryAll();
 
     /**
      * 根据ID查询
@@ -30,9 +35,8 @@ public interface RoleService {
     /**
      * 创建
      * @param resources /
-     * @return /
      */
-    RoleDTO create(Role resources);
+    void create(Role resources);
 
     /**
      * 编辑
@@ -51,7 +55,7 @@ public interface RoleService {
      * @param id 用户ID
      * @return /
      */
-    List<RoleSmallDTO> findByUsersId(long id);
+    List<RoleSmallDTO> findByUsersId(Long id);
 
     /**
      * 根据角色查询角色级别
@@ -72,13 +76,6 @@ public interface RoleService {
      * @param id /
      */
     void untiedMenu(Long id);
-
-    /**
-     * 不带条件分页查询
-     * @param pageable 分页参数
-     * @return /
-     */
-    List<RoleDTO> queryAll(Pageable pageable);
 
     /**
      * 待条件分页查询
@@ -109,4 +106,17 @@ public interface RoleService {
      * @return 权限信息
      */
     List<GrantedAuthority> mapToGrantedAuthorities(UserDTO user);
+
+    /**
+     * 验证是否被用户关联
+     * @param ids /
+     */
+    void verification(Set<Long> ids);
+
+    /**
+     * 根据菜单Id查询
+     * @param menuIds /
+     * @return /
+     */
+    List<Role> findInMenuId(List<Long> menuIds);
 }

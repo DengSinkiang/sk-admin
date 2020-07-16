@@ -92,10 +92,4 @@ public class SnowFlakeUtil {
         return System.currentTimeMillis();
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            SnowFlakeUtil snowFlakeUtil = SnowFlakeUtil.getFlowIdInstance();
-            System.out.println(snowFlakeUtil.nextId());
-        }
-    }
 }

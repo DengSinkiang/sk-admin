@@ -1,8 +1,10 @@
 package com.dxj.module.system.domain.dto;
 
+import com.dxj.base.BaseDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -14,21 +16,16 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-public class JobDTO implements Serializable {
+@ToString
+public class JobDTO extends BaseDTO implements Serializable {
 
     private Long id;
 
-    private Long sort;
+    private Integer jobSort;
 
     private String name;
 
     private Boolean enabled;
-
-    private DeptDTO dept;
-
-    private String deptSuperiorName;
-
-    private Timestamp createTime;
 
     public JobDTO(String name, Boolean enabled) {
         this.name = name;

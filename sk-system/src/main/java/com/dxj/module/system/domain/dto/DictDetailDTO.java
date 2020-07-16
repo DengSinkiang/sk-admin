@@ -1,7 +1,9 @@
 package com.dxj.module.system.domain.dto;
 
+import com.dxj.base.BaseDTO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -12,17 +14,16 @@ import java.sql.Timestamp;
 */
 @Getter
 @Setter
-public class DictDetailDTO implements Serializable {
+@ToString
+public class DictDetailDTO extends BaseDTO implements Serializable {
 
     private Long id;
+
+    private DictSmallDTO dict;
 
     private String label;
 
     private String value;
 
-    private String sort;
-
-    private DictSmallDTO dict;
-
-    private Timestamp createTime;
+    private Integer dictSort;
 }

@@ -12,6 +12,7 @@ import com.dxj.domain.dto.PictureQuery;
 import com.dxj.exception.SkException;
 import com.dxj.service.PictureService;
 import com.dxj.util.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
@@ -31,34 +32,25 @@ import java.util.*;
  * @date 2018-12-27
  */
 @Slf4j
+@RequiredArgsConstructor
 @Service(value = "pictureService")
-@CacheConfig(cacheNames = "picture")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class PictureServiceImpl implements PictureService {
 
     @Value("${smms.token}")
     private String token;
-
-    private final PictureDao pictureDao;
-
+    private final PictureDao pictureRepository;
     private static final String SUCCESS = "success";
-
     private static final String CODE = "code";
-
     private static final String MSG = "message";
 
-    public PictureServiceImpl(PictureDao pictureDao) {
-        this.pictureDao = pictureDao;
-    }
-
     @Override
-    public Map<String, Object> queryAll(PictureQuery criteria, Pageable pageable) {
-        return PageUtil.toPage(pictureDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
+    public Object queryAll(PictureQuery criteria, Pageable pageable) {
+        return PageUtil.toPage(pictureRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
     }
 
     @Override
     public List<Picture> queryAll(PictureQuery criteria) {
-        return pictureDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+        return pictureRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
     }
 
     @Override
@@ -66,14 +58,14 @@ public class PictureServiceImpl implements PictureService {
     public Picture upload(MultipartFile multipartFile, String username) {
         File file = FileUtils.toFile(multipartFile);
         // 验证是否重复上传
-        Picture picture = pictureDao.findByMd5Code(FileUtils.getMd5(file));
+        Picture picture = pictureRepository.findByMd5Code(FileUtils.getMd5(file));
         if (picture != null) {
             return picture;
         }
         HashMap<String, Object> paramMap = new HashMap<>(1);
         paramMap.put("smfile", file);
         // 上传文件
-        String result = HttpRequest.post(CommonConstant.SM_MS_URL + "/v2/upload")
+        String result = HttpRequest.post(CommonConstant.Url.SM_MS_URL + "/v2/upload")
                 .header("Authorization", token)
                 .form(paramMap)
                 .timeout(20000)
@@ -87,7 +79,7 @@ public class PictureServiceImpl implements PictureService {
         picture.setUsername(username);
         picture.setMd5Code(FileUtils.getMd5(file));
         picture.setFilename(FileUtils.getFileNameNoEx(multipartFile.getOriginalFilename()) + "." + FileUtils.getExtensionName(multipartFile.getOriginalFilename()));
-        pictureDao.save(picture);
+        pictureRepository.save(picture);
         //删除临时文件
         FileUtils.del(file);
         return picture;
@@ -96,7 +88,7 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public Picture findById(Long id) {
-        Picture picture = pictureDao.findById(id).orElseGet(Picture::new);
+        Picture picture = pictureRepository.findById(id).orElseGet(Picture::new);
         ValidationUtil.isNull(picture.getId(), "Picture", "id", id);
         return picture;
     }
@@ -107,9 +99,9 @@ public class PictureServiceImpl implements PictureService {
             Picture picture = findById(id);
             try {
                 HttpUtil.get(picture.getDelete());
-                pictureDao.delete(picture);
+                pictureRepository.delete(picture);
             } catch (Exception e) {
-                pictureDao.delete(picture);
+                pictureRepository.delete(picture);
             }
         }
     }
@@ -117,7 +109,7 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public void synchronize() {
         //链式构建请求
-        String result = HttpRequest.get(CommonConstant.SM_MS_URL + "/v2/upload_history")
+        String result = HttpRequest.get(CommonConstant.Url.SM_MS_URL + "/v2/upload_history")
                 //头信息，多个头信息多次调用此方法即可
                 .header("Authorization", token)
                 .timeout(20000)
@@ -125,11 +117,11 @@ public class PictureServiceImpl implements PictureService {
         JSONObject jsonObject = JSONUtil.parseObj(result);
         List<Picture> pictures = JSON.parseArray(jsonObject.get("data").toString(), Picture.class);
         for (Picture picture : pictures) {
-            if (!pictureDao.existsByUrl(picture.getUrl())) {
+            if (!pictureRepository.existsByUrl(picture.getUrl())) {
                 picture.setSize(FileUtils.getSize(Integer.parseInt(picture.getSize())));
                 picture.setUsername("System Sync");
-                picture.setMd5Code("");
-                pictureDao.save(picture);
+                picture.setMd5Code(null);
+                pictureRepository.save(picture);
             }
         }
     }

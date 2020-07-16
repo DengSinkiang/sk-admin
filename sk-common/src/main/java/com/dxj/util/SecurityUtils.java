@@ -1,7 +1,10 @@
 package com.dxj.util;
 
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.dxj.exception.SkException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,6 +23,7 @@ import java.util.Objects;
  * @author Sinkiang
  * @date 2019-01-17
  */
+@Slf4j
 public class SecurityUtils {
 
     /**
@@ -61,6 +66,17 @@ public class SecurityUtils {
     public static Long getCurrentUserId() {
         UserDetails userDetails = getCurrentUser();
         return new JSONObject(new JSONObject(userDetails).get("user")).get("id", Long.class);
+    }
+
+    /**
+     * 获取当前用户的数据权限
+     *
+     * @return /
+     */
+    public static List<Long> getCurrentUserDataScope() {
+        UserDetails userDetails = getCurrentUser();
+        JSONArray array = JSONUtil.parseArray(new JSONObject(userDetails).get("dataScopes"));
+        return JSONUtil.toList(array, Long.class);
     }
 
     public static HttpServletRequest getHttpServletRequest() {

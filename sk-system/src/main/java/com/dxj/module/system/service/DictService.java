@@ -1,7 +1,7 @@
 package com.dxj.module.system.service;
 
-import com.dxj.module.system.domain.entity.Dict;
 import com.dxj.module.system.domain.dto.DictDTO;
+import com.dxj.module.system.domain.entity.Dict;
 import com.dxj.module.system.domain.query.DictQuery;
 import org.springframework.data.domain.Pageable;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
 * @author Sinkiang
@@ -32,18 +33,11 @@ public interface DictService {
     List<DictDTO> queryAll(DictQuery dict);
 
     /**
-     * 根据ID查询
-     * @param id /
-     * @return /
-     */
-    DictDTO findById(Long id);
-
-    /**
      * 创建
      * @param resources /
      * @return /
      */
-    DictDTO create(Dict resources);
+    void create(Dict resources);
 
     /**
      * 编辑
@@ -53,9 +47,9 @@ public interface DictService {
 
     /**
      * 删除
-     * @param id /
+     * @param ids /
      */
-    void delete(Long id);
+    void delete(Set<Long> ids);
 
     /**
      * 导出数据

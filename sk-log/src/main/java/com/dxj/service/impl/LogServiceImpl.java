@@ -6,12 +6,15 @@ import cn.hutool.json.JSONObject;
 import com.dxj.dao.LogDao;
 import com.dxj.domain.entity.Log;
 import com.dxj.domain.dto.LogQuery;
-import com.dxj.domain.mapper.LogErrorMapper;
-import com.dxj.domain.mapper.LogSmallMapper;
+import com.dxj.domain.mapstruct.LogErrorMapper;
+import com.dxj.domain.mapstruct.LogSmallMapper;
 import com.dxj.service.LogService;
 import com.dxj.util.*;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,34 +24,23 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Sinkiang
  * @date 2018-11-24
  */
 @Service
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
+@RequiredArgsConstructor
 public class LogServiceImpl implements LogService {
-
-    private final LogDao logDao;
-
+    private static final Logger log = LoggerFactory.getLogger(LogServiceImpl.class);
+    private final LogDao logRepository;
     private final LogErrorMapper logErrorMapper;
-
     private final LogSmallMapper logSmallMapper;
-
-    public LogServiceImpl(LogDao logDao, LogErrorMapper logErrorMapper, LogSmallMapper logSmallMapper) {
-        this.logDao = logDao;
-        this.logErrorMapper = logErrorMapper;
-        this.logSmallMapper = logSmallMapper;
-    }
 
     @Override
     public Object queryAll(LogQuery criteria, Pageable pageable) {
-        Page<Log> page = logDao.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)), pageable);
+        Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)), pageable);
         String status = "ERROR";
         if (status.equals(criteria.getLogType())) {
             return PageUtil.toPage(page.map(logErrorMapper::toDto));
@@ -58,12 +50,12 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public List<Log> queryAll(LogQuery criteria) {
-        return logDao.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)));
+        return logRepository.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)));
     }
 
     @Override
     public Object queryAllByUser(LogQuery criteria, Pageable pageable) {
-        Page<Log> page = logDao.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)), pageable);
+        Page<Log> page = logRepository.findAll(((root, criteriaQuery, cb) -> QueryHelp.getPredicate(root, criteria, cb)), pageable);
         return PageUtil.toPage(page.map(logSmallMapper::toDto));
     }
 
@@ -80,13 +72,10 @@ public class LogServiceImpl implements LogService {
 
         StringBuilder params = new StringBuilder("{");
         //参数值
-        Object[] argValues = joinPoint.getArgs();
+        List<Object> argValues = new ArrayList<>(Arrays.asList(joinPoint.getArgs()));
         //参数名称
-        String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
-        if (argValues != null) {
-            for (int i = 0; i < argValues.length; i++) {
-                params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
-            }
+        for (Object argValue : argValues) {
+            params.append(argValue).append(" ");
         }
         // 描述
         if (log != null) {
@@ -98,10 +87,9 @@ public class LogServiceImpl implements LogService {
         String loginPath = "login";
         if (loginPath.equals(signature.getName())) {
             try {
-                assert argValues != null;
-                username = new JSONObject(argValues[0]).get("username").toString();
+                username = new JSONObject(argValues.get(0)).get("username").toString();
             } catch (Exception e) {
-                e.printStackTrace();
+                LogServiceImpl.log.error(e.getMessage(), e);
             }
         }
         log.setAddress(StringUtils.getCityInfo(log.getRequestIp()));
@@ -109,12 +97,12 @@ public class LogServiceImpl implements LogService {
         log.setUsername(username);
         log.setParams(params.toString() + " }");
         log.setBrowser(browser);
-        logDao.save(log);
+        logRepository.save(log);
     }
 
     @Override
     public Object findByErrDetail(Long id) {
-        Log log = logDao.findById(id).orElseGet(Log::new);
+        Log log = logRepository.findById(id).orElseGet(Log::new);
         ValidationUtil.isNull(log.getId(), "Log", "id", id);
         byte[] details = log.getExceptionDetail();
         return Dict.create().set("exception", new String(ObjectUtil.isNotNull(details) ? details : "".getBytes()));
@@ -141,12 +129,12 @@ public class LogServiceImpl implements LogService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delAllByError() {
-        logDao.deleteByLogType("ERROR");
+        logRepository.deleteByLogType("ERROR");
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delAllByInfo() {
-        logDao.deleteByLogType("INFO");
+        logRepository.deleteByLogType("INFO");
     }
 }

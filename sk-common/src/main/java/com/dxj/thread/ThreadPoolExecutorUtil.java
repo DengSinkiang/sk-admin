@@ -8,12 +8,13 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 用于获取自定义线程池
+ *
  * @author Sinkiang
  * @date 2019年10月31日18:16:47
  */
 public class ThreadPoolExecutorUtil {
 
-    public static ThreadPoolExecutor getPoll(){
+    public static ThreadPoolExecutor getPoll() {
         AsyncTaskProperties properties = SpringContextHolder.getBean(AsyncTaskProperties.class);
         return new ThreadPoolExecutor(
                 properties.getCorePoolSize(),

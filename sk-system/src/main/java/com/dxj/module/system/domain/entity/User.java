@@ -1,15 +1,30 @@
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package com.dxj.module.system.domain.entity;
 
+import com.dxj.base.BEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -21,60 +36,75 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name="user")
-public class User implements Serializable {
+@Table(name="sys_user")
+public class User extends BEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     @NotNull(groups = Update.class)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "ID", hidden = true)
     private Long id;
 
-    @NotBlank
-    private String username;
+    @ManyToMany
+    @ApiModelProperty(value = "用户角色")
+    @JoinTable(name = "sys_users_roles",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
+    private Set<Role> roles;
 
-    /** 用户昵称 */
-    @NotBlank
-    private String nickName;
-
-    /** 性别 */
-    private String sex;
+    @ManyToMany
+    @ApiModelProperty(value = "用户岗位")
+    @JoinTable(name = "sys_users_jobs",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "job_id",referencedColumnName = "job_id")})
+    private Set<Job> jobs;
 
     @OneToOne
-    @JoinColumn(name = "avatar_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-    private UserAvatar userAvatar;
+    @JoinColumn(name = "dept_id")
+    @ApiModelProperty(value = "用户部门")
+    private Dept dept;
 
     @NotBlank
+    @Column(unique = true)
+    @ApiModelProperty(value = "用户名称")
+    private String username;
+
+    @NotBlank
+    @ApiModelProperty(value = "用户昵称")
+    private String nickName;
+
     @Email
+    @NotBlank
+    @ApiModelProperty(value = "邮箱")
     private String email;
 
     @NotBlank
+    @ApiModelProperty(value = "电话号码")
     private String phone;
 
-    @NotNull
-    private Boolean enabled;
+    @ApiModelProperty(value = "用户性别")
+    private String gender;
 
+    @ApiModelProperty(value = "头像真实名称",hidden = true)
+    private String avatarName;
+
+    @ApiModelProperty(value = "头像存储的路径", hidden = true)
+    private String avatarPath;
+
+    @ApiModelProperty(value = "密码")
     private String password;
 
-    @Column(name = "create_time")
-    @CreationTimestamp
-    private Timestamp createTime;
+    @NotNull
+    @ApiModelProperty(value = "是否启用")
+    private Boolean enabled;
 
-    @Column(name = "last_password_reset_time")
-    private Date lastPasswordResetTime;
+    @ApiModelProperty(value = "是否为admin账号", hidden = true)
+    private Boolean isAdmin = false;
 
-    @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))}, inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "none"))})
-    private Set<Role> roles;
-
-    @OneToOne
-    @JoinColumn(name = "job_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-    private Job job;
-
-    @OneToOne
-    @JoinColumn(name = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-    private Dept dept;
-
-    public @interface Update {}
+    @Column(name = "pwd_reset_time")
+    @ApiModelProperty(value = "最后修改密码的时间", hidden = true)
+    private Date pwdResetTime;
 
     @Override
     public boolean equals(Object o) {

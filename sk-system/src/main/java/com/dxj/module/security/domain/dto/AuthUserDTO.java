@@ -21,7 +21,7 @@ public class AuthUserDTO {
 
     private String code;
 
-    private String uuid = "";
+    private String uuid;
 
     @Override
     public String toString() {

@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.dxj.module.security.config.SecurityProperties;
+import com.dxj.module.security.config.bean.SecurityProperties;
 import com.dxj.util.RedisUtils;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -33,39 +33,61 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class TokenProvider implements InitializingBean {
 
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
-    private static final String AUTHORITIES_KEY = "auth";
-    private Key key;
+    public static final String AUTHORITIES_KEY = "auth";
+    private JwtParser jwtParser;
+    private JwtBuilder jwtBuilder;
+
+    public TokenProvider(SecurityProperties properties, RedisUtils redisUtils) {
+        this.properties = properties;
+        this.redisUtils = redisUtils;
+    }
 
     @Override
     public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(properties.getBase64Secret());
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        Key key = Keys.hmacShaKeyFor(keyBytes);
+        jwtParser = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build();
+        jwtBuilder = Jwts.builder()
+                .signWith(key, SignatureAlgorithm.HS512);
     }
 
+    /**
+     * 创建Token 设置永不过期，
+     * Token 的时间有效性转到Redis 维护
+     *
+     * @param authentication /
+     * @return /
+     */
     public String createToken(Authentication authentication) {
+        /*
+         * 获取权限列表
+         */
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY, authorities)
-                .signWith(key, SignatureAlgorithm.HS512)
+        return jwtBuilder
                 // 加入ID确保生成的 Token 都不一致
                 .setId(IdUtil.simpleUUID())
+                .claim(AUTHORITIES_KEY, authorities)
+                .setSubject(authentication.getName())
                 .compact();
     }
 
+    /**
+     * 依据Token 获取鉴权信息
+     *
+     * @param token /
+     * @return /
+     */
     Authentication getAuthentication(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(key)
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims = getClaims(token);
 
         // fix bug: 当前用户如果没有任何权限时，在输入用户名后，刷新验证码会抛IllegalArgumentException
         Object authoritiesStr = claims.get(AUTHORITIES_KEY);
@@ -74,16 +96,20 @@ public class TokenProvider implements InitializingBean {
                         Arrays.stream(authoritiesStr.toString().split(","))
                                 .map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toList()) : Collections.emptyList();
-
-        User principal = new User(claims.getSubject(), "", authorities);
-
+        User principal = new User(claims.getSubject(), "******", authorities);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+    }
+
+    public Claims getClaims(String token) {
+        return jwtParser
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     /**
      * @param token 需要检查的token
      */
-    void checkRenewal(String token) {
+    public void checkRenewal(String token) {
         // 判断是否续期token,计算token的过期时间
         long time = redisUtils.getExpire(properties.getOnlineKey() + token) * 1000;
         Date expireDate = DateUtil.offset(new Date(), DateField.MILLISECOND, (int) time);
@@ -91,7 +117,7 @@ public class TokenProvider implements InitializingBean {
         long differ = expireDate.getTime() - System.currentTimeMillis();
         // 如果在续期检查的范围内，则续期
         if (differ <= properties.getDetect()) {
-            long renew = time + properties.getReNew();
+            long renew = time + properties.getRenew();
             redisUtils.expire(properties.getOnlineKey() + token, renew, TimeUnit.MILLISECONDS);
         }
     }

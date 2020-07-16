@@ -197,4 +197,27 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return weekDays[w];
     }
+
+    /**
+     * 获取当前机器的IP
+     *
+     * @return /
+     */
+    public static String getLocalIp() {
+        InetAddress addr;
+        try {
+            addr = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            return "unknown";
+        }
+        byte[] ipAddr = addr.getAddress();
+        StringBuilder ipAddrStr = new StringBuilder();
+        for (int i = 0; i < ipAddr.length; i++) {
+            if (i > 0) {
+                ipAddrStr.append(".");
+            }
+            ipAddrStr.append(ipAddr[i] & 0xFF);
+        }
+        return ipAddrStr.toString();
+    }
 }

@@ -7,6 +7,7 @@ import com.dxj.module.system.domain.query.DictQuery;
 import com.dxj.module.system.service.DictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * @author Sinkiang
  * @date 2019-04-10
  */
-@Api(tags = "系统：字典管理")
 @RestController
+@RequiredArgsConstructor
+@Api(tags = "系统：字典管理")
 @RequestMapping("/api/dict")
 public class DictController {
 
     private final DictService dictService;
-
     private static final String ENTITY_NAME = "dict";
-
-    public DictController(DictService dictService) {
-        this.dictService = dictService;
-    }
 
     @Log("导出字典数据")
     @ApiOperation("导出字典数据")
@@ -46,7 +44,7 @@ public class DictController {
     @ApiOperation("查询字典")
     @GetMapping(value = "/all")
     @PreAuthorize("@sk.check('dict:list')")
-    public ResponseEntity<Object> all() {
+    public ResponseEntity<Object> queryAll() {
         return new ResponseEntity<>(dictService.queryAll(new DictQuery()), HttpStatus.OK);
     }
 
@@ -54,7 +52,7 @@ public class DictController {
     @ApiOperation("查询字典")
     @GetMapping
     @PreAuthorize("@sk.check('dict:list')")
-    public ResponseEntity<Object> getDicts(DictQuery resources, Pageable pageable) {
+    public ResponseEntity<Object> query(DictQuery resources, Pageable pageable) {
         return new ResponseEntity<>(dictService.queryAll(resources, pageable), HttpStatus.OK);
     }
 
@@ -66,24 +64,25 @@ public class DictController {
         if (resources.getId() != null) {
             throw new SkException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
-        return new ResponseEntity<>(dictService.create(resources), HttpStatus.CREATED);
+        dictService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Log("修改字典")
     @ApiOperation("修改字典")
     @PutMapping
     @PreAuthorize("@sk.check('dict:edit')")
-    public ResponseEntity<Void> update(@Validated(Dict.Update.class) @RequestBody Dict resources) {
+    public ResponseEntity<Object> update(@Validated(Dict.Update.class) @RequestBody Dict resources) {
         dictService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Log("删除字典")
     @ApiOperation("删除字典")
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping
     @PreAuthorize("@sk.check('dict:del')")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        dictService.delete(id);
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
+        dictService.delete(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.dxj.module.quartz.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.dxj.exception.SkException;
 import com.dxj.module.quartz.dao.QuartzJobDao;
 import com.dxj.module.quartz.dao.QuartzLogDao;
@@ -8,15 +9,14 @@ import com.dxj.module.quartz.domain.entity.QuartzLog;
 import com.dxj.module.quartz.domain.query.QuartzJobQuery;
 import com.dxj.module.quartz.service.QuartzJobService;
 import com.dxj.module.quartz.util.QuartzManage;
-import com.dxj.util.FileUtils;
-import com.dxj.util.PageUtil;
-import com.dxj.util.QueryHelp;
-import com.dxj.util.ValidationUtil;
+import com.dxj.util.*;
+import lombok.RequiredArgsConstructor;
 import org.quartz.CronExpression;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,84 +29,70 @@ import java.util.*;
  * @author Sinkiang
  * @date 2019-01-07
  */
+@RequiredArgsConstructor
 @Service(value = "quartzJobService")
-@CacheConfig(cacheNames = "quartzJob")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QuartzJobServiceImpl implements QuartzJobService {
 
-    private final QuartzJobDao quartzJobDao;
-
-    private final QuartzLogDao quartzLogDao;
-
+    private final QuartzJobDao quartzJobRepository;
+    private final QuartzLogDao quartzLogRepository;
     private final QuartzManage quartzManage;
-
-    public QuartzJobServiceImpl(QuartzJobDao quartzJobDao, QuartzLogDao quartzLogDao, QuartzManage quartzManage) {
-        this.quartzJobDao = quartzJobDao;
-        this.quartzLogDao = quartzLogDao;
-        this.quartzManage = quartzManage;
-    }
+    private final RedisUtils redisUtils;
 
     @Override
-    @Cacheable
     public Object queryAll(QuartzJobQuery criteria, Pageable pageable) {
-        return PageUtil.toPage(quartzJobDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
+        return PageUtil.toPage(quartzJobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
     }
 
     @Override
     public Object queryAllLog(QuartzJobQuery criteria, Pageable pageable) {
-        return PageUtil.toPage(quartzLogDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
+        return PageUtil.toPage(quartzLogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable));
     }
 
     @Override
     public List<QuartzJob> queryAll(QuartzJobQuery criteria) {
-        return quartzJobDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+        return quartzJobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
     }
 
     @Override
     public List<QuartzLog> queryAllLog(QuartzJobQuery criteria) {
-        return quartzLogDao.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+        return quartzLogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
     }
 
     @Override
-    @Cacheable(key = "#p0")
     public QuartzJob findById(Long id) {
-        QuartzJob quartzJob = quartzJobDao.findById(id).orElseGet(QuartzJob::new);
+        QuartzJob quartzJob = quartzJobRepository.findById(id).orElseGet(QuartzJob::new);
         ValidationUtil.isNull(quartzJob.getId(), "QuartzJob", "id", id);
         return quartzJob;
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public QuartzJob create(QuartzJob resources) {
+    public void create(QuartzJob resources) {
         if (!CronExpression.isValidExpression(resources.getCronExpression())) {
             throw new SkException("cron表达式格式错误");
         }
-        resources = quartzJobDao.save(resources);
+        resources = quartzJobRepository.save(resources);
         quartzManage.addJob(resources);
-        return resources;
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(QuartzJob resources) {
-        if (resources.getId().equals(1L)) {
-            throw new SkException("该任务不可操作");
-        }
         if (!CronExpression.isValidExpression(resources.getCronExpression())) {
             throw new SkException("cron表达式格式错误");
         }
-        resources = quartzJobDao.save(resources);
+        if (StringUtils.isNotBlank(resources.getSubTask())) {
+            List<String> tasks = Arrays.asList(resources.getSubTask().split("[,，]"));
+            if (tasks.contains(resources.getId().toString())) {
+                throw new SkException("子任务中不能添加当前任务ID");
+            }
+        }
+        resources = quartzJobRepository.save(resources);
         quartzManage.updateJobCron(resources);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     public void updateIsPause(QuartzJob quartzJob) {
-        if (quartzJob.getId().equals(1L)) {
-            throw new SkException("该任务不可操作");
-        }
         if (quartzJob.getIsPause()) {
             quartzManage.resumeJob(quartzJob);
             quartzJob.setIsPause(false);
@@ -114,28 +100,46 @@ public class QuartzJobServiceImpl implements QuartzJobService {
             quartzManage.pauseJob(quartzJob);
             quartzJob.setIsPause(true);
         }
-        quartzJobDao.save(quartzJob);
+        quartzJobRepository.save(quartzJob);
     }
 
     @Override
     public void execution(QuartzJob quartzJob) {
-        if (quartzJob.getId().equals(1L)) {
-            throw new SkException("该任务不可操作");
-        }
         quartzManage.runJobNow(quartzJob);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void delete(Set<Long> ids) {
         for (Long id : ids) {
-            if (id.equals(1L)) {
-                throw new SkException("更新访客记录不可删除，你可以在后台代码中取消该限制");
-            }
             QuartzJob quartzJob = findById(id);
             quartzManage.deleteJob(quartzJob);
-            quartzJobDao.delete(quartzJob);
+            quartzJobRepository.delete(quartzJob);
+        }
+    }
+
+    @Async
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void executionSubJob(String[] tasks) throws InterruptedException {
+        for (String id : tasks) {
+            QuartzJob quartzJob = findById(Long.parseLong(id));
+            // 执行任务
+            String uuid = IdUtil.simpleUUID();
+            quartzJob.setUuid(uuid);
+            // 执行任务
+            execution(quartzJob);
+            // 获取执行状态，如果执行失败则停止后面的子任务执行
+            Boolean result = (Boolean) redisUtils.get(uuid);
+            while (result == null) {
+                // 休眠5秒，再次获取子任务执行情况
+                Thread.sleep(5000);
+                result = (Boolean) redisUtils.get(uuid);
+            }
+            if (!result) {
+                redisUtils.del(uuid);
+                break;
+            }
         }
     }
 
@@ -150,7 +154,7 @@ public class QuartzJobServiceImpl implements QuartzJobService {
             map.put("参数", quartzJob.getParams());
             map.put("表达式", quartzJob.getCronExpression());
             map.put("状态", quartzJob.getIsPause() ? "暂停中" : "运行中");
-            map.put("描述", quartzJob.getRemark());
+            map.put("描述", quartzJob.getDescription());
             map.put("创建日期", quartzJob.getCreateTime());
             list.add(map);
         }

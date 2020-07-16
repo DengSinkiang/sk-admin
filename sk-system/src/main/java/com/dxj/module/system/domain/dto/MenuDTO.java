@@ -1,33 +1,41 @@
 package com.dxj.module.system.domain.dto;
 
+import com.dxj.base.BaseDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Sinkiang
  * @date 2018-12-17
  */
 @Data
-public class MenuDTO implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class MenuDTO extends BaseDTO implements Serializable {
 
     private Long id;
+
+    private List<MenuDTO> children;
 
     private Integer type;
 
     private String permission;
 
-    private String name;
+    private String title;
 
-    private Long sort;
+    private Integer menuSort;
 
     private String path;
 
     private String component;
 
     private Long pid;
+
+    private Integer subCount;
 
     private Boolean iFrame;
 
@@ -39,7 +47,16 @@ public class MenuDTO implements Serializable {
 
     private String icon;
 
-    private List<MenuDTO> children;
+    public Boolean getHasChildren() {
+        return subCount > 0;
+    }
 
-    private Timestamp createTime;
+    public Boolean getLeaf() {
+        return subCount <= 0;
+    }
+
+    public String getLabel() {
+        return title;
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.dxj.module.system.service;
 
-import com.dxj.module.system.domain.entity.Job;
 import com.dxj.module.system.domain.dto.JobDTO;
+import com.dxj.module.system.domain.entity.Job;
 import com.dxj.module.system.domain.query.JobQuery;
 import org.springframework.data.domain.Pageable;
 
@@ -29,7 +29,7 @@ public interface JobService {
      * @param resources /
      * @return /
      */
-    JobDTO create(Job resources);
+    void create(Job resources);
 
     /**
      * 编辑
@@ -65,4 +65,10 @@ public interface JobService {
      * @throws IOException /
      */
     void download(List<JobDTO> queryAll, HttpServletResponse response) throws IOException;
+
+    /**
+     * 验证是否被用户关联
+     * @param ids /
+     */
+    void verification(Set<Long> ids);
 }
