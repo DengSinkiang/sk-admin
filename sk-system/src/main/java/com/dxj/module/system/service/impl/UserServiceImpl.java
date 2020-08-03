@@ -5,6 +5,7 @@ import com.dxj.config.FileProperties;
 import com.dxj.constant.CacheKey;
 import com.dxj.exception.EntityExistException;
 import com.dxj.exception.EntityNotFoundException;
+import com.dxj.module.security.service.OnlineUserService;
 import com.dxj.module.security.service.UserCacheClean;
 import com.dxj.module.system.dao.UserDao;
 import com.dxj.module.system.domain.dto.JobSmallDTO;
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
     private final FileProperties properties;
     private final RedisUtils redisUtils;
     private final UserCacheClean userCacheClean;
+    private final OnlineUserService onlineUserService;
 
     @Override
     public Object queryAll(UserQuery criteria, Pageable pageable) {
@@ -106,6 +108,10 @@ public class UserServiceImpl implements UserService {
         // 如果用户名称修改
         if(!resources.getUsername().equals(user.getUsername())){
             redisUtils.del("user::username:" + user.getUsername());
+        }
+        // 如果用户被禁用，则清除用户登录信息
+        if(!resources.getEnabled()){
+            onlineUserService.kickOutForUsername(resources.getUsername());
         }
         user.setUsername(resources.getUsername());
         user.setEmail(resources.getEmail());

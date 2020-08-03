@@ -3,6 +3,7 @@ package com.dxj.util;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.dxj.enumeration.DataScopeEnum;
 import com.dxj.exception.SkException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -81,5 +82,17 @@ public class SecurityUtils {
 
     public static HttpServletRequest getHttpServletRequest() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
+    /**
+     * 获取数据权限级别
+     * @return 级别
+     */
+    public static String getDataScopeType() {
+        List<Long> dataScopes = getCurrentUserDataScope();
+        if(dataScopes.size() != 0){
+            return "";
+        }
+        return DataScopeEnum.ALL.getValue();
     }
 }

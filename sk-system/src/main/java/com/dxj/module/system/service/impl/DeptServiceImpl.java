@@ -2,6 +2,7 @@ package com.dxj.module.system.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.dxj.enumeration.DataScopeEnum;
 import com.dxj.exception.SkException;
 import com.dxj.module.system.dao.DeptDao;
 import com.dxj.module.system.dao.RoleDao;
@@ -12,10 +13,7 @@ import com.dxj.module.system.service.DeptService;
 import com.dxj.module.system.domain.dto.DeptDTO;
 import com.dxj.module.system.domain.query.DeptQuery;
 import com.dxj.module.system.domain.mapstruct.DeptMapper;
-import com.dxj.util.FileUtils;
-import com.dxj.util.QueryHelp;
-import com.dxj.util.RedisUtils;
-import com.dxj.util.ValidationUtil;
+import com.dxj.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -47,8 +45,12 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public List<DeptDTO> queryAll(DeptQuery criteria, Boolean isQuery) throws Exception {
         Sort sort = new Sort(Sort.Direction.ASC, "deptSort");
+
+        String dataScopeType = SecurityUtils.getDataScopeType();
         if (isQuery) {
-            criteria.setPidIsNull(true);
+            if(dataScopeType.equals(DataScopeEnum.ALL.getValue())){
+                criteria.setPidIsNull(true);
+            }
             List<Field> fields = QueryHelp.getAllFields(criteria.getClass(), new ArrayList<>());
             List<String> fieldNames = new ArrayList<String>(){{ add("pidIsNull");add("enabled");}};
             for (Field field : fields) {
@@ -64,7 +66,12 @@ public class DeptServiceImpl implements DeptService {
                 }
             }
         }
-        return deptMapper.toDto(deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),sort));
+        List<DeptDTO> list = deptMapper.toDto(deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),sort));
+        // 如果为空，就代表为自定义权限或者本级权限，就需要去重，不理解可以注释掉，看查询结果
+        if(StringUtils.isBlank(dataScopeType)) {
+            return deduplication(list);
+        }
+        return list;
     }
 
     @Override
@@ -246,5 +253,22 @@ public class DeptServiceImpl implements DeptService {
         redisUtils.del("dept::id:" + id);
         redisUtils.del("dept::pid:" + (oldPid == null ? 0 : oldPid));
         redisUtils.del("dept::pid:" + (newPid == null ? 0 : newPid));
+    }
+
+    private List<DeptDTO> deduplication(List<DeptDTO> list) {
+        List<DeptDTO> deptDtos = new ArrayList<>();
+        for (DeptDTO deptDto : list) {
+            boolean flag = true;
+            for (DeptDTO dto : list) {
+                if (deptDto.getPid().equals(dto.getId())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag){
+                deptDtos.add(deptDto);
+            }
+        }
+        return deptDtos;
     }
 }
