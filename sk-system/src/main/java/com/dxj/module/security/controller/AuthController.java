@@ -10,6 +10,7 @@ import com.dxj.annotation.rest.AnonymousGetMapping;
 import com.dxj.annotation.rest.AnonymousPostMapping;
 import com.dxj.config.RsaProperties;
 import com.dxj.exception.SkException;
+import com.dxj.module.security.config.bean.LoginCodeEnum;
 import com.dxj.module.security.config.bean.LoginProperties;
 import com.dxj.module.security.config.bean.SecurityProperties;
 import com.dxj.module.security.domain.dto.AuthUserDTO;
@@ -110,8 +111,13 @@ public class AuthController {
         // 获取运算的结果
         Captcha captcha = loginProperties.getCaptcha();
         String uuid = properties.getCodeKey() + IdUtil.simpleUUID();
+        //当验证码类型为 arithmetic时且长度 >= 2 时，captcha.text()的结果有几率为浮点型
+        String captchaValue = captcha.text();
+        if (captcha.getCharType() - 1 == LoginCodeEnum.arithmetic.ordinal() && captchaValue.contains(".")) {
+            captchaValue = captchaValue.split("\\.")[0];
+        }
         // 保存
-        redisUtils.set(uuid, captcha.text(), loginProperties.getLoginCode().getExpiration(), TimeUnit.MINUTES);
+        redisUtils.set(uuid, captchaValue, loginProperties.getLoginCode().getExpiration(), TimeUnit.MINUTES);
         // 验证码信息
         Map<String, Object> imgResult = new HashMap<String, Object>(2) {{
             put("img", captcha.toBase64());

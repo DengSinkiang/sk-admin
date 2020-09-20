@@ -103,7 +103,7 @@ public class DictServiceImpl implements DictService {
         FileUtils.downloadExcel(list, response);
     }
 
-    public void delCaches(Dict dict){
-        redisUtils.del("dept::name:" + dict.getName());
+    private void delCaches(Dict dict){
+        redisUtils.del("dict::name:" + dict.getName());
     }
 }

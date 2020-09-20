@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @apiNote 配置文件转换Pojo类的 统一配置 类
+ * @apiNote 配置文件转换Pojo类的 统一配置类
  * @author: liaojinlong
  * @date: 2020/6/10 19:04
  */

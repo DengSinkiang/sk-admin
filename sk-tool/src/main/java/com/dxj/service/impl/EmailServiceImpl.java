@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void send(EmailVo emailVo, EmailConfig emailConfig) {
-        if (emailConfig == null) {
+        if (emailConfig.getId() == null) {
             throw new SkException("请先配置，再操作");
         }
         // 封装
